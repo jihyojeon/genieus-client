@@ -51,10 +51,10 @@ export default function Navbar() {
           <ModalBody>Hey</ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
+            <Button variant='secondary' onClick={onClose}>
               Close
             </Button>
-            <Button variant='ghost'>Secondary Action</Button>
+            <Button variant='secondary'>Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
