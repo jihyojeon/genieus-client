@@ -1,12 +1,11 @@
 import React from 'react'
 import {Box, Text} from '@chakra-ui/react'
+import Navbar from '../components/LandingPage/Navbar'
 
 const LandingPage = () => {
   return (
     <Box>
-      <Text > Hello  Page</Text>
-      
-      
+      <Navbar />
     </Box>
   )
 }
