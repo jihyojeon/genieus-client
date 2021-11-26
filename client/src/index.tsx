@@ -7,6 +7,10 @@ import * as serviceWorker from "./serviceWorker"
 import {ChakraProvider} from "@chakra-ui/react"
 import {myTheme} from './styles/extendTheme'
 
+// Fonts
+import "@fontsource/chivo"
+import "@fontsource/nunito"
+
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={myTheme}>

@@ -7,7 +7,8 @@ export const myTheme = extendTheme({
 
   },
   fonts: {
- 
+    chivo: "chivo",
+    nunito: "nunito",
   },
 
   components: {
