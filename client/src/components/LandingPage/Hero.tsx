@@ -9,10 +9,14 @@ import {
     Image,
     useColorModeValue,
     Text,
+    Link,
+    useDisclosure,
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+
+// Modals
+import ModalSignUp from './ModalSignUp'
+import TutorSignInArea from './TutorSignInArea'
 
 const dark = '#121212'
 const light = 'gray.100'
@@ -21,6 +25,8 @@ const jsIcon: any = require('../../assets/icons/javascript-1.svg')
 const codingLotie: any = require('../../assets/lottie/coder/data.json')
 
 const Hero = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     return (
         <Box bg={useColorModeValue(dark, light)}>
             <Grid templateColumns="2.3fr 2fr">
@@ -58,30 +64,23 @@ const Hero = () => {
                                 alignItems="center"
                                 mt={10}
                             >
-                                <Button mr="7" variant="secondary">
+                                <Button
+                                    onClick={onOpen}
+                                    mr="7"
+                                    variant="secondary"
+                                >
                                     Sign Up
                                 </Button>
-                                <Button variant="secondary">
-
-                                    Learn more
-                                </Button>
+                                <Link
+                                    href="#link-header"
+                                    scrollBehavior="smooth"
+                                >
+                                    <Button variant="secondary">
+                                        Learn more
+                                    </Button>
+                                </Link>
                             </Flex>
-                            <Text
-                                _hover={{
-                                    color: 'teal.600',
-                                    cursor: 'pointer',
-                                }}
-                                letterSpacing={1}
-                                width="10rem"
-                                bg="#121212"
-                                color="#fff"
-                                fontWeight={400}
-                                fontFamily="chivo"
-                                mt={9}
-                                opacity={0.7}
-                            >
-                                Sign up as tutor...
-                            </Text>
+                            <TutorSignInArea />
                         </Flex>
                     </Flex>
                 </GridItem>
@@ -163,18 +162,8 @@ const Hero = () => {
                 alignItems="flex-start"
                 height="100px"
                 width="100vw"
-            >
-                <Text
-                    color="#fff"
-                    opacity="0.5"
-                    letterSpacing={1.5}
-                    _hover={{ opacity: 0.8, cursor: 'pointer' }}
-                    align="center"
-                >
-                    {' '}
-                    Find out more... <FontAwesomeIcon icon={faArrowDown} />
-                </Text>
-            </Box>
+            ></Box>
+            <ModalSignUp isOpen={isOpen} onClose={onClose} />
         </Box>
     )
 }
