@@ -20,6 +20,7 @@
     "@types/node": "^12.20.37",
     "@types/react": "^16.14.21",
     "@types/react-dom": "^16.9.14",
+    "firebase": "^9.5.0",
     "framer-motion": "^4.1.17",
     "lottie-react": "^2.1.0",
     "react": "^17.0.2",

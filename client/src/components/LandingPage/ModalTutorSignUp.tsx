@@ -4,7 +4,6 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
 import { FcGoogle } from 'react-icons/fc'
-import Logo from '../../assets/icons/logo.svg'
 
 import {
     Modal,
@@ -16,8 +15,8 @@ import {
     ModalBody,
     Button,
     Flex,
-    Image,
     Text,
+    Image,
     FormControl,
     InputGroup,
     FormLabel,
@@ -26,18 +25,17 @@ import {
     InputRightElement,
     HStack,
     Checkbox,
-    FormHelperText,
     Center,
+    FormHelperText,
 } from '@chakra-ui/react'
 
-import { FaGoogle, FaTwitter } from 'react-icons/fa'
+import { FaGoogle } from 'react-icons/fa'
+import Logo from '../../assets/icons/logo.svg'
 
 //@ts-ignore
-const ModalSignUp = ({ isOpen, onClose }) => {
+const ModalTutorSignUp = ({ isOpen, onClose }) => {
     const [registerEmail, setRegisterEmail] = useState('')
     const [registerPassword, setRegisterPassword] = useState('')
-
-    const signUpWithGoogle = () => {}
 
     const signup = async () => {
         try {
@@ -47,7 +45,6 @@ const ModalSignUp = ({ isOpen, onClose }) => {
                 registerPassword
             )
             console.log(`${user} Signed up!`)
-            console.log(auth.currentUser?.email)
         } catch (error) {
             //@ts-ignore
             console.log(error)
@@ -66,7 +63,7 @@ const ModalSignUp = ({ isOpen, onClose }) => {
                     align="center"
                     fontSize="30px"
                 >
-                    Sign Up
+                    Tutor Sign Up
                     <Image
                         src={Logo}
                         position="absolute"
@@ -123,9 +120,9 @@ const ModalSignUp = ({ isOpen, onClose }) => {
 
                         <HStack>
                             <Button
+                                w={'25rem'}
                                 mt={4}
                                 onClick={signInWithGoogle}
-                                w={'25rem'}
                                 variant={'outline'}
                                 leftIcon={<FcGoogle />}
                             >
@@ -134,45 +131,14 @@ const ModalSignUp = ({ isOpen, onClose }) => {
                                 </Center>
                             </Button>
                         </HStack>
-
-                        <FormControl ml="120" mt="4" as="fieldset">
-                            <FormLabel as="legend">
-                                <Flex direction="row" justifyContent="center">
-                                    <Text
-                                        fontFamily="chivo"
-                                        fontWeight="bold"
-                                        letterSpacing="2.5"
-                                        fontSize="18px"
-                                    >
-                                        Please select a subscription type
-                                    </Text>
-                                </Flex>
-                            </FormLabel>
-
-                            <HStack spacing="24px">
-                                <Checkbox size="lg" colorScheme="purple">
-                                    Pro
-                                </Checkbox>
-                                <Checkbox size="lg" colorScheme="purple">
-                                    Max
-                                </Checkbox>
-                                <Checkbox size="lg" colorScheme="purple">
-                                    Basic
-                                </Checkbox>
-                            </HStack>
-                        </FormControl>
                     </Flex>
                 </ModalBody>
 
                 <ModalCloseButton />
 
                 <ModalFooter>
-                    <Flex fontFamily="chivo" mr={45} align="left">
-                        <Text mr={2}> Already a user? </Text>
-                        <Box onClick={isOpen}> Login </Box>
-                    </Flex>
-                    <Button onClick={signup} variant="primary">
-                        Next
+                    <Button w="100%" onClick={signup} variant="primary">
+                        Sign Up
                     </Button>
                 </ModalFooter>
             </ModalContent>
@@ -180,4 +146,4 @@ const ModalSignUp = ({ isOpen, onClose }) => {
     )
 }
 
-export default ModalSignUp
+export default ModalTutorSignUp
