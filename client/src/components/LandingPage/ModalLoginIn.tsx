@@ -41,7 +41,8 @@ const ModalLogIn = ({ isOpen, onClose }) => {
                 loginEmail,
                 loginpassword
             )
-            console.log(`${user} Logged in!`)
+            console.log(auth.currentUser?.email)
+
         } catch (error) {
             //@ts-ignore
             console.log(error)
@@ -108,8 +109,8 @@ const ModalLogIn = ({ isOpen, onClose }) => {
                             </InputGroup>
                         </FormControl>
                         <Button
-                            w={'full'}
                             onClick={signInWithGoogle}
+                            w={'25rem'}
                             variant={'outline'}
                             leftIcon={<FcGoogle />}
                         >

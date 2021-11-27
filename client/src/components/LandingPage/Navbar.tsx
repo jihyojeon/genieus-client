@@ -42,6 +42,7 @@ export default function Navbar() {
                         pt={5}
                         pl={7}
                         borderRadius="50px"
+
                     />
                     <Flex alignItems={'center'}>
                         <Stack direction={'row'} spacing={7}>

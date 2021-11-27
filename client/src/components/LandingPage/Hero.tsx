@@ -4,12 +4,12 @@ import {
     Button,
     Flex,
     Grid,
-    Link,
     GridItem,
     Heading,
     Image,
     useColorModeValue,
     Text,
+    Link,
     useDisclosure,
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
@@ -71,7 +71,14 @@ const Hero = () => {
                                 >
                                     Sign Up
                                 </Button>
-                                <Button variant="secondary">Learn more</Button>
+                                <Link
+                                    href="#link-header"
+                                    scrollBehavior="smooth"
+                                >
+                                    <Button variant="secondary">
+                                        Learn more
+                                    </Button>
+                                </Link>
                             </Flex>
                             <TutorSignInArea />
                         </Flex>

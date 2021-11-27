@@ -3,6 +3,8 @@ import ModalLoginIn from './ModalLoginIn'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
+import { FcGoogle } from 'react-icons/fc'
+
 import {
     Modal,
     ModalOverlay,
@@ -23,10 +25,11 @@ import {
     InputRightElement,
     HStack,
     Checkbox,
+    Center,
     FormHelperText,
 } from '@chakra-ui/react'
 
-import { FaGoogle, FaTwitter } from 'react-icons/fa'
+import { FaGoogle } from 'react-icons/fa'
 import Logo from '../../assets/icons/logo.svg'
 
 //@ts-ignore
@@ -117,12 +120,15 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
 
                         <HStack>
                             <Button
-                                onClick={signInWithGoogle}
+                                w={'25rem'}
                                 mt={4}
-                                colorScheme="facebook"
-                                leftIcon={<FaGoogle />}
+                                onClick={signInWithGoogle}
+                                variant={'outline'}
+                                leftIcon={<FcGoogle />}
                             >
-                                Sign Up with Google
+                                <Center>
+                                    <Text>Sign in with Google</Text>
+                                </Center>
                             </Button>
                         </HStack>
                     </Flex>

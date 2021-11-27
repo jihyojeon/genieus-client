@@ -47,6 +47,7 @@ const ModalSignUp = ({ isOpen, onClose }) => {
                 registerPassword
             )
             console.log(`${user} Signed up!`)
+            console.log(auth.currentUser?.email)
         } catch (error) {
             //@ts-ignore
             console.log(error)
@@ -124,7 +125,7 @@ const ModalSignUp = ({ isOpen, onClose }) => {
                             <Button
                                 mt={4}
                                 onClick={signInWithGoogle}
-                                w={'full'}
+                                w={'25rem'}
                                 variant={'outline'}
                                 leftIcon={<FcGoogle />}
                             >

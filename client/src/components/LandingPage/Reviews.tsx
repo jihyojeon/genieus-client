@@ -92,7 +92,7 @@ const TestimonialAvatar = ({
 
 export default function WithSpeechBubbles() {
     return (
-        <Box pb={'5vh'} bg={useColorModeValue('#121212', 'gray.100')}>
+        <Box py={'10vh'} bg={useColorModeValue('#121212', 'gray.100')}>
             <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
                 <Stack spacing={0} align={'center'}>
                     <Heading color="gray.500">Our Clients Speak</Heading>
@@ -115,6 +115,7 @@ export default function WithSpeechBubbles() {
                                 lectus feugiat nunc sem.
                             </TestimonialText>
                         </TestimonialContent>
+
                         <TestimonialAvatar
                             src={
                                 'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
