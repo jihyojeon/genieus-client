@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
+import { FcGoogle } from 'react-icons/fc'
 
 import {
     Modal,
@@ -20,12 +21,13 @@ import {
     Input,
     Box,
     InputRightElement,
+    Center,
     HStack,
     Checkbox,
     FormHelperText,
 } from '@chakra-ui/react'
 
-import { FaGoogle } from 'react-icons/fa'
+
 
 //@ts-ignore
 const ModalLogIn = ({ isOpen, onClose }) => {
@@ -99,12 +101,14 @@ const ModalLogIn = ({ isOpen, onClose }) => {
                             </InputGroup>
                         </FormControl>
                         <Button
+                            w={'full'}
                             onClick={signInWithGoogle}
-                            mt={4}
-                            colorScheme="facebook"
-                            leftIcon={<FaGoogle />}
+                            variant={'outline'}
+                            leftIcon={<FcGoogle />}
                         >
-                            Sign in with Google
+                            <Center>
+                                <Text>Sign in with Google</Text>
+                            </Center>
                         </Button>
                     </Flex>
                 </ModalBody>

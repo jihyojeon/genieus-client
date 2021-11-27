@@ -3,6 +3,8 @@ import ModalLoginIn from './ModalLoginIn'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
+import { FcGoogle } from 'react-icons/fc'
+
 import {
     Modal,
     ModalOverlay,
@@ -23,6 +25,7 @@ import {
     HStack,
     Checkbox,
     FormHelperText,
+    Center,
 } from '@chakra-ui/react'
 
 import { FaGoogle, FaTwitter } from 'react-icons/fa'
@@ -110,12 +113,15 @@ const ModalSignUp = ({ isOpen, onClose }) => {
 
                         <HStack>
                             <Button
-                                onClick={signInWithGoogle}
                                 mt={4}
-                                colorScheme="facebook"
-                                leftIcon={<FaGoogle />}
+                                onClick={signInWithGoogle}
+                                w={'full'}
+                                variant={'outline'}
+                                leftIcon={<FcGoogle />}
                             >
-                                Sign Up with Google
+                                <Center>
+                                    <Text>Sign in with Google</Text>
+                                </Center>
                             </Button>
                         </HStack>
 
