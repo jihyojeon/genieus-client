@@ -1,9 +1,13 @@
 import { Flex, Box, Text, Divider, Image, Button, VStack } from '@chakra-ui/react'
 import React from 'react'
 
-export const RequestCard = () => {
+interface HelpRequestTypes {
+  name: string
+}
+
+export const RequestCard = ({name}: HelpRequestTypes) => {
   return (
-    <Box minWidth="23%" width="23%" height="45vh" rounded="3xl" ml="20px" bg="#4A5568">
+    <Box minWidth="24%" width="24%" height="45vh" rounded="3xl" ml="20px" bg="#4A5568">
       <VStack>
         <Flex alignItems="center">
           <Image
@@ -16,18 +20,18 @@ export const RequestCard = () => {
           </Text>
         </Flex>
         <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short" color="#A5B4FC">
-          David
+          {name}
         </Text>
         <Text mt={2} fontSize="s" fontWeight="semibold" lineHeight="short" color="#FFFFFF">
           #datastructures #linkedlist
         </Text>
         <Divider width="90%"/>
-        <Text mx={2} py={3} fontSize="s" fontWeight="semibold" lineHeight="short" width="90%" color="#FFFFFF">
+        <Text mx={2} pb={10} fontSize="s" fontWeight="semibold" lineHeight="short" width="90%" color="#FFFFFF">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Text>
         <Button 
           type='submit' 
-          bg="#818CF8" 
+          variant="primary"
         >
           Expand
         </Button>
