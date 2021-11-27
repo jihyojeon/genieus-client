@@ -61,10 +61,7 @@ const Hero = () => {
                                 <Button mr="7" variant="secondary">
                                     Sign Up
                                 </Button>
-                                <Button variant="secondary">
-
-                                    Learn more
-                                </Button>
+                                <Button variant="secondary">Learn more</Button>
                             </Flex>
                             <Text
                                 _hover={{
