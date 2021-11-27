@@ -1,14 +1,18 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, List } from '@chakra-ui/react'
 import React from 'react'
 import { RequestCard } from './RequestCard'
 
 export const IncomingRequests = () => {
   return (
     <Flex flexDirection="column">
-      <Box>Your Requests:</Box>
-      <Box>
+      <Box mt={2} py={2} fontSize="xl" fontWeight="semibold" lineHeight="short" color="#A5B4FC">Your Requests:</Box>
+      <List display="flex" overflow="scroll">
         <RequestCard />
-      </Box>
+        <RequestCard />
+        <RequestCard />
+        <RequestCard />
+        <RequestCard />
+      </List>
 
     </Flex>
   )
