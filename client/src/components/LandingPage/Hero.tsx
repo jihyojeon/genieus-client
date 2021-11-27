@@ -4,6 +4,7 @@ import {
     Button,
     Flex,
     Grid,
+    Link,
     GridItem,
     Heading,
     Image,
@@ -12,8 +13,6 @@ import {
     useDisclosure,
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 // Modals
 import ModalSignUp from './ModalSignUp'
@@ -156,17 +155,7 @@ const Hero = () => {
                 alignItems="flex-start"
                 height="100px"
                 width="100vw"
-            >
-                <Text
-                    color="#fff"
-                    opacity="0.5"
-                    letterSpacing={1.5}
-                    _hover={{ opacity: 0.8, cursor: 'pointer' }}
-                    align="center"
-                >
-                    Find out more... <FontAwesomeIcon icon={faArrowDown} />
-                </Text>
-            </Box>
+            ></Box>
             <ModalSignUp isOpen={isOpen} onClose={onClose} />
         </Box>
     )

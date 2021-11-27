@@ -11,6 +11,7 @@ import {
     ModalCloseButton,
     ModalHeader,
     ModalFooter,
+    Image,
     ModalBody,
     Button,
     Flex,
@@ -26,8 +27,7 @@ import {
     Checkbox,
     FormHelperText,
 } from '@chakra-ui/react'
-
-
+import Logo from '../../assets/icons/logo.svg'
 
 //@ts-ignore
 const ModalLogIn = ({ isOpen, onClose }) => {
@@ -61,6 +61,13 @@ const ModalLogIn = ({ isOpen, onClose }) => {
                     fontSize="30px"
                 >
                     Log In
+                    <Image
+                        src={Logo}
+                        position="absolute"
+                        top={1}
+                        boxSize="4.5rem"
+                        borderRadius="50px"
+                    />
                 </ModalHeader>
 
                 <ModalBody>

@@ -8,6 +8,7 @@ import {
     Stack,
     useColorMode,
     useDisclosure,
+    Image,
     Modal,
     ModalOverlay,
     ModalContent,
@@ -19,6 +20,7 @@ import {
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 import ModalLogIn from './ModalLoginIn'
+import Logo from '../../assets/icons/logo.svg'
 
 const dark = '#121212'
 const light = 'gray.100'
@@ -34,7 +36,13 @@ export default function Navbar() {
                     alignItems={'center'}
                     justifyContent={'space-between'}
                 >
-                    <Box color="white">Logo</Box>
+                    <Image
+                        src={Logo}
+                        boxSize="9rem"
+                        pt={5}
+                        pl={7}
+                        borderRadius="50px"
+                    />
                     <Flex alignItems={'center'}>
                         <Stack direction={'row'} spacing={7}>
                             <Button onClick={onOpen} variant="primary">

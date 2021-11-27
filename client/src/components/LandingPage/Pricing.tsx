@@ -31,13 +31,13 @@ function PriceWrapper({ children }: { children: ReactNode }) {
 
 export default function Pricing() {
     return (
-        <Box bg={useColorModeValue('#121212', 'gray.200')} py={12}>
+        <Box bg={useColorModeValue('#121212', 'gray.200')} pb={15}>
             <VStack spacing={2} textAlign="center">
                 <Heading as="h1" fontSize="4xl" color="#fff">
                     Subscriptions that fit your need!
                 </Heading>
                 <Text fontSize="lg" color={'gray.100'}>
-                   Your first call is completely free!
+                    Your first call is completely free!
                 </Text>
             </VStack>
             <Stack

@@ -14,6 +14,7 @@ import {
     Button,
     Flex,
     Text,
+    Image,
     FormControl,
     InputGroup,
     FormLabel,
@@ -26,6 +27,7 @@ import {
 } from '@chakra-ui/react'
 
 import { FaGoogle, FaTwitter } from 'react-icons/fa'
+import Logo from '../../assets/icons/logo.svg'
 
 //@ts-ignore
 const ModalTutorSignUp = ({ isOpen, onClose }) => {
@@ -59,6 +61,13 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
                     fontSize="30px"
                 >
                     Tutor Sign Up
+                    <Image
+                        src={Logo}
+                        position="absolute"
+                        top={1}
+                        boxSize="4.5rem"
+                        borderRadius="50px"
+                    />
                 </ModalHeader>
 
                 <ModalBody>

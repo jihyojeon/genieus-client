@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
 import { FcGoogle } from 'react-icons/fc'
+import Logo from '../../assets/icons/logo.svg'
 
 import {
     Modal,
@@ -15,6 +16,7 @@ import {
     ModalBody,
     Button,
     Flex,
+    Image,
     Text,
     FormControl,
     InputGroup,
@@ -64,6 +66,13 @@ const ModalSignUp = ({ isOpen, onClose }) => {
                     fontSize="30px"
                 >
                     Sign Up
+                    <Image
+                        src={Logo}
+                        position="absolute"
+                        top={1}
+                        boxSize="4.5rem"
+                        borderRadius="50px"
+                    />
                 </ModalHeader>
 
                 <ModalBody>
