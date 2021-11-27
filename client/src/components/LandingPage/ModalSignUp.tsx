@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
 import {
     Modal,
     ModalOverlay,
@@ -8,26 +10,147 @@ import {
     ModalFooter,
     ModalBody,
     Button,
-    useDisclosure,
+    Flex,
+    Text,
+    FormControl,
+    InputGroup,
+    FormLabel,
+    Input,
+    Box,
+    InputRightElement,
+    HStack,
+    Checkbox,
+    FormHelperText,
 } from '@chakra-ui/react'
 
+import { FaGoogle, FaTwitter } from 'react-icons/fa'
+
 //@ts-ignore
-const ModalSignUp = ({isOpen, onClose}) => {
+const ModalSignUp = ({ isOpen, onClose }) => {
+    const [registerEmail, setRegisterEmail] = useState('')
+    const [registerPassword, setRegisterPassword] = useState('')
 
+    const signup = async () => {
+        try {
+            const user = await createUserWithEmailAndPassword(
+                auth,
+                registerEmail,
+                registerPassword
+            )
+            console.log(`${user} Signed up!`)
+        } catch (error) {
+            //@ts-ignore
+            console.log(error)
+        }
+    }
 
+    const [show, setShow] = React.useState(false)
+    const handleClick = () => setShow(!show)
     return (
-        <Modal isOpen={isOpen} onClose={onClose} >
+        <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>Modal Title</ModalHeader>
+            <ModalContent fontFamily="chivo">
+                <ModalHeader
+                    m={0}
+                    fontWeight="400"
+                    align="center"
+                    fontSize="30px"
+                >
+                    Sign Up
+                </ModalHeader>
+
+                <ModalBody>
+                    <Flex
+                        justifyContent="center"
+                        alignItems="center"
+                        direction="column"
+                    >
+                        <FormControl mb="3" id="first-name" isRequired>
+                            <FormLabel>Full name</FormLabel>
+                            <Input variant="filled" />
+                        </FormControl>
+                        <FormControl mb="2.5" id="email" isRequired>
+                            <FormLabel>Email address</FormLabel>
+                            <Input
+                                onChange={(e) =>
+                                    setRegisterEmail(e.target.value)
+                                }
+                                type="email"
+                            />
+                            <FormHelperText>
+                                We'll never share your email.
+                            </FormHelperText>
+                        </FormControl>
+                        <FormControl id="email" isRequired>
+                            <FormLabel>Password</FormLabel>
+                            <InputGroup size="md">
+                                <Input
+                                    onChange={(e) =>
+                                        setRegisterPassword(e.target.value)
+                                    }
+                                    pr="4.5rem"
+                                    type={show ? 'text' : 'password'}
+                                    placeholder="Enter password"
+                                />
+                                <InputRightElement width="4.5rem">
+                                    <Button
+                                        h="1.75rem"
+                                        size="sm"
+                                        onClick={handleClick}
+                                    >
+                                        {show ? 'Hide' : 'Show'}
+                                    </Button>
+                                </InputRightElement>
+                            </InputGroup>
+                        </FormControl>
+
+                        <HStack>
+                            <Button
+                                mt={4}
+                                colorScheme="facebook"
+                                leftIcon={<FaGoogle />}
+                            >
+                                Sign in with Google
+                            </Button>
+                        </HStack>
+
+                        <FormControl ml="120" mt="4" as="fieldset">
+                            <FormLabel as="legend">
+                                <Text
+                                    fontFamily="chivo"
+                                    fontWeight="500"
+                                    letterSpacing="1.5"
+                                    fontSize="18px"
+                                >
+                                    Please select subscription type
+                                </Text>
+                            </FormLabel>
+
+                            <HStack spacing="24px">
+                                <Checkbox size="lg" colorScheme="purple">
+                                    Pro
+                                </Checkbox>
+                                <Checkbox size="lg" colorScheme="purple">
+                                    Max
+                                </Checkbox>
+                                <Checkbox size="lg" colorScheme="purple">
+                                    Basic
+                                </Checkbox>
+                            </HStack>
+                        </FormControl>
+                    </Flex>
+                </ModalBody>
+
                 <ModalCloseButton />
-                <ModalBody>Hey</ModalBody>
 
                 <ModalFooter>
-                    <Button variant="secondary" onClick={onClose}>
-                        Close
+                    <Flex fontFamily="chivo" mr={45} align="left">
+                        <Text mr={2}> Already a user? </Text>
+                        <Box> Login </Box>
+                    </Flex>
+                    <Button onClick={signup} variant="primary">
+                        Next
                     </Button>
-                    <Button variant="secondary">Secondary Action</Button>
                 </ModalFooter>
             </ModalContent>
         </Modal>

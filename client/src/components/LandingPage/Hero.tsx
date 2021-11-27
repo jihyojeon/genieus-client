@@ -9,10 +9,12 @@ import {
     Image,
     useColorModeValue,
     Text,
+    useDisclosure,
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import ModalSignUp from './ModalSignUp'
 
 const dark = '#121212'
 const light = 'gray.100'
@@ -21,6 +23,8 @@ const jsIcon: any = require('../../assets/icons/javascript-1.svg')
 const codingLotie: any = require('../../assets/lottie/coder/data.json')
 
 const Hero = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     return (
         <Box bg={useColorModeValue(dark, light)}>
             <Grid templateColumns="2.3fr 2fr">
@@ -58,22 +62,24 @@ const Hero = () => {
                                 alignItems="center"
                                 mt={10}
                             >
-                                <Button mr="7" variant="secondary">
+                                <Button
+                                    onClick={onOpen}
+                                    mr="7"
+                                    variant="secondary"
+                                >
                                     Sign Up
                                 </Button>
-                                <Button variant="secondary">
-
-                                    Learn more
-                                </Button>
+                                <Button variant="secondary">Learn more</Button>
                             </Flex>
                             <Text
+                                onClick={onOpen}
                                 _hover={{
                                     color: 'teal.600',
                                     cursor: 'pointer',
                                 }}
                                 letterSpacing={1}
                                 width="10rem"
-                                bg="#121212"
+
                                 color="#fff"
                                 fontWeight={400}
                                 fontFamily="chivo"
@@ -175,6 +181,7 @@ const Hero = () => {
                     Find out more... <FontAwesomeIcon icon={faArrowDown} />
                 </Text>
             </Box>
+            <ModalSignUp isOpen={isOpen} onClose={onClose} />
         </Box>
     )
 }
