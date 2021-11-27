@@ -19,6 +19,8 @@ import {
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 
+import ModalSignUp from './ModalSignUp'
+
 const dark = '#121212';
 const light = 'gray.100';
 
@@ -35,29 +37,17 @@ export default function Navbar() {
               <Button onClick={onOpen} variant='primary'>
                 Log In
               </Button>
-              <Button variant='primary'> Sign Up </Button>
+              {/* <Button variant='primary'> Sign Up </Button> */}
               <ColorModeSwitcher />
             </Stack>
           </Flex>
         </Flex>
       </Box>
 
+      
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>Hey</ModalBody>
+        <ModalSignUp  isOpen={isOpen} onClose={onClose}/>
 
-          <ModalFooter>
-            <Button variant='secondary' onClick={onClose}>
-              Close
-            </Button>
-            <Button variant='secondary'>Secondary Action</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </>
   );
 }
