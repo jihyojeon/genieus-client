@@ -14,7 +14,10 @@ import {
 import Lottie from 'lottie-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+
+// Modals
 import ModalSignUp from './ModalSignUp'
+import TutorSignInArea from './TutorSignInArea'
 
 const dark = '#121212'
 const light = 'gray.100'
@@ -71,23 +74,7 @@ const Hero = () => {
                                 </Button>
                                 <Button variant="secondary">Learn more</Button>
                             </Flex>
-                            <Text
-                                onClick={onOpen}
-                                _hover={{
-                                    color: 'teal.600',
-                                    cursor: 'pointer',
-                                }}
-                                letterSpacing={1}
-                                width="10rem"
-
-                                color="#fff"
-                                fontWeight={400}
-                                fontFamily="chivo"
-                                mt={9}
-                                opacity={0.7}
-                            >
-                                Sign up as tutor...
-                            </Text>
+                            <TutorSignInArea />
                         </Flex>
                     </Flex>
                 </GridItem>
@@ -177,7 +164,6 @@ const Hero = () => {
                     _hover={{ opacity: 0.8, cursor: 'pointer' }}
                     align="center"
                 >
-                    {' '}
                     Find out more... <FontAwesomeIcon icon={faArrowDown} />
                 </Text>
             </Box>
