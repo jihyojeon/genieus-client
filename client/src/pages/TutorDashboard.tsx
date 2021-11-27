@@ -3,6 +3,7 @@ import { Box, Grid, GridItem, useColorModeValue } from '@chakra-ui/react';
 import Topbar from '../components/TutorDashboard/Topbar';
 import { IncomingRequests } from '../components/TutorDashboard/IncomingRequests';
 import { TutorStats } from '../components/TutorDashboard/TutorStats';
+import { TutorDetails } from '../components/TutorDashboard/TutorDetails';
 
 const dark = '#121212';
 const light = 'gray.100';
@@ -23,10 +24,13 @@ const TutorDashboard = () => {
           <IncomingRequests/>
         </GridItem>
 
-        <GridItem rowSpan={5} colSpan={1} >
+        <GridItem rowSpan={5} colSpan={1}>
           <TutorStats/>
         </GridItem>
-        <GridItem rowSpan={2} colSpan={3} bg="papayawhip"></GridItem>
+
+        <GridItem rowSpan={2} colSpan={3}>
+          <TutorDetails/>
+        </GridItem>
       </Grid>
       
       

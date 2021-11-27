@@ -14,11 +14,6 @@ export const IncomingRequests = () => {
         {requestNames.map(name => {
           return <RequestCard name={name} />
         })}
-        {/* <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard />
-        <RequestCard /> */}
       </List>
 
     </Flex>
