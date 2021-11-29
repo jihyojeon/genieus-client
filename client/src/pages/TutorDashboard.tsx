@@ -4,7 +4,7 @@ import Topbar from '../components/TutorDashboard/Topbar';
 import { IncomingRequests } from '../components/TutorDashboard/IncomingRequests';
 import { TutorStats } from '../components/TutorDashboard/TutorStats';
 import { TutorDetails } from '../components/TutorDashboard/TutorDetails';
-// import {Colors} from '../'
+
 
 const dark = '#121212';
 const light = 'gray.100';

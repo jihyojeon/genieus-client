@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ModalLoginIn from './ModalLoginIn'
+
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
@@ -21,15 +21,12 @@ import {
   InputGroup,
   FormLabel,
   Input,
-  Box,
   InputRightElement,
   HStack,
-  Checkbox,
   Center,
   FormHelperText,
 } from '@chakra-ui/react'
 
-import { FaGoogle } from 'react-icons/fa'
 import Logo from '../../assets/icons/logo.svg'
 
 //@ts-ignore

@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { Box, Flex, Text, Checkbox, Button, Link } from '@chakra-ui/react'
-import Split from 'react-split'
+import React from 'react'
+import { Box, Flex, Text, Checkbox, Button } from '@chakra-ui/react'
 
 const ButtonBar = ({
   getHRData,

@@ -3,7 +3,6 @@ import {
   Box,
   Flex,
   Button,
-  useColorModeValue,
   Stack,
   useDisclosure,
   Image,
@@ -12,9 +11,6 @@ import {
 import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 import ModalLogIn from './ModalLoginIn'
 import Logo from '../../assets/icons/logo.svg'
-
-// const dark = '#121212'
-// const light = 'gray.100'
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()

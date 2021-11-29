@@ -1,21 +1,7 @@
 import React from 'react'
-import {
-  Box,
-  Flex,
-  Heading,
-  Icon,
-  IconButton,
-  Image,
-  Text,
-  useDisclosure,
-} from '@chakra-ui/react'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faCrown } from '@fortawesome/free-solid-svg-icons'
-// import { faCrown } from "react-icons/fa";
+import { Box, Flex, Heading, IconButton, Image, Text } from '@chakra-ui/react'
+
 import { SettingsIcon } from '@chakra-ui/icons'
-// import ModalEditProfile from './ModalEditProfile'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCrown } from '@fortawesome/free-solid-svg-icons'
 
 // TODO: pull from database/state/props
 const userDetails: any = {
@@ -35,8 +21,6 @@ function tierIcon(tier: string) {
 }
 
 const CornerProfile = () => {
-  // const { isOpen, onOpen, onClose } = useDisclosure()
-
   return (
     <Flex flexDirection={'row'} color={'white'} justify={'flex-end'}>
       <Flex flexDirection={'column'}>
@@ -52,7 +36,6 @@ const CornerProfile = () => {
           aria-label="Edit Profile"
           icon={<SettingsIcon />}
           size="small"
-          // onClick={onOpen}
           bg="blue"
           h="20px"
           w="20px"
@@ -66,7 +49,6 @@ const CornerProfile = () => {
           src={userDetails.avatar}
         />
       </Box>
-      {/* <ModalEditProfile isOpen={isOpen} onClose={onClose} /> */}
     </Flex>
   )
 }

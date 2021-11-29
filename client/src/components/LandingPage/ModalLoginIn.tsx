@@ -3,7 +3,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
 import { FcGoogle } from 'react-icons/fc'
-import { Link } from 'react-router-dom'
 
 import {
   Modal,
@@ -21,11 +20,8 @@ import {
   InputGroup,
   FormLabel,
   Input,
-  Box,
   InputRightElement,
   Center,
-  HStack,
-  Checkbox,
   FormHelperText,
 } from '@chakra-ui/react'
 import Logo from '../../assets/icons/logo.svg'
@@ -42,7 +38,7 @@ const ModalLogIn = ({ isOpen, onClose }) => {
         loginEmail,
         loginpassword
       )
-      
+
       console.log(auth.currentUser?.email)
     } catch (error) {
       //@ts-ignore
@@ -110,7 +106,7 @@ const ModalLogIn = ({ isOpen, onClose }) => {
         <ModalCloseButton />
 
         <ModalFooter>
-          <Button onClick={login}  w="100%">
+          <Button onClick={login} w="100%">
             Submit
           </Button>
         </ModalFooter>
