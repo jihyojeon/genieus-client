@@ -14,8 +14,8 @@ const favArr: any = [
   { tutor: "vic3", exp1: "JS", dur: 3, online: 1, key: 2 },
   { tutor: "vic4", exp1: "JS", dur: 4, online: 0, key: 3 },
   { tutor: "vic5", exp1: "JS", dur: 5, online: 0, key: 4 },
-  { tutor: "vic6", exp1: "JS", dur: 6, online: 1, key: 5 },
-  { tutor: "vic7", exp1: "JS", dur: 7, online: 0, key: 6 },
+  // { tutor: "vic6", exp1: "JS", dur: 6, online: 1, key: 5 },
+  // { tutor: "vic7", exp1: "JS", dur: 7, online: 0, key: 6 },
 ] 
 
 
@@ -63,7 +63,7 @@ const Favourites = () => {
 
               <Flex
                 flexDirection="row"
-                justify="space-between"
+                justify="flex-start"
                 bg="blue"
                 w="100%"
                 p="15px"
@@ -71,22 +71,24 @@ const Favourites = () => {
                 borderRadius={'1rem'}
                 border="solid"
               >
-                <Image
-                  src="https://bit.ly/dan-abramov"
-                  boxSize="4rem"
-                  borderRadius="1rem"
-                  />
-                <Flex flexDirection="column">
+                <Flex flexDirection="column" justify="space-between">
+                  <Image
+                    src="https://bit.ly/dan-abramov"
+                    boxSize="5rem"
+                    borderRadius="1rem"
+                    />
+                  <Box position="relative">
+                    {el.online === 0 ?
+                      <Text color="green.500" as={MdCheckCircle} /> :
+                      <Text color="green.500" as={MdRemoveCircleOutline} />}
+                  </Box>
+                </Flex>
+                <Flex flexDirection="column" bg="red" justify="flex-start" align="flex-start" ml="20px">
                   <Heading>{el.tutor}</Heading>
                   <Text>Experience</Text>
                   <Text>{el.exp1} - {el.dur} years</Text>
                   <Text>Language 2 - 1 year</Text>
                 </Flex>
-                <Box>
-                  {el.online === 0 ?
-                    <Text color="green.500" as={MdCheckCircle} /> :
-                    <Text color="green.500" as={MdRemoveCircleOutline} />}
-                </Box>
               </Flex>
             </Box>
           )

@@ -3,19 +3,21 @@ import {
   Box,
   Flex,
   Heading,
+  Icon,
   IconButton,
   Image,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCrown } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faCrown } from '@fortawesome/free-solid-svg-icons'
+// import { faCrown } from "react-icons/fa";
 import { SettingsIcon } from '@chakra-ui/icons'
 // import ModalEditProfile from './ModalEditProfile'
 
 // TODO: pull from database/state/props
 const userDetails: any = {
-  name: "David Martin",
+  name: "David",
   tier: "Pro",
   avatar: "https://bit.ly/sage-adebayo"
   }
@@ -44,6 +46,7 @@ const CornerProfile = () => {
         <Text>
           {userDetails.tier} Tier {tierIcon(userDetails.tier)}
         </Text>
+        
         <IconButton
           colorScheme="white"
           aria-label="Edit Profile"

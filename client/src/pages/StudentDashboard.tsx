@@ -53,7 +53,7 @@ const StudentDashboard = () => {
       </GridItem>
     
       {/* PREVIOUS (BOTTOM) PANE */}
-      <GridItem rowSpan={1} colSpan={2} bg="red" h="160px">
+      <GridItem rowSpan={1} colSpan={2} bg="red" h="200px">
         <Previous />
       </GridItem>
     </Grid>
