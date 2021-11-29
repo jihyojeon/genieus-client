@@ -84,7 +84,6 @@ const About = () => {
                 fontFamily="sans-serif"
                 fontSize={20}
                 lineHeight={10}
-                mt={5}
               >
                 <ListItem>Debug any errors</ListItem>
                 <ListItem>Create new features!</ListItem>
