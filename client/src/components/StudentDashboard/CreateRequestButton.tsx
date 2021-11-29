@@ -19,8 +19,11 @@ const CreateRequestButton = () => {
         boxShadow="dark-lg"
         fontSize="3xl"
         fontWeight={700}
-        height={'5rem'}
+        minHeight={"2rem"}
+        height={'70%'}
         onClick={clickHandler}
+        marginTop={'5%'}
+        marginBottom={'5%'}
         width={'20rem'}
       >
         Create Request

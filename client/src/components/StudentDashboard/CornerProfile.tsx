@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Box,
     Flex,
     Heading,
     Image,
@@ -18,25 +19,27 @@ const topRightColor: string = "white"
 
 const CornerProfile = () => {
   return (
-    <Flex flexDirection={'row'} color={topRightColor}>
+    <Flex flexDirection={'row'} color={topRightColor} justify={"flex-end"}>
       <Flex flexDirection={'column'}>
-    <Heading
-      as={"h3"}
-      fontSize={"2xl"}
-      fontWeight={500}
-        >
+        <Heading as={"h3"} fontSize={"2xl"} fontWeight={500} >
           Welcome {name}
         </Heading>
           <Text>
               {tier} Tier {tierIcon}
           </Text>
       </Flex>
-      <Image
-        src="https://bit.ly/sage-adebayo"
-        boxSize="8rem"
-        borderRadius="4rem"
-        ml="5"
-      />
+      <Box
+        position="relative"
+        bg="orange">
+          <Image
+            src="https://bit.ly/sage-adebayo"
+            boxSize="8rem"
+            borderRadius="4rem"
+            ml="5"
+
+          />
+
+      </Box>
     </Flex>
   )
 }

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Flex, Heading, ListItem, UnorderedList, Text } from '@chakra-ui/react'
+import { Flex, Heading, List, ListItem, UnorderedList, Text } from '@chakra-ui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+// import { } from 'react-vis'
 
 const mainBoxColor: string = "#374151"
 
@@ -21,41 +22,32 @@ const Interactions = () => {
     p={'1rem'}
     h="100%"
     >
-      <Heading
-        as="h1"
-        size="xl"
-        fontWeight="600"
-      >
+
+      <Heading as="h1" size="xl" fontWeight="600" bg="red">
         Interactions
       </Heading>
-
-      <Heading
-        as="h2"
-        size="l"
-        fontWeight="500"
-      >
-          Amazing! You've problem-solved with one of our tutors for { helpDuration} minutes this month!
+      <br/>
+      <Heading as="h2" size="l" fontWeight="500">
+        Amazing! You've problem-solved with one of our tutors for {helpDuration} minutes this month!
       </Heading>
-
-      <Heading
-        as="h2"
-        size="l"
-      >
-        Credit remaining
-      </Heading>
-      <UnorderedList>
+      <br/>
+      <List spacing={3}>
+        <Heading
+          as="h2"
+          size="l"
+          >
+          Credit remaining
+        </Heading>
         <ListItem>{remainingCredit} minutes</ListItem>
-      </UnorderedList>
-
-      <Heading
-        as="h2"
-        size="l"
-      >
-        Days remaining
-      </Heading>
-      <UnorderedList>
-        <ListItem>{remainingDays} days</ListItem>
-      </UnorderedList>
+        <Heading
+          as="h2"
+          size="l"
+          >
+          Days remaining
+        </Heading>
+        
+        <ListItem >{remainingDays} days</ListItem>
+      </List>
     {/* TODO: INSERT PIE CHART */}
     </Flex>
   )
