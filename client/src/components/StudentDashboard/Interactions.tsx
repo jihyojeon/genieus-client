@@ -1,8 +1,5 @@
 import React from 'react'
-import { Flex, Heading, List, ListItem, UnorderedList, Text } from '@chakra-ui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
-// import { } from 'react-vis'
+import { Flex, Heading, List, ListItem } from '@chakra-ui/react'
 
 const mainBoxColor: string = "#374151"
 
@@ -15,12 +12,12 @@ const Interactions = () => {
     <Flex
       bg={ mainBoxColor }
       borderColor={'white'}
-      borderWidth={'solid'}
       borderRadius={'2rem'}
+      borderWidth={'solid'}
       color={"white"}    
       flexDirection="column"
-    p={'1rem'}
-    h="100%"
+      h="100%"
+      p={'1rem'}
     >
 
       <Heading as="h1" size="xl" fontWeight="600" bg="red">
@@ -32,21 +29,17 @@ const Interactions = () => {
       </Heading>
       <br/>
       <List spacing={3}>
-        <Heading
-          as="h2"
-          size="l"
-          >
+        
+        <Heading as="h2" size="l">
           Credit remaining
         </Heading>
         <ListItem>{remainingCredit} minutes</ListItem>
-        <Heading
-          as="h2"
-          size="l"
-          >
+        
+        <Heading as="h2" size="l">
           Days remaining
         </Heading>
-        
         <ListItem >{remainingDays} days</ListItem>
+      
       </List>
     {/* TODO: INSERT PIE CHART */}
     </Flex>

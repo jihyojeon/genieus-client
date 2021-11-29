@@ -51,7 +51,8 @@ const Favourites = () => {
             backgroundColor: `rgba(0, 0, 0, 0.15)`,
           },
           '&::-webkit-scrollbar-thumb': {
-            backgroundColor: `rgba(0, 0, 0, 0.05)`,
+            backgroundColor: `rgba(0, 0, 0, 0.45)`,
+            borderRadius: '8px',
           },
         }}
 

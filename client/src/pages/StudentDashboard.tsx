@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Flex, Grid, GridItem} from '@chakra-ui/react'
+import {Grid, GridItem} from '@chakra-ui/react'
 import Achievements from '../components/StudentDashboard/Achievements'
 import CornerProfile from '../components/StudentDashboard/CornerProfile'
 import CreateRequestButton from '../components/StudentDashboard/CreateRequestButton'
@@ -7,21 +7,24 @@ import Favourites from '../components/StudentDashboard/Favourites'
 import Interactions from '../components/StudentDashboard/Interactions'
 import Previous from '../components/StudentDashboard/Previous'
 
+
 const gridBackgroundColor: string = "hsl(217, 22%, 19%)"
 
 const StudentDashboard = () => {
+
+
+
   return (
       
     <Grid
-      // bg={gridBackgroundColor}
-      bg={"yellow"}
+      bg={gridBackgroundColor}
       gap={5}
       h="100vh"
       mh="100%"
-      padding="5"
-      templateRows="auto 1fr auto"
-      templateColumns="repeat(3, 1fr)"
       overflowY={"hidden"}
+      padding="5"
+      templateColumns="repeat(3, 1fr)"
+      templateRows="auto 1fr auto"
     >
       
       {/* CREATE REQUEST BUTTON */}

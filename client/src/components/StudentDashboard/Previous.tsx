@@ -32,8 +32,8 @@ const Previous = () => {
     <Heading
       as="h1"
       size="xl"
-        fontWeight="600"
-        pb="0.5rem"
+      fontWeight="600"
+      pb="0.5rem"
     > Previous
     </Heading>
     
@@ -47,12 +47,13 @@ const Previous = () => {
 
         sx={{
           '&::-webkit-scrollbar': {
-            width: '16px',
+            width: '30px',
             borderRadius: '8px',
             backgroundColor: `rgba(0, 0, 0, 0.15)`,
           },
           '&::-webkit-scrollbar-thumb': {
-            backgroundColor: `rgba(0, 0, 0, 0.05)`,
+            borderRadius: '8px',
+            backgroundColor: `rgba(0, 0, 0, 0.45)`,
           },
         }}
 
@@ -65,6 +66,7 @@ const Previous = () => {
                 <Text>Issue solved - {el.issue}</Text>
                 <Text>Duration - {el.duration}m</Text>
                 <Text>Tutor - {el.tutor}</Text>
+                {/* TODO: CHANGE TO STAR RATING */}
                 <Text>Rating - {el.rating}</Text>
               </Flex>
 
