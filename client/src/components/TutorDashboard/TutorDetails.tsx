@@ -42,7 +42,9 @@ export const TutorDetails = () => {
     //   spoken_language: ['mandarin']
     // })
 
-    const test = await StudentService.getFavouriteTutorsByStudentId("testid3")
+    const test = await StudentService.blockTutor('testid3', {
+      tutor_id: 'hello'
+    })
     console.log(test);
   }
 

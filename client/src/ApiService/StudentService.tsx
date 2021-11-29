@@ -82,7 +82,8 @@ const StudentService = {
   updateStudentById,
   deleteStudentById,
   addFavouriteTutor,
-  getFavouriteTutorsByStudentId
+  getFavouriteTutorsByStudentId,
+  blockTutor
 }
 
 export default StudentService
