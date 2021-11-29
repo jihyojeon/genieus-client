@@ -7,15 +7,15 @@ import Pricing from '../components/LandingPage/Pricing'
 import Reviews from '../components/LandingPage/Reviews'
 
 const LandingPage = () => {
-    return (
-        <Box>
-            <Navbar />
-            <Hero />
-            <About />
-            <Pricing />
-            <Reviews />
-        </Box>
-    )
+  return (
+    <Box>
+      <Navbar />
+      <Hero />
+      <About />
+      <Pricing />
+      <Reviews />
+    </Box>
+  )
 }
 
 export default LandingPage
