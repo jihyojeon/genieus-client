@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage'
 import StudentDashboard from './pages/StudentDashboard'
 import TutorDashboard from './pages/TutorDashboard'
 import StudentHR from './pages/StudentHR'
+import Example from './pages/Example'
 
 const App = () => {
   return (

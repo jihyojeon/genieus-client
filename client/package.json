@@ -8,10 +8,12 @@
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@fontsource/chivo": "^4.5.0",
+    "@fontsource/montserrat": "^4.5.1",
     "@fontsource/nunito": "^4.5.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.16",
+    "@monaco-editor/react": "^4.3.1",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^10.4.9",
@@ -23,11 +25,14 @@
     "firebase": "^9.5.0",
     "framer-motion": "^4.1.17",
     "lottie-react": "^2.1.0",
+    "prismjs": "^1.25.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^3.11.0",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
+    "react-simple-code-editor": "^0.11.0",
+    "react-split": "^2.0.13",
     "typescript": "^4.5.2",
     "web-vitals": "^0.2.4"
   },
@@ -51,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/prismjs": "^1.16.6"
   }
 }

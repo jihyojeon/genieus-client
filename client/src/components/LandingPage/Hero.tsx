@@ -60,11 +60,20 @@ const Hero = () => {
                 <Button colorScheme="indigo" onClick={onOpen} mr="7">
                   Sign Up
                 </Button>
-                <Link href="#link-header" scrollBehavior="smooth">
-                  <Button colorScheme="indigo" variant="outline">
-                    Learn more
-                  </Button>
-                </Link>
+
+                <Button
+                  colorScheme="indigo"
+                  variant="outline"
+                  onClick={() => {
+                    window.scrollTo({
+                      left: 0,
+                      top: 800,
+                      behavior: 'smooth',
+                    })
+                  }}
+                >
+                  Learn more
+                </Button>
               </Flex>
               <TutorSignInArea />
             </Flex>

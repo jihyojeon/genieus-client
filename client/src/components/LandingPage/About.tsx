@@ -26,21 +26,26 @@ const About = () => {
   return (
     <Box>
       <Box position="relative">
-        <Link href="#link-header">
-          <Text
-            position="absolute"
-            fontFamily="sans-serif"
-            bottom={10}
-            left={'45%'}
-            opacity="0.5"
-            letterSpacing={1.5}
-            _hover={{ opacity: 0.8, cursor: 'pointer' }}
-            align="center"
-          >
-            Find out more...
-            <FontAwesomeIcon icon={faArrowDown} />
-          </Text>
-        </Link>
+        <Text
+          onClick={() => {
+            window.scrollTo({
+              left: 0,
+              top: 800,
+              behavior: 'smooth',
+            })
+          }}
+          position="absolute"
+          fontFamily="sans-serif"
+          bottom={10}
+          left={'45%'}
+          opacity="0.5"
+          letterSpacing={1.5}
+          _hover={{ opacity: 0.8, cursor: 'pointer' }}
+          align="center"
+        >
+          Find out more...
+          <FontAwesomeIcon icon={faArrowDown} />
+        </Text>
       </Box>
       <Heading
         id="link-header"

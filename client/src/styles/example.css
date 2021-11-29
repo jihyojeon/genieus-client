@@ -1,0 +1,34 @@
+.split {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 95vw;
+}
+
+.gutter {
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-position: 50%;
+
+  opacity: 0.5;
+}
+
+.gutter.gutter-horizontal {
+  background-color: white;
+  opacity: 0.1;
+  height: 300px;
+  margin-top: 100px;
+  border-radius: 10px;
+
+  cursor: col-resize;
+}
+
+.split-one {
+  min-width: 400px;
+  margin-right: 5rem;
+}
+
+.split-two {
+  min-width: 400px;
+  margin-left: 5rem;
+}

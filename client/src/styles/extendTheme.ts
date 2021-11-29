@@ -23,6 +23,7 @@ export const myTheme = extendTheme(
     },
     fonts: {
       chivo: 'chivo',
+      montserrat: 'montserrat',
     },
 
     components: {
