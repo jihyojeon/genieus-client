@@ -3,12 +3,9 @@ import {
   Box,
   Grid,
   Heading,
-  useColorModeValue,
   Flex,
   GridItem,
-  Link,
   Text,
-  Image,
   UnorderedList,
   ListItem,
 } from '@chakra-ui/react'
@@ -16,10 +13,6 @@ import Lottie from 'lottie-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
-const dark = '#121212'
-const light = 'gray.100'
-
-const jsIcon: any = require('../../assets/icons/javascript-1.svg')
 const workingMan: any = require('../../assets/lottie/working-man/36707-working-man.json')
 
 const About = () => {

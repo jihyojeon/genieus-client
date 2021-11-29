@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ModalLoginIn from './ModalLoginIn'
+
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
@@ -30,14 +30,10 @@ import {
   Center,
 } from '@chakra-ui/react'
 
-import { FaGoogle, FaTwitter } from 'react-icons/fa'
-
 //@ts-ignore
 const ModalSignUp = ({ isOpen, onClose }) => {
   const [registerEmail, setRegisterEmail] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
-
-  const signUpWithGoogle = () => {}
 
   const signup = async () => {
     try {

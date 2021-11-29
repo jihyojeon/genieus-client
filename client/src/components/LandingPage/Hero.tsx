@@ -7,9 +7,6 @@ import {
   GridItem,
   Heading,
   Image,
-  useColorModeValue,
-  Text,
-  Link,
   useDisclosure,
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
@@ -18,10 +15,6 @@ import Lottie from 'lottie-react'
 import ModalSignUp from './ModalSignUp'
 import TutorSignInArea from './TutorSignInArea'
 
-// const dark = '#121212'
-// const light = 'gray.200'
-
-const jsIcon: any = require('../../assets/icons/javascript-1.svg')
 const codingLottie: any = require('../../assets/lottie/coder/data.json')
 
 const Hero = () => {

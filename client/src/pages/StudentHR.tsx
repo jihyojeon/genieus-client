@@ -5,7 +5,7 @@ import HrContent from '../components/StudentHR/HrContent'
 
 import TutorFound from '../components/StudentHR/TutorFound'
 
-import Split from 'react-split'
+
 
 const StudentHR = () => {
   const [tutorComplete, settutorComplete] = useState(false)

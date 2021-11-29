@@ -1,18 +1,17 @@
-import React from 'react'
-import { Flex, Box, List } from '@chakra-ui/layout'
+// import React from 'react'
+import { Flex, Box } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
-import StudentService from '../../ApiService/StudentService';
-import dotenv from 'dotenv';
-import TutorService from '../../ApiService/TutorService';
-import HelpRequestService from '../../ApiService/HelpRequestService';
-import SubscriptionService from '../../ApiService/SubscriptionService';
+import StudentService from '../../ApiService/StudentService'
+import dotenv from 'dotenv'
+// import TutorService from '../../ApiService/TutorService';
+// import HelpRequestService from '../../ApiService/HelpRequestService';
+// import SubscriptionService from '../../ApiService/SubscriptionService';
 
-dotenv.config();
+dotenv.config()
 
 export const TutorDetails = () => {
-
-  async function test () {
-    console.log("clicked");
+  async function test() {
+    console.log('clicked')
     // const test = await TutorService.getAllTutors()
     // const test = await TutorService.deleteTutorById('testid')
     // const test = await TutorService.addTutor({
@@ -23,7 +22,7 @@ export const TutorDetails = () => {
     //   spoken_language: ["hello"]
     // })
 
-    // const test = await HelpRequestService.updateHelpRequestById("string", 
+    // const test = await HelpRequestService.updateHelpRequestById("string",
     // {
     //   description: "this is an update from the apiservice"
     // })
@@ -43,19 +42,25 @@ export const TutorDetails = () => {
     // })
 
     const test = await StudentService.blockTutor('testid3', {
-      tutor_id: 'hello'
+      tutor_id: 'hello',
     })
-    console.log(test);
+    console.log(test)
   }
-
 
   return (
     <Flex flexDirection="column">
-      <Box mt={2} py={2} fontSize="xl" fontWeight="semibold" lineHeight="short" color="#A5B4FC">Personal Details:</Box>
-      
-      <Button onClick={test}>
-        Api Test
-      </Button>
+      <Box
+        mt={2}
+        py={2}
+        fontSize="xl"
+        fontWeight="semibold"
+        lineHeight="short"
+        color="#A5B4FC"
+      >
+        Personal Details:
+      </Box>
+
+      <Button onClick={test}>Api Test</Button>
     </Flex>
   )
 }

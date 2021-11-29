@@ -14,8 +14,7 @@ const favArr: any = [
   { tutor: "vic3", exp1: "JS", dur: 3, online: 1, key: 2 },
   { tutor: "vic4", exp1: "JS", dur: 4, online: 0, key: 3 },
   { tutor: "vic5", exp1: "JS", dur: 5, online: 0, key: 4 },
-  // { tutor: "vic6", exp1: "JS", dur: 6, online: 1, key: 5 },
-  // { tutor: "vic7", exp1: "JS", dur: 7, online: 0, key: 6 },
+
 ] 
 
 
