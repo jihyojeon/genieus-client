@@ -41,17 +41,16 @@ return ApiService.fetchRequest('/student/' + id, {
   body: JSON.stringify(body)
   })
 }
-// ******************************************************************************************************************************************
-// EVERYTHING BELOW HERE HAS TO BE TESTED AND CHECKED!!!!!!!!!!!
-// ******************************************************************************************************************************************
 
 function deleteStudentById(id: string) {
   return ApiService.fetchRequest('/student/' + id, {
     method: "DELETE"
   })
 }
-
-function addFavouriteTutor(studentId: string, body: {tutorId: string}) {
+// ******************************************************************************************************************
+// THIS NEEDS TO BE UPDATED TO OVERWRITE THE FAVOURITES TUTOR ARRAY ONCE THE API LOGIC HAS BEEN UPDATED ON BACKEND
+// ******************************************************************************************************************
+function addFavouriteTutor(studentId: string, body: {tutor_id: string}) {
   return ApiService.fetchRequest('/student/' + studentId + '/favourite', {
     method: "PUT",
     headers: {
@@ -61,13 +60,29 @@ function addFavouriteTutor(studentId: string, body: {tutorId: string}) {
   })
 }
 
+function getFavouriteTutorsByStudentId(id: string) {
+  return ApiService.fetchRequest('/student/' + id + '/favourite')
+}
+
+function blockTutor(studentId: string, body: {tutor_id: string}) {
+  return ApiService.fetchRequest('/student/' + studentId + '/block', {
+    method: "PUT",
+    headers: {
+      "content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  })
+}
+
+
 const StudentService = {
   getAllStudents,
   getStudentById,
   addStudent,
   updateStudentById,
   deleteStudentById,
-  addFavouriteTutor
+  addFavouriteTutor,
+  getFavouriteTutorsByStudentId
 }
 
 export default StudentService

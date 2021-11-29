@@ -3,6 +3,9 @@ import { Flex, Box, List } from '@chakra-ui/layout'
 import { Button } from '@chakra-ui/button'
 import StudentService from '../../ApiService/StudentService';
 import dotenv from 'dotenv';
+import TutorService from '../../ApiService/TutorService';
+import HelpRequestService from '../../ApiService/HelpRequestService';
+import SubscriptionService from '../../ApiService/SubscriptionService';
 
 dotenv.config();
 
@@ -10,21 +13,38 @@ export const TutorDetails = () => {
 
   async function test () {
     console.log("clicked");
-    // const students = await StudentService.updateStudentById("testid", {
-    //   name: 'updatedtestname'
+    // const test = await TutorService.getAllTutors()
+    // const test = await TutorService.deleteTutorById('testid')
+    // const test = await TutorService.addTutor({
+    //   email: "testemail",
+    //   name: "testname",
+    //   id: "testid",
+    //   photo_url: "testphoto",
+    //   spoken_language: ["hello"]
     // })
-    const students = await StudentService.getAllStudents();
-    console.log(students);
-  }
 
-  // {
-  //   name?: string
-  //   bio?: string
-  //   photo_url?: string
-  //   spoken_language?: string[]
-  //   location?: string
-  
-  // }
+    // const test = await HelpRequestService.updateHelpRequestById("string", 
+    // {
+    //   description: "this is an update from the apiservice"
+    // })
+
+    // USING PARAMS
+    // const test = await HelpRequestService.getHelpRequestsByParams(new URLSearchParams({
+    //   student_id: 'fea8be3e64777240'
+    // }).toString())
+
+    // const test = await StudentService.addStudent({
+    //   email: "test",
+    //   name: "testname",
+    //   id: "testid3",
+    //   subscription_type: "basic",
+    //   photo_url: "url",
+    //   spoken_language: ['mandarin']
+    // })
+
+    const test = await StudentService.getFavouriteTutorsByStudentId("testid3")
+    console.log(test);
+  }
 
 
   return (
