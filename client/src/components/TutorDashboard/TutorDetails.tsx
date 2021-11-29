@@ -10,9 +10,22 @@ export const TutorDetails = () => {
 
   async function test () {
     console.log("clicked");
-    const students = await StudentService.getStudentById("fea8be3e64777240");
+    // const students = await StudentService.updateStudentById("testid", {
+    //   name: 'updatedtestname'
+    // })
+    const students = await StudentService.getAllStudents();
     console.log(students);
   }
+
+  // {
+  //   name?: string
+  //   bio?: string
+  //   photo_url?: string
+  //   spoken_language?: string[]
+  //   location?: string
+  
+  // }
+
 
   return (
     <Flex flexDirection="column">
