@@ -11,14 +11,12 @@ import { IncomingRequests } from '../components/TutorDashboard/IncomingRequests'
 import { TutorStats } from '../components/TutorDashboard/TutorStats'
 import { TutorDetails } from '../components/TutorDashboard/TutorDetails'
 import { useGetTutorByIdQuery } from '../redux/services/tutorService'
-// import { RootState } from '../redux/store'
-import { useDispatch, useSelector } from 'react-redux'
 
 
 const TutorDashboard = () => {
   const { data, error, isLoading } = useGetTutorByIdQuery('fea8be3e6479812379')
-  // const dispatch = useDispatch()
-  // const tutor = useSelector((state: RootState) => state.tutor)
+
+
 
   return (
     <Box>
