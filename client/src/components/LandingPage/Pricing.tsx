@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { FaCheckCircle } from 'react-icons/fa'
 import ModalSignUp from './ModalSignUp'
+import { useGetSubscriptionsQuery } from '../../redux/services/subscriptionService'
 
 function PriceWrapper({ children }: { children: ReactNode }) {
   return (
@@ -33,6 +34,8 @@ function PriceWrapper({ children }: { children: ReactNode }) {
 
 export default function Pricing() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const getSubscriptions = useGetSubscriptionsQuery()
 
   return (
     <Box pb={15}>
@@ -168,7 +171,11 @@ export default function Pricing() {
               </List>
 
               <Box w="80%" pt={7}>
-                <Button onClick={onOpen} w="full" colorScheme="indigo">
+                <Button
+                  onClick={() => console.log(getSubscriptions.data)}
+                  w="full"
+                  colorScheme="indigo"
+                >
                   Start trial
                 </Button>
               </Box>

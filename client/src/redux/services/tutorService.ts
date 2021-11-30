@@ -22,8 +22,38 @@ export const tutorApi = createApi({
     getTutorById: builder.query<TutorType, string>({
       query: (id) => `tutor/${id}`,
     }),
+
+    getAllTutors: builder.query<TutorType, void>({
+      query: () => `/tutor`,
+    }),
+    addTutor: builder.mutation<TutorType, any>({
+      query: (user) => ({
+        url: '/tutor',
+        method: 'POST',
+        body: user,
+      }),
+    }),
+    updateTutor: builder.mutation<TutorType, any>({
+      query: (user) => ({
+        url: `/tutor/${user.id}`,
+        method: 'PATCH',
+        body: user,
+      }),
+    }),
+
+    deleteTutor: builder.mutation<TutorType, any>({
+      query: (id) => ({
+        url: `/tutor/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
-
-export const { useGetTutorByIdQuery } = tutorApi
+export const {
+  useGetTutorByIdQuery,
+  useGetAllTutorsQuery,
+  useAddTutorMutation,
+  useDeleteTutorMutation,
+  useUpdateTutorMutation
+} = tutorApi
