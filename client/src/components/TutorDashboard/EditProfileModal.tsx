@@ -12,6 +12,7 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
+  Textarea,
   Stack,
   Heading,
   Avatar,
@@ -55,11 +56,9 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                     <Avatar size="xl" src="https://bit.ly/sage-adebayo">
                       <AvatarBadge
                         size="sm"
-                        rounded="full"
                         top="-10px"
                         colorScheme="red"
                         aria-label="remove Image"
-                        icon={<SmallCloseIcon />}
                       />
                     </Avatar>
                   </Center>
@@ -69,31 +68,24 @@ const EditProfileModal = ({ isOpen, onClose }) => {
                 </Stack>
               </FormControl>
               <FormControl id="userName" isRequired>
-                <FormLabel>User name</FormLabel>
-                <Input
-                  placeholder="UserName"
-                  _placeholder={{ color: 'gray.500' }}
-                  type="text"
-                />
+                <FormLabel>Location</FormLabel>
+                <Input _placeholder={{ color: 'gray.500' }} type="text" />
               </FormControl>
               <FormControl id="email" isRequired>
-                <FormLabel>Email address</FormLabel>
-                <Input
-                  placeholder="your-email@example.com"
-                  _placeholder={{ color: 'gray.500' }}
-                  type="email"
-                />
+                <FormLabel>Non-tech languages</FormLabel>
+                <Input _placeholder={{ color: 'gray.500' }} />
+              </FormControl>
+              <FormControl id="email" isRequired>
+                <FormLabel>Tech languages</FormLabel>
+                <Input _placeholder={{ color: 'gray.500' }} />
               </FormControl>
               <FormControl id="password" isRequired>
-                <FormLabel>Password</FormLabel>
-                <Input
-                  placeholder="password"
-                  _placeholder={{ color: 'gray.500' }}
-                  type="password"
-                />
+                <FormLabel>Bio</FormLabel>
+                <Textarea placeholder="Bio" />
               </FormControl>
               <Stack spacing={6} direction={['column', 'row']}>
                 <Button
+                  onClick={onClose}
                   bg={'red.400'}
                   color={'white'}
                   w="full"

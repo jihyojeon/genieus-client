@@ -12,8 +12,7 @@ export const IncomingRequests = () => {
         my={2}
         ml={5}
         fontSize="xl"
-        fontWeight="600"
-        fontFamily="montserrat"
+        fontWeight="400"
         color="indigo.400"
         letterSpacing={0.5}
       >
