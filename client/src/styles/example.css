@@ -32,3 +32,18 @@
   min-width: 400px;
   margin-left: 5rem;
 }
+
+/* USED FOR STAR RATINGS MODULE IN STUDENT-FEEDBACK */
+.star-rating {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
+}
+/*  */
