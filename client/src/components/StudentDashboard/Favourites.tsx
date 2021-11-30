@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import {
+  Avatar,
+  Badge,
   Box,
   Flex,
   Heading,
@@ -13,6 +15,7 @@ import ModalFavourites from './ModalFavourites'
 const favArr: any = [
   {
     tutor: 'Vic',
+    image: "https://bit.ly/dan-abramov",
     exp1: 'JS',
     dur1: 1,
     exp2: 'Java',
@@ -22,6 +25,7 @@ const favArr: any = [
   },
   {
     tutor: 'Charley',
+    image: "https://bit.ly/dan-abramov",
     exp1: 'Ada',
     dur1: 2,
     exp2: 'Python',
@@ -31,6 +35,7 @@ const favArr: any = [
   },
   {
     tutor: 'Jess',
+    image: "https://bit.ly/dan-abramov",
     exp1: 'Pascale',
     dur1: 3,
     exp2: 'C#',
@@ -40,6 +45,7 @@ const favArr: any = [
   },
   {
     tutor: 'Maylyn',
+    image: "https://bit.ly/dan-abramov",
     exp1: 'Red',
     dur1: 4,
     exp2: 'Fortran',
@@ -49,6 +55,7 @@ const favArr: any = [
   },
   {
     tutor: 'Tobias',
+    image: "https://bit.ly/dan-abramov",
     exp1: 'Kotlin',
     dur1: 5,
     exp2: 'Cobol',
@@ -106,23 +113,39 @@ const Favourites = () => {
                 w="95%"
               >
                 <Flex flexDirection="column" justify="space-between">
-                  <Image
-                    borderRadius="1rem"
-                    boxSize="5rem"
-                    minWidth="5rem"
-                    src="https://bit.ly/dan-abramov"
+                  <Avatar
+                    size={"xl"}
+                    src={el.image}
+
+                    _after={{
+                      content: '""',
+                      w: 4,
+                      h: 4,
+                      bg: 'green.300',
+                      border: '2px solid white',
+                      rounded: 'full',
+                      pos: 'absolute',
+                      bottom: 0,
+                      right: 3,
+                    }}
                   />
-                  <Box position="relative">
+
+
+                  {/* OLD METHOD FOR SHOWING ONLINE STATUS */}
+                  {/* <Box position="relative">
                     {el.online === 0 ? (
                       <Text color="green.500" as={MdCheckCircle} size="large" />
-                    ) : (
-                      <Text
+                      ) : (
+                        <Text
                         color="green.500"
                         as={MdRemoveCircleOutline}
                         size="large"
-                      />
-                    )}
-                  </Box>
+                        />
+                        )}
+                  </Box> */}
+                  {/* OLD METHOD FOR SHOWING ONLINE STATUS */}
+
+
                 </Flex>
                 <Flex
                   align="flex-start"
