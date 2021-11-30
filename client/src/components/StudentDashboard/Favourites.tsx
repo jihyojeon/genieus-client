@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import {
   Avatar,
-  Badge,
+  // Badge,
   Box,
   Flex,
   Heading,
-  Image,
+  // Image,
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
-import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
+// import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
 import ModalFavourites from './ModalFavourites'
 
 const favArr: any = [

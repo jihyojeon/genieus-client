@@ -7,11 +7,10 @@ import '../../styles/example.css'
 import {
   Grid,
   Box,
-  Image,
   GridItem,
   Heading,
   Flex,
-  Select,
+  // Select,
   HStack,
   useColorModeValue,
   Tag,

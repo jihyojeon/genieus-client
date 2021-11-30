@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import {
   Avatar,
-  Box,
   Flex,
   Heading,
-  HStack,
   Text,
   useColorModeValue,
   VStack,
