@@ -28,32 +28,32 @@ const StudentDashboard = () => {
     >
       
       {/* CREATE REQUEST BUTTON */}
-      <GridItem rowSpan={1} colSpan={2} bg="red">
+      <GridItem rowSpan={1} colSpan={2}>
         <CreateRequestButton/>
       </GridItem>
         
       {/* PROFILE TOPRIGHT */}
-      <GridItem rowSpan={1} colSpan={1} bg="red">
+      <GridItem rowSpan={1} colSpan={1}>
         <CornerProfile />
       </GridItem>
 
       {/* INTRACTIONS PANE */}
-      <GridItem rowSpan={1} colSpan={1} bg="red">
+      <GridItem rowSpan={1} colSpan={1}>
         <Interactions />
       </GridItem>
         
       {/* ACHIEVEMENTS PANE */}
-      <GridItem  rowSpan={1} colSpan={1} bg="red">
+      <GridItem  rowSpan={1} colSpan={1}>
         <Achievements />
       </GridItem>
     
       {/* FAVOURITES (RIGHT) PANE */}
-      <GridItem  rowSpan={2} colSpan={1} bg="red">
+      <GridItem  rowSpan={2} colSpan={1}>
         <Favourites />
       </GridItem>
     
       {/* PREVIOUS (BOTTOM) PANE */}
-      <GridItem rowSpan={1} colSpan={2} bg="red" h="200px">
+      <GridItem rowSpan={1} colSpan={2} h="200px">
         <Previous />
       </GridItem>
     </Grid>

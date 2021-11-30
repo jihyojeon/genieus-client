@@ -1,18 +1,23 @@
 import React from 'react'
-import { Button, Flex } from '@chakra-ui/react'
+import { Button, Flex, useDisclosure } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 const buttonColorPurple = '#A78BFA'
 
-const clickHandler = () => {
-  // TODO: IMPLEMENT ACTION ON CREATE REQUEST CLICK
-  console.log('Create request clicked - not yet implemented')
-}
-
+// TODO: NOT SURE THIS IS THE TEXTBOOK IMPLEMENTATION OF REACT ROUTING
 const CreateRequestButton = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    console.log('Create request clicked - not yet implemented')
+    navigate('/student-hr')
+  }
+
   return (
-    <Flex justify={'flex-start'} align={'center'} height={"100%"}>
+    <Flex justify={'flex-start'} align={'center'} height={'100%'}>
       <Button
-        // TODO: MOVE FORMATTING TO BUTTONSTYLE.TS?
         bg={buttonColorPurple}
         borderRadius={'2.5rem'}
         // TODO: CREATE LIGHTER, STRONGER, SHADOW UNDER BUTTON
@@ -20,8 +25,8 @@ const CreateRequestButton = () => {
         fontSize="3xl"
         fontWeight={700}
         height={'70%'}
-        minHeight={"2rem"}
-        onClick={clickHandler}
+        minHeight={'2rem'}
+        onClick={handleClick}
         width={'20rem'}
       >
         Create Request
