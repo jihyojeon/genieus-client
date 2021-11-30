@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals'
 import * as serviceWorker from './serviceWorker'
 import { ChakraProvider } from '@chakra-ui/react'
 import { myTheme } from './styles/extendTheme'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
 // Fonts
 import '@fontsource/chivo'
@@ -14,10 +16,12 @@ import '@fontsource/montserrat'
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider store={store}>
     <ChakraProvider theme={myTheme}>
       <ColorModeScript />
       <App />
     </ChakraProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )
