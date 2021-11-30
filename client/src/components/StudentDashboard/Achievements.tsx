@@ -1,24 +1,15 @@
 import React from 'react'
-import {
-  Box,
-  Flex,
-  Heading,
-  List,
-  ListIcon,
-  ListItem,
-} from '@chakra-ui/react'
+import { Box, Flex, Heading, List, ListIcon, ListItem } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
-import {  } from '@chakra-ui/icons'
+import {} from '@chakra-ui/icons'
 import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
 
 const mainBoxColor: string = '#374151'
 const lottieFirework: any = require('../../assets/lottie/firework/83980-fireworkc.json')
 
-const Achievements = () => {
-  // TODO: EXPAND LINE SPACING
-  // TODO: FVOURITES
-  // TODO: SHADOW ON CREATE REQUEST BUTTON
+const colorsTickBox: string = 'green.500'
 
+const Achievements = () => {
   return (
     <Flex
       bg={mainBoxColor}
@@ -27,35 +18,38 @@ const Achievements = () => {
       borderRadius={'2rem'}
       color={'white'}
       flexDirection="column"
-      h="100%"
-      p={'1rem'}
+      height="100%"
+      padding={'1rem'}
     >
-      {/* <VStack> */}
-
-      <Flex flexDirection="row" bg="red" justify={'space-between'}>
+      <Flex flexDirection="row" justify={'space-between'}>
         <Heading as="h1" size="xl" fontWeight="600" zIndex={10}>
           Achievements
         </Heading>
-        <Box position="relative" top={"-10px"} width="70px" h="70px" bg="blue" zIndex="5">
+        <Box position="relative" top={'-10px'} w="70px" h="70px" zIndex="5">
           <Lottie animationData={lottieFirework} style={{ width: '100px' }} />
         </Box>
       </Flex>
 
-      <List spacing={3} position="relative" bg="purple" zIndex={0}>
+      <List spacing={3} position="relative" zIndex={0}>
         <ListItem>
-          <ListIcon as={MdCheckCircle} color="green.500"/>completed bio
+          <ListIcon as={MdCheckCircle} color={colorsTickBox} />
+          completed bio
         </ListItem>
         <ListItem>
-          <ListIcon as={MdCheckCircle} color='green.500'/>completed first request
+          <ListIcon as={MdCheckCircle} color={colorsTickBox} />
+          completed first help request
         </ListItem>
         <ListItem>
-          <ListIcon as={MdCheckCircle} color='green.500'/>member for 3 months
+          <ListIcon as={MdCheckCircle} color={colorsTickBox} />
+          member for 3 months
         </ListItem>
         <ListItem>
-          <ListIcon as={MdCheckCircle} color='green.500'/>favourited a tutor
+          <ListIcon as={MdCheckCircle} color={colorsTickBox} />
+          favourited a tutor
         </ListItem>
         <ListItem>
-          <ListIcon as={MdRemoveCircleOutline} color='green.500'/>5 JavaScript help requests
+          <ListIcon as={MdRemoveCircleOutline} color={colorsTickBox} />5
+          JavaScript help requests
         </ListItem>
       </List>
     </Flex>

@@ -1,89 +1,132 @@
 import React, { useState } from 'react'
 
 import {
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  useColorModeValue,
+  HStack,
+  Avatar,
+  AvatarBadge,
+  IconButton,
+  Center,
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalCloseButton,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  Button,
-  Flex,
-  Image,
-  Text,
-  FormControl,
-  InputGroup,
-  FormLabel,
-  Input,
-  Box,
-  InputRightElement,
-  HStack,
-  Checkbox,
-  FormHelperText,
-  Center,
-} from '@chakra-ui/react'
+  ModalHeader
+} from '@chakra-ui/react';
+import { SmallCloseIcon } from '@chakra-ui/icons';
 
-const ModalEditProfile = ({}) => {
-  // const ModalEditProfile = ({ isOpen, onClose }) => {
-  //   const [updateName, setUpdateName] = useState('')
-  //   const [updateEmail, setUpdateEmail] = useState('')
-  //   const [updateBio, setUpdateBio] = useState('')
-  //   const [updatePhoto, setUpdatePhoto] = useState('')
+//@ts-ignore
+const ModalEditProfile = ({ isOpen, onClose }) => {
+  const [updateName, setupdateName] = useState('')
+  const [updateEmail, setupdateEmail] = useState('')
+  const [updateBio, setupdateBio] = useState('')
+
 
   return (
-    <Text>Hello World</Text>
-    // <Modal></Modal>
-    // <Modal isOpen={isOpen} onClose={onClose}>
-    //   <ModalOverlay />
-    //   <ModalContent fontFamily="chivo">
-    //     <ModalHeader m={0} fontWeight="400" align="center" fontSize="30px">
-    //       Edit profile
-    //     </ModalHeader>
+      
+    <Modal isOpen={isOpen} onClose={onClose}>
+    <ModalOverlay>
+    <ModalContent fontFamily="sans-serif">
+    <ModalHeader m={0} fontWeight="400" align="center" fontSize="30px">
 
-    //     <ModalBody>
-    //       <Flex flexDirection="row">
-    //         <Image
-    //           src="https://bit.ly/dan-abramov"
-    //           boxSize="10rem"
-    //           borderRadius="5rem"
-    //         />
-
-    //         <Box ml="20px">
-    //           <Flex flexDirection="column">
-    //             <FormLabel>Update name</FormLabel>
-    //             <Input
-    //               onChange={(e) => setUpdateName(e.target.value)}
-    //               type="string"
-    //             />
-
-    //             <FormLabel>Update email</FormLabel>
-    //             <Input
-    //               onChange={(e) => setUpdateEmail(e.target.value)}
-    //               type="email"
-    //             />
-    //           </Flex>
-    //         </Box>
-    //       </Flex>
-    //       <FormLabel>Update bio</FormLabel>
-    //       <InputGroup>
-    //         <Input
-    //           onChange={(e) => setUpdateBio(e.target.value)}
-    //           type="email"
-    //         />
-    //       </InputGroup>
-    //     </ModalBody>
-
-    //     <ModalFooter>
-    //       <Flex flexDirection="row" justify="space-between" align="left">
-    //         <Button>Submit</Button>
-    //         <Button>Cancel</Button>
-    //         <ModalCloseButton />
-    //       </Flex>
-    //     </ModalFooter>
-    //   </ModalContent>
-    // </Modal>
-  )
-}
+      <Flex
+        minH={'50vh'}
+        align={'center'}
+        justify={'center'}>
+        {/* // bg={useColorModeValue('gray.50', 'gray.800')} */}
+        <Stack
+          spacing={4}
+          w={'full'}
+          maxW={'md'}
+          // bg={useColorModeValue('white', 'gray.700')}
+          rounded={'xl'}
+          boxShadow={'lg'}
+          p={6}
+          my={12}>
+          <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
+            User Profile Edit
+          </Heading>
+          <FormControl id="userName">
+            <FormLabel>Photo</FormLabel>
+            <Stack direction={['column', 'row']} spacing={6}>
+              <Center>
+                <Avatar size="xl" src="https://bit.ly/sage-adebayo">
+                  <AvatarBadge
+                    as={IconButton}
+                    size="sm"
+                    rounded="full"
+                    top="-10px"
+                    colorScheme="red"
+                    aria-label="remove Image"
+                    icon={<SmallCloseIcon />}
+                  />
+                </Avatar>
+              </Center>
+              <Center w="full">
+                <Button w="full">Change Photo</Button>
+              </Center>
+            </Stack>
+          </FormControl>
+          <FormControl id="userName">
+            <FormLabel>Name</FormLabel>
+            <Input
+              placeholder="Your Name"
+              _placeholder={{ color: 'gray.500' }}
+              type="text"
+            />
+          </FormControl>
+          <FormControl id="email">
+            <FormLabel>Email address</FormLabel>
+            <Input
+              placeholder="your-email@example.com"
+              _placeholder={{ color: 'gray.500' }}
+              type="email"
+            />
+          </FormControl>
+          <FormControl id="bio">
+            <FormLabel>Bio</FormLabel>
+            <Input
+              placeholder="Biography"
+              _placeholder={{ color: 'gray.500' }}
+              type="bio"
+            />
+          </FormControl>
+          <Stack spacing={6} direction={['column', 'row']}>
+            <Button
+              bg={'red.400'}
+              color={'white'}
+              w="full"
+              _hover={{
+                bg: 'red.500',
+              }}>
+              Cancel
+            </Button>
+            <Button
+              bg={'blue.400'}
+              color={'white'}
+              w="full"
+              _hover={{
+                bg: 'blue.500',
+              }}>
+              Submit
+            </Button>
+          </Stack>
+        </Stack>
+            </Flex>
+            </ModalHeader>
+          
+          </ModalContent>
+          </ModalOverlay>
+            </Modal>
+    );
+  }
 
 export default ModalEditProfile
+
+

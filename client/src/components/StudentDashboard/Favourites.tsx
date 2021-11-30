@@ -1,98 +1,151 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
-    Box,
-    Flex,
-    Heading,
-    Image,
-    Text,
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Text,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
+import ModalFavourites from './ModalFavourites'
 
 const favArr: any = [
-  { tutor: "vic1", exp1: "JS", dur: 1, online: 0, key: 0 },
-  { tutor: "vic2", exp1: "JS", dur: 2, online: 0, key: 1 },
-  { tutor: "vic3", exp1: "JS", dur: 3, online: 1, key: 2 },
-  { tutor: "vic4", exp1: "JS", dur: 4, online: 0, key: 3 },
-  { tutor: "vic5", exp1: "JS", dur: 5, online: 0, key: 4 },
+  {
+    tutor: 'Vic',
+    exp1: 'JS',
+    dur1: 1,
+    exp2: 'Java',
+    dur2: 2,
+    online: 0,
+    key: 0,
+  },
+  {
+    tutor: 'Charley',
+    exp1: 'Ada',
+    dur1: 2,
+    exp2: 'Python',
+    dur2: 2,
+    online: 0,
+    key: 1,
+  },
+  {
+    tutor: 'Jess',
+    exp1: 'Pascale',
+    dur1: 3,
+    exp2: 'C#',
+    dur2: 2,
+    online: 1,
+    key: 2,
+  },
+  {
+    tutor: 'Maylyn',
+    exp1: 'Red',
+    dur1: 4,
+    exp2: 'Fortran',
+    dur2: 2,
+    online: 0,
+    key: 3,
+  },
+  {
+    tutor: 'Tobias',
+    exp1: 'Kotlin',
+    dur1: 5,
+    exp2: 'Cobol',
+    dur2: 2,
+    online: 0,
+    key: 4,
+  },
+]
 
-] 
-
+const colorBgFav = '#C7D2FE'
+const colorNameFav = '#F40B0B'
+const colorTextFav = 'black'
+const colorHeading = 'white'
 
 const Favourites = () => {
+  const [favList, setFavList] = useState(favArr)
+
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
     // TODO: USE https://chakra-ui.com/docs/overlay/drawer FOR REVIEW
 
-    <Flex
-      color={"white"}    
-      flexDirection="column"
-      h="100%"
-    >
-
-    <Heading
-      as="h1"
-      size="xl"
-      fontWeight="600"
-      pt={'1rem'}
-      pb={'1rem'}
-    >
-      Favourites
-    </Heading>
+    <Flex color={colorHeading} flexDirection="column" h="100%" minWidth="350px">
+      <Heading as="h1" size="xl" fontWeight="600" pt={'1rem'} pb={'1rem'}>
+        Favourite Tutors
+      </Heading>
       <Box
-        overflowY={"auto"}
+        overflowY={'auto'}
         // scrollBar={"hidden"}
-        bg={"cyan"}
-
         sx={{
           '&::-webkit-scrollbar': {
-            width: '16px',
+            backgroundColor: `rgba(150, 150, 190, 0.15)`,
             borderRadius: '8px',
-            backgroundColor: `rgba(0, 0, 0, 0.15)`,
+            width: '16px',
           },
           '&::-webkit-scrollbar-thumb': {
-            backgroundColor: `rgba(0, 0, 0, 0.45)`,
+            backgroundColor: `rgba(160, 160, 230, 0.45)`,
             borderRadius: '8px',
           },
         }}
-
       >
-        {favArr.map((el:any) => {
+        {favList.map((el: any) => {
           return (
             <Box key={el.dur}>
-
-              <Flex
+              {/* TODO: CHANGE TO BUTTON OR ADD VIEW/REMOVE BUTTON AND CARRY FORWARD DETAILS */}
+              <Flex onClick={ onOpen }
+                bg={colorBgFav}
+                border="solid"
+                borderRadius={'1rem'}
                 flexDirection="row"
                 justify="flex-start"
-                bg="blue"
-                w="100%"
                 p="15px"
-                mb="1rem"
-                borderRadius={'1rem'}
-                border="solid"
+                mb="2rem"
+                w="95%"
               >
                 <Flex flexDirection="column" justify="space-between">
                   <Image
-                    src="https://bit.ly/dan-abramov"
-                    boxSize="5rem"
                     borderRadius="1rem"
-                    />
+                    boxSize="5rem"
+                    minWidth="5rem"
+                    src="https://bit.ly/dan-abramov"
+                  />
                   <Box position="relative">
-                    {el.online === 0 ?
-                      <Text color="green.500" as={MdCheckCircle} /> :
-                      <Text color="green.500" as={MdRemoveCircleOutline} />}
+                    {el.online === 0 ? (
+                      <Text color="green.500" as={MdCheckCircle} size="large" />
+                    ) : (
+                      <Text
+                        color="green.500"
+                        as={MdRemoveCircleOutline}
+                        size="large"
+                      />
+                    )}
                   </Box>
                 </Flex>
-                <Flex flexDirection="column" bg="red" justify="flex-start" align="flex-start" ml="20px">
-                  <Heading>{el.tutor}</Heading>
+                <Flex
+                  align="flex-start"
+                  color={colorTextFav}
+                  flexDirection="column"
+                  justify="flex-start"
+                  ml="20px"
+                >
+                  <Heading color={colorNameFav}>{el.tutor}</Heading>
                   <Text>Experience</Text>
-                  <Text>{el.exp1} - {el.dur} years</Text>
-                  <Text>Language 2 - 1 year</Text>
+                  <Text>
+                    {el.exp1} - {el.dur1} years
+                  </Text>
+                  <Text>
+                    {el.exp2} - {el.dur2} years
+                  </Text>
                 </Flex>
               </Flex>
             </Box>
           )
         })}
       </Box>
+      <ModalFavourites isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }

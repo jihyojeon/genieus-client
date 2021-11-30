@@ -1,13 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Flex, Heading, List, ListItem } from '@chakra-ui/react'
 
 const mainBoxColor: string = "#374151"
 
-const helpDuration: number = 23 // TOTAL DURATION OF HELP REQUESTS THIS MONTH
-const remainingCredit: number = 93 // MINUTES OF HELP REQUESTS REMAINING THIS MONTH
-const remainingDays: number = 13 // DAYS REMAINING UNTIL START OF NEXT BILLIGNG CYCLE
+// TODO: DUMMY OBJECT - PULL FROM DATABASE
+const interactionsObj: any = {
+  helpDuration: 23, // TOTAL DURATION OF HELP REQUESTS THIS MONTH
+  remainingCredit: 93, // MINUTES OF HELP REQUESTS REMAINING THIS MONTH
+  remainingDays: 13, // DAYS REMAINING UNTIL START OF NEXT BILLIGNG CYCLE,
+}
 
 const Interactions = () => {
+
+  const [interactions, setInteractions] = useState(interactionsObj)
+
   return (
     <Flex
       bg={ mainBoxColor }
@@ -16,16 +22,16 @@ const Interactions = () => {
       borderWidth={'solid'}
       color={"white"}    
       flexDirection="column"
-      h="100%"
-      p={'1rem'}
+      height="100%"
+      padding={'1rem'}
     >
 
-      <Heading as="h1" size="xl" fontWeight="600" bg="red">
+      <Heading as="h1" size="xl" fontWeight="600">
         Interactions
       </Heading>
       <br/>
       <Heading as="h2" size="l" fontWeight="500">
-        Amazing! You've problem-solved with one of our tutors for {helpDuration} minutes this month!
+        Amazing! You've problem-solved with one of our tutors for {interactions.helpDuration} minutes this month!
       </Heading>
       <br/>
       <List spacing={3}>
@@ -33,12 +39,12 @@ const Interactions = () => {
         <Heading as="h2" size="l">
           Credit remaining
         </Heading>
-        <ListItem>{remainingCredit} minutes</ListItem>
+        <ListItem>{interactions.remainingCredit} minutes</ListItem>
         
         <Heading as="h2" size="l">
           Days remaining
         </Heading>
-        <ListItem >{remainingDays} days</ListItem>
+        <ListItem >{interactions.remainingDays} days</ListItem>
       
       </List>
     {/* TODO: INSERT PIE CHART */}
