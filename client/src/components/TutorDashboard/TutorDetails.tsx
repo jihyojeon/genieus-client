@@ -11,33 +11,45 @@ import {
   TagLabel,
   Textarea,
   Tag,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { Button } from '@chakra-ui/button'
 import StudentService from '../../ApiService/StudentService'
 import dotenv from 'dotenv'
-// import TutorService from '../../ApiService/TutorService';
-// import HelpRequestService from '../../ApiService/HelpRequestService';
-// import SubscriptionService from '../../ApiService/SubscriptionService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCog } from '@fortawesome/free-solid-svg-icons'
+import EditProfileModal from './EditProfileModal'
 
 dotenv.config()
 
 export const TutorDetails = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   const [bioValue, setbioValue] = useState(
     'Hey, Im Daniel from Toronto. I love chess and software!'
   )
   return (
     <Box>
-      <Heading
-        my={2}
-        ml={5}
-        fontSize="xl"
-        fontWeight="600"
-        fontFamily="montserrat"
-        color="indigo.400"
-        letterSpacing={0.5}
-      >
-        Tutor Details:
-      </Heading>
+      <Flex alignItems="center">
+        <Heading
+          my={2}
+          ml={5}
+          fontSize="xl"
+          fontWeight="600"
+          fontFamily="montserrat"
+          color="indigo.400"
+          letterSpacing={0.5}
+        >
+          Tutor Information:
+        </Heading>
+        <Box
+          _hover={{ opacity: 0.8, color: 'indigo.400' }}
+          onClick={onOpen}
+          ml={5}
+        >
+          <FontAwesomeIcon size="sm" icon={faCog} />
+        </Box>
+      </Flex>
       {/* Info area */}
 
       <Flex
@@ -126,6 +138,7 @@ export const TutorDetails = () => {
           </Flex>
         </Flex>
       </Flex>
+      <EditProfileModal isOpen={isOpen} onClose={onClose} />
     </Box>
   )
 }
