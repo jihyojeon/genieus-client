@@ -3,19 +3,27 @@ import React from 'react'
 import { RequestCard } from './RequestCard'
 
 export const IncomingRequests = () => {
-  
   // requestNames is temporary until we get real data
   const requestNames = ['David', 'Magi', 'Eugene', 'Alexi', 'Charley']
-  
+
   return (
     <Flex flexDirection="column">
-      <Box mt={2} py={2} fontSize="xl" fontWeight="semibold" lineHeight="short" color="#A5B4FC">Your Requests:</Box>
+      <Box
+        my={2}
+        ml={5}
+        fontSize="xl"
+        fontWeight="600"
+        fontFamily="montserrat"
+        color="indigo.400"
+        letterSpacing={0.5}
+      >
+        Your Requests:
+      </Box>
       <List display="flex" overflow="scroll">
-        {requestNames.map(name => {
+        {requestNames.map((name) => {
           return <RequestCard name={name} />
         })}
       </List>
-
     </Flex>
   )
 }
