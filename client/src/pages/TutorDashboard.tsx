@@ -13,36 +13,22 @@ import Topbar from '../components/TutorDashboard/Topbar'
 import { IncomingRequests } from '../components/TutorDashboard/IncomingRequests'
 import { TutorStats } from '../components/TutorDashboard/TutorStats'
 import { TutorDetails } from '../components/TutorDashboard/TutorDetails'
-import { useAddStudentMutation } from '../redux/services/studentService'
+import { useGetHRRequestsQuery } from '../redux/services/HelpRequestService'
 
 const TutorDashboard = () => {
-  const [addStudent, addStudentResult] = useAddStudentMutation()
-
-  // const getAllTutors = useGetAllTutorsQuery()
+  const getHRs = useGetHRRequestsQuery()
 
   return (
     <Box>
       <FormControl w="300px">
         <Button
           type="submit"
-          onClick={() =>
-            addStudent({
-              email: 'string',
-              name: 'string',
-              id: 'sdfdsfsdfdsf',
-              subscription_type: 'basic',
-              photo_url: 'string',
-              spoken_language: ['ss'],
-              location: 'string',
-            })
-          }
+          onClick={() => {
+            console.log(getHRs.data)
+          }}
         >
           +
         </Button>
-        <Button onClick={() => console.log(addStudentResult)}>
-          View tutor created
-        </Button>
-      
       </FormControl>
 
       <Topbar />
