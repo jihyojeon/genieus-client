@@ -7,8 +7,14 @@ import Favourites from '../components/StudentDashboard/Favourites'
 import Interactions from '../components/StudentDashboard/Interactions'
 import Previous from '../components/StudentDashboard/Previous'
 import Stats from '../components/StudentDashboard/StudentStats'
+import { auth } from '../firebase'
 
 const gridBackgroundColor: string = 'hsl(217, 22%, 19%)'
+
+// CALL DATA
+// GET FIREBASE ID
+const userEmail = auth.currentUser?.email
+console.log(userEmail)
 
 const StudentDashboard = () => {
   return (
