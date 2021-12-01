@@ -25,7 +25,7 @@ const favArr: any = [
   },
   {
     tutor: 'Charley',
-    image: "https://bit.ly/dan-abramov",
+    image: "https://bit.ly/ryan-florence",
     exp1: 'Ada',
     dur1: 2,
     exp2: 'Python',
@@ -45,7 +45,7 @@ const favArr: any = [
   },
   {
     tutor: 'Maylyn',
-    image: "https://bit.ly/dan-abramov",
+    image: "https://bit.ly/ryan-florence",
     exp1: 'Red',
     dur1: 4,
     exp2: 'Fortran',
@@ -55,7 +55,7 @@ const favArr: any = [
   },
   {
     tutor: 'Tobias',
-    image: "https://bit.ly/dan-abramov",
+    image: "https://bit.ly/code-beast",
     exp1: 'Kotlin',
     dur1: 5,
     exp2: 'Cobol',

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Chat from './pages/Chat'
 import Feedback from './pages/Feedback'
 import LandingPage from './pages/LandingPage'
 import StudentDashboard from './pages/StudentDashboard'
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/tutor-dashboard" element={<TutorDashboard />} />
         <Route path="/student-hr" element={<StudentHR />} />
         <Route path="/tutor-hr" element={<TutorHR />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/student-feedback" element={<Feedback />} />
         <Route path="/tutor-complete" element={<TutorClose />} />
       </Routes>
