@@ -18,6 +18,8 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { auth } from '../../firebase'
 import { signOut } from 'firebase/auth'
 
+import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
+
 export default function Topbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -31,6 +33,11 @@ export default function Topbar() {
       })
   }
 
+  // ***************************************************************************************************************************************************
+  // THIS VARIABLE IS HARD CODED, BUT WE SHOUDL GET THE TUTORID FROM FIREBASE
+  // ***************************************************************************************************************************************************
+
+  const { data, error, isLoading } = useGetTutorByIdQuery('tutor1')
   return (
     <>
       <Box px={6} py={2} h="10vh">
@@ -64,7 +71,7 @@ export default function Topbar() {
                 {/* Profile Pic */}
                 <Avatar
                   size="md"
-                  name="Dan Abrahmov"
+                  name={error ? "error" : isLoading ? "loading" : data ? data.name : undefined}
                   src="https://bit.ly/dan-abramov"
                 >
                   <AvatarBadge boxSize="1em" bg="green.500" />
