@@ -3,6 +3,9 @@ import { Box, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react'
 
 export default function ChatDuration() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [ duration, setDuration ] = useState(Date.now())
+
+  const arrivalTime = Date.now()
 
   return (
     <Flex direction="column">
@@ -13,11 +16,13 @@ export default function ChatDuration() {
           fontSize={25}
           fontWeight={400}
         >
-          Chat Duration
+          Chat Time Remaining
         </Heading>
 
         <Flex direction="row" mb="1rem" justify="center">
-          <Text>Time</Text>
+          <Text mt="0.5rem">
+            {arrivalTime}
+          </Text>
         </Flex>
       </Box>
     </Flex>

@@ -1,23 +1,25 @@
 import React from 'react'
 import { Flex, Button, useDisclosure } from '@chakra-ui/react'
 import ModalStudentRequest from './ModalStudentRequest'
+import { useNavigate } from 'react-router-dom'
 
-  const ButtonBar = ({
-    setloadingBtn,
-    setStudentReady,
-  }: any) => {
-
+const ButtonBar = ({ setloadingBtn, setStudentReady }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  return (
+  const navigate = useNavigate()
 
+  const handleClick = () => {
+    console.log('Create request clicked - not yet implemented')
+    navigate('/chat')
+  }
+
+  return (
     <Flex
       alignItems="flex-start"
       flexDirection="row"
       justifyContent="center"
       px="10"
     >
-
       <Button
         colorScheme="indigo"
         fontFamily="montserrat"
@@ -34,6 +36,7 @@ import ModalStudentRequest from './ModalStudentRequest'
         fontFamily="montserrat"
         letterSpacing={2}
         ml={105}
+        onClick={handleClick}
         padding={8}
         variant="outline"
       >

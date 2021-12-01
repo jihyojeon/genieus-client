@@ -33,7 +33,7 @@ export default function ChatBubbleSent() {
             borderTopLeftRadius="0rem"
             borderTopRightRadius="3rem"
             borderBottomLeftRadius="3rem"
-            borderBottomRightRadius="0%"
+            borderBottomRightRadius="1rem"
             p="1rem"
             pr="7rem"
             pl="2rem"

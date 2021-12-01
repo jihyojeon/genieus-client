@@ -40,7 +40,7 @@ export default function ChatBubbleReceived() {
           border="1px"
           borderTopLeftRadius="3rem"
           borderTopRightRadius="0rem"
-          borderBottomLeftRadius="0%"
+          borderBottomLeftRadius="1rem"
           borderBottomRightRadius="3rem"
           p="1rem"
           pl="7rem"

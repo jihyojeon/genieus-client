@@ -13,7 +13,14 @@ export default function ChatLeftPane() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <Box borderRadius={"1rem"} bg="lightgrey" padding="0.5rem" align="center" height="100%">
+    <Box
+      borderRadius={"1rem"}
+      bg="lightgrey"
+      padding="0.5rem"
+      align="center" 
+      maxheight="100%"
+      overflowY={'hidden'}
+    >
       <ChatParticipants />
       <ChatLink />
       <ChatDuration />

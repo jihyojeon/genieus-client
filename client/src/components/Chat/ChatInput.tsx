@@ -5,7 +5,7 @@ export default function ChatInput() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <Box>
+    <Box zIndex="10" height="100%">
       <Flex direction="row" justify="flex-start" align="center">
         <FormControl>
           <Input

@@ -9,6 +9,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import Participant from './Participant'
+import ModalChat from './ModalChat'
 
 const participantsArr: any = [
   {
@@ -49,11 +50,11 @@ export default function ChatParticipants() {
       >
         Participants
       </Heading>
-      <Box bg="grey" borderRadius="1rem" padding="1rem">
+      <Box bg="grey" borderRadius="1rem" padding="1rem" >
 
         <Flex direction="row" mb="1rem" align="center">
           {/* TODO: REPLACE THIS AND REPEATED ITEM BELOW WITH PARTICIPANT COMPONENT INSTEAD */}
-          <Avatar size={'lg'} src={particpantDetails[0].image} mr="2rem"></Avatar>
+          <Avatar size={'lg'} src={particpantDetails[0].image} mr="2rem" onClick= {onOpen}></Avatar>
           <Heading
             fontFamily="montserrat"
             letterSpacing={1}
@@ -79,6 +80,10 @@ export default function ChatParticipants() {
         </Flex>
 
       </Box>
+
+      {/* TODO: REPLACE WITH STUDENT/TUTOR VERSIONS OF THIS MODAL POPUP */}
+      <ModalChat isOpen={isOpen} onClose={onClose} />
+      {/*  */}
     </Flex>
   )
 }
