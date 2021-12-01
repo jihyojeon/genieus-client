@@ -23,7 +23,7 @@ export const tutorApi = createApi({
       query: (id) => `tutor/${id}`,
     }),
 
-    getAllTutors: builder.query<TutorType, void>({
+    getAllTutors: builder.query<TutorType[], void>({
       query: () => `/tutor`,
     }),
     addTutor: builder.mutation<TutorType, any>({
