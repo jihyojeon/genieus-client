@@ -29,25 +29,27 @@ import {
   FormHelperText,
   Center,
 } from '@chakra-ui/react'
+import { Link, useNavigate } from 'react-router-dom'
 
 //@ts-ignore
 const ModalSignUp = ({ isOpen, onClose }) => {
+  let navigate = useNavigate()
+
   const [registerEmail, setRegisterEmail] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
 
   const signup = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      )
-      console.log(`${user} Signed up!`)
-      console.log(auth.currentUser?.email)
-    } catch (error) {
-      //@ts-ignore
-      console.log(error)
-    }
+    const user = await createUserWithEmailAndPassword(
+      auth,
+      registerEmail,
+      registerPassword
+    )
+      .then((user) => {
+        navigate('/tutor-dashboard')
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
   }
 
   const [show, setShow] = React.useState(false)

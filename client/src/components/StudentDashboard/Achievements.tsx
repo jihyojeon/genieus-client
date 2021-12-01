@@ -12,22 +12,19 @@ const colorsTickBox: string = 'green.500'
 const Achievements = () => {
   return (
     <Flex
-      bg={mainBoxColor}
-      borderColor={'white'}
-      borderWidth={'solid'}
-      borderRadius={'2rem'}
-      color={'white'}
+      bg={'gray.700'}
+      borderRadius={'10px'}
       flexDirection="column"
-      height="100%"
+      height="40vh"
       padding={'1rem'}
+      mt={12}
     >
-      <Flex flexDirection="row" justify={'space-between'}>
-        <Heading as="h1" size="xl" fontWeight="600" zIndex={10}>
-          Achievements
-        </Heading>
-        <Box position="relative" top={'-10px'} w="70px" h="70px" zIndex="5">
-          <Lottie animationData={lottieFirework} style={{ width: '100px' }} />
-        </Box>
+      <Flex flexDirection="row" justify={'center'}>
+        <Flex justifyContent="center" alignItems="center" pb={5}>
+          <Heading as="h1" size="lg" fontWeight="400">
+            Achievements
+          </Heading>
+        </Flex>
       </Flex>
 
       <List spacing={3} position="relative" zIndex={0}>

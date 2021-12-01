@@ -11,6 +11,7 @@ import {
 import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 import ModalLogIn from './ModalLoginIn'
 import Logo from '../../assets/icons/logo.svg'
+import TutorLoginButton from './TutorLoginButton'
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -22,6 +23,7 @@ export default function Navbar() {
           <Image src={Logo} boxSize="9rem" pt={5} pl={7} borderRadius="50px" />
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
+              <TutorLoginButton />
               <Button variant="outline" onClick={onOpen}>
                 Log In
               </Button>

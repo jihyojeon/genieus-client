@@ -13,6 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 interface HelpRequestTypes {
   name: string
@@ -46,7 +47,7 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
         <Box position="relative" h={'50px'} w={'full'}>
           <Image
             position="absolute"
-            height="30px"
+            height="25px"
             top={0}
             left={5}
             src={imageObj.python}
@@ -54,7 +55,7 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
         </Box>
         <Flex justify={'center'} mt={-12}>
           <Avatar
-            size={'xl'}
+            size={'lg'}
             src={
               'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
             }
@@ -109,19 +110,21 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
               #vue
             </Badge>
           </Stack>
-          <Button
-            w={'full'}
-            mt={3}
-            bg={useColorModeValue('#151f21', 'gray.900')}
-            color={'white'}
-            rounded={'md'}
-            _hover={{
-              transform: 'translateY(-2px)',
-              boxShadow: 'lg',
-            }}
-          >
-            Expand
-          </Button>
+          <Link to="/tutor-hr">
+            <Button
+              w={'full'}
+              mt={3}
+              bg={useColorModeValue('#151f21', 'gray.900')}
+              color={'white'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+            >
+              Expand
+            </Button>
+          </Link>
         </Box>
       </Box>
     </Center>

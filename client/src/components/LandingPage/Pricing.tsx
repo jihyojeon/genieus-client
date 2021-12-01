@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { FaCheckCircle } from 'react-icons/fa'
 import ModalSignUp from './ModalSignUp'
+import { useGetSubscriptionsQuery } from '../../redux/services/subscriptionService'
 
 function PriceWrapper({ children }: { children: ReactNode }) {
   return (
@@ -34,6 +35,11 @@ function PriceWrapper({ children }: { children: ReactNode }) {
 export default function Pricing() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  const getSubscriptions = useGetSubscriptionsQuery()
+
+
+           
+
   return (
     <Box pb={15}>
       <VStack spacing={2} textAlign="center">
@@ -52,7 +58,8 @@ export default function Pricing() {
         <PriceWrapper>
           <Box color={useColorModeValue('gray.500', 'gray.100')} py={4} px={12}>
             <Text fontWeight="500" fontSize="2xl">
-              Basic
+
+              {getSubscriptions.data && getSubscriptions.data.Basic.subscription_name}
             </Text>
             <HStack justifyContent="center">
               <Text fontSize="3xl" fontWeight="600">
@@ -168,7 +175,14 @@ export default function Pricing() {
               </List>
 
               <Box w="80%" pt={7}>
-                <Button onClick={onOpen} w="full" colorScheme="indigo">
+                <Button
+                  onClick={() =>
+                    //@ts-ignore
+                    console.log(getSubscriptions.data.Max.subscription_name)
+                  }
+                  w="full"
+                  colorScheme="indigo"
+                >
                   Start trial
                 </Button>
               </Box>

@@ -26,26 +26,25 @@ import {
   Center,
   FormHelperText,
 } from '@chakra-ui/react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import Logo from '../../assets/icons/logo.svg'
 
 //@ts-ignore
 const ModalTutorSignUp = ({ isOpen, onClose }) => {
+  let navigate = useNavigate()
+
   const [registerEmail, setRegisterEmail] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
 
   const signup = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      )
-      console.log(`${user} Signed up!`)
-    } catch (error) {
-      //@ts-ignore
-      console.log(error)
-    }
+    const user = await createUserWithEmailAndPassword(
+      auth,
+      registerEmail,
+      registerPassword
+    ).then((user) => {
+      navigate('/tutor-dashboard')
+    })
   }
 
   const [show, setShow] = React.useState(false)
