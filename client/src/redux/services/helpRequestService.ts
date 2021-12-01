@@ -9,7 +9,7 @@ interface HRType {
   favourites_only: boolean
 }
 
-// this is a comment
+
 
 export const helpRequestApi = createApi({
   reducerPath: 'helpRequestApi',
