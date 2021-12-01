@@ -9,8 +9,8 @@ interface HRType {
   favourites_only: boolean
 }
 
-export const HelpRequestApi = createApi({
-  reducerPath: 'HelpRequestApi',
+export const helpRequestApi = createApi({
+  reducerPath: 'helpRequestApi',
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
   endpoints: (builder) => ({
     // GET ALL
@@ -64,4 +64,4 @@ export const {
   useUpdateHRRequestMutation,
   useGetPendingHRByIdQuery,
 
-} = HelpRequestApi
+} = helpRequestApi
