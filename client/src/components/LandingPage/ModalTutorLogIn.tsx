@@ -28,7 +28,7 @@ import Logo from '../../assets/icons/logo.svg'
 import { Link, useNavigate } from 'react-router-dom'
 
 //@ts-ignore
-const ModalLogIn = ({ isOpen, onClose }) => {
+const ModalTutorLogIn = ({ isOpen, onClose }) => {
   let navigate = useNavigate()
 
   const [loginEmail, setLoginEmail] = useState('')
@@ -48,7 +48,7 @@ const ModalLogIn = ({ isOpen, onClose }) => {
   const login = async () => {
     await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
       .then((user) => {
-        navigate('/student-dashboard')
+        navigate('/tutor-dashboard')
         console.log(auth.currentUser?.email)
       })
       .catch((err) => {
@@ -73,7 +73,7 @@ const ModalLogIn = ({ isOpen, onClose }) => {
       <ModalOverlay />
       <ModalContent fontFamily="chivo">
         <ModalHeader m={0} fontWeight="400" align="center" fontSize="30px">
-          Log In
+          Tutor Log In
           <Image
             src={Logo}
             position="absolute"
@@ -142,4 +142,4 @@ const ModalLogIn = ({ isOpen, onClose }) => {
   )
 }
 
-export default ModalLogIn
+export default ModalTutorLogIn

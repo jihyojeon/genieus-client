@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { auth } from '../../firebase'
 import {
   Box,
   Flex,
@@ -18,6 +19,7 @@ import {
 import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 import { SettingsIcon } from '@chakra-ui/icons'
 import ModalEditProfile from './ModalEditProfile'
+import { useNavigate } from 'react-router-dom'
 
 // TODO: DUMMY OBJECT - PULL FROM DATABASE
 const userDetailsObj: any = {
@@ -38,7 +40,15 @@ function tierIcon(tier: string) {
 }
 
 const CornerProfile = () => {
+  const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => navigate('/'))
+      .catch((err) => console.log(err))
+  }
 
   const [userDetails, setUserDetails] = useState(userDetailsObj)
 
@@ -69,7 +79,7 @@ const CornerProfile = () => {
                       width="20px"
                     />
                   </Flex>
-                  <Button opacity="0.6" variant="ghost">
+                  <Button onClick={handleSignOut} opacity="0.6" variant="ghost">
                     Log Out
                   </Button>
                 </Flex>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Flex, useDisclosure } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
+import { auth } from '../../firebase'
 
 const buttonColorPurple = '#A78BFA'
 
