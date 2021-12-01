@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-interface TutorType {
+export default interface TutorType {
   email: string
   name: string
   id: string

@@ -5,6 +5,8 @@ import {
   Heading,
   Image,
   Text,
+  Avatar,
+  AvatarBadge,
   useDisclosure,
 } from '@chakra-ui/react'
 import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
@@ -72,71 +74,78 @@ const Favourites = () => {
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
     // TODO: USE https://chakra-ui.com/docs/overlay/drawer FOR REVIEW
 
-    <Flex color={colorHeading} flexDirection="column" h="100%" minWidth="350px">
-      <Heading as="h1" size="xl" fontWeight="600" pt={'1rem'} pb={'1rem'}>
+    <Flex
+      justifyContent="center"
+      color={colorHeading}
+      flexDirection="column"
+      h="100%"
+    >
+      <Heading
+        as="h1"
+        size="lg"
+        fontFamily="montserrat"
+        fontWeight="300"
+        pb={'1rem'}
+        ml={10}
+      >
         Favourite Tutors
       </Heading>
       <Box
         overflowY={'auto'}
         // scrollBar={"hidden"}
-        sx={{
-          '&::-webkit-scrollbar': {
-            backgroundColor: `rgba(150, 150, 190, 0.15)`,
-            borderRadius: '8px',
-            width: '16px',
-          },
-          '&::-webkit-scrollbar-thumb': {
-            backgroundColor: `rgba(160, 160, 230, 0.45)`,
-            borderRadius: '8px',
-          },
-        }}
+        // sx={{
+        //   '&::-webkit-scrollbar': {
+        //     backgroundColor: `rgba(150, 150, 190, 0.15)`,
+        //     borderRadius: '8px',
+        //     width: '16px',
+        //   },
+        //   '&::-webkit-scrollbar-thumb': {
+        //     backgroundColor: `rgba(160, 160, 230, 0.45)`,
+        //     borderRadius: '8px',
+        //   },
+        // }}
       >
         {favList.map((el: any) => {
           return (
             <Box key={el.dur}>
               {/* TODO: CHANGE TO BUTTON OR ADD VIEW/REMOVE BUTTON AND CARRY FORWARD DETAILS */}
-              <Flex onClick={ onOpen }
-                bg={colorBgFav}
-                border="solid"
-                borderRadius={'1rem'}
+              <Flex
+                onClick={onOpen}
+                _hover={{ cursor: 'pointer', opacity: 0.7 }}
+                bg={'gray.700'}
+                borderRadius={'10px'}
                 flexDirection="row"
                 justify="flex-start"
                 p="15px"
                 mb="2rem"
-                w="95%"
+                w="80%"
+                ml={10}
               >
                 <Flex flexDirection="column" justify="space-between">
-                  <Image
-                    borderRadius="1rem"
-                    boxSize="5rem"
-                    minWidth="5rem"
+                  <Avatar
+                    size="md"
+                    name="Dan Abrahmov"
                     src="https://bit.ly/dan-abramov"
-                  />
-                  <Box position="relative">
-                    {el.online === 0 ? (
-                      <Text color="green.500" as={MdCheckCircle} size="large" />
-                    ) : (
-                      <Text
-                        color="green.500"
-                        as={MdRemoveCircleOutline}
-                        size="large"
-                      />
-                    )}
-                  </Box>
+                  >
+                    <AvatarBadge boxSize="1em" bg="green.500" />
+                  </Avatar>
                 </Flex>
                 <Flex
                   align="flex-start"
-                  color={colorTextFav}
                   flexDirection="column"
                   justify="flex-start"
                   ml="20px"
                 >
-                  <Heading color={colorNameFav}>{el.tutor}</Heading>
-                  <Text>Experience</Text>
-                  <Text>
+                  <Heading fontSize={25} fontWeight={300}>
+                    {el.tutor}
+                  </Heading>
+                  <Text fontSize={20} fontWeight={200}>
+                    Experience
+                  </Text>
+                  <Text fontSize={15} fontWeight={200}>
                     {el.exp1} - {el.dur1} years
                   </Text>
-                  <Text>
+                  <Text fontSize={15} fontWeight={200}>
                     {el.exp2} - {el.dur2} years
                   </Text>
                 </Flex>

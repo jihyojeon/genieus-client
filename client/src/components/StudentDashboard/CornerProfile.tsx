@@ -1,6 +1,21 @@
-import React, {useState} from 'react'
-import { Box, Flex, Heading, IconButton, Image, Text, useDisclosure } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import {
+  Box,
+  Flex,
+  Heading,
+  IconButton,
+  Image,
+  WrapItem,
+  Avatar,
+  Text,
+  useDisclosure,
+  Stack,
+  Button,
+  AvatarBadge,
+  useColorModeValue,
+} from '@chakra-ui/react'
 
+import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 import { SettingsIcon } from '@chakra-ui/icons'
 import ModalEditProfile from './ModalEditProfile'
 
@@ -26,35 +41,51 @@ const CornerProfile = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [userDetails, setUserDetails] = useState(userDetailsObj)
-  
-  return (
-    <Flex flexDirection={'row'} color={'white'} justify={'flex-end'}>
-      <Flex flexDirection={'column'} mr="5">
-        <Heading as={'h3'} fontSize={'2xl'} fontWeight={500}>
-          Welcome {userDetails.name}
-        </Heading>
-        <Text>
-          {userDetails.tier} Tier {tierIcon(userDetails.tier)}
-        </Text>
 
-        <IconButton
-          // TODO: ICON IS TOO DARK IN DARK MODE
-          aria-label="Edit Profile"
-          colorScheme="white"
-          height="20px"
-          icon={<SettingsIcon />}
-          size="small"
-          onClick={onOpen}
-          width="20px"
-        />
+  return (
+    <Flex justifyContent="flex-end" mr={5} px={0} py={0} h="10vh">
+      <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+        <Flex alignItems={'center'}>
+          <Stack direction={'row'} spacing={7}>
+            {/* User area  */}
+
+            <Flex pt={4}>
+              <Box>
+                <Text fontFamily="montserrat" fontSize={18} mr={5}>
+                  Welcome Alex
+                </Text>
+                {/* Average Rating */}
+                <Flex alignItems="center" justifyContent="center">
+                  <Flex alignItems="center" direction="row">
+                    <IconButton
+                      // TODO: ICON IS TOO DARK IN DARK MODE
+                      aria-label="Edit Profile"
+                      color={useColorModeValue('#000', '#fff')}
+                      bg="gray.700"
+                      height="20px"
+                      icon={<SettingsIcon />}
+                      size="small"
+                      onClick={onOpen}
+                      width="20px"
+                    />
+                  </Flex>
+                  <Button opacity="0.6" variant="ghost">
+                    Log Out
+                  </Button>
+                </Flex>
+              </Box>
+              {/* Profile Pic */}
+              <Avatar
+                size="md"
+                name="Dan Abrahmov"
+                src="https://bit.ly/dan-abramov"
+              >
+                <AvatarBadge boxSize="1em" bg="green.500" />
+              </Avatar>
+            </Flex>
+          </Stack>
+        </Flex>
       </Flex>
-      <Box position="relative">
-        <Image
-          boxSize="8rem"
-          borderRadius="4rem"
-          src={userDetails.avatar}
-        />
-      </Box>
       <ModalEditProfile isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
