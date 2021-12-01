@@ -1,4 +1,4 @@
-// import { ReactNode } from 'react'
+import { ReactNode, useState, useEffect } from 'react'
 import {
   Box,
   Flex,
@@ -16,34 +16,37 @@ import Logo from '../../assets/icons/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { auth } from '../../firebase'
-import { signOut } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
 
-import { tutorApi, useGetTutorByIdQuery } from '../../redux/services/tutorService'
+import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 
 export default function Topbar() {
+  const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [userId, setUserId] = useState()
 
-  const signTutorOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      })
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+  }, [])
+
+  //@ts-ignore
+  const tutor = useGetTutorByIdQuery(userId)
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => navigate('/'))
+      .catch((err) => console.log(err))
   }
-
-  // ***************************************************************************************************************************************************
-  // THIS VARIABLE IS HARD CODED, BUT WE SHOUDL GET THE TUTORID FROM FIREBASE
-  // ***************************************************************************************************************************************************
-  const tutor = useGetTutorByIdQuery('tutor1')
-
 
   return (
     <>
       <Box px={6} py={2} h="10vh">
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Image src={Logo} boxSize="7rem" pt={5} pl={7} borderRadius="50px" />
+          <Image src={Logo} boxSize="6rem" pt={5} pl={7} borderRadius="50px" />
 
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
@@ -51,19 +54,38 @@ export default function Topbar() {
 
               <Flex pt={4}>
                 <Box>
-                  <Text fontFamily="montserrat" fontSize={18} mr={5}>
-                    Welcome {tutor.error ? "error" : tutor.isLoading ? "loading" : tutor.data ? tutor.data.name : undefined}
-                  </Text>
+                  <Flex direction="row">
+                    <Text fontFamily="montserrat" fontSize={18} mr={5}>
+                      Welcome
+                      {tutor.error
+                        ? 'error'
+                        : tutor.isLoading
+                        ? 'loading'
+                        : tutor.data
+                        ? ' ' + tutor.data.name
+                        : undefined}
+                    </Text>
+                  </Flex>
                   {/* Average Rating */}
                   <Flex alignItems="center" justifyContent="center">
                     <Flex alignItems="center" direction="row">
-                      <Text mr={2}> {tutor.error ? "error" : tutor.isLoading ? "loading" : tutor.data ? tutor.data.avg_rating : undefined} </Text>
-                      <FontAwesomeIcon icon={faStar} />
+                      <Text mr={2}>
+                        {' '}
+                        {tutor.error
+                          ? 'error'
+                          : tutor.isLoading
+                          ? 'loading'
+                          : tutor.data
+                          ? tutor.data.avg_rating
+                          : undefined}
+                      </Text>
+                      {/* @ts-ignore */}
+                      {tutor.data ? tutor.data.avg_rating && (<FontAwesomeIcon icon={faStar} />) : null}
                     </Flex>
                     <Button
                       opacity="0.6"
                       variant="ghost"
-                      onClick={signTutorOut}
+                      onClick={handleSignOut}
                     >
                       Log Out
                     </Button>
@@ -72,8 +94,24 @@ export default function Topbar() {
                 {/* Profile Pic */}
                 <Avatar
                   size="md"
-                  name={tutor.error ? "error" : tutor.isLoading ? "loading" : tutor.data ? tutor.data.name : undefined}
-                  src={tutor.error ? "error" : tutor.isLoading ? "loading" : tutor.data ? tutor.data.photo_url : undefined}
+                  name={
+                    tutor.error
+                      ? 'error'
+                      : tutor.isLoading
+                      ? 'loading'
+                      : tutor.data
+                      ? tutor.data.name
+                      : undefined
+                  }
+                  src={
+                    tutor.error
+                      ? 'error'
+                      : tutor.isLoading
+                      ? 'loading'
+                      : tutor.data
+                      ? tutor.data.photo_url
+                      : undefined
+                  }
                 >
                   <AvatarBadge boxSize="1em" bg="green.500" />
                 </Avatar>

@@ -19,7 +19,7 @@ export const HelpRequestApi = createApi({
     }),
     getHrRequestByValue: builder.query<HRType, any>({
       query: (body) =>
-        `//helprequest?parameter=${body.tutor.id | body.student.id}`,
+        `/helprequest?parameter=${body.tutor.id | body.student.id}`,
     }),
     // GET BY ID
     getHRRequestById: builder.query<HRType, string>({
@@ -63,4 +63,5 @@ export const {
   useDeleteHRRequestMutation,
   useUpdateHRRequestMutation,
   useGetPendingHRByIdQuery,
+
 } = HelpRequestApi

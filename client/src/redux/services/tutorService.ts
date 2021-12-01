@@ -4,12 +4,12 @@ export default interface TutorType {
   email: string
   name: string
   id: string
-  photo_url: string
-  spoken_language: string[]
-  location: string
+  photo_url?: string
+  spoken_language?: string[]
+  location?: string
   joined_date: Date
   bio: string
-  avg_rating: number
+  avg_rating: number | undefined
   completed_help_requests: number
   tags: string[]
   programming_languages: string[]
