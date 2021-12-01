@@ -18,14 +18,13 @@ const CreateRequestButton = () => {
   return (
     <Flex justify={'flex-start'} align={'center'} height={'100%'}>
       <Button
-        bg={buttonColorPurple}
-        borderRadius={'2.5rem'}
+        borderRadius={'10px'}
         // TODO: CREATE LIGHTER, STRONGER, SHADOW UNDER BUTTON
+        variant="outline"
         boxShadow="dark-lg"
         fontSize="3xl"
-        fontWeight={700}
+        fontWeight={300}
         height={'70%'}
-        minHeight={'2rem'}
         onClick={handleClick}
         width={'20rem'}
       >

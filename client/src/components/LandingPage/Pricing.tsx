@@ -37,6 +37,9 @@ export default function Pricing() {
 
   const getSubscriptions = useGetSubscriptionsQuery()
 
+
+           
+
   return (
     <Box pb={15}>
       <VStack spacing={2} textAlign="center">
@@ -55,7 +58,8 @@ export default function Pricing() {
         <PriceWrapper>
           <Box color={useColorModeValue('gray.500', 'gray.100')} py={4} px={12}>
             <Text fontWeight="500" fontSize="2xl">
-              Basic
+
+              {getSubscriptions.data && getSubscriptions.data.Basic.subscription_name}
             </Text>
             <HStack justifyContent="center">
               <Text fontSize="3xl" fontWeight="600">
@@ -172,7 +176,10 @@ export default function Pricing() {
 
               <Box w="80%" pt={7}>
                 <Button
-                  onClick={() => console.log(getSubscriptions.data)}
+                  onClick={() =>
+                    //@ts-ignore
+                    console.log(getSubscriptions.data.Max.subscription_name)
+                  }
                   w="full"
                   colorScheme="indigo"
                 >

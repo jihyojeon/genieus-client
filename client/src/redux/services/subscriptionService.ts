@@ -7,6 +7,9 @@ interface SubscriptionType {
   description: string
   minutes: number
   active: boolean
+  Basic: any
+  Max: any
+  Pro: any
 }
 
 export const subscriptionApi = createApi({
