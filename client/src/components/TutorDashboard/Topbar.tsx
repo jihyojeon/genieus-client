@@ -18,7 +18,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { auth } from '../../firebase'
 import { signOut } from 'firebase/auth'
 
-import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
+import { tutorApi, useGetTutorByIdQuery } from '../../redux/services/tutorService'
 
 export default function Topbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -36,8 +36,9 @@ export default function Topbar() {
   // ***************************************************************************************************************************************************
   // THIS VARIABLE IS HARD CODED, BUT WE SHOUDL GET THE TUTORID FROM FIREBASE
   // ***************************************************************************************************************************************************
+  const tutor = useGetTutorByIdQuery('tutor1')
 
-  const { data, error, isLoading } = useGetTutorByIdQuery('tutor1')
+
   return (
     <>
       <Box px={6} py={2} h="10vh">
@@ -51,12 +52,12 @@ export default function Topbar() {
               <Flex pt={4}>
                 <Box>
                   <Text fontFamily="montserrat" fontSize={18} mr={5}>
-                    Welcome Daniel
+                    Welcome {tutor.error ? "error" : tutor.isLoading ? "loading" : tutor.data ? tutor.data.name : undefined}
                   </Text>
                   {/* Average Rating */}
                   <Flex alignItems="center" justifyContent="center">
                     <Flex alignItems="center" direction="row">
-                      <Text mr={2}> 3.4 </Text>
+                      <Text mr={2}> {tutor.error ? "error" : tutor.isLoading ? "loading" : tutor.data ? tutor.data.avg_rating : undefined} </Text>
                       <FontAwesomeIcon icon={faStar} />
                     </Flex>
                     <Button
@@ -71,8 +72,8 @@ export default function Topbar() {
                 {/* Profile Pic */}
                 <Avatar
                   size="md"
-                  name={error ? "error" : isLoading ? "loading" : data ? data.name : undefined}
-                  src="https://bit.ly/dan-abramov"
+                  name={tutor.error ? "error" : tutor.isLoading ? "loading" : tutor.data ? tutor.data.name : undefined}
+                  src={tutor.error ? "error" : tutor.isLoading ? "loading" : tutor.data ? tutor.data.photo_url : undefined}
                 >
                   <AvatarBadge boxSize="1em" bg="green.500" />
                 </Avatar>
