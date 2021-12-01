@@ -8,7 +8,7 @@ export default function ChatTopBar() {
 
   return (
     
-    <Flex alignItems={'flex-start'} justifyContent={"space-between"}>
+    <Flex alignItems={'flex-start'} justifyContent={"space-between"} >
       <Image
         boxSize="9rem"
         position="relative"

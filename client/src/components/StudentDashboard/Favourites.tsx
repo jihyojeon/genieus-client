@@ -7,7 +7,7 @@ import {
   Heading,
   // Image,
   Text,
-  AvatarBadge,
+  // AvatarBadge,
   useDisclosure,
 } from '@chakra-ui/react'
 // import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'

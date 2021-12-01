@@ -9,30 +9,31 @@ export default function ChatRightPane() {
   return (
     <Flex direction="column">
       <Box
-      // height="60vh"
-      // maxheight="100%"
-      overflowY={"scroll"}
-          sx={{
-            '&::-webkit-scrollbar': {
-              backgroundColor: `rgba(150, 150, 190, 0.15)`,
-              borderRadius: '8px',
-              width: '16px',
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: `rgba(160, 160, 230, 0.45)`,
-              borderRadius: '8px',
-            },
-          }}
-        >
+        paddingRight={'0.5rem'}
+        height={"80vh"}
+        minHeight="10%"
+        overflowY={"scroll" }
+        sx={{
+          '&::-webkit-scrollbar': {
+            backgroundColor: `rgba(150, 150, 190, 0.15)`,
+            borderRadius: '8px',
+            width: '16px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: `rgba(160, 160, 230, 0.45)`,
+            borderRadius: '8px',
+          },
+        }}
+      >
         <ChatBubbleSent />
         <ChatBubbleReceived />
         <ChatBubbleReceived />
         <ChatBubbleSent />
         <ChatBubbleReceived />
         <ChatBubbleSent />
-        {/* <ChatBubbleReceived />
+        <ChatBubbleReceived />
         <ChatBubbleSent />
-        <ChatBubbleReceived /> */}
+        <ChatBubbleReceived />
       </Box>
     </Flex>
   )

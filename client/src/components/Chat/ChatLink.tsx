@@ -31,9 +31,12 @@ export default function ChatLink() {
           Video Call Link
         </Heading>
 
-        <Flex direction="column" mb="1rem" justify="center" align="center">
+        <Flex direction="row" mb="1rem" justify="space-evenly" align="center">
           <Button w="100px" mt="1rem" onClick={zoomButtonHandler} href={zoomURL}>
-            Zoom
+            Open Zoom
+          </Button>
+          <Button w="100px" mt="1rem" onClick={() =>  navigator.clipboard.writeText(zoomURL)} href={zoomURL}>
+            Copy Link
           </Button>
         </Flex>
       </Box>
