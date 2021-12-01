@@ -16,7 +16,7 @@ export const IncomingRequests = () => {
         color="indigo.400"
         letterSpacing={0.5}
       >
-        Your Requests:
+        Open Requests:
       </Box>
       <List display="flex" overflow="scroll">
         {requestNames.map((name) => {
