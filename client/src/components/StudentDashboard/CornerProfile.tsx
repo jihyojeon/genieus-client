@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { auth } from '../../firebase'
 import {
   Box,
   Flex,
-  Heading,
   IconButton,
-  Image,
-  WrapItem,
   Avatar,
   Text,
   useDisclosure,
@@ -16,10 +13,10 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
-import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 import { SettingsIcon } from '@chakra-ui/icons'
 import ModalEditProfile from './ModalEditProfile'
 import { useNavigate } from 'react-router-dom'
+import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 
 // TODO: DUMMY OBJECT - PULL FROM DATABASE
 const userDetailsObj: any = {
@@ -28,20 +25,20 @@ const userDetailsObj: any = {
   avatar: 'https://bit.ly/sage-adebayo',
 }
 
-// TODO: SWAP X-Y-Z FOR ICONS/IMAGES
-function tierIcon(tier: string) {
-  if (tier === 'Pro') {
-    return 'X'
-  } else if (tier === 'Budget') {
-    return 'Y'
-  } else {
-    return 'Z'
-  }
-}
-
 const CornerProfile = () => {
   const navigate = useNavigate()
+  const [userId, setUserId] = useState()
+  //@ts-ignore
+  const student = useGetStudentByIdQuery(userId)
+
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+  }, [])
 
   const handleSignOut = () => {
     auth
@@ -62,7 +59,14 @@ const CornerProfile = () => {
             <Flex pt={4}>
               <Box>
                 <Text fontFamily="montserrat" fontSize={18} mr={5}>
-                  Welcome Alex
+                  Welcome
+                  {student.error
+                    ? 'error'
+                    : student.isLoading
+                    ? 'loading'
+                    : student.data
+                    ? ' ' + student.data.name
+                    : undefined}
                 </Text>
                 {/* Average Rating */}
                 <Flex alignItems="center" justifyContent="center">
