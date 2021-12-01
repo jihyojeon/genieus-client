@@ -4,7 +4,7 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 import { tutorApi } from './services/tutorService'
 import { subscriptionApi } from './services/subscriptionService'
 import { studentApi } from './services/studentService'
-import { HelpRequestApi } from './services/HelpRequestService'
+import { HelpRequestApi } from './services/helpRequestService'
 
 export const store = configureStore({
   reducer: {

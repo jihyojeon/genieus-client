@@ -33,9 +33,12 @@ export const tutorApi = createApi({
         body: user,
       }),
     }),
-    updateTutor: builder.mutation<TutorType, any>({
-      query: (user) => ({
-        url: `/tutor/${user.id}`,
+    updateTutor: builder.mutation<
+      TutorType,
+      Partial<TutorType> & Pick<TutorType, 'id'>
+    >({
+      query: (id, ...user) => ({
+        url: `/tutor/${id}`,
         method: 'PATCH',
         body: user,
       }),
@@ -55,5 +58,5 @@ export const {
   useGetAllTutorsQuery,
   useAddTutorMutation,
   useDeleteTutorMutation,
-  useUpdateTutorMutation
+  useUpdateTutorMutation,
 } = tutorApi

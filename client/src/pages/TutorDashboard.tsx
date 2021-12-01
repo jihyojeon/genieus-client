@@ -13,23 +13,30 @@ import Topbar from '../components/TutorDashboard/Topbar'
 import { IncomingRequests } from '../components/TutorDashboard/IncomingRequests'
 import { TutorStats } from '../components/TutorDashboard/TutorStats'
 import { TutorDetails } from '../components/TutorDashboard/TutorDetails'
-import { useGetHRRequestsQuery } from '../redux/services/HelpRequestService'
+import {
+  useUpdateTutorMutation,
+  useGetAllTutorsQuery,
+} from '../redux/services/tutorService'
 
 const TutorDashboard = () => {
-  const getHRs = useGetHRRequestsQuery()
+  // const [updateTutor, updateTutorResult] = useUpdateTutorMutation()
+  // const getTutors = useGetAllTutorsQuery()
 
   return (
     <Box>
-      <FormControl w="300px">
-        <Button
-          type="submit"
-          onClick={() => {
-            console.log(getHRs.data)
-          }}
-        >
-          +
-        </Button>
-      </FormControl>
+      {/* <Button onClick={() => console.log(getTutors.data)}> Get all </Button>
+
+      <Button
+        onClick={() => {
+          updateTutor({
+            id: 'fea8be3e6479812379',
+            name: 'New name',
+          })
+        }}
+      >
+        Update
+      </Button>
+      <Button onClick={() => console.log(updateTutorResult)}> New</Button> */}
 
       <Topbar />
       <Grid
