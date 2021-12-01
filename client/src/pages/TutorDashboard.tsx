@@ -19,25 +19,9 @@ import {
 } from '../redux/services/tutorService'
 
 const TutorDashboard = () => {
-  // const [updateTutor, updateTutorResult] = useUpdateTutorMutation()
-  // const getTutors = useGetAllTutorsQuery()
 
   return (
     <Box>
-      {/* <Button onClick={() => console.log(getTutors.data)}> Get all </Button>
-
-      <Button
-        onClick={() => {
-          updateTutor({
-            id: 'fea8be3e6479812379',
-            name: 'New name',
-          })
-        }}
-      >
-        Update
-      </Button>
-      <Button onClick={() => console.log(updateTutorResult)}> New</Button> */}
-
       <Topbar />
       <Grid
         h="90vh"
