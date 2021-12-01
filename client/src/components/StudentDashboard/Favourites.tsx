@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
 import {
+  Avatar,
+  // Badge,
   Box,
   Flex,
   Heading,
-  Image,
+  // Image,
   Text,
   Avatar,
   AvatarBadge,
   useDisclosure,
 } from '@chakra-ui/react'
-import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
+// import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
 import ModalFavourites from './ModalFavourites'
 
 const favArr: any = [
   {
     tutor: 'Vic',
+    image: "https://bit.ly/dan-abramov",
     exp1: 'JS',
     dur1: 1,
     exp2: 'Java',
@@ -24,6 +27,7 @@ const favArr: any = [
   },
   {
     tutor: 'Charley',
+    image: "https://bit.ly/ryan-florence",
     exp1: 'Ada',
     dur1: 2,
     exp2: 'Python',
@@ -33,6 +37,7 @@ const favArr: any = [
   },
   {
     tutor: 'Jess',
+    image: "https://bit.ly/dan-abramov",
     exp1: 'Pascale',
     dur1: 3,
     exp2: 'C#',
@@ -42,6 +47,7 @@ const favArr: any = [
   },
   {
     tutor: 'Maylyn',
+    image: "https://bit.ly/ryan-florence",
     exp1: 'Red',
     dur1: 4,
     exp2: 'Fortran',
@@ -51,6 +57,7 @@ const favArr: any = [
   },
   {
     tutor: 'Tobias',
+    image: "https://bit.ly/code-beast",
     exp1: 'Kotlin',
     dur1: 5,
     exp2: 'Cobol',
@@ -123,12 +130,40 @@ const Favourites = () => {
               >
                 <Flex flexDirection="column" justify="space-between">
                   <Avatar
-                    size="md"
-                    name="Dan Abrahmov"
-                    src="https://bit.ly/dan-abramov"
-                  >
-                    <AvatarBadge boxSize="1em" bg="green.500" />
-                  </Avatar>
+
+                    size={"xl"}
+                    src={el.image}
+
+                    _after={{
+                      content: '""',
+                      w: 4,
+                      h: 4,
+                      bg: 'green.300',
+                      border: '2px solid white',
+                      rounded: 'full',
+                      pos: 'absolute',
+                      bottom: 0,
+                      right: 3,
+                    }}
+                  />
+
+
+                  {/* OLD METHOD FOR SHOWING ONLINE STATUS */}
+                  {/* <Box position="relative">
+                    {el.online === 0 ? (
+                      <Text color="green.500" as={MdCheckCircle} size="large" />
+                      ) : (
+                        <Text
+                        color="green.500"
+                        as={MdRemoveCircleOutline}
+                        size="large"
+                        />
+                        )}
+                  </Box> */}
+                  {/* OLD METHOD FOR SHOWING ONLINE STATUS */}
+
+
+
                 </Flex>
                 <Flex
                   align="flex-start"

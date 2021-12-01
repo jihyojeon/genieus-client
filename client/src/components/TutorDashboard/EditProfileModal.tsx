@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../firebase'
-import { signInWithGoogle } from '../../firebase'
-import { FcGoogle } from 'react-icons/fc'
 
 import {
   Modal,
-  ModalOverlay,
+  // ModalOverlay,
   ModalContent,
-  ModalCloseButton,
-  ModalHeader,
-  ModalFooter,
+  // ModalCloseButton,
+  // ModalHeader,
+  // ModalFooter,
   ModalBody,
   Textarea,
   Stack,
-  Heading,
+  // Heading,
   Avatar,
   AvatarBadge,
   Button,
@@ -25,9 +21,9 @@ import {
   useColorModeValue,
   Center,
 } from '@chakra-ui/react'
-import Logo from '../../assets/icons/logo.svg'
+// import Logo from '../../assets/icons/logo.svg'
 
-import { SmallCloseIcon } from '@chakra-ui/icons'
+// import { SmallCloseIcon } from '@chakra-ui/icons'
 
 //@ts-ignore
 const EditProfileModal = ({ isOpen, onClose }) => {
