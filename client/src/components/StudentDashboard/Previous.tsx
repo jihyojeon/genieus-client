@@ -55,15 +55,16 @@ const Previous = () => {
       setUserId(item.uid)
     })
   }, [])
-  const getHrRequests = useGetHrRequestByValueQuery(userId)
+  //@ts-ignore
+  const getHrRequests = useGetHrRequestByValueQuery({student_id: userId})
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
     <Flex py={3} ml={7} color={'white'} flexDirection="column">
       <Heading as="h1" size="lg" fontWeight="300" pb="0.5rem">
         Recent Help Requests
       </Heading>
-      <Button onClick={() => console.log(getHrRequests.data)}> </Button>
-      <Button onClick={() => console.log(userId)}> </Button>
+      {/* <Button onClick={() => console.log(getHrRequests.data)}> </Button>
+      <Button onClick={() => console.log(userId)}> </Button> */}
 
       <Flex
         flexDirection="row"
