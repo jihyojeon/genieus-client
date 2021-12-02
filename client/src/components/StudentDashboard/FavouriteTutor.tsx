@@ -32,7 +32,7 @@ const FavouriteTutor = ({ tutor }: { tutor: any }) => {
         <Flex flexDirection="column" justify="space-between">
           <Avatar
             name={tutor.name}
-            size={'xl'}
+            size={'lg'}
             src={tutor.image}
             _after={{
               content: '""',

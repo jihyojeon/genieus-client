@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Flex, Heading, Text } from '@chakra-ui/react'
+// import {getPendingHRById}
 
 const prevArr: any = [
   {
@@ -44,13 +45,12 @@ const prevArr: any = [
   },
 ]
 
-const colorBgPrev: string = '#9CA3AF'
-const colorTextPrev: string = 'black'
+
 
 const Previous = () => {
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
-    <Flex color={'white'} flexDirection="column">
+    <Flex py={3} ml={7} color={'white'} flexDirection="column">
       <Heading as="h1" size="lg" fontWeight="300" pb="0.5rem">
         Recent Help Requests
       </Heading>

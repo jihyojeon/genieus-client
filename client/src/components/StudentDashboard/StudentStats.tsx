@@ -77,15 +77,17 @@ export default function BasicStatistics() {
   return (
     <Flex
       alignItems="flex-start"
-      width="75rem"
+      justifyContent="center"
       direction="column"
-      mx={'auto'}
       h="50vh"
       pt={5}
       px={{ base: 2, sm: 12, md: 17 }}
     >
-      <Heading> Your Account: </Heading>
+      <Heading fontFamily="montserrat" fontWeight="400" ml={5}>
+        Your Account:
+      </Heading>
       <Wrap
+        mr={10}
         direction="column"
         wrap={'wrap'}
         justifyContent="space-evenly"

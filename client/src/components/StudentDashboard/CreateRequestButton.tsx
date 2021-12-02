@@ -25,6 +25,7 @@ const CreateRequestButton = () => {
         boxShadow="dark-lg"
         fontSize="3xl"
         fontWeight={300}
+        ml={8}
         height={'70%'}
         onClick={handleClick}
         width={'20rem'}
