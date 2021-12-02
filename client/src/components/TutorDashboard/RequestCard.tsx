@@ -14,17 +14,15 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-interface HelpRequestTypes {
-  name: string
-}
+import HRType from '../../redux/services/helpRequestService'
 
 const imageObj = {
   python:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png',
 }
 
-export const RequestCard = ({ name }: HelpRequestTypes) => {
+//@ts-ignore
+export const RequestCard = ({ hr }: HRType) => {
   return (
     <Center
       border="1px solid"
@@ -68,7 +66,7 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
         <Box p={6}>
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'lg'} fontWeight={500} fontFamily={'body'}>
-              {name}
+              {hr.student_id}
             </Heading>
           </Stack>
           <Flex

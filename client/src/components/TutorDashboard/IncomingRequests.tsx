@@ -1,10 +1,24 @@
 import { Box, Flex, List } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import HRType, { useGetPendingHRByIdQuery } from '../../redux/services/helpRequestService'
 import { RequestCard } from './RequestCard'
+import { auth } from '../../firebase'
 
 export const IncomingRequests = () => {
   // requestNames is temporary until we get real data
-  const requestNames = ['David', 'Magi', 'Eugene', 'Alexi', 'Charley']
+  // const requestNames = ['David', 'Magi', 'Eugene', 'Alexi', 'Charley']
+
+  const [userId, setUserId] = useState()
+
+  //@ts-ignore
+  const helpRequests = useGetPendingHRByIdQuery(userId)
+  // [{...}, {...}, {...}]
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+  }, [])
 
   return (
     <Flex flexDirection="column">
@@ -26,9 +40,15 @@ export const IncomingRequests = () => {
       borderRadius="5px"
       py={3}
       >
-        {requestNames.map((name) => {
-          return <RequestCard name={name} />
-        })}
+        {helpRequests.error
+        ? 'error'
+        : helpRequests.isLoading
+        ? 'loading'
+        : helpRequests.data
+        ? helpRequests.data.map((hr) => {
+          //@ts-ignore
+          return <RequestCard hr={hr} />
+        }): undefined}
       </List>
     </Flex>
   )
