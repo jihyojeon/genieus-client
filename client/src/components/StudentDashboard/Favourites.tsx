@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { auth } from '../../firebase'
 import {
   Avatar,
-  // Badge,
+  Button,
   Box,
   Flex,
   Heading,
@@ -12,6 +13,9 @@ import {
 } from '@chakra-ui/react'
 // import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
 import ModalFavourites from './ModalFavourites'
+import { useGetFavouriteTutorsByIdQuery } from '../../redux/services/studentService'
+import { useAddFavouriteTutorMutation } from '../../redux/services/studentService'
+import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 
 const favArr: any = [
   {
@@ -66,12 +70,20 @@ const favArr: any = [
   },
 ]
 
-const colorBgFav = '#C7D2FE'
-const colorNameFav = '#F40B0B'
-const colorTextFav = 'black'
-const colorHeading = 'white'
-
 const Favourites = () => {
+  const [userId, setUserId] = useState()
+  //@ts-ignore
+  const favouriteTutor = useGetFavouriteTutorsByIdQuery(userId)
+
+  const [addTutorToFav, addTutorToFavResult] = useAddFavouriteTutorMutation()
+
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+  }, [])
+
   const [favList, setFavList] = useState(favArr)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -80,12 +92,17 @@ const Favourites = () => {
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
     // TODO: USE https://chakra-ui.com/docs/overlay/drawer FOR REVIEW
 
-    <Flex
-      justifyContent="center"
-      color={colorHeading}
-      flexDirection="column"
-      h="100%"
-    >
+    <Flex justifyContent="center" flexDirection="column" h="100%">
+      <Button
+        // @ts-ignore
+        onClick={() => addTutorToFav('XZsYgF1jXLXIutgnFr4RUXl8HOT2')}
+      >
+        +
+      </Button>
+      <Button onClick={() => console.log(addTutorToFavResult)}>
+        See Tutor result
+      </Button>
+      <Button onClick={() => console.log(favouriteTutor.data)}>View</Button>
       <Heading
         as="h1"
         size="lg"
@@ -143,20 +160,6 @@ const Favourites = () => {
                       right: 3,
                     }}
                   />
-
-                  {/* OLD METHOD FOR SHOWING ONLINE STATUS */}
-                  {/* <Box position="relative">
-                    {el.online === 0 ? (
-                      <Text color="green.500" as={MdCheckCircle} size="large" />
-                      ) : (
-                        <Text
-                        color="green.500"
-                        as={MdRemoveCircleOutline}
-                        size="large"
-                        />
-                        )}
-                  </Box> */}
-                  {/* OLD METHOD FOR SHOWING ONLINE STATUS */}
                 </Flex>
                 <Flex
                   align="flex-start"
