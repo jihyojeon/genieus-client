@@ -91,8 +91,8 @@ const CornerProfile = () => {
               {/* Profile Pic */}
               <Avatar
                 size="md"
-                name="Dan Abrahmov"
-                src="https://bit.ly/dan-abramov"
+                name={student?.data?.name}
+                src={student?.data?.photo_url}
               >
                 <AvatarBadge boxSize="1em" bg="green.500" />
               </Avatar>
@@ -100,7 +100,7 @@ const CornerProfile = () => {
           </Stack>
         </Flex>
       </Flex>
-      <ModalEditProfile isOpen={isOpen} onClose={onClose} />
+      <ModalEditProfile student={student.data} userId={userId} isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }

@@ -14,17 +14,15 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-interface HelpRequestTypes {
-  name: string
-}
+import HRType from '../../redux/services/helpRequestService'
 
 const imageObj = {
   python:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png',
 }
 
-export const RequestCard = ({ name }: HelpRequestTypes) => {
+//@ts-ignore
+export const RequestCard = ({ hr }: HRType) => {
   return (
     <Center
       border="1px solid"
@@ -32,15 +30,16 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
       borderRadius="10px"
       fontFamily="montserrat"
       mx={6}
-      py={2}
-      px={3}
+      my={2}
       bg={useColorModeValue('white', 'gray.800')}
+      // bg={'red'}
+      minW={'25%'}
     >
       <Box
         overflow="hidden"
         position="relative"
-        maxH={'350px'}
-        minW={'200px'}
+        minH={'100%'}
+        minW={'100%'}
         boxShadow={'2xl'}
         rounded={'md'}
       >
@@ -48,12 +47,12 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
           <Image
             position="absolute"
             height="25px"
-            top={0}
+            top={2}
             left={5}
             src={imageObj.python}
           />
         </Box>
-        <Flex justify={'center'} mt={-12}>
+        <Flex justify={'center'} mt={-10}>
           <Avatar
             size={'lg'}
             src={
@@ -69,7 +68,7 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
         <Box p={6}>
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'lg'} fontWeight={500} fontFamily={'body'}>
-              {name}
+              {hr.student.name}
             </Heading>
           </Stack>
           <Flex
@@ -79,36 +78,24 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
           >
             {/* <Text mb={3}> Description </Text> */}
             <Text fontSize="13">
-              {' '}
-              I have a problem with react router. I need help...{' '}
+              {/* {' '}
+              I have a problem with react router. I need help...{' '} */}
+              {hr.description}
             </Text>
           </Flex>
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+            {/*@ts-ignore*/}
+            {hr.tags?.map(tag => {
+            return (
             <Badge
               px={2}
               py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
               fontWeight={'400'}
             >
-              #redux
+              #{tag}
             </Badge>
-            <Badge
-              px={2}
-              py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
-              fontWeight={'400'}
-            >
-              #react
-            </Badge>
-            <Badge
-              px={2}
-              py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
-              fontWeight={'400'}
-            >
-              #vue
-            </Badge>
+            )})}
           </Stack>
           <Link to="/tutor-hr">
             <Button

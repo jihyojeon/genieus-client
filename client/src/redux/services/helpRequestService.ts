@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-interface HRType {
+export default interface HRType {
   student_id: string
   description: string
   tags?: string[]
@@ -8,8 +8,6 @@ interface HRType {
   code: string
   favourites_only: boolean
 }
-
-
 
 export const helpRequestApi = createApi({
   reducerPath: 'helpRequestApi',
@@ -19,9 +17,22 @@ export const helpRequestApi = createApi({
     getHRRequests: builder.query<HRType, void>({
       query: () => `/helprequest`,
     }),
-    getHrRequestByValue: builder.query<HRType, any>({
-      query: (body) =>
-        `/helprequest?parameter=${body.tutor.id | body.student.id}`,
+    getHrRequestByValue: builder.query<
+      HRType[],
+      {
+        student_id: string
+        tutor_id: string
+        language?: string
+        status?: string
+      }
+    >({
+      query: (arg) => {
+        const { student_id, tutor_id, language, status } = arg
+        return {
+          url: `/helprequest`,
+          params: { student_id, tutor_id, language, status },
+        }
+      },
     }),
     // GET BY ID
     getHRRequestById: builder.query<HRType, string>({
@@ -45,15 +56,15 @@ export const helpRequestApi = createApi({
     // UPDATE HR
 
     updateHRRequest: builder.mutation<HRType, any>({
-      query: (user) => ({
-        url: `/helprequest/${user.id}`,
-        method: 'PATH',
-        body: user,
+      query: ({ id, ...hr }) => ({
+        url: `/helprequest/${id}`,
+        method: 'PATCH',
+        body: hr,
       }),
     }),
     // GET PENDING HR'S
-    getPendingHRById: builder.query<HRType, any>({
-      query: (body) => `/helprequest/pending/${body.tutor.id}`,
+    getPendingHRById: builder.query<HRType[], string>({
+      query: (tutorId) => `/helprequest/pending/${tutorId}`,
     }),
   }),
 })
@@ -65,5 +76,5 @@ export const {
   useDeleteHRRequestMutation,
   useUpdateHRRequestMutation,
   useGetPendingHRByIdQuery,
-
+  useGetHrRequestByValueQuery,
 } = helpRequestApi

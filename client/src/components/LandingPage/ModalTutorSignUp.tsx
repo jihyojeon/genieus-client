@@ -51,7 +51,12 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
       const userId = await auth.currentUser?.uid
       console.log(registerEmail, userId, username)
       await auth.onAuthStateChanged((user) => {})
-      await addTutor({ email: registerEmail, id: userId, name: username })
+      await addTutor({
+        email: registerEmail,
+        id: userId,
+        name: username,
+        programming_languages: ['JavaScript', 'Python'],
+      })
       navigate('/tutor-dashboard')
     } catch (error) {
       console.log(error)

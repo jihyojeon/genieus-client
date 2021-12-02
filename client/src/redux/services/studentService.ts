@@ -78,7 +78,7 @@ export const studentApi = createApi({
 
     removeFavouriteTutor: builder.mutation<
       StudentType,
-      { studentId: string; tutorId: string }
+      { studentId: any; tutorId: any }
     >({
       query: ({ studentId, tutorId }) => ({
         url: `/student/${studentId}/favourite/remove`,
@@ -124,7 +124,7 @@ export const studentApi = createApi({
       query: ({ studentId, tutorId }) => ({
         url: `/student/${studentId}/block/remove`,
         method: 'PUT',
-        body: { tutor_id: tutorId },
+        body: { tutor_id: tutorId }
       }),
       invalidatesTags: ['Student'],
     }),

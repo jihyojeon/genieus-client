@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Flex, Text, Checkbox, Button } from '@chakra-ui/react'
+import { useAddHRRequestMutation } from '../../redux/services/helpRequestService'
 
 const ButtonBar = ({
   getHRData,
   loadingBtn,
   setloadingBtn,
   settutorComplete,
+  userId,
+  value,
+  selectValue,
+  codeValue,
 }: any) => {
+  const [addHRRequest, addHRRequestResult] = useAddHRRequestMutation()
+  const [SelectFav, setSelectFav] = useState(false)
   return (
     <Flex
       px="10"
@@ -15,7 +22,12 @@ const ButtonBar = ({
       justifyContent="space-around"
     >
       <Flex>
-        <Checkbox size="lg" colorScheme="indigo" pr={5}></Checkbox>
+        <Checkbox
+          onChange={() => setSelectFav(true)}
+          size="lg"
+          colorScheme="indigo"
+          pr={5}
+        ></Checkbox>
 
         <Text fontFamily="montserrat" letterSpacing={1} lineHeight={7}>
           Click here to wait for your favourites <br />{' '}
@@ -33,6 +45,15 @@ const ButtonBar = ({
       {!loadingBtn === true ? (
         <Button
           onClick={() => {
+            addHRRequest({
+              student_id: userId,
+              description: value,
+              language: selectValue,
+              code: codeValue,
+              favourites_only: SelectFav,
+            })
+            console.log(addHRRequestResult)
+
             getHRData()
             setTimeout(() => {
               settutorComplete(true)

@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Split from 'react-split'
 import ButtonBar from './ButtonBar'
 import Editor from '@monaco-editor/react'
 import '../../styles/example.css'
+import { auth } from '../../firebase'
 
 import {
   Grid,
@@ -31,6 +32,7 @@ const HrContent = ({ settutorComplete }: any) => {
   const [codeValue, setcodeValue] = useState('')
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
+  const [userId, setUserId] = useState()
 
   let handleInputChange = (e: any): void => {
     let inputValue = e.target.value
@@ -44,6 +46,13 @@ const HrContent = ({ settutorComplete }: any) => {
   const getHRData = () => {
     console.log(`${codeValue}, ${value}, ${selectValue}`)
   }
+
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+  }, [])
 
   return (
     <Box>
@@ -175,10 +184,14 @@ const HrContent = ({ settutorComplete }: any) => {
 
       {/* Bottom Nar */}
       <ButtonBar
+        value={value}
+        userId={userId}
+        selectValue={selectValue}
         settutorComplete={settutorComplete}
         loadingBtn={loadingBtn}
         setloadingBtn={setloadingBtn}
         getHRData={getHRData}
+        codeValue={codeValue}
       />
     </Box>
   )
