@@ -1,10 +1,8 @@
-import { ReactNode } from 'react'
-import { Box, Flex, Heading, useDisclosure } from '@chakra-ui/react'
+import { Box, Flex, Heading } from '@chakra-ui/react'
 import ChatBubbleSent from './ChatBubbleSent'
 import ChatBubbleReceived from './ChatBubbleReceived'
 
-export default function ChatRightPane() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+export default function ChatRightPane(props: any) {
 
   return (
     <Flex direction="column">
@@ -13,6 +11,7 @@ export default function ChatRightPane() {
         // TODO: ADD SCROLLBAR FOR WHEN SCREEN HEIGHT IS REDUCED
         height={"70vh"}
         minHeight="10%"
+        pl="1rem"
         overflowY={"scroll" }
         sx={{
           '&::-webkit-scrollbar': {

@@ -171,7 +171,7 @@ const HrContent = ({ settutorComplete }: any) => {
                 <Editor
                   height="50vh"
                   defaultLanguage="javascript"
-                  defaultValue="// Please describe your problem..."
+                  defaultValue="// Provide sample code to help outline your problem..."
                   value={codeValue}
                   onChange={handleEditorChange}
                   theme={useColorModeValue('vs-light', 'vs-dark')}
