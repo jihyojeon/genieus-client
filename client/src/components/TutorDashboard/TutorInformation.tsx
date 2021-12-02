@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from 'react'
 import {
-  Flex,
+  Image,
   Box,
-  Heading,
+  Flex,
   Text,
+  Heading,
+  List,
+  UnorderedList,
+  ListItem,
   HStack,
-  VStack,
+  Tag,
   TagLabel,
   Textarea,
-  Tag,
-  useDisclosure,
-  Button
+  VStack,
+  useDisclosure
 } from '@chakra-ui/react'
-import dotenv from 'dotenv'
+import React, { useState, useEffect } from 'react'
+import EditProfileModal from './EditProfileModal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog } from '@fortawesome/free-solid-svg-icons'
-import EditProfileModal from './EditProfileModal'
+
+
 import { auth } from '../../firebase'
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 
-dotenv.config()
 
-export const TutorDetails = () => {
+export const TutorInformation = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   const [userId, setUserId] = useState()
   //@ts-ignore
   const tutor = useGetTutorByIdQuery(userId)
@@ -40,72 +42,57 @@ export const TutorDetails = () => {
 
 
   return (
-    <Box>
-      <Flex alignItems="center">
-        <Heading
-          my={2}
-          ml={5}
-          fontSize="xl"
-          fontWeight="400"
-          color="indigo.400"
-          letterSpacing={0.5}
-        >
-          Tutor Information:
-        </Heading>
-        <Box
+    <Flex flexDirection="column">
+      <Box mt={10} height="30vh" fontFamily="montserrat" h="30vh">
+        <Flex alignItems="center" justifyContent="space-between">
+          <Heading
+            my={2}
+            fontSize="xl"
+            fontWeight="340"
+            color="indigo.400"
+            letterSpacing={1}
+          >
+            Tutor Information:
+          </Heading>
+          <Box
           _hover={{ opacity: 0.8, color: 'indigo.400' }}
           onClick={onOpen}
           ml={5}
         >
           <FontAwesomeIcon size="sm" icon={faCog} />
         </Box>
-      </Flex>
-      {/* Info area */}
-
-      <Flex
-        mt={2}
-        alignItems="center"
-        justifyContent="flex-start"
-        direction="row"
-      >
-        <Flex
-          ml={5}
-          mr={10}
-          direction="column"
-          alignItems="flex-start"
-          justifyContent="space-evenly"
-          maxW="15rem"
-        >
-          <Flex direction="column">
-            <Text>Location:</Text>
-            <HStack spacing={5}>
-              <Tag mt={2} variant="outline" size="lg" colorScheme="indigo">
-                <TagLabel>{tutor.error
-                        ? 'error'
-                        : tutor.isLoading
-                        ? 'loading'
-                        : tutor.data
-                        ? ' ' + tutor.data.location
-                        : undefined}
-                </TagLabel>
-              </Tag>
-            </HStack>
-          </Flex>
-          <Flex mt={3} direction="column">
-            <Text>Spoken languages:</Text>
-            <HStack mt={3} spacing={5}>
-              {tutor.data?.spoken_language?.map(language => {
-                return (
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>{language}</TagLabel>
-                  </Tag>
-                )
-              })}
-            </HStack>
-          </Flex>
         </Flex>
 
-        <Flex mx={5} direction="column" maxW="15rem" ml={5}>
+        <Flex direction="column">
+          <Text>Location:</Text>
+          <HStack spacing={5}>
+            <Tag mt={3} variant="outline" size="lg" colorScheme="indigo">
+              <TagLabel>{tutor.error
+                      ? 'error'
+                      : tutor.isLoading
+                      ? 'loading'
+                      : tutor.data
+                      ? ' ' + tutor.data.location
+                      : undefined}
+              </TagLabel>
+            </Tag>
+          </HStack>
+        </Flex>
+
+        <Flex mt={4} direction="column">
+          <Text>Spoken languages:</Text>
+          <HStack mt={3} spacing={5}>
+            {tutor.data?.spoken_language?.map(language => {
+              return (
+                <Tag variant="outline" size="lg" colorScheme="indigo">
+                  <TagLabel>{language}</TagLabel>
+                </Tag>
+              )
+            })}
+          </HStack>
+        </Flex>
+
+        <Flex mt={4} direction="column" maxW="15rem">
           <Text>Bio:</Text>
           <Textarea
             mt={2}
@@ -121,13 +108,14 @@ export const TutorDetails = () => {
             placeholder="Tell us a bit about youself..."
           />
         </Flex>
+
         <Flex
           alignItems="flex-start"
           justifyContent="center"
           fontFamily="montserrat"
           direction="column"
           maxW="25rem"
-          ml={10}
+          mt={4}
         >
           <Text>Your Tech Expertise:</Text>
           <Text opacity="0.6" fontSize="10px">
@@ -155,8 +143,11 @@ export const TutorDetails = () => {
             </VStack>
           </Flex>
         </Flex>
-      </Flex>
+      </Box>
+      <Box>
+        
+      </Box>
       <EditProfileModal isOpen={isOpen} onClose={onClose} />
-    </Box>
+    </Flex>
   )
 }

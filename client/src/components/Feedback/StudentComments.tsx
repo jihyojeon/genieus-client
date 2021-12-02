@@ -11,54 +11,46 @@ import {
   VStack
 } from '@chakra-ui/react'
 
-const stars = () => {
-  return console.log('test 2')
+
+// TODO: IMPLEMENT ACTION ON SUBMIT
+const submitHandler = () => {
+  console.log('Submit clicked')
 }
 
-const tutorObj = {
-  tutorName: 'Vic',
-  callDuration: 25,
-  photo: 'https://bit.ly/sage-adebayo',
-}
+// TODO: RECORD 1) STARS, 2) COMMENTS, 3) REMOVE CHECKBOX
+const StudentComments = (props: any) => {
 
-const StudentComments = () => {
-  const [tutorObjState, settutorObjState] = useState(tutorObj)
-  const [tutorFeedback, setTutorFeedback] = useState('none')
+  const name = props.name
 
   return (
     <Center>
-      <Flex direction="column" align="center" mt="50px" >
-        <VStack spacing={4}>
-          <Heading size="sm">
-            Are there any comments to share with {tutorObjState.tutorName}?
-          </Heading>
+      <VStack spacing={2}>
+        <Heading size="sm">
+          Are there any comments to share with {name}?
+        </Heading>
 
-          <InputGroup size="md">
-            <Textarea
-              bg="white"
-              placeHolder="Leave feedback here"
-              _placeholder={{ color: 'gray.500' }}
-            />
-          </InputGroup>
-
-          <Flex flexDirection="column" align="center">
-            <Text>
-              Everyone responds differently to different teaching
-              approaches.
-            </Text>
-            <Text>
-              If you prefer {tutorObjState.tutorName} isn't assigned your requests in future, tick the box below.
-            </Text>
-            <Checkbox defaultIsNotChecked mt="1rem">
-              Remove{' '}
-            </Checkbox>
-          </Flex>
-        </VStack>
+        <InputGroup size="md">
+          {/* TODO: RETURN THIS FEEDBACK */}
+          <Textarea
+            bg="white"
+            placeHolder="Leave feedback here"
+            _placeholder={{ color: 'gray.500' }}
+          />
+        </InputGroup>
+        <Text>
+          Everyone responds differently to certain teaching styles.
+        </Text>
+        <Text>
+          If you prefer {name} isn't assigned to your future requests, tick the box below.
+        </Text>
+        <Checkbox defaultIsNotChecked mt="1rem">
+          {/* TODO: HANDLE TICKBOX RECORDING */}
+        </Checkbox>
+          Remove{' '}
         <Flex direction="row">
-          <Button mt="2rem" mr="2rem">Cancel</Button>
-          <Button mt="2rem" ml="2rem">Submit</Button>
+          <Button mt="1rem" onClick={submitHandler}>Submit</Button>
         </Flex>
-      </Flex>
+      </VStack>
     </Center>
   )
 }

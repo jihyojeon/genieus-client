@@ -73,7 +73,7 @@ const Hero = () => {
           </Flex>
         </GridItem>
 
-        <GridItem position="relative">
+        <GridItem >
           <Box>
             <Flex
               h="80vh"
@@ -81,13 +81,15 @@ const Hero = () => {
               justifyContent="center"
               alignItems="flex-start"
             >
-              <Box>
+
+              <Lottie animationData={codingLottie} style={{ height: '80vh' }}>
+              <Box position="relative">
                 <Image
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png"
                   boxSize="60px"
                   position="absolute"
-                  top="30"
-                  right="100"
+                  top="40vh"
+                  right="90%"
                   borderRadius="50px"
                 />
 
@@ -95,8 +97,8 @@ const Hero = () => {
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
                   boxSize="60px"
                   position="absolute"
-                  top="180"
-                  right="90"
+                  top="10vh"
+                  right="75%"
                   borderRadius="full"
                 />
 
@@ -104,8 +106,8 @@ const Hero = () => {
                   src="https://cdn.worldvectorlogo.com/logos/java.svg"
                   boxSize="60px"
                   position="absolute"
-                  top="20"
-                  right="460"
+                  top="70vh"
+                  right="70%"
                   borderRadius="50px"
                 />
 
@@ -113,8 +115,8 @@ const Hero = () => {
                   src="https://cdn.worldvectorlogo.com/logos/react-1.svg"
                   boxSize="60px"
                   position="absolute"
-                  top="450"
-                  right="500"
+                  top="5vh"
+                  right="55%"
                   borderRadius="50px"
                 />
 
@@ -122,8 +124,8 @@ const Hero = () => {
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png"
                   boxSize="60px"
                   position="absolute"
-                  top="490"
-                  right="150"
+                  top="10vh"
+                  right="20%"
                   borderRadius="full"
                 />
 
@@ -131,12 +133,12 @@ const Hero = () => {
                   src="https://cdn.worldvectorlogo.com/logos/redux.svg"
                   boxSize="60px"
                   position="absolute"
-                  top="240"
-                  right="525"
+                  top="65vh"
+                  right="15%"
                   borderRadius="20px"
                 />
               </Box>
-              <Lottie animationData={codingLottie} style={{ height: '80vh' }} />
+              </Lottie>
             </Flex>
           </Box>
         </GridItem>

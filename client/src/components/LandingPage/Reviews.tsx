@@ -1,12 +1,12 @@
 import { ReactNode } from 'react'
 import {
+  Avatar,
   Box,
   Flex,
   Heading,
   Text,
   Stack,
   Container,
-  Avatar,
   useColorModeValue,
 } from '@chakra-ui/react'
 
@@ -76,7 +76,7 @@ const TestimonialAvatar = ({
 }) => {
   return (
     <Flex align={'center'} mt={8} direction={'column'}>
-      <Avatar src={src} alt={name} mb={2} />
+      <Avatar src={src} alt={name} mb={2} size={'xl'} />
       <Stack spacing={-1} align={'center'}>
         <Text fontWeight={600}>{name}</Text>
         <Text fontSize={'sm'} color={useColorModeValue('gray.600', 'gray.400')}>
@@ -92,7 +92,7 @@ export default function WithSpeechBubbles() {
     <Box py={'10vh'}>
       <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
-          <Heading color="gray.500">Our Clients Speak</Heading>
+          <Heading color="gray.500">Our students Speak</Heading>
           <Text color="gray.500">
             We have been working with clients around the world
           </Text>
@@ -103,51 +103,54 @@ export default function WithSpeechBubbles() {
         >
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Efficient Collaborating</TestimonialHeading>
+              <TestimonialHeading>Brilliant!</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                neque sed imperdiet nibh lectus feugiat nunc sem.
+                Vic's advice to "Switch it off and back on again" really helped
+                with my Windows problems
               </TestimonialText>
             </TestimonialContent>
 
             <TestimonialAvatar
               src={
-                'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
+                'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT12cP23udqvCqHW_2oAvK257g3oVQkv23tOumxtpfFOhHi8a5B'
               }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              name={'Bill Gates'}
+              title={'Former CEO'}
             />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Intuitive Design</TestimonialHeading>
+              <TestimonialHeading>
+                Solved problem within minutes
+              </TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                neque sed imperdiet nibh lectus feugiat nunc sem.
+                Our monastry's webpage was really suffering until Jess
+                recommended we adopt Next.js. It solved everything and sped up
+                chanting.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
+                'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Dalai_Lama_in_2012_02.jpg/1280px-Dalai_Lama_in_2012_02.jpg'
               }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              name={'Tenzin Gyatso'}
+              title={'Dalai Lama'}
             />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Mindblowing Service</TestimonialHeading>
+              <TestimonialHeading>Tobias fixd it!</TestimonialHeading>
               <TestimonialText>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor
-                neque sed imperdiet nibh lectus feugiat nunc sem.
+                My country was on the verge of collapse - then I turned to
+                GenieUs and they provided all our tech answers
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                'https://images.unsplash.com/photo-1586297135537-94bc9ba060aa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80'
+                'https://obamawhitehouse.archives.gov/sites/whitehouse.gov/files/images/twitter_cards_potus.jpg'
               }
-              name={'Jane Cooper'}
-              title={'CEO at ABC Corporation'}
+              name={'Barak Obama'}
+              title={'Former US President'}
             />
           </Testimonial>
         </Stack>
