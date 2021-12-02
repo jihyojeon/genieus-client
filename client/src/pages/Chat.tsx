@@ -9,41 +9,38 @@ import ChatTopBar from '../components/Chat/ChatTopBar'
 const Chat = () => {
   return (
     <Grid
-      // bg={'tomato'}
       gap={3}
-      height="100vh"
-      maxheight="100%"
+      height="100%"
       overflowY={'hidden'}
       padding="3"
       templateColumns="repeat(3, 1fr)"
-      templateRows="auto auto 1fr auto"
+      templateRows="80px auto 100px"
+      // templateRows="80px auto 120px"
     >
-      <GridItem rowSpan={1} colSpan={3} h="4rem"
-        // bg="grey"
+      <GridItem
+        rowSpan={1}
+        colSpan={3}
+        // h="70px"
       >
         <ChatTopBar />
       </GridItem>
 
-      <GridItem rowSpan={3} colSpan={1}
-      // bg="yellow"
-      >
-        <ChatLeftPane/>
+      <GridItem rowSpan={2} colSpan={1}>
+        <ChatLeftPane />
       </GridItem>
 
-      <GridItem rowSpan={1} colSpan={2} h="3rem"
-      // bg="cyan"
-      >
+      {/* <GridItem rowSpan={1} colSpan={2} h="3rem">
         <ChatHeader />
+      </GridItem> */}
+
+      <GridItem rowSpan={1} colSpan={2}>
+        <ChatRightPane />
       </GridItem>
 
-      <GridItem rowSpan={1} colSpan={2} h="100%"
-      // bg="red"
-      >
-        <ChatRightPane/>
-      </GridItem>
-
-      <GridItem rowSpan={1} colSpan={2}
-      // bg="grey"
+      <GridItem
+        rowSpan={1}
+        colSpan={2}
+        // h="60px"
       >
         <ChatInput />
       </GridItem>

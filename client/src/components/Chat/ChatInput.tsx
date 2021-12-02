@@ -5,34 +5,34 @@ export default function ChatInput() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <Box zIndex="10" height="100%">
-      <Flex direction="row" justify="flex-start" align="center">
+    <Box
+      zIndex="10"
+      // height="100%"
+      // minheight="70px"
+    >
+      <Flex direction="row" justify="flex-start" align="center" position={"static"}>
         <FormControl>
           <Input
-            placeholder="Chat Input"
-            borderRadius="1rem"
             border="2px"
+            borderRadius="1rem"
+            colorScheme="indigo"
+            letterSpacing={2}
             minHeight="4rem"
             mr="2rem"
-
-            letterSpacing={2}
-            colorScheme="indigo"
-            variant="outline"
             padding={8}
-
+            placeholder="Chat Input"
+            variant="outline"
             />
         </FormControl>
         <Button
-          ml="2rem"
-          borderRadius="1rem"
           border="2px"
-          width="10rem"
-
-          letterSpacing={2}
+          borderRadius="1rem"
           colorScheme="indigo"
-          variant="outline"
+          letterSpacing={2}
+          ml="2rem"
           padding={8}
-
+          variant="outline"
+          width="10rem"
         >Send
         </Button>
       </Flex>
