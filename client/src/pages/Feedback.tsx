@@ -1,41 +1,50 @@
-import React from 'react'
-import StarRating from '../components/Feedback/StarRating'
-import StudentComments from '../components/Feedback/StudentComments'
+import React, { useState } from 'react'
 import {
-  // Avatar,
-  // Badge,
-  // Box,
-  // Button,
+  Avatar,
   Center,
   Flex,
-  // Grid,
-  // Heading,
-  // Link,
-  // Modal,
-  // ModalContent,
-  // ModalHeader,
-  // ModalOverlay,
-  // Stack,
-  // Text,
-  // useColorModeValue,
+  Heading,
+  Text,
   VStack,
+  // useColorModeValue,
 } from '@chakra-ui/react'
+import StarRating from '../components/Feedback/StarRating'
+import StudentComments from '../components/Feedback/StudentComments'
+
+// TODO: REPLACE WITH DATABASE DATA FOR TUTOROBJSTATE
+const tutorObj = {
+  tutorName: 'Vic',
+  callDuration: 25,
+  photo: 'https://bit.ly/sage-adebayo',
+}
 
 const Feedback = () => {
+  const [tutorObjState, setTutorObjState] = useState(tutorObj)
+
   return (
     <Center>
-      <VStack align="center">
-        <Flex
-          mt="150px"
-          direction="column"
-          border="solid"
-          borderRadius="3rem"
-          padding="3rem"
-        >
-          <StarRating />
-          <StudentComments />
-        </Flex>
-      </VStack>
+      <Flex
+        direction="column"
+        align="center"
+        mt="2rem"
+        border="solid"
+        borderRadius="3rem"
+        padding="2rem"
+      >
+        <VStack spacing={4}>
+          <Text>You were online for {tutorObjState.callDuration} minutes</Text>
+          <Heading>How was your call with {tutorObjState.tutorName}?</Heading>
+          <Avatar size="2xl" src={tutorObjState.photo} />
+          <StarRating
+                  size={48}
+                  icon="star"
+                  scale={5}
+                  fillColor="gold"
+                  strokeColor="grey"
+          />
+          <StudentComments name={tutorObjState.tutorName} />
+        </VStack>
+      </Flex>
     </Center>
   )
 }

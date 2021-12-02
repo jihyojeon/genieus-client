@@ -58,12 +58,12 @@ export default function Pricing() {
         <PriceWrapper>
           <Box color={useColorModeValue('gray.500', 'gray.100')} py={4} px={12}>
             <Text fontWeight="500" fontSize="2xl">
-
+              {/* TODO: INSERT NAME OF PACKAGE HERE */}
               {getSubscriptions.data && getSubscriptions.data.Basic.subscription_name}
             </Text>
             <HStack justifyContent="center">
               <Text fontSize="3xl" fontWeight="600">
-                $
+                £
               </Text>
               <Text fontSize="5xl" fontWeight="900">
                 10
@@ -78,7 +78,7 @@ export default function Pricing() {
             py={4}
             borderBottomRadius={'xl'}
           >
-            <List color="#fff" spacing={3} textAlign="start" px={12}>
+            <List spacing={3} textAlign="start" px={12}>
               <ListItem>
                 <ListIcon as={FaCheckCircle} color="green.500" />
                 unlimited build minutes
@@ -92,7 +92,7 @@ export default function Pricing() {
                 5TB Lorem, ipsum dolor.
               </ListItem>
             </List>
-            <Box color="#fff" w="80%" pt={7}>
+            <Box w="80%" pt={7}>
               <Button
                 onClick={onOpen}
                 w="full"
@@ -106,7 +106,7 @@ export default function Pricing() {
         </PriceWrapper>
 
         <PriceWrapper>
-          <Box color="#fff" position="relative">
+          <Box position="relative">
             <Box
               position="absolute"
               top="-16px"
@@ -136,7 +136,7 @@ export default function Pricing() {
               </Text>
               <HStack justifyContent="center">
                 <Text fontSize="3xl" fontWeight="600">
-                  $
+                  £
                 </Text>
                 <Text fontSize="5xl" fontWeight="900">
                   20
@@ -196,7 +196,7 @@ export default function Pricing() {
             </Text>
             <HStack justifyContent="center">
               <Text fontSize="3xl" fontWeight="600">
-                $
+                £
               </Text>
               <Text fontSize="5xl" fontWeight="900">
                 30

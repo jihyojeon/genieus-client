@@ -29,5 +29,9 @@ export const ButtonStyle = {
       _hover: { opacity: 0.6 },
       _focus: { boxShadow: 'outline' },
     },
+
+    starRating: {
+      position: "relative",
+    }
   },
 }
