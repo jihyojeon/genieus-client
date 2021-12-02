@@ -2,9 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import TutorType from './tutorService'
 
 interface StudentType {
-  email : string
-  name : string
-  id : string
+  email: string
+  name: string
+  id: string
   subscription_type: string //('basic', 'pro', 'max')
   lastpayment_date: Date
   photo_url: string
@@ -20,13 +20,16 @@ interface StudentType {
 export const studentApi = createApi({
   reducerPath: 'studentApi',
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
+  tagTypes: ['Student'],
   endpoints: (builder) => ({
     getAllStudents: builder.query<StudentType[], void>({
       query: () => `/student`,
+      providesTags: ['Student'],
     }),
 
     getStudentById: builder.query<StudentType, string>({
-      query: (id) => `/student/${id}`
+      query: (id) => `/student/${id}`,
+      providesTags: ['Student'],
     }),
 
     addStudent: builder.mutation({
@@ -35,87 +38,120 @@ export const studentApi = createApi({
         method: 'POST',
         body: student,
       }),
+      invalidatesTags: ['Student'],
     }),
 
-    updateStudentById: builder.mutation<StudentType, Partial<StudentType> & Pick<StudentType, 'id'>>({
-      query: ({id, ...student}) => ({
+    updateStudentById: builder.mutation<
+      StudentType,
+      Partial<StudentType> & Pick<StudentType, 'id'>
+    >({
+      query: ({ id, ...student }) => ({
         url: `/student/${id}`,
         method: 'PATCH',
         body: student,
       }),
+      invalidatesTags: ['Student'],
     }),
 
-    deleteStudentById: builder.mutation<{success: boolean; id: string}, string>({
+    deleteStudentById: builder.mutation<
+      { success: boolean; id: string },
+      string
+    >({
       query: (id) => ({
         url: `/student/${id}`,
-        method: "DELETE"
-      })
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Student'],
     }),
 
-    addFavouriteTutor: builder.mutation<StudentType, {studentId: string, tutorId: string}>({
-      query: ({studentId, tutorId}) => ({
+    addFavouriteTutor: builder.mutation<
+      StudentType,
+      { studentId: string; tutorId: string }
+    >({
+      query: ({ studentId, tutorId }) => ({
         url: `/student/${studentId}/favourite/push`,
         method: 'PUT',
-        body: { tutor_id: tutorId }
-      })
+        body: { tutor_id: tutorId },
+      }),
+      invalidatesTags: ['Student'],
     }),
 
-    removeFavouriteTutor: builder.mutation<StudentType, {studentId: string, tutorId: string}>({
-      query: ({studentId, tutorId}) => ({
+    removeFavouriteTutor: builder.mutation<
+      StudentType,
+      { studentId: string; tutorId: string }
+    >({
+      query: ({ studentId, tutorId }) => ({
         url: `/student/${studentId}/favourite/remove`,
         method: 'PUT',
-        body: { tutor_id: tutorId }
-      })
+        body: { tutor_id: tutorId },
+      }),
+      invalidatesTags: ['Student'],
     }),
 
-    replaceFavouriteTutors: builder.mutation<StudentType, {studentId: string, tutorId: string[]}>({
-      query: ({studentId, tutorId}) => ({
+    replaceFavouriteTutors: builder.mutation<
+      StudentType,
+      { studentId: string; tutorId: string[] }
+    >({
+      query: ({ studentId, tutorId }) => ({
         url: `/student/${studentId}/favourite/replace`,
         method: 'PUT',
-        body: { tutor_id: tutorId }
-      })
+        body: { tutor_id: tutorId },
+      }),
+      invalidatesTags: ['Student'],
     }),
 
     getFavouriteTutorsById: builder.query<TutorType[], string>({
-      query: (id) => `/student/${id}/favourite`
+      query: (id) => `/student/${id}/favourite`,
+      providesTags: ['Student'],
     }),
 
-    addBlockedTutor: builder.mutation<StudentType, {studentId: string, tutorId: string}>({
-      query: ({studentId, tutorId}) => ({
+    addBlockedTutor: builder.mutation<
+      StudentType,
+      { studentId: string; tutorId: string }
+    >({
+      query: ({ studentId, tutorId }) => ({
         url: `/student/${studentId}/block/push`,
         method: 'PUT',
-        body: { tutor_id: tutorId }
-      })
+        body: { tutor_id: tutorId },
+      }),
+      invalidatesTags: ['Student'],
     }),
 
-    removeBlockedTutor: builder.mutation<StudentType, {studentId: string, tutorId: string}>({
-      query: ({studentId, tutorId}) => ({
+    removeBlockedTutor: builder.mutation<
+      StudentType,
+      { studentId: string; tutorId: string }
+    >({
+      query: ({ studentId, tutorId }) => ({
         url: `/student/${studentId}/block/remove`,
         method: 'PUT',
-        body: { tutor_id: tutorId }
-      })
+        body: { tutor_id: tutorId },
+      }),
+      invalidatesTags: ['Student'],
     }),
 
-    replaceBlockedTutors: builder.mutation<StudentType, {studentId: string, tutorId: string[]}>({
-      query: ({studentId, tutorId}) => ({
+    replaceBlockedTutors: builder.mutation<
+      StudentType,
+      { studentId: string; tutorId: string[] }
+    >({
+      query: ({ studentId, tutorId }) => ({
         url: `/student/${studentId}/block/replace`,
         method: 'PUT',
-        body: { tutor_id: tutorId }
-      })
+        body: { tutor_id: tutorId },
+      }),
+      invalidatesTags: ['Student'],
     }),
 
     getBlockedTutorsById: builder.query<TutorType[], string>({
-      query: (id) => `/student/${id}/block`
-    })
-
-
-  })
+      query: (id) => `/student/${id}/block`,
+      providesTags: ['Student'],
+    }),
+  }),
 })
 
 export const {
-  useGetAllStudentsQuery, 
-  useGetStudentByIdQuery, 
-  useAddStudentMutation, 
+  useGetAllStudentsQuery,
+  useGetStudentByIdQuery,
+  useAddStudentMutation,
   useUpdateStudentByIdMutation,
   useDeleteStudentByIdMutation,
   useAddFavouriteTutorMutation,
@@ -125,5 +161,5 @@ export const {
   useAddBlockedTutorMutation,
   useRemoveBlockedTutorMutation,
   useReplaceBlockedTutorsMutation,
-  useGetBlockedTutorsByIdQuery
+  useGetBlockedTutorsByIdQuery,
 } = studentApi

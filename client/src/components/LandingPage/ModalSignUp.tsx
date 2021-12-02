@@ -63,8 +63,14 @@ const ModalSignUp = ({ isOpen, onClose }) => {
       )
 
       const userId = await auth.currentUser?.uid
+      console.log(registerEmail, userId, username, radioValue)
 
-      await addStudent({ email: registerEmail, id: userId, name: username })
+      await addStudent({
+        email: registerEmail,
+        id: userId,
+        name: username,
+        subscription_type: radioValue,
+      })
       navigate('/student-dashboard')
     } catch (error) {
       console.log(error)
