@@ -15,16 +15,13 @@ export default function ChatDuration() {
     strokeWidth: 10,
   }
 
-  
   // TODO: IMPLEMENT ACTION WHEN COUNTDOWN TIMER REACHES LIMIT
   // TODO: FIX LOGIC TO CHANGE MINUTES TO SECONDS WHEN UNDER 60 SECONDS LEFT - USE STATE
   // TODO: FIX LOGIC TO CHANGE MINUTES TO SECONDS WHEN UNDER 60 SECONDS LEFT - USE STATE
   const renderTime = ({ remainingTime }: any) => {
     if (remainingTime === 0) {
       console.log('Countdown time ended')
-      return (
-        <Text>{MINUTES} minute window expired</Text>
-      );
+      return <Text>{MINUTES} minute window expired</Text>
     } else {
       return (
         <Box>
@@ -34,8 +31,8 @@ export default function ChatDuration() {
             letterSpacing={1}
             fontSize={25}
             fontWeight={800}
-            >
-            {Math.ceil(remainingTime/60)}
+          >
+            {Math.ceil(remainingTime / 60)}
             {/* {remainingTime < 60 ? { remainingTime } : Math.ceil(remainingTime / 60)} */}
           </Text>
           <Text
@@ -44,7 +41,7 @@ export default function ChatDuration() {
             letterSpacing={1}
             fontSize={20}
             fontWeight={400}
-            >
+          >
             minutes
             {/* {remainingTime < 60 ? "seconds" : "minutes"} */}
           </Text>
@@ -64,13 +61,9 @@ export default function ChatDuration() {
 
   return (
     <Flex direction="column">
-      <Box
-        bg="grey"
-        borderRadius="1rem"
-        padding="1rem"
-        marginTop={'1rem'}
-      >
-        <CountdownCircleTimer {...timerProps}
+      <Box bg="grey" borderRadius="1rem" padding="1rem" marginTop={'1rem'}>
+        <CountdownCircleTimer
+          {...timerProps}
           isPlaying
           duration={SECONDS}
           colors={[
