@@ -94,15 +94,21 @@ const Favourites = () => {
 
     <Flex justifyContent="center" flexDirection="column" h="100%">
       <Button
-        // @ts-ignore
-        onClick={() => addTutorToFav('XZsYgF1jXLXIutgnFr4RUXl8HOT2')}
+        onClick={() =>
+          addTutorToFav({
+            // @ts-ignore
+            studentId: userId,
+            tutorId: 'tutor3',
+          })
+        }
       >
         +
       </Button>
       <Button onClick={() => console.log(addTutorToFavResult)}>
         See Tutor result
       </Button>
-      <Button onClick={() => console.log(favouriteTutor.data)}>View</Button>
+      <Button onClick={() => console.log(userId)}>See ID</Button>
+      <Button onClick={() => console.log(userId, favouriteTutor)}>View</Button>
       <Heading
         as="h1"
         size="lg"
