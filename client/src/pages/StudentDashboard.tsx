@@ -11,11 +11,6 @@ import { auth } from '../firebase'
 
 const gridBackgroundColor: string = 'hsl(217, 22%, 19%)'
 
-// CALL DATA
-// GET FIREBASE ID
-const userEmail = auth.currentUser?.email
-console.log(userEmail)
-
 const StudentDashboard = () => {
   return (
     <Grid
