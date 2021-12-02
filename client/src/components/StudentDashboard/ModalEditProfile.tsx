@@ -38,14 +38,13 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
               <Stack
                 spacing={4}
                 w={'full'}
-                maxW={'md'}
+                maxW={'full'}
                 // bg={useColorModeValue('white', 'gray.700')}
                 rounded={'xl'}
-                boxShadow={'lg'}
                 p={6}
-                my={12}
+                my={2}
               >
-                <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
+                <Heading mb={5} fontSize={{ base: '2xl', sm: '3xl' }}>
                   User Profile Edit
                 </Heading>
                 <FormControl id="userName">
@@ -67,17 +66,32 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                           colorScheme="red"
                           aria-label="remove Image"
                           icon={<SmallCloseIcon />}
+                          onClick={() =>
+                            updateStudent({
+                              id: userId,
+                              //@ts-ignore
+                              photo_url: null,
+                            })
+                          }
                         />
                       </Avatar>
                     </Center>
                     <Center w="full">
                       <FormControl>
+                        <FormLabel
+                          color="indigo.400"
+                          fontFamily="montserrat"
+                          _hover={{ cursor: 'pointer', opacity: 0.8 }}
+                        >
+                          Change Photo
+                        </FormLabel>
+
                         <Input
                           w="full"
                           type="file"
-                          style={{}}
-                          //@ts-ignore
+                          style={{ display: 'none' }}
                           onChange={(e) =>
+                            //@ts-ignore
                             setphotoFile(URL.createObjectURL(e.target.files[0]))
                           }
                         />

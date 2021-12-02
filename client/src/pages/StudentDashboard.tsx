@@ -38,21 +38,21 @@ const StudentDashboard = () => {
         <Interactions />
       </GridItem> */}
 
-      <GridItem w="80vh" rowSpan={1} colSpan={1}>
+      <GridItem w="80vh" rowSpan={1} colSpan={2}>
         <Stats />
       </GridItem>
 
       {/* ACHIEVEMENTS PANE */}
-      <GridItem
+      {/* <GridItem
         justifyContent="flex-end"
         alignItems="flex-end"
-        w="40vh"
+        w="30vh"
         rowSpan={1}
         colSpan={1}
         ml={20}
       >
         <Achievements />
-      </GridItem>
+      </GridItem> */}
 
       {/* FAVOURITES (RIGHT) PANE */}
       <GridItem rowSpan={2} colSpan={1}>
