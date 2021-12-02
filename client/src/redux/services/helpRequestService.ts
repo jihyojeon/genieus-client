@@ -65,5 +65,6 @@ export const {
   useDeleteHRRequestMutation,
   useUpdateHRRequestMutation,
   useGetPendingHRByIdQuery,
+  useGetHrRequestByValueQuery
 
 } = helpRequestApi

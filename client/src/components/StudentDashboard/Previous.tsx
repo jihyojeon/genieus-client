@@ -1,6 +1,7 @@
-import React from 'react'
-import { Box, Flex, Heading, Text } from '@chakra-ui/react'
-// import {getPendingHRById}
+import React, { useState, useEffect } from 'react'
+import { Box, Flex, Heading, Text, Button } from '@chakra-ui/react'
+import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
+import { auth } from '../../firebase'
 
 const prevArr: any = [
   {
@@ -45,15 +46,24 @@ const prevArr: any = [
   },
 ]
 
-
-
 const Previous = () => {
+  const [userId, setUserId] = useState()
+
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+  }, [])
+  const getHrRequests = useGetHrRequestByValueQuery(userId)
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
     <Flex py={3} ml={7} color={'white'} flexDirection="column">
       <Heading as="h1" size="lg" fontWeight="300" pb="0.5rem">
         Recent Help Requests
       </Heading>
+      <Button onClick={() => console.log(getHrRequests.data)}> </Button>
+      <Button onClick={() => console.log(userId)}> </Button>
 
       <Flex
         flexDirection="row"
