@@ -8,6 +8,8 @@ export default function ChatBubbleReceived() {
   const sender: string = 'Vic'
   const message: string = "Blah blah blah blah"
 
+  const gradColor: string = "#9e9e9e"
+
   // const format = {
   //   day: "numeric",
   //   month: "2-digit",
@@ -44,7 +46,7 @@ export default function ChatBubbleReceived() {
 
           <Flex justify="right">
             <Box
-              bg="#9e9e9e"
+              bg={gradColor}
               border="1px"
               borderTopLeftRadius="3rem"
               borderTopRightRadius="0rem"
