@@ -1,10 +1,9 @@
-import { ReactNode } from 'react'
-import { Box, Flex, Heading, Image, Text, useDisclosure } from '@chakra-ui/react'
-import { ColorModeSwitcher } from '../../ColorModeSwitcher'
-import Logo from '../../assets/icons/logo.svg'
+import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react'
+import { ColorModeSwitcher } from '../../../ColorModeSwitcher'
+import Logo from '../../../assets/icons/logo.svg'
 
-export default function ChatTopBar() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+export default function ChatTopBar(props: any) {
+
 
   return (
     
@@ -30,6 +29,7 @@ export default function ChatTopBar() {
           Agree here any details before proceeding to your Zoom call
         </Text>
       </Flex>
+
       <Box>
         <ColorModeSwitcher position="absolute" right={'3'} />
       </Box>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import {
   Avatar,
   Center,
@@ -6,7 +6,6 @@ import {
   Heading,
   Text,
   VStack,
-  // useColorModeValue,
 } from '@chakra-ui/react'
 import StarRating from '../components/Feedback/StarRating'
 import StudentComments from '../components/Feedback/StudentComments'
@@ -36,11 +35,11 @@ const Feedback = () => {
           <Heading>How was your call with {tutorObjState.tutorName}?</Heading>
           <Avatar size="2xl" src={tutorObjState.photo} />
           <StarRating
-                  size={48}
-                  icon="star"
-                  scale={5}
-                  fillColor="gold"
-                  strokeColor="grey"
+            size={32}
+            icon="StarIcon"
+            scale={5}
+            fillColor="gold"
+            strokeColor="grey"
           />
           <StudentComments name={tutorObjState.tutorName} />
         </VStack>

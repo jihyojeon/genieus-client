@@ -1,12 +1,11 @@
-import { ReactNode } from 'react'
-import { Box, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 
-export default function ChatBubbleReceived() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+const ChatBubbleReceived = (props: any) => {
 
+   // TODO: REPLACE WITH PROPS?
   const timeStamp = '14:32 [15s ago]'
-  const sender: string = 'Vic'
   const message: string = "Blah blah blah blah"
+  const sender: string = 'Vic'
 
   const gradColor: string = "#9e9e9e"
 
@@ -18,14 +17,14 @@ export default function ChatBubbleReceived() {
   // const timeStamp = Date.now().toLocaleString("en-gb", format)
 
   return (
-    <Box pt="20px">
+    <Box pt="20px" mt="1.5rem">
       <Flex direction="column">
         <Box position="relative">
           <Flex justify="right">
             <Box
               align="right"
               bgGradient='linear(to-t, #9e9e9e, hsl(196, 65%, 62%))'
-              border="1px"
+              border="0px"
               borderBottom="0px"
               borderBottomLeftRadius="1rem"
               borderTopLeftRadius="3rem"
@@ -47,16 +46,17 @@ export default function ChatBubbleReceived() {
           <Flex justify="right">
             <Box
               bg={gradColor}
-              border="1px"
+              border="0px"
               borderTopLeftRadius="3rem"
               borderTopRightRadius="0rem"
               borderBottomLeftRadius="1rem"
               borderBottomRightRadius="3rem"
               mt="0"
+              minWidth="60%"
               p="0.5rem"
               pl="7rem"
               pr="2rem"
-              minWidth="60%"
+              shadow={"dark-lg"}
               zIndex="1"
             >
               <Text align={'right'}>{message}</Text>
@@ -67,3 +67,5 @@ export default function ChatBubbleReceived() {
     </Box>
   )
 }
+
+export default ChatBubbleReceived
