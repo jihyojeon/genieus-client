@@ -11,8 +11,15 @@ import {
   VStack
 } from '@chakra-ui/react'
 
-const stars = () => {
-  return console.log('test 2')
+
+// TODO: IMPLEMENT ACTION ON CANCEL
+const cancelHandler = () => {
+  console.log('Cancel clicked')
+}
+
+// TODO: IMPLEMENT ACTION ON SUBMIT
+const submitHandler = () => {
+  console.log('Submit clicked')
 }
 
 const tutorObj = {
@@ -21,8 +28,9 @@ const tutorObj = {
   photo: 'https://bit.ly/sage-adebayo',
 }
 
+// TODO: RECORD 1) STARS, 2) COMMENTS, 3) REMOVE CHECKBOX
 const StudentComments = () => {
-  const [tutorObjState, settutorObjState] = useState(tutorObj)
+  const [tutorObjState, setTutorObjState] = useState(tutorObj)
   const [tutorFeedback, setTutorFeedback] = useState('none')
 
   return (
@@ -50,13 +58,14 @@ const StudentComments = () => {
               If you prefer {tutorObjState.tutorName} isn't assigned your requests in future, tick the box below.
             </Text>
             <Checkbox defaultIsNotChecked mt="1rem">
+              {/* TODO: HANDLE TICKBOX RECORDING */}
               Remove{' '}
             </Checkbox>
           </Flex>
         </VStack>
         <Flex direction="row">
-          <Button mt="2rem" mr="2rem">Cancel</Button>
-          <Button mt="2rem" ml="2rem">Submit</Button>
+          <Button mt="2rem" mr="2rem" onClick={cancelHandler}>Cancel</Button>
+          <Button mt="2rem" ml="2rem" onClick={submitHandler}>Submit</Button>
         </Flex>
       </Flex>
     </Center>
