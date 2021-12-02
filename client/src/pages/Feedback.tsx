@@ -35,8 +35,14 @@ const Feedback = () => {
           <Text>You were online for {tutorObjState.callDuration} minutes</Text>
           <Heading>How was your call with {tutorObjState.tutorName}?</Heading>
           <Avatar size="2xl" src={tutorObjState.photo} />
-          <StarRating />
-          <StudentComments name={tutorObjState.tutorName}/>
+          <StarRating
+                  size={48}
+                  icon="star"
+                  scale={5}
+                  fillColor="gold"
+                  strokeColor="grey"
+          />
+          <StudentComments name={tutorObjState.tutorName} />
         </VStack>
       </Flex>
     </Center>

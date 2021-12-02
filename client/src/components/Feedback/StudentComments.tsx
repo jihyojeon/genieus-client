@@ -12,11 +12,6 @@ import {
 } from '@chakra-ui/react'
 
 
-// TODO: IMPLEMENT ACTION ON CANCEL
-const cancelHandler = () => {
-  console.log('Cancel clicked')
-}
-
 // TODO: IMPLEMENT ACTION ON SUBMIT
 const submitHandler = () => {
   console.log('Submit clicked')
@@ -53,8 +48,7 @@ const StudentComments = (props: any) => {
         </Checkbox>
           Remove{' '}
         <Flex direction="row">
-          <Button mt="1rem" mr="2rem" onClick={cancelHandler}>Cancel</Button>
-          <Button mt="1rem" ml="2rem" onClick={submitHandler}>Submit</Button>
+          <Button mt="1rem" onClick={submitHandler}>Submit</Button>
         </Flex>
       </VStack>
     </Center>
