@@ -10,7 +10,8 @@ export default function ChatRightPane() {
     <Flex direction="column">
       <Box
         paddingRight={'0.5rem'}
-        height={"80vh"}
+        // TODO: ADD SCROLLBAR FOR WHEN SCREEN HEIGHT IS REDUCED
+        height={"70vh"}
         minHeight="10%"
         overflowY={"scroll" }
         sx={{

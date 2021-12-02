@@ -13,17 +13,19 @@ import ChatActions from './ChatActions'
 export default function ChatLeftPane() {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  
   return (
-    <Flex direction="column">
+    <Flex direction="column" h="100%">
       <Box
         align="center" 
         bg="lightgrey"
         borderRadius={"1rem"}
-        height="70vh"
         marginRight="2rem"
-        overflowY={"scroll"}
         padding="0.5rem"
-        
+        paddingBottom="1rem"
+        // TODO: ADD SCROLLBAR FOR WHEN SCREEN HEIGHT IS REDUCED
+        overflowY={"scroll"}
+        height={"80vh"}
           sx={{
             '&::-webkit-scrollbar': {
               backgroundColor: `rgba(150, 150, 190, 0.00)`,
