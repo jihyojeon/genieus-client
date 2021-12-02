@@ -26,6 +26,7 @@ import {
 } from '@chakra-ui/react'
 import Logo from '../../assets/icons/logo.svg'
 import { Link, useNavigate } from 'react-router-dom'
+import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 
 //@ts-ignore
 const ModalLogIn = ({ isOpen, onClose }) => {
@@ -36,6 +37,7 @@ const ModalLogIn = ({ isOpen, onClose }) => {
   const [isLoggedIn, setisLoggedIn] = useState(false)
   const [errormsg, seterrormsg] = useState('')
 
+
   // useEffect(() => {
   //   const unsubscribe = auth.onAuthStateChanged((user) => {
   //     if (user) {
@@ -45,7 +47,17 @@ const ModalLogIn = ({ isOpen, onClose }) => {
   //   return unsubscribe
   // }, [])
 
+  // const student = useGetStudentByIdQuery(userId)
+
   const login = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
+      
+      navigate('/student-dashboard')
+    } catch (error) {
+      console.log(error)
+    }
+
     await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
       .then((user) => {
         navigate('/student-dashboard')

@@ -1,33 +1,44 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Flex,
   Box,
   Heading,
   Text,
-  Badge,
-  Stack,
   HStack,
   VStack,
   TagLabel,
   Textarea,
   Tag,
   useDisclosure,
+  Button
 } from '@chakra-ui/react'
-import { Button } from '@chakra-ui/button'
-import StudentService from '../../ApiService/StudentService'
 import dotenv from 'dotenv'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog } from '@fortawesome/free-solid-svg-icons'
 import EditProfileModal from './EditProfileModal'
+import { auth } from '../../firebase'
+import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 
 dotenv.config()
 
 export const TutorDetails = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const [bioValue, setbioValue] = useState(
-    'Hey, Im Daniel from Toronto. I love chess and software!'
-  )
+  const [userId, setUserId] = useState()
+  //@ts-ignore
+  const tutor = useGetTutorByIdQuery(userId)
+  const [bioValue, setBioValue] = useState(tutor.data?.bio)
+
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+      //@ts-ignore
+      setBioValue(tutor.data?.bio)
+    })
+  }, [])
+
+
   return (
     <Box>
       <Flex alignItems="center">
@@ -69,19 +80,27 @@ export const TutorDetails = () => {
             <Text>Location:</Text>
             <HStack spacing={5}>
               <Tag mt={2} variant="outline" size="lg" colorScheme="indigo">
-                <TagLabel>Toronto</TagLabel>
+                <TagLabel>{tutor.error
+                        ? 'error'
+                        : tutor.isLoading
+                        ? 'loading'
+                        : tutor.data
+                        ? ' ' + tutor.data.location
+                        : undefined}
+                </TagLabel>
               </Tag>
             </HStack>
           </Flex>
           <Flex mt={3} direction="column">
-            <Text>Non-tech languages:</Text>
+            <Text>Spoken languages:</Text>
             <HStack mt={3} spacing={5}>
-              <Tag variant="outline" size="lg" colorScheme="indigo">
-                <TagLabel>French</TagLabel>
-              </Tag>
-              <Tag variant="outline" size="lg" colorScheme="indigo">
-                <TagLabel>English</TagLabel>
-              </Tag>
+              {tutor.data?.spoken_language?.map(language => {
+                return (
+                  <Tag variant="outline" size="lg" colorScheme="indigo">
+                    <TagLabel>{language}</TagLabel>
+                  </Tag>
+                )
+              })}
             </HStack>
           </Flex>
         </Flex>
@@ -91,7 +110,7 @@ export const TutorDetails = () => {
           <Textarea
             mt={2}
             value={bioValue}
-            onChange={(e: any) => setbioValue(e.target.value)}
+            onChange={(e: any) => setBioValue(e.target.value)}
             border="1px solid"
             borderColor="indigo.500"
             isRequired
@@ -99,7 +118,7 @@ export const TutorDetails = () => {
             minH="8rem"
             fontFamily="montserrat"
             fontSize={'12px'}
-            placeholder={bioValue}
+            placeholder="Tell us a bit about youself..."
           />
         </Flex>
         <Flex
@@ -141,39 +160,3 @@ export const TutorDetails = () => {
     </Box>
   )
 }
-
-// async function test() {
-//   console.log('clicked')
-//   // const test = await TutorService.getAllTutors()
-//   // const test = await TutorService.deleteTutorById('testid')
-//   // const test = await TutorService.addTutor({
-//   //   email: "testemail",
-//   //   name: "testname",
-//   //   id: "testid",
-//   //   photo_url: "testphoto",
-//   //   spoken_language: ["hello"]
-//   // })
-
-//   // const test = await HelpRequestService.updateHelpRequestById("string",
-//   // {
-//   //   description: "this is an update from the apiservice"
-//   // })
-
-//   // USING PARAMS
-//   // const test = await HelpRequestService.getHelpRequestsByParams(new URLSearchParams({
-//   //   student_id: 'fea8be3e64777240'
-//   // }).toString())
-
-//   // const test = await StudentService.addStudent({
-//   //   email: "test",
-//   //   name: "testname",
-//   //   id: "testid3",
-//   //   subscription_type: "basic",
-//   //   photo_url: "url",
-//   //   spoken_language: ['mandarin']
-//   // })
-
-//   const test = await StudentService.blockTutor('testid3', {
-//     tutor_id: 'hello',
-//   })
-//   console.log(test)
