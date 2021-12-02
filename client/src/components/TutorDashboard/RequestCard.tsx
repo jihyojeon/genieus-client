@@ -32,12 +32,14 @@ export const RequestCard = ({ hr }: HRType) => {
       mx={6}
       my={2}
       bg={useColorModeValue('white', 'gray.800')}
+      // bg={'red'}
+      minW={'25%'}
     >
       <Box
         overflow="hidden"
         position="relative"
-        maxH={'350px'}
-        minW={'200px'}
+        minH={'100%'}
+        minW={'100%'}
         boxShadow={'2xl'}
         rounded={'md'}
       >
@@ -66,7 +68,7 @@ export const RequestCard = ({ hr }: HRType) => {
         <Box p={6}>
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'lg'} fontWeight={500} fontFamily={'body'}>
-              {hr.student_id}
+              {hr.student.name}
             </Heading>
           </Stack>
           <Flex
@@ -76,36 +78,24 @@ export const RequestCard = ({ hr }: HRType) => {
           >
             {/* <Text mb={3}> Description </Text> */}
             <Text fontSize="13">
-              {' '}
-              I have a problem with react router. I need help...{' '}
+              {/* {' '}
+              I have a problem with react router. I need help...{' '} */}
+              {hr.description}
             </Text>
           </Flex>
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+            {/*@ts-ignore*/}
+            {hr.tags?.map(tag => {
+            return (
             <Badge
               px={2}
               py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
               fontWeight={'400'}
             >
-              #redux
+              #{tag}
             </Badge>
-            <Badge
-              px={2}
-              py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
-              fontWeight={'400'}
-            >
-              #react
-            </Badge>
-            <Badge
-              px={2}
-              py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
-              fontWeight={'400'}
-            >
-              #vue
-            </Badge>
+            )})}
           </Stack>
           <Link to="/tutor-hr">
             <Button
