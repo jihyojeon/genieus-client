@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-interface HRType {
+export default interface HRType {
   student_id: string
   description: string
   tags?: string[]
@@ -52,8 +52,8 @@ export const helpRequestApi = createApi({
       }),
     }),
     // GET PENDING HR'S
-    getPendingHRById: builder.query<HRType, any>({
-      query: (body) => `/helprequest/pending/${body.tutor.id}`,
+    getPendingHRById: builder.query<HRType[], string>({
+      query: (tutorId) => `/helprequest/pending/${tutorId}`,
     }),
   }),
 })
