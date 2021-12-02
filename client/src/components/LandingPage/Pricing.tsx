@@ -37,9 +37,6 @@ export default function Pricing() {
 
   const getSubscriptions = useGetSubscriptionsQuery()
 
-
-           
-
   return (
     <Box pb={15}>
       <VStack spacing={2} textAlign="center">
@@ -47,7 +44,7 @@ export default function Pricing() {
           Subscriptions that fit your need!
         </Heading>
         <Text fontSize="lg">Your first call is completely free!</Text>
-      </VStack>
+      </VStack >
       <Stack
         direction={{ base: 'column', md: 'row' }}
         textAlign="center"
@@ -56,10 +53,15 @@ export default function Pricing() {
         py={10}
       >
         <PriceWrapper>
-          <Box color={useColorModeValue('gray.500', 'gray.100')} py={4} px={12}>
+          <Box
+          maxWidth="20rem">
+
+
+          <Box color={useColorModeValue('gray.500', 'gray.100')} py={4} px={12} >
             <Text fontWeight="500" fontSize="2xl">
               {/* TODO: INSERT NAME OF PACKAGE HERE */}
-              {getSubscriptions.data && getSubscriptions.data.Basic.subscription_name}
+              {getSubscriptions.data &&
+                getSubscriptions.data.Basic.subscription_name}
             </Text>
             <HStack justifyContent="center">
               <Text fontSize="3xl" fontWeight="600">
@@ -81,15 +83,11 @@ export default function Pricing() {
             <List spacing={3} textAlign="start" px={12}>
               <ListItem>
                 <ListIcon as={FaCheckCircle} color="green.500" />
-                unlimited build minutes
+                45 minutes of help requests a month.
               </ListItem>
               <ListItem>
                 <ListIcon as={FaCheckCircle} color="green.500" />
-                Lorem, ipsum dolor.
-              </ListItem>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color="green.500" />
-                5TB Lorem, ipsum dolor.
+                Roll-over of 20 minutes to following month.
               </ListItem>
             </List>
             <Box w="80%" pt={7}>
@@ -103,10 +101,13 @@ export default function Pricing() {
               </Button>
             </Box>
           </VStack>
+          </Box>
         </PriceWrapper>
 
         <PriceWrapper>
-          <Box position="relative">
+          <Box
+            position="relative"
+            maxWidth="20rem">
             <Box
               position="absolute"
               top="-16px"
@@ -154,24 +155,17 @@ export default function Pricing() {
               <List spacing={3} textAlign="start" px={12}>
                 <ListItem>
                   <ListIcon as={FaCheckCircle} color="green.500" />
-                  unlimited build minutes
+                  120 minutes of help request a month.
                 </ListItem>
                 <ListItem>
                   <ListIcon as={FaCheckCircle} color="green.500" />
-                  Lorem, ipsum dolor.
+                  Roll-over of 25 minutes to following month.
                 </ListItem>
                 <ListItem>
                   <ListIcon as={FaCheckCircle} color="green.500" />
-                  5TB Lorem, ipsum dolor.
+                  Access to "Favourite Tutor" functions.
                 </ListItem>
-                <ListItem>
-                  <ListIcon as={FaCheckCircle} color="green.500" />
-                  5TB Lorem, ipsum dolor.
-                </ListItem>
-                <ListItem>
-                  <ListIcon as={FaCheckCircle} color="green.500" />
-                  5TB Lorem, ipsum dolor.
-                </ListItem>
+
               </List>
 
               <Box w="80%" pt={7}>
@@ -190,6 +184,9 @@ export default function Pricing() {
           </Box>
         </PriceWrapper>
         <PriceWrapper>
+          <Box maxWidth="20rem">
+            
+
           <Box color={useColorModeValue('gray.500', 'gray.100')} py={4} px={12}>
             <Text fontWeight="500" fontSize="2xl">
               Max
@@ -215,15 +212,19 @@ export default function Pricing() {
             <List spacing={3} textAlign="start" px={12}>
               <ListItem>
                 <ListIcon as={FaCheckCircle} color="green.500" />
-                unlimited build minutes
+                200 minutes of help request a month.
               </ListItem>
               <ListItem>
                 <ListIcon as={FaCheckCircle} color="green.500" />
-                Lorem, ipsum dolor.
+                Access to "Favourite Tutor" functions.
               </ListItem>
               <ListItem>
                 <ListIcon as={FaCheckCircle} color="green.500" />
-                5TB Lorem, ipsum dolor.
+                Priority tutor service.
+              </ListItem>
+              <ListItem>
+                <ListIcon as={FaCheckCircle} color="green.500" />
+                VIP help request options. 
               </ListItem>
             </List>
             <Box w="80%" pt={7}>
@@ -236,7 +237,8 @@ export default function Pricing() {
                 Start trial
               </Button>
             </Box>
-          </VStack>
+            </VStack>
+            </Box>
         </PriceWrapper>
       </Stack>
       <ModalSignUp isOpen={isOpen} onClose={onClose} />

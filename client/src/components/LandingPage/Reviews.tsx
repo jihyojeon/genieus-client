@@ -92,9 +92,9 @@ export default function WithSpeechBubbles() {
     <Box py={'10vh'}>
       <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
-          <Heading color="gray.500">Our students Speak</Heading>
+          <Heading color="gray.500">Our clients Speak</Heading>
           <Text color="gray.500">
-            We have been working with clients around the world
+            We work with coding students and professionals around the world
           </Text>
         </Stack>
         <Stack
@@ -106,7 +106,7 @@ export default function WithSpeechBubbles() {
               <TestimonialHeading>Brilliant!</TestimonialHeading>
               <TestimonialText>
                 Vic's advice to "Switch it off and back on again" really helped
-                with my Windows problems
+                with my Windows problems.
               </TestimonialText>
             </TestimonialContent>
 
@@ -121,11 +121,11 @@ export default function WithSpeechBubbles() {
           <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>
-                Solved problem within minutes
+                Helped solve temple backend within minutes
               </TestimonialHeading>
               <TestimonialText>
-                Our monastry's webpage was really suffering until Jess
-                recommended we adopt Next.js. It solved everything and sped up
+                Our temple's webpage was really suffering until Jess recommended
+                we adopt Next.js. It solved everything and even sped up
                 chanting.
               </TestimonialText>
             </TestimonialContent>
@@ -139,10 +139,11 @@ export default function WithSpeechBubbles() {
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>Tobias fixd it!</TestimonialHeading>
+              <TestimonialHeading>Tobias fixed it!</TestimonialHeading>
               <TestimonialText>
                 My country was on the verge of collapse - then I turned to
-                GenieUs and they provided all our tech answers
+                GenieUs and their expert tutors helped us solve all our tech
+                issues.
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
