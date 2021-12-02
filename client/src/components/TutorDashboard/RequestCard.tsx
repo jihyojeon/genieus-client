@@ -32,8 +32,7 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
       borderRadius="10px"
       fontFamily="montserrat"
       mx={6}
-      py={2}
-      px={3}
+      my={2}
       bg={useColorModeValue('white', 'gray.800')}
     >
       <Box
@@ -48,12 +47,12 @@ export const RequestCard = ({ name }: HelpRequestTypes) => {
           <Image
             position="absolute"
             height="25px"
-            top={0}
+            top={2}
             left={5}
             src={imageObj.python}
           />
         </Box>
-        <Flex justify={'center'} mt={-12}>
+        <Flex justify={'center'} mt={-10}>
           <Avatar
             size={'lg'}
             src={

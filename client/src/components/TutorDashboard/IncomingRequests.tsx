@@ -18,7 +18,14 @@ export const IncomingRequests = () => {
       >
         Open Requests:
       </Box>
-      <List display="flex" overflow="scroll">
+      <List 
+      display="flex" 
+      overflow="scroll" 
+      border="1px solid"
+      borderColor="rgba(127, 6, 219, .4)"
+      borderRadius="5px"
+      py={3}
+      >
         {requestNames.map((name) => {
           return <RequestCard name={name} />
         })}

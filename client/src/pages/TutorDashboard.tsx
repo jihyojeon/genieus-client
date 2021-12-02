@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 import Topbar from '../components/TutorDashboard/Topbar'
 import { IncomingRequests } from '../components/TutorDashboard/IncomingRequests'
-import { TutorStats } from '../components/TutorDashboard/TutorStats'
+import { TutorInformation } from '../components/TutorDashboard/TutorInformation'
 import { TutorDetails } from '../components/TutorDashboard/TutorDetails'
 
 const TutorDashboard = () => {
@@ -27,11 +27,11 @@ const TutorDashboard = () => {
         </GridItem>
 
         <GridItem rowSpan={5} colSpan={1}>
-          <TutorStats />
+          <TutorInformation />
         </GridItem>
 
         <GridItem rowSpan={2} colSpan={3}>
-          <TutorDetails />
+          {/* <TutorDetails /> */}
         </GridItem>
       </Grid>
     </Box>
