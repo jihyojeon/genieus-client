@@ -13,8 +13,9 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import HRType from '../../redux/services/helpRequestService'
+import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
 
 const imageObj = {
   python:
@@ -23,6 +24,9 @@ const imageObj = {
 
 //@ts-ignore
 export const RequestCard = ({ hr }: HRType) => {
+  const getHrRequest = useGetHrRequestByValueQuery(hr.student_id)
+
+  const navigate = useNavigate()
   return (
     <Center
       border="1px solid"
@@ -33,6 +37,7 @@ export const RequestCard = ({ hr }: HRType) => {
       my={2}
       bg={useColorModeValue('white', 'gray.800')}
     >
+      <Button onClick={() => console.log(hr)}> </Button>
       <Box
         overflow="hidden"
         position="relative"
@@ -66,7 +71,7 @@ export const RequestCard = ({ hr }: HRType) => {
         <Box p={6}>
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'lg'} fontWeight={500} fontFamily={'body'}>
-              {hr.student_id}
+              {hr.student.name}
             </Heading>
           </Stack>
           <Flex
@@ -75,13 +80,27 @@ export const RequestCard = ({ hr }: HRType) => {
             justifyContent={'flex-start'}
           >
             {/* <Text mb={3}> Description </Text> */}
-            <Text fontSize="13">
-              {' '}
-              I have a problem with react router. I need help...{' '}
-            </Text>
+            <Text fontSize="13">{hr.language}</Text>
+
+            <Text fontSize="13">{hr.description}</Text>
           </Flex>
           <Divider mt={3} />
-          <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+
+          {hr.tags && hr.tags == null ? (
+            hr.tags.map((tag: string[]) => {
+              return (
+                <Stack spacing={5}>
+                  <Badge variant="outline" size="lg" colorScheme="indigo">
+                    {tag}
+                  </Badge>
+                </Stack>
+              )
+            })
+          ) : (
+            <Text>Tags Here</Text>
+          )}
+
+          {/* <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             <Badge
               px={2}
               py={1}
@@ -106,10 +125,12 @@ export const RequestCard = ({ hr }: HRType) => {
             >
               #vue
             </Badge>
-          </Stack>
-          <Link to="/tutor-hr">
+          </Stack> */}
+          {/* @ts-ignore */}
+          <Link to="/tutor-hr" state={hr}>
             <Button
               w={'full'}
+              onClick={() => navigate('/tutor-hr', { state: hr })}
               mt={3}
               bg={useColorModeValue('#151f21', 'gray.900')}
               color={'white'}

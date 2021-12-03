@@ -9,18 +9,22 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
+  Button,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 
 //@ts-ignore
-const ModalStudentRequest = ({ isOpen, onClose }) => {
+const ModalStudentRequest = ({ isOpen, onClose, hrData }) => {
+  const getStudent = useGetStudentByIdQuery(hrData.student_id)
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
         <ModalContent fontFamily="sans-serif">
           <ModalHeader m={0} fontWeight="400" align="center" fontSize="30px">
             <Center py={6}>
+              <Button onClick={() => console.log(getStudent.data)}> </Button>
               <Box
                 bg={useColorModeValue('white', 'gray.900')}
                 boxShadow={'2xl'}
@@ -51,21 +55,21 @@ const ModalStudentRequest = ({ isOpen, onClose }) => {
                   }}
                 />
                 <Heading fontSize={'2xl'} fontFamily={'body'}>
-                  Jihyo
+                  {hrData.student.name}
                 </Heading>
                 <Text
                   textAlign={'center'}
+                  fontSize="1.3rem"
                   color={useColorModeValue('gray.700', 'gray.400')}
                   px={3}
                 >
-                  Coder, Millwall Fan,
+                  {getStudent.isSuccess && getStudent?.data?.email}
                 </Text>
                 <Heading fontSize={'2xl'} fontFamily={'body'} mt="1rem">
                   Bio
                 </Heading>
-                <Text
-                >
-                  Superpower: speaks Korean, machine learning enthusiast, pro with Git and Speech-to-Text
+                <Text fontSize={'20px'}>
+                  {getStudent.isSuccess && getStudent?.data?.bio}
                 </Text>
 
                 <Stack

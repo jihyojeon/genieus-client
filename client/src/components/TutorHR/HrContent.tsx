@@ -10,16 +10,17 @@ import {
   GridItem,
   Heading,
   Flex,
+  Text,
   // Select,
   HStack,
+  Button,
   useColorModeValue,
   Tag,
   TagLabel,
   Textarea,
 } from '@chakra-ui/react'
 
-const HrContent = ({ setStudentReady }: any) => {
-
+const HrContent = ({ setStudentReady, hrData }: any) => {
   const imageObj = {
     js: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
     python: 'http://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png',
@@ -32,12 +33,11 @@ const HrContent = ({ setStudentReady }: any) => {
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
 
-
   return (
     <Box>
       <Grid p={10} templateColumns="repeat(2, 1fr)" gap={10}>
         {/* Description Box */}
-
+        <Button onClick={() => console.log(hrData)}> </Button>
         <Split
           className="split"
           cursor="col-resize"
@@ -57,17 +57,20 @@ const HrContent = ({ setStudentReady }: any) => {
                 >
                   Description
                 </Heading>
-                <HStack spacing={5}>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>#redux</TagLabel>
-                  </Tag>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>#react</TagLabel>
-                  </Tag>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>#javascript</TagLabel>
-                  </Tag>
-                </HStack>
+
+                {hrData && hrData == null ? (
+                  hrData.tags.map((tag: string[]) => {
+                    return (
+                      <HStack spacing={5}>
+                        <Tag variant="outline" size="lg" colorScheme="indigo">
+                          <TagLabel>{tag}</TagLabel>
+                        </Tag>
+                      </HStack>
+                    )
+                  })
+                ) : (
+                  <Text>Tags Here</Text>
+                )}
               </Flex>
 
               <Box pt={5}>
@@ -75,7 +78,7 @@ const HrContent = ({ setStudentReady }: any) => {
                   border="1px solid"
                   borderColor="indigo.300"
                   isRequired
-                  value={value}
+                  value={hrData.description}
                   height={'50vh'}
                   placeholder="<!-- Please describe you issue in detail....  -->"
                 />
@@ -102,11 +105,9 @@ const HrContent = ({ setStudentReady }: any) => {
 
                 <HStack spacing={5}>
                   <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>Javascript</TagLabel>
+                    <TagLabel>{hrData.language}</TagLabel>
                   </Tag>
                 </HStack>
-
-
               </Flex>
               <Box
                 mt={4}
@@ -120,7 +121,7 @@ const HrContent = ({ setStudentReady }: any) => {
                   height="50vh"
                   defaultLanguage="javascript"
                   defaultValue="// Please describe your problem..."
-                  value={codeValue}
+                  value={hrData.code}
                   theme={useColorModeValue('vs-light', 'vs-dark')}
                 />
               </Box>
@@ -131,6 +132,7 @@ const HrContent = ({ setStudentReady }: any) => {
 
       {/* Bottom Nar */}
       <ButtonBar
+        hrData={hrData}
         setStudentReady={setStudentReady}
         setloadingBtn={setloadingBtn}
       />

@@ -39,12 +39,16 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
-        <ModalContent fontFamily="sans-serif">
-          <ModalHeader m={0} fontWeight="400" align="center" fontSize="30px">
-            <Center py={6}>
+        <ModalContent
+          bg={useColorModeValue('white', 'gray.800')}
+          fontFamily="sans-serif"
+          round="full"
+        >
+          <ModalHeader fontWeight="400" align="center" fontSize="30px">
+            <Center>
               <Box
                 w={'full'}
-                bg={useColorModeValue('white', 'gray.900')}
+                bg={useColorModeValue('white', 'gray.800')}
                 boxShadow={'2xl'}
                 rounded={'lg'}
                 p={6}
@@ -145,7 +149,6 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                       removeTutor({ studentId: userId, tutorId: tutor.id })
                     }
                     fontSize={'sm'}
-                    w={'10vh'}
                     rounded={'full'}
                     variant={'outline'}
                     boxShadow={
@@ -155,7 +158,7 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                       opacity: 0.6,
                     }}
                   >
-                    Remove
+                    Remove from favourites
                   </Button>
                 </Stack>
               </Box>
