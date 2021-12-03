@@ -1,4 +1,4 @@
-import { Box, Flex, List } from '@chakra-ui/react'
+import { Box, Flex, List, Text } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import HRType, {
   useGetPendingHRByIdQuery,
@@ -33,6 +33,8 @@ export const IncomingRequests = () => {
       >
         Open Requests:
       </Box>
+      {/*@ts-ignore*/}
+      {helpRequests.data ? 
       <List
         display="flex"
         overflow="scroll"
@@ -52,6 +54,8 @@ export const IncomingRequests = () => {
             })
           : undefined}
       </List>
+      : <Text>New help requests will appear here</Text>
+    }
     </Flex>
   )
 }

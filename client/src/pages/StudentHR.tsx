@@ -5,11 +5,9 @@ import HrContent from '../components/StudentHR/HrContent'
 
 import TutorFound from '../components/StudentHR/TutorFound'
 
-
-
 const StudentHR = () => {
   const [tutorComplete, settutorComplete] = useState(false)
-
+  // Fixed
   return (
     <Box>
       <TopBar />
