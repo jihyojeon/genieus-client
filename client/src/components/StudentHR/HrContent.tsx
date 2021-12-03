@@ -104,7 +104,7 @@ const HrContent = ({ settutorComplete }: any) => {
                   isRequired
                   value={value}
                   height={'50vh'}
-                  placeholder="<!-- Please describe you issue in detail....  -->"
+                  placeholder="<!-- Please describe you issue in detail, using #tags to populate the hashtag bar....  -->"
                 />
               </Box>
             </GridItem>
