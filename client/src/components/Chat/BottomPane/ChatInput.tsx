@@ -14,8 +14,9 @@ export default function ChatInput() {
     <Box
       zIndex="10"
       minheight="70px"
+      marginTop="2rem"
     >
-      <Flex direction="row" justify="flex-start" align="center" position={"static"}>
+      <Flex direction="row" justify="flex-start" align="center">
         <FormControl>
           <Input
             border="2px"
