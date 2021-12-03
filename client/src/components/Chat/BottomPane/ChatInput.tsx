@@ -1,14 +1,19 @@
-import { ReactNode } from 'react'
-import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, Input } from '@chakra-ui/react'
 
 export default function ChatInput() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  // TODO: MAKE CHAT STICK TO BOTTOM OF SCREEN
+  // TODO: CATCH TEXT INPUT
+
+
+  const sendHandler = () => {
+    console.log('SEND clicked')
+  }
 
   return (
     <Box
       zIndex="10"
-      // height="100%"
-      // minheight="70px"
+      minheight="70px"
     >
       <Flex direction="row" justify="flex-start" align="center" position={"static"}>
         <FormControl>
@@ -29,7 +34,8 @@ export default function ChatInput() {
           borderRadius="1rem"
           colorScheme="indigo"
           letterSpacing={2}
-          ml="2rem"
+          ml="2rem"r
+          onClick={sendHandler}
           padding={8}
           variant="outline"
           width="10rem"

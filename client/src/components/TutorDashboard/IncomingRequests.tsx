@@ -5,14 +5,12 @@ import { RequestCard } from './RequestCard'
 import { auth } from '../../firebase'
 
 export const IncomingRequests = () => {
-  // requestNames is temporary until we get real data
-  // const requestNames = ['David', 'Magi', 'Eugene', 'Alexi', 'Charley']
 
   const [userId, setUserId] = useState()
 
   //@ts-ignore
-  const helpRequests = useGetPendingHRByIdQuery(userId)
-  // [{...}, {...}, {...}]
+  const helpRequests = useGetPendingHRByIdQuery(userId, {pollingInterval: 3000})
+  
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       //@ts-ignore
