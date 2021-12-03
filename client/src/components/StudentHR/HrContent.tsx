@@ -13,6 +13,7 @@ import {
   Heading,
   Flex,
   Select,
+  Text,
   HStack,
   useColorModeValue,
   Tag,
@@ -33,6 +34,8 @@ const HrContent = ({ settutorComplete }: any) => {
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
   const [userId, setUserId] = useState()
+  let tags = value.match(/#[a-z]+/gi)
+  console.log(tags)
 
   let handleInputChange = (e: any): void => {
     let inputValue = e.target.value
@@ -78,17 +81,19 @@ const HrContent = ({ settutorComplete }: any) => {
                 >
                   Description
                 </Heading>
-                <HStack spacing={5}>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>#redux</TagLabel>
-                  </Tag>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>#react</TagLabel>
-                  </Tag>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>#javascript</TagLabel>
-                  </Tag>
-                </HStack>
+                {tags !== null ? (
+                  tags.map((tag) => {
+                    return (
+                      <HStack spacing={2}>
+                        <Tag variant="outline" size="lg" colorScheme="indigo">
+                          <TagLabel>{tag}</TagLabel>
+                        </Tag>
+                      </HStack>
+                    )
+                  })
+                ) : (
+                  <Text> Tags displayed here...</Text>
+                )}
               </Flex>
 
               <Box pt={5}>
@@ -184,6 +189,7 @@ const HrContent = ({ settutorComplete }: any) => {
 
       {/* Bottom Nar */}
       <ButtonBar
+        tags={tags}
         value={value}
         userId={userId}
         selectValue={selectValue}
