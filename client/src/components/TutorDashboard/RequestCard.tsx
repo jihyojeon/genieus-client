@@ -86,7 +86,7 @@ export const RequestCard = ({ hr }: HRType) => {
             {hr.tags?.map((tag) => {
               return (
                 <Badge px={2} py={1} fontWeight={'400'}>
-                  #{tag}
+                  {tag}
                 </Badge>
               )
             })}
