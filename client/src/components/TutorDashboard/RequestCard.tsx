@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import HRType from '../../redux/services/helpRequestService'
 
 const imageObj = {
@@ -23,6 +23,7 @@ const imageObj = {
 
 //@ts-ignore
 export const RequestCard = ({ hr }: HRType) => {
+  const navigate = useNavigate()
   return (
     <Center
       border="1px solid"
@@ -88,21 +89,23 @@ export const RequestCard = ({ hr }: HRType) => {
               )
             })}
           </Stack>
-          <Link to="/tutor-hr">
-            <Button
-              w={'full'}
-              mt={3}
-              bg={useColorModeValue('#151f21', 'gray.900')}
-              color={'white'}
-              rounded={'md'}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-            >
-              Expand
-            </Button>
-          </Link>
+
+          <Button
+            w={'full'}
+            mt={3}
+            onClick={() => {
+              navigate('/tutor-hr', { state: hr })
+            }}
+            bg={useColorModeValue('#151f21', 'gray.900')}
+            color={'white'}
+            rounded={'md'}
+            _hover={{
+              transform: 'translateY(-2px)',
+              boxShadow: 'lg',
+            }}
+          >
+            Expand
+          </Button>
         </Box>
       </Box>
     </Center>

@@ -24,7 +24,6 @@ const ModalStudentRequest = ({ isOpen, onClose, hrData }) => {
         <ModalContent fontFamily="sans-serif">
           <ModalHeader m={0} fontWeight="400" align="center" fontSize="30px">
             <Center py={6}>
-              <Button onClick={() => console.log(getStudent.data)}> </Button>
               <Box
                 bg={useColorModeValue('white', 'gray.900')}
                 boxShadow={'2xl'}

@@ -151,9 +151,6 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                     fontSize={'sm'}
                     rounded={'full'}
                     variant={'outline'}
-                    boxShadow={
-                      '0px 1px 1px 1px rgb(66 153 225 / 48%), 0 1px 1px -5px rgb(66 153 225 / 43%)'
-                    }
                     _hover={{
                       opacity: 0.6,
                     }}

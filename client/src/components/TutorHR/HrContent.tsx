@@ -33,11 +33,13 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
 
+  let tags = value.match(/#[a-z]+/gi)
+
   return (
     <Box>
       <Grid p={10} templateColumns="repeat(2, 1fr)" gap={10}>
         {/* Description Box */}
-        <Button onClick={() => console.log(hrData)}> </Button>
+
         <Split
           className="split"
           cursor="col-resize"
@@ -81,6 +83,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                   value={hrData.description}
                   height={'50vh'}
                   placeholder="<!-- Please describe you issue in detail....  -->"
+                  
                 />
               </Box>
             </GridItem>
