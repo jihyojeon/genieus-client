@@ -5,12 +5,12 @@ import ChatBubbleReceived from './ChatBubbleReceived'
 export default function ChatRightPane(props: any) {
 
   return (
-    <Flex direction="column">
+    <Flex direction="column"
+    // TODO: FIX THIS HEIGHT SO IT HANDLES DYNAMIC RESIZING
+      height={"72%"}
+    >
       <Box
         paddingRight={'0.5rem'}
-        // TODO: ADD SCROLLBAR FOR WHEN SCREEN HEIGHT IS REDUCED
-        height={"70vh"}
-        minHeight="10%"
         pl="1rem"
         overflowY={"scroll" }
         sx={{

@@ -14,6 +14,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 
+// TODO: REBUIILD THIS IN FULL
+
 //@ts-ignore
 const ModalChat = ({ isOpen, onClose }) => {
   return (

@@ -23,7 +23,8 @@ const ChatDuration = (props: any) => {
       return <Text>{MINUTES} minute window expired</Text>
     } else {
       return (
-        <Box>
+        <Box
+        >
           <Text
             color="black"
             fontFamily="montserrat"
@@ -62,13 +63,6 @@ const ChatDuration = (props: any) => {
 
   return (
     <Flex direction="row">
-      <Box
-        bg="grey"
-        borderTopLeftRadius="1rem"
-        borderBottomLeftRadius="1rem"
-        padding="1rem"
-        marginTop={'1rem'}
-      >
         <CountdownCircleTimer
           {...timerProps}
           isPlaying
@@ -82,7 +76,6 @@ const ChatDuration = (props: any) => {
         >
           {renderTime}
         </CountdownCircleTimer>
-      </Box>
     </Flex>
   )
 }

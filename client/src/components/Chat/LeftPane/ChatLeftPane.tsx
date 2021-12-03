@@ -6,13 +6,13 @@ import ChatParticipant from './ChatParticipant'
 const ChatLeftPane = ( props: any  ) => {
 
   // PROPS FOR CHAT
-  const seconds: number = props.seconds
-  const zoomUrl: string = props.zoomUrl
-  const name:string = props.name
-  const imageUrl:string = props.imageUrl
+  const seconds: number = props.seconds // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE
+  const zoomUrl: string = props.zoomUrl // ZOOM URL (COPIED TO CLIPBOARD AND USED IN BUTTON)
+  const name:string = props.name // PROVIDES NAME OF OTHER PARTY 
+  const imageUrl:string = props.imageUrl // PROVIDES MUG SHOT OF OTHER PARTY
 
   return (
-    <Flex direction="column" h="100%" position="relative">
+    <Flex direction="column"  >
       <Box
         align="center"
         bg="lightgrey"
@@ -35,15 +35,26 @@ const ChatLeftPane = ( props: any  ) => {
           },
         }}
       >
-        <Flex direction="row">
-          <ChatDuration 
-            seconds={seconds}
-          />
-          <ChatParticipant
-            name={name}
-            imageUrl={imageUrl}
-          />
-        </Flex>
+        <Box
+          bg="grey"
+          borderRadius="1rem"
+          marginTop={'1rem'}
+          padding="1rem"
+          width="100%"
+        >
+          <Flex
+            direction="row"
+            align="flex-end"
+          >
+            <ChatDuration 
+              seconds={seconds}
+              />
+            <ChatParticipant
+              name={name}
+              imageUrl={imageUrl}
+            />
+          </Flex>
+        </Box>
         <ChatActions
           name={name}
           imageUrl={imageUrl}

@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   Box,
   Button,
@@ -8,26 +9,26 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react'
+import ModalDecline from './ModalDecline'
 
 const ChatActions = (props: any) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const navigate = useNavigate()
 
-  const chatLimit = props.limit
+  const seconds = props.seconds
   const zoomUrl = props.zoomUrl
 
-  console.log('PROPPS', props)
-  console.log('PROPPS', zoomUrl)
+  // TODO: TAKE THIS STATUS FROM SIGN-IN DETAILS
+  const [isTutor, setIsTutor] = useState(true)
 
-  const decline = () => {
-    // TODO: STOP CLOCK FOR BOTH
-    // TODO: DISPLAY 1) CONFIRMATION 2) POPUP
-    // TODO: IF TUTOR -> RETURN TO TUTOR DASHBOARD
-    // TODO: IF STUDENT -> RETURN TO STUDENT HR
+  const decline = (props: any) => {
     console.log('Decline session')
+    // TODO: DISPLAY 1) CONFIRMATION POPUP MODAL
+    // TODO: DISPLAY 2) MODAL FOR BOTH PARTIES SIMULTANEOUSLY
+    isTutor ? navigate('/tutor-dashboard') : navigate('/student-hr')
   }
 
   const zoomButtonHandler = () => {
-    // TODO: REPLACE COUNTDOWN WITH TIMER
+    // TODO: 1) REPLACE COUNTDOWN TIMER WITH CLOCK
     // TODO: DISPLAY WARNING IF ATTEMPT TO CLOSE THIS WINDOW
     // TODO: HANDLE RECORDING OF ELAPSED TIME
     // TODO: DISPLAY PERIODIC WARNINGS
@@ -57,7 +58,7 @@ const ChatActions = (props: any) => {
           Actions
         </Heading>
         <Text>
-          You have {chatLimit / 60} minutes to further discuss your problem and
+          You have {seconds / 60} minutes to further discuss your problem and
           finalise whether to proceed with this help request.
         </Text>
         <Text mt="0.5rem">
@@ -67,6 +68,7 @@ const ChatActions = (props: any) => {
         <Button w="100px" onClick={decline}>
           Decline
         </Button>
+        <Button>Test Button for Decline Modal Popup</Button>
         <Divider mt="0.5rem" />
         <Text>If wishing to proceed, click Open Zoom below.</Text>
         <Button w="100px" onClick={zoomButtonHandler}>
