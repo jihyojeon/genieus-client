@@ -7,7 +7,7 @@ import {
 import Topbar from '../components/TutorDashboard/Topbar'
 import { IncomingRequests } from '../components/TutorDashboard/IncomingRequests'
 import { TutorInformation } from '../components/TutorDashboard/TutorInformation'
-import { TutorDetails } from '../components/TutorDashboard/TutorDetails'
+import { TutorStats } from '../components/TutorDashboard/TutorStats'
 
 const TutorDashboard = () => {
 
@@ -18,20 +18,20 @@ const TutorDashboard = () => {
         h="90vh"
         py={2}
         px={4}
-        templateRows="repeat(5, 1fr)"
+        templateRows="repeat(11, 1fr)"
         templateColumns="repeat(4, 1fr)"
         gap={4}
       >
-        <GridItem rowSpan={3} colSpan={3}>
+        <GridItem rowSpan={8} colSpan={3}>
           <IncomingRequests />
         </GridItem>
 
-        <GridItem rowSpan={5} colSpan={1}>
+        <GridItem rowSpan={9} colSpan={1}>
           <TutorInformation />
         </GridItem>
 
-        <GridItem rowSpan={2} colSpan={3}>
-          {/* <TutorDetails /> */}
+        <GridItem rowSpan={3} colSpan={3}>
+          <TutorStats />
         </GridItem>
       </Grid>
     </Box>
