@@ -18,30 +18,38 @@ export default interface TutorType {
 export const tutorApi = createApi({
   reducerPath: 'tutorApi',
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
+  tagTypes: ['Tutor'],
   endpoints: (builder) => ({
+    
     getTutorById: builder.query<TutorType, string>({
       query: (id) => `tutor/${id}`,
+      providesTags: ['Tutor']
     }),
 
     getAllTutors: builder.query<TutorType[], void>({
       query: () => `/tutor`,
+      providesTags: ['Tutor']
     }),
+
     addTutor: builder.mutation<TutorType, any>({
       query: (user) => ({
         url: '/tutor',
         method: 'POST',
         body: user,
       }),
+      invalidatesTags: ['Tutor']
     }),
+    
     updateTutor: builder.mutation<
       TutorType,
       Partial<TutorType> & Pick<TutorType, 'id'>
     >({
-      query: (id, ...user) => ({
+      query: ({ id, ...user }) => ({
         url: `/tutor/${id}`,
         method: 'PATCH',
         body: user,
       }),
+      invalidatesTags: ['Tutor']
     }),
 
     deleteTutor: builder.mutation<TutorType, any>({
@@ -49,6 +57,7 @@ export const tutorApi = createApi({
         url: `/tutor/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['Tutor']
     }),
   }),
 })
