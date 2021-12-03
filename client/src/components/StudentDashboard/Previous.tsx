@@ -2,49 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Box, Flex, Heading, Text, Button } from '@chakra-ui/react'
 import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
 import { auth } from '../../firebase'
-
-const prevArr: any = [
-  {
-    issue: 'React router',
-    date: '21 May 2021',
-    duration: 21,
-    tutor: 'Vic',
-    rating: 4,
-    key: 0,
-  },
-  {
-    issue: 'Python',
-    date: '22 May 2021',
-    duration: 22,
-    tutor: 'Charlie',
-    rating: 4,
-    key: 1,
-  },
-  {
-    issue: 'Figma',
-    date: '23 May 2021',
-    duration: 23,
-    tutor: 'Tobias',
-    rating: 4,
-    key: 2,
-  },
-  {
-    issue: 'C++',
-    date: '24 May 2021',
-    duration: 24,
-    tutor: 'Vic',
-    rating: 4,
-    key: 3,
-  },
-  {
-    issue: 'Fortran',
-    date: '25 May 2021',
-    duration: 25,
-    tutor: 'Jess',
-    rating: 5,
-    key: 4,
-  },
-]
+import moment from 'moment'
 
 const Previous = () => {
   const [userId, setUserId] = useState()
@@ -56,15 +14,13 @@ const Previous = () => {
     })
   }, [])
   //@ts-ignore
-  const getHrRequests = useGetHrRequestByValueQuery({student_id: userId})
+  const getHrRequests = useGetHrRequestByValueQuery({ student_id: userId })
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
     <Flex py={3} ml={7} color={'white'} flexDirection="column">
       <Heading as="h1" size="lg" fontWeight="300" pb="0.5rem">
         Recent Help Requests
       </Heading>
-      {/* <Button onClick={() => console.log(getHrRequests.data)}> </Button>
-      <Button onClick={() => console.log(userId)}> </Button> */}
 
       <Flex
         flexDirection="row"
@@ -83,13 +39,15 @@ const Previous = () => {
         //   },
         // }}
       >
-        {prevArr.map((el: any) => {
+        {getHrRequests?.data?.map((el: any) => {
           return (
             <Box key={el.key}>
               <Flex
-                bg={'gray.600'}
                 borderRadius={'10px'}
+                border="1px solid"
+                borderColor="indigo.400"
                 flexDirection="column"
+                boxShadow="rgba(72, 113, 247, 0.35) 0px 5px 15px"
                 mb="1rem"
                 mr="1rem"
                 p={'0.5rem'}
@@ -97,9 +55,8 @@ const Previous = () => {
               >
                 <Text>Issue solved - {el.issue}</Text>
                 <Text>Tutor - {el.tutor}</Text>
-                <Text>
-                  {el.date} [{el.duration} minutes]
-                </Text>
+                <Text>Date: {moment(el.createdAt).format('l')}</Text>
+                <Text>Langauge: {el.language}</Text>
                 {/* TODO: CHANGE TO STAR RATING */}
                 <Text>Rating - {el.rating}</Text>
               </Flex>

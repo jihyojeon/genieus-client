@@ -2,9 +2,11 @@ import React from 'react'
 import { Flex, Button, useDisclosure } from '@chakra-ui/react'
 import ModalStudentRequest from './ModalStudentRequest'
 import { useNavigate } from 'react-router-dom'
+import { useDeleteHRRequestMutation } from '../../redux/services/helpRequestService'
 
-const ButtonBar = ({ setloadingBtn, setStudentReady }: any) => {
+const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [deleteHr, deleteHrResult] = useDeleteHRRequestMutation()
 
   const navigate = useNavigate()
 
@@ -49,10 +51,14 @@ const ButtonBar = ({ setloadingBtn, setStudentReady }: any) => {
         ml={105}
         padding={8}
         variant="outline"
+        onClick={() => {
+          deleteHr(hrData.id)
+          navigate('/tutor-dashboard')
+        }}
       >
         Decline
       </Button>
-      <ModalStudentRequest isOpen={isOpen} onClose={onClose} />
+      <ModalStudentRequest hrData={hrData} isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }

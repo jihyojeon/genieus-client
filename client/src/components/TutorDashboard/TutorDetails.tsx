@@ -15,7 +15,6 @@ import {
 import dotenv from 'dotenv'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog } from '@fortawesome/free-solid-svg-icons'
-import EditProfileModal from './EditProfileModal'
 import { auth } from '../../firebase'
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 
@@ -156,7 +155,6 @@ export const TutorDetails = () => {
           </Flex>
         </Flex>
       </Flex>
-      <EditProfileModal isOpen={isOpen} onClose={onClose} />
     </Box>
   )
 }

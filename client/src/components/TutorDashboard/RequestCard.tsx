@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import HRType from '../../redux/services/helpRequestService'
 
 const imageObj = {
@@ -23,6 +23,7 @@ const imageObj = {
 
 //@ts-ignore
 export const RequestCard = ({ hr }: HRType) => {
+  const navigate = useNavigate()
   return (
     <Center
       border="1px solid"
@@ -55,9 +56,11 @@ export const RequestCard = ({ hr }: HRType) => {
         <Flex justify={'center'} mt={-10}>
           <Avatar
             size={'lg'}
-            src={
-              'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-            }
+            src={hr.student.photo_url}
+
+            name={hr.student.name}
+
+
             alt={'Author'}
             css={{
               border: '2px solid white',
@@ -76,16 +79,16 @@ export const RequestCard = ({ hr }: HRType) => {
             alignItems={'flex-start'}
             justifyContent={'flex-start'}
           >
-            {/* <Text mb={3}> Description </Text> */}
+
             <Text fontSize="13">
-              {/* {' '}
-              I have a problem with react router. I need help...{' '} */}
               {hr.description}
             </Text>
+
           </Flex>
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             {/*@ts-ignore*/}
+
             {hr.tags?.map(tag => {
             return (
             <Badge
@@ -96,22 +99,25 @@ export const RequestCard = ({ hr }: HRType) => {
               #{tag}
             </Badge>
             )})}
+
           </Stack>
-          <Link to="/tutor-hr">
-            <Button
-              w={'full'}
-              mt={3}
-              bg={useColorModeValue('#151f21', 'gray.900')}
-              color={'white'}
-              rounded={'md'}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-            >
-              Expand
-            </Button>
-          </Link>
+
+          <Button
+            w={'full'}
+            mt={3}
+            onClick={() => {
+              navigate('/tutor-hr', { state: hr })
+            }}
+            bg={useColorModeValue('#151f21', 'gray.900')}
+            color={'white'}
+            rounded={'md'}
+            _hover={{
+              transform: 'translateY(-2px)',
+              boxShadow: 'lg',
+            }}
+          >
+            Expand
+          </Button>
         </Box>
       </Box>
     </Center>
