@@ -1,4 +1,5 @@
 //@ts-ignore
+import React, { useState } from 'react'
 import {
   Button,
   Modal,
@@ -18,11 +19,24 @@ import {
   Badge,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
-console.log('MODAL OPENED')
 //@ts-ignore
 
-const ModalDecline = ({ isOpen, onClose }) => {
+const ModalDecline = ({ isOpen, onClose, name, imageUrl }) => {
+  const navigate = useNavigate()
+
+  // TODO: DECIDES WHERE TO NAVIGATE ON DECLINE.
+  const [isTutor, setIsTutor] = useState(true)
+
+  const abandonAction = () => {
+    if (isTutor) {
+      return navigate('/tutor-dashboard')
+    } else {
+      return navigate('/student-hr')
+    }
+  }
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
@@ -38,43 +52,23 @@ const ModalDecline = ({ isOpen, onClose }) => {
               textAlign={'center'}
             >
               <ModalHeader>
-                <Heading fontSize={'2xl'} fontFamily={'body'}>
-                  Lindsey James
-                </Heading>
-              </ModalHeader>
-
-              <ModalBody>
-                <Avatar
-                  size={'xl'}
-                  src={
-                    'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-                  }
-                  alt={'Avatar Alt'}
-                  mb={4}
-                  pos={'relative'}
-                  _after={{
-                    content: '""',
-                    w: 4,
-                    h: 4,
-                    bg: 'green.300',
-                    border: '2px solid white',
-                    rounded: 'full',
-                    pos: 'absolute',
-                    bottom: 0,
-                    right: 3,
-                  }}
-                />
-
                 <Text
                   textAlign={'center'}
                   color={useColorModeValue('gray.700', 'gray.400')}
                   px={3}
                 >
-                  Confirm you wish to decline this Help Request
+                  Confirm you wish to decline this Help Request with {name}
+                </Text>
+              </ModalHeader>
+
+              <ModalBody>
+                <Avatar size={'2xl'} src={imageUrl} alt={'Avatar Alt'} />
+                <Text>
+                  You will return to [if tutor] your Dashboard [or if student]
+                  your Help Request
                 </Text>
               </ModalBody>
               <ModalFooter>
-                <ModalCloseButton>CLOSE</ModalCloseButton>
                 <Stack
                   align={'center'}
                   justify={'center'}
@@ -84,19 +78,23 @@ const ModalDecline = ({ isOpen, onClose }) => {
                   <Stack mt={8} direction={'row'} spacing={4}>
                     <Button
                       flex={1}
+                      padding="1rem"
                       fontSize={'sm'}
                       rounded={'full'}
                       _focus={{
                         bg: 'gray.200',
                       }}
-                      // {/* TODO: CLOSE MODAL */}
-                      // onClick={console.log('resume chat CLICKED')}
+                      // TODO: CONDITIONAL: RETURN TO
+                      onClick={abandonAction}
                     >
-                      Resume Chat
-                    
+                      {/* TODO: CONDITIONAL TEXT TUTOR/STUDENT
+                      STUDENT: [YES] RETURN TO HELP REQUEST
+                    TUTOR: [YES] RETURN TO TUTOR DASHBOARD */}
+                      Abandon
                     </Button>
                     <Button
                       flex={1}
+                      padding="1rem"
                       fontSize={'sm'}
                       rounded={'full'}
                       bg={'blue.400'}
@@ -110,13 +108,9 @@ const ModalDecline = ({ isOpen, onClose }) => {
                       _focus={{
                         bg: 'blue.500',
                       }}
+                      onClick={onClose}
                     >
-                      {/* 
-                      TODO: CONDITIONAL TEXT TUTOR/STUDENT
-                      STUDENT: [YES] RETURN TO HELP REQUEST
-                      TUTOR: [YES] RETURN TO TUTOR DASHBOARD
-                      */}
-                      Abandon
+                      Resume Chat
                     </Button>
                   </Stack>
                 </Stack>

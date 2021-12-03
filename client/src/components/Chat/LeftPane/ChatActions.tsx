@@ -16,19 +16,13 @@ const ChatActions = (props: any) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const seconds = props.seconds
+  const name = props.name
+  const imageUrl = props.imageUrl
   const zoomUrl = props.zoomUrl
+  const seconds = props.seconds
 
   // TODO: TAKE THIS STATUS FROM SIGN-IN DETAILS
   const [isTutor, setIsTutor] = useState(true)
-
-  const decline = (props: any) => {
-    console.log('Decline session')
-    // TODO: DISPLAY 1) CONFIRMATION POPUP MODAL
-    // TODO: DISPLAY 2) MODAL FOR BOTH PARTIES SIMULTANEOUSLY
-
-    isTutor ? navigate('/tutor-dashboard') : navigate('/student-hr')
-  }
 
   const zoomButtonHandler = () => {
     // TODO: 1) REPLACE COUNTDOWN TIMER WITH CLOCK
@@ -69,14 +63,11 @@ const ChatActions = (props: any) => {
           not be charged for the elapsed time.
         </Text>
 
-        <Button w="100px" onClick={decline}>
+        {/* TESTING */}
+        <Button w="100px" onClick={onOpen}>
           Decline
         </Button>
-        {/* TESTING */}
-
-        <Button onClick={onOpen}>Test Button for Decline Modal Popup</Button>
-        <ModalDecline isOpen={isOpen} onClose={onClose} />
-
+        <ModalDecline isOpen={isOpen} onClose={onClose} name={name} imageUrl={imageUrl}/>
         {/* TESTING */}
 
         <Divider mt="0.5rem" />
