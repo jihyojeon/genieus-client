@@ -33,9 +33,9 @@ export const RequestCard = ({ hr }: HRType) => {
       mx={6}
       my={2}
       bg={useColorModeValue('white', 'gray.800')}
-      // bg={'red'}
       minW={'26%'}
       maxW={'26%'}
+      minH={'23rem'}
     >
       <Box
         overflow="hidden"
@@ -66,23 +66,16 @@ export const RequestCard = ({ hr }: HRType) => {
           />
         </Flex>
 
-        <Box p={6}>
+        <Box p={6} display={'flex'} flexDirection={'column'} alignItems={'center'}>
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'lg'} fontWeight={500} fontFamily={'body'}>
               {hr.student.name}
             </Heading>
           </Stack>
-          <Flex
-            direction={'column'}
-            alignItems={'flex-start'}
-            justifyContent={'flex-start'}
-          >
-            <Text fontSize="13">{hr.description}</Text>
-          </Flex>
+          <Text fontSize="13">{hr.description.substring(0,150)}</Text>
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             {/*@ts-ignore*/}
-
             {hr.tags?.map((tag) => {
               return (
                 <Badge px={2} py={1} fontWeight={'400'}>
@@ -92,23 +85,26 @@ export const RequestCard = ({ hr }: HRType) => {
             })}
           </Stack>
 
-          <Button
-            w={'full'}
-            mt={3}
-            onClick={() => {
-              navigate('/tutor-hr', { state: hr })
-            }}
-            bg={useColorModeValue('#151f21', 'gray.900')}
-            color={'white'}
-            rounded={'md'}
-            _hover={{
-              transform: 'translateY(-2px)',
-              boxShadow: 'lg',
-            }}
-          >
-            Expand
-          </Button>
         </Box>
+        <Button
+          position={'absolute'}
+          bottom={'10px'}
+          left={'10%'}
+          w={'80%'}
+          mt={3}
+          onClick={() => {
+            navigate('/tutor-hr', { state: hr })
+          }}
+          bg={useColorModeValue('#151f21', 'gray.900')}
+          color={'white'}
+          rounded={'md'}
+          _hover={{
+            transform: 'translateY(-2px)',
+            boxShadow: 'lg',
+          }}
+        >
+          Expand
+        </Button>
       </Box>
     </Center>
   )
