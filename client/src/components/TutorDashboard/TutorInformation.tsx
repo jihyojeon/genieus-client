@@ -129,7 +129,8 @@ export const TutorInformation = () => {
       <Box>
         
       </Box>
-      <ModalEditTutorProfile isOpen={isOpen} onClose={onClose} />
+      {/*@ts-ignore*/}
+      <ModalEditTutorProfile tutor={tutor.data} isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }
