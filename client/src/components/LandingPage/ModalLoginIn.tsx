@@ -37,7 +37,6 @@ const ModalLogIn = ({ isOpen, onClose }) => {
   const [isLoggedIn, setisLoggedIn] = useState(false)
   const [errormsg, seterrormsg] = useState('')
 
-
   // useEffect(() => {
   //   const unsubscribe = auth.onAuthStateChanged((user) => {
   //     if (user) {
@@ -47,35 +46,16 @@ const ModalLogIn = ({ isOpen, onClose }) => {
   //   return unsubscribe
   // }, [])
 
-  // const student = useGetStudentByIdQuery(userId)
-
   const login = async () => {
     try {
       await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
-      
+
       navigate('/student-dashboard')
     } catch (error) {
       console.log(error)
+      seterrormsg('Please enter valid details...')
     }
-
-    await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
-      .then((user) => {
-        navigate('/student-dashboard')
-        console.log(auth.currentUser?.email)
-      })
-      .catch((err) => {
-        console.log(err)
-        seterrormsg('Please enter valid details...')
-      })
   }
-
-  // const handleAccountStatus = () => {
-  //   auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       ;<Redirect to="/student-dashboard" />
-  //     }
-  //   })
-  // }
 
   const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)

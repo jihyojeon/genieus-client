@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import {
   Button,
@@ -27,6 +27,11 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
   const [updateBio, setupdateBio] = useState('')
   const [updateStudent, updateStudentResult] = useUpdateStudentByIdMutation()
   const [photoFile, setphotoFile] = useState(null)
+
+  useEffect(() => {
+    setupdateName(student?.name)
+    setupdateBio(student?.bio)
+  }, [student?.name, student?.bio])
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -102,7 +107,7 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                 <FormControl id="userName">
                   <FormLabel>Name</FormLabel>
                   <Input
-                    placeholder={student?.name}
+                    // placeholder={student?.name}
                     _placeholder={{ color: 'gray.500' }}
                     onChange={(e) => setupdateName(e.target.value)}
                     value={updateName}
@@ -113,7 +118,7 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                 <FormControl id="bio">
                   <FormLabel>Bio</FormLabel>
                   <Input
-                    placeholder={student?.bio}
+                    // placeholder={student?.bio}
                     _placeholder={{ color: 'gray.500' }}
                     onChange={(e) => setupdateBio(e.target.value)}
                     value={updateBio}

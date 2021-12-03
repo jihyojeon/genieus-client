@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import HRType from '../../redux/services/helpRequestService'
 
 const imageObj = {
@@ -23,6 +23,7 @@ const imageObj = {
 
 //@ts-ignore
 export const RequestCard = ({ hr }: HRType) => {
+  const navigate = useNavigate()
   return (
     <Center
       border="1px solid"
@@ -56,6 +57,10 @@ export const RequestCard = ({ hr }: HRType) => {
           <Avatar
             size={'lg'}
             src={hr.student.photo_url}
+
+            name={hr.student.name}
+
+
             alt={'Author'}
             css={{
               border: '2px solid white',
@@ -74,13 +79,16 @@ export const RequestCard = ({ hr }: HRType) => {
             alignItems={'flex-start'}
             justifyContent={'flex-start'}
           >
+
             <Text fontSize="13">
               {hr.description}
             </Text>
+
           </Flex>
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             {/*@ts-ignore*/}
+
             {hr.tags?.map(tag => {
             return (
             <Badge
@@ -91,22 +99,25 @@ export const RequestCard = ({ hr }: HRType) => {
               #{tag}
             </Badge>
             )})}
+
           </Stack>
-          <Link to="/tutor-hr">
-            <Button
-              w={'full'}
-              mt={3}
-              bg={useColorModeValue('#151f21', 'gray.900')}
-              color={'white'}
-              rounded={'md'}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-            >
-              Expand
-            </Button>
-          </Link>
+
+          <Button
+            w={'full'}
+            mt={3}
+            onClick={() => {
+              navigate('/tutor-hr', { state: hr })
+            }}
+            bg={useColorModeValue('#151f21', 'gray.900')}
+            color={'white'}
+            rounded={'md'}
+            _hover={{
+              transform: 'translateY(-2px)',
+              boxShadow: 'lg',
+            }}
+          >
+            Expand
+          </Button>
         </Box>
       </Box>
     </Center>

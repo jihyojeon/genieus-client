@@ -19,7 +19,7 @@ import { auth } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
 
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
-
+//@ts-ignore
 export default function Topbar() {
   const navigate = useNavigate()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -80,7 +80,11 @@ export default function Topbar() {
                           : undefined}
                       </Text>
                       {/* @ts-ignore */}
-                      {tutor.data ? tutor.data.avg_rating && (<FontAwesomeIcon icon={faStar} />) : null}
+                      {tutor.data
+                        ? tutor.data.avg_rating && (
+                            <FontAwesomeIcon icon={faStar} />
+                          )
+                        : null}
                     </Flex>
                     <Button
                       opacity="0.6"
