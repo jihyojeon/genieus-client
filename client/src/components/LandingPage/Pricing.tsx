@@ -59,7 +59,8 @@ export default function Pricing() {
 
           <Box color={useColorModeValue('gray.500', 'gray.100')} py={4} px={12} >
             <Text fontWeight="500" fontSize="2xl">
-              {/* TODO: INSERT NAME OF PACKAGE HERE */}
+                {/* TODO: INSERT NAME OF PACKAGE HERE */}
+                Basic
               {getSubscriptions.data &&
                 getSubscriptions.data.Basic.subscription_name}
             </Text>
