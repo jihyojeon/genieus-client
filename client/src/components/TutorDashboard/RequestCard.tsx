@@ -34,7 +34,8 @@ export const RequestCard = ({ hr }: HRType) => {
       my={2}
       bg={useColorModeValue('white', 'gray.800')}
       // bg={'red'}
-      minW={'25%'}
+      minW={'26%'}
+      maxW={'26%'}
     >
       <Box
         overflow="hidden"
@@ -57,10 +58,7 @@ export const RequestCard = ({ hr }: HRType) => {
           <Avatar
             size={'lg'}
             src={hr.student.photo_url}
-
             name={hr.student.name}
-
-
             alt={'Author'}
             css={{
               border: '2px solid white',
@@ -79,27 +77,19 @@ export const RequestCard = ({ hr }: HRType) => {
             alignItems={'flex-start'}
             justifyContent={'flex-start'}
           >
-
-            <Text fontSize="13">
-              {hr.description}
-            </Text>
-
+            <Text fontSize="13">{hr.description}</Text>
           </Flex>
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             {/*@ts-ignore*/}
 
-            {hr.tags?.map(tag => {
-            return (
-            <Badge
-              px={2}
-              py={1}
-              fontWeight={'400'}
-            >
-              #{tag}
-            </Badge>
-            )})}
-
+            {hr.tags?.map((tag) => {
+              return (
+                <Badge px={2} py={1} fontWeight={'400'}>
+                  #{tag}
+                </Badge>
+              )
+            })}
           </Stack>
 
           <Button

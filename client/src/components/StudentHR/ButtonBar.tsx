@@ -11,6 +11,7 @@ const ButtonBar = ({
   value,
   selectValue,
   codeValue,
+  tags,
 }: any) => {
   const [addHRRequest, addHRRequestResult] = useAddHRRequestMutation()
   const [SelectFav, setSelectFav] = useState(false)
@@ -51,6 +52,7 @@ const ButtonBar = ({
               language: selectValue,
               code: codeValue,
               favourites_only: SelectFav,
+              tags: tags,
             })
             console.log(addHRRequestResult)
 

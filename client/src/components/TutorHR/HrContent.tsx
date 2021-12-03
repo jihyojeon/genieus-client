@@ -33,7 +33,6 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
 
-  let tags = value.match(/#[a-z]+/gi)
 
   return (
     <Box>
