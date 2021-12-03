@@ -34,7 +34,7 @@ export const IncomingRequests = () => {
         Open Requests:
       </Box>
       {/*@ts-ignore*/}
-      {helpRequests.data.length ? 
+      {helpRequests.data ? 
       <List
         display="flex"
         overflow="scroll"
