@@ -55,9 +55,7 @@ export const RequestCard = ({ hr }: HRType) => {
         <Flex justify={'center'} mt={-10}>
           <Avatar
             size={'lg'}
-            src={
-              'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-            }
+            src={hr.student.photo_url}
             alt={'Author'}
             css={{
               border: '2px solid white',
@@ -76,10 +74,7 @@ export const RequestCard = ({ hr }: HRType) => {
             alignItems={'flex-start'}
             justifyContent={'flex-start'}
           >
-            {/* <Text mb={3}> Description </Text> */}
             <Text fontSize="13">
-              {/* {' '}
-              I have a problem with react router. I need help...{' '} */}
               {hr.description}
             </Text>
           </Flex>
