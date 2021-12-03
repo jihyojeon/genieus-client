@@ -9,7 +9,7 @@ export const IncomingRequests = () => {
   const [userId, setUserId] = useState()
 
   //@ts-ignore
-  const helpRequests = useGetPendingHRByIdQuery(userId)
+  const helpRequests = useGetPendingHRByIdQuery(userId, {pollingInterval: 3000})
   
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
