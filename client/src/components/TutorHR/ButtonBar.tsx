@@ -1,18 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { auth } from '../../firebase'
 import { Flex, Button, useDisclosure } from '@chakra-ui/react'
 import ModalStudentRequest from './ModalStudentRequest'
 import { useNavigate } from 'react-router-dom'
 import { useDeleteHRRequestMutation } from '../../redux/services/helpRequestService'
+import { useUpdateHRRequestMutation } from '../../redux/services/helpRequestService'
 
 const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [deleteHr, deleteHrResult] = useDeleteHRRequestMutation()
+  const [updateHr, updateHrResult] = useUpdateHRRequestMutation()
+  const [userId, setUserId] = useState()
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+  }, [])
+
   const handleClick = () => {
-    console.log('Create request clicked - not yet implemented')
-    navigate('/chat')
+    console.log(hrData)
+    updateHr({ id: hrData.id, status: 'assigned', tutor_id: userId })
+
+    // navigate('/chat')
   }
 
   return (

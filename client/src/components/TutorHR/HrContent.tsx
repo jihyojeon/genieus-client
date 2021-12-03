@@ -33,7 +33,6 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
 
-
   return (
     <Box>
       <Grid p={10} templateColumns="repeat(2, 1fr)" gap={10}>
@@ -82,7 +81,6 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                   value={hrData.description}
                   height={'50vh'}
                   placeholder="<!-- Please describe you issue in detail....  -->"
-                  
                 />
               </Box>
             </GridItem>
@@ -121,7 +119,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
               >
                 <Editor
                   height="50vh"
-                  defaultLanguage="javascript"
+                  language="javascript"
                   defaultValue="// Please describe your problem..."
                   value={hrData.code}
                   theme={useColorModeValue('vs-light', 'vs-dark')}
