@@ -39,6 +39,7 @@ const Previous = () => {
         //   },
         // }}
       >
+        <Button onClick={() => console.log(getHrRequests.data)}> </Button>
         {getHrRequests?.data?.map((el: any) => {
           return (
             <Box key={el.key}>
@@ -53,16 +54,16 @@ const Previous = () => {
                 p={'0.5rem'}
                 width="300px"
               >
-                <Text>Issue solved - {el.issue}</Text>
-                <Text>Tutor - {el.tutor}</Text>
-                <Text>Date: {moment(el.createdAt).format('l')}</Text>
-                <Text>Langauge: {el.language}</Text>
-                {/* TODO: CHANGE TO STAR RATING */}
-                <Text>Rating - {el.rating}</Text>
-              </Flex>
+        <Text>Issue solved - {el.issue}</Text>
+        {/* <Text>Tutor - {el.tutor}</Text> */}
+        <Text>Date: {moment(el.createdAt).format('l')}</Text>
+        <Text>Langauge: {el.language}</Text>
+
+        <Text>Rating - {el.rating}</Text>
+         </Flex>
             </Box>
           )
-        })}
+        })} 
       </Flex>
     </Flex>
   )
