@@ -10,13 +10,13 @@ const StudentHR = () => {
 
   return (
     <Box>
-      {/* <TopBar /> */}
-      {/* <HrContent settutorComplete={settutorComplete} /> */}
-      {/* {tutorComplete && (
+      <TopBar />
+      <HrContent settutorComplete={settutorComplete} />
+      {tutorComplete && (
         <Box mt={10} p={0}>
           <TutorFound />
         </Box>
-      )} */}
+      )}
     </Box>
   )
 }
