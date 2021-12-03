@@ -13,9 +13,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import HRType from '../../redux/services/helpRequestService'
-import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
 
 const imageObj = {
   python:
@@ -24,9 +23,6 @@ const imageObj = {
 
 //@ts-ignore
 export const RequestCard = ({ hr }: HRType) => {
-  const getHrRequest = useGetHrRequestByValueQuery(hr.student_id)
-
-  const navigate = useNavigate()
   return (
     <Center
       border="1px solid"
@@ -36,13 +32,14 @@ export const RequestCard = ({ hr }: HRType) => {
       mx={6}
       my={2}
       bg={useColorModeValue('white', 'gray.800')}
+      // bg={'red'}
+      minW={'25%'}
     >
-      <Button onClick={() => console.log(hr)}> </Button>
       <Box
         overflow="hidden"
         position="relative"
-        maxH={'350px'}
-        minW={'200px'}
+        minH={'100%'}
+        minW={'100%'}
         boxShadow={'2xl'}
         rounded={'md'}
       >
@@ -58,9 +55,8 @@ export const RequestCard = ({ hr }: HRType) => {
         <Flex justify={'center'} mt={-10}>
           <Avatar
             size={'lg'}
-            src={
-              'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-            }
+            src={hr.student.photo_url}
+            name={hr.student.name}
             alt={'Author'}
             css={{
               border: '2px solid white',
@@ -79,58 +75,22 @@ export const RequestCard = ({ hr }: HRType) => {
             alignItems={'flex-start'}
             justifyContent={'flex-start'}
           >
-            {/* <Text mb={3}> Description </Text> */}
-            <Text fontSize="13">{hr.language}</Text>
-
             <Text fontSize="13">{hr.description}</Text>
           </Flex>
           <Divider mt={3} />
-
-          {hr.tags && hr.tags == null ? (
-            hr.tags.map((tag: string[]) => {
+          <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+            {/*@ts-ignore*/}
+            {hr.tags?.map((tag) => {
               return (
-                <Stack spacing={5}>
-                  <Badge variant="outline" size="lg" colorScheme="indigo">
-                    {tag}
-                  </Badge>
-                </Stack>
+                <Badge px={2} py={1} fontWeight={'400'}>
+                  #{tag}
+                </Badge>
               )
-            })
-          ) : (
-            <Text>Tags Here</Text>
-          )}
-
-          {/* <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
-            <Badge
-              px={2}
-              py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
-              fontWeight={'400'}
-            >
-              #redux
-            </Badge>
-            <Badge
-              px={2}
-              py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
-              fontWeight={'400'}
-            >
-              #react
-            </Badge>
-            <Badge
-              px={2}
-              py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
-              fontWeight={'400'}
-            >
-              #vue
-            </Badge>
-          </Stack> */}
-          {/* @ts-ignore */}
-          <Link to="/tutor-hr" state={hr}>
+            })}
+          </Stack>
+          <Link to="/tutor-hr">
             <Button
               w={'full'}
-              onClick={() => navigate('/tutor-hr', { state: hr })}
               mt={3}
               bg={useColorModeValue('#151f21', 'gray.900')}
               color={'white'}
