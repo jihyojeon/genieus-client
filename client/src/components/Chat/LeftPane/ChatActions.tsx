@@ -14,18 +14,15 @@ import ModalDecline from './ModalDecline'
 const ChatActions = (props: any) => {
   const navigate = useNavigate()
 
-  const seconds = props.seconds
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const name = props.name
+  const imageUrl = props.imageUrl
   const zoomUrl = props.zoomUrl
+  const seconds = props.seconds
 
   // TODO: TAKE THIS STATUS FROM SIGN-IN DETAILS
   const [isTutor, setIsTutor] = useState(true)
-
-  const decline = (props: any) => {
-    console.log('Decline session')
-    // TODO: DISPLAY 1) CONFIRMATION POPUP MODAL
-    // TODO: DISPLAY 2) MODAL FOR BOTH PARTIES SIMULTANEOUSLY
-    isTutor ? navigate('/tutor-dashboard') : navigate('/student-hr')
-  }
 
   const zoomButtonHandler = () => {
     // TODO: 1) REPLACE COUNTDOWN TIMER WITH CLOCK
@@ -65,10 +62,14 @@ const ChatActions = (props: any) => {
           If either of you decline to proceed, or the timer finishes, you will
           not be charged for the elapsed time.
         </Text>
-        <Button w="100px" onClick={decline}>
+
+        {/* TESTING */}
+        <Button w="100px" onClick={onOpen}>
           Decline
         </Button>
-        <Button>Test Button for Decline Modal Popup</Button>
+        <ModalDecline isOpen={isOpen} onClose={onClose} name={name} imageUrl={imageUrl}/>
+        {/* TESTING */}
+
         <Divider mt="0.5rem" />
         <Text>If wishing to proceed, click Open Zoom below.</Text>
         <Button w="100px" onClick={zoomButtonHandler}>
@@ -76,7 +77,7 @@ const ChatActions = (props: any) => {
         </Button>
         <Divider mt="0.5rem" />
         <Text>
-          Once your help request is complete, clikc the button below to mark
+          Once your help request is complete, click the button below to mark
           your call as complete.
         </Text>
         <Button w="100px" onClick={complete}>

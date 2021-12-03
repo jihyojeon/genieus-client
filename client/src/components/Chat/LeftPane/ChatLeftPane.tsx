@@ -3,16 +3,15 @@ import ChatDuration from './ChatDuration'
 import ChatActions from './ChatActions'
 import ChatParticipant from './ChatParticipant'
 
-const ChatLeftPane = ( props: any  ) => {
-
+const ChatLeftPane = (props: any) => {
   // PROPS FOR CHAT
   const seconds: number = props.seconds // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE
   const zoomUrl: string = props.zoomUrl // ZOOM URL (COPIED TO CLIPBOARD AND USED IN BUTTON)
-  const name:string = props.name // PROVIDES NAME OF OTHER PARTY 
-  const imageUrl:string = props.imageUrl // PROVIDES MUG SHOT OF OTHER PARTY
+  const name: string = props.name // PROVIDES NAME OF OTHER PARTY
+  const imageUrl: string = props.imageUrl // PROVIDES MUG SHOT OF OTHER PARTY
 
   return (
-    <Flex direction="column"  >
+    <Flex direction="column">
       <Box
         align="center"
         bg="lightgrey"
@@ -26,6 +25,7 @@ const ChatLeftPane = ( props: any  ) => {
           '&::-webkit-scrollbar': {
             backgroundColor: `rgba(150, 150, 190, 0.00)`,
             borderRadius: '8px',
+            backgroundClip: 'padding-box',
             width: '16px',
           },
           '&::-webkit-scrollbar-thumb': {
@@ -42,17 +42,9 @@ const ChatLeftPane = ( props: any  ) => {
           padding="1rem"
           width="100%"
         >
-          <Flex
-            direction="row"
-            align="flex-end"
-          >
-            <ChatDuration 
-              seconds={seconds}
-              />
-            <ChatParticipant
-              name={name}
-              imageUrl={imageUrl}
-            />
+          <Flex direction="row" align="flex-end">
+            <ChatDuration seconds={seconds} />
+            <ChatParticipant name={name} imageUrl={imageUrl} />
           </Flex>
         </Box>
         <ChatActions
@@ -61,7 +53,6 @@ const ChatLeftPane = ( props: any  ) => {
           seconds={seconds}
           zoomUrl={zoomUrl}
         />
-
       </Box>
     </Flex>
   )
