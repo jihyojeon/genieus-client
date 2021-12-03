@@ -150,7 +150,7 @@ const ModalEditTutorProfile = ({ isOpen, onClose, tutor}) => {
           </FormControl>
           <Stack spacing={6} direction={['column', 'row']}>
             <Button
-            onClick={() => console.log(tutor)}
+            onClick={() => onClose()}
               bg={'red.400'}
               color={'white'}
               w="full"
