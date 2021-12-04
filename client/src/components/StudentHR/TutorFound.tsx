@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { useUpdateHRRequestMutation } from '../../redux/services/helpRequestService'
+import { useNavigate } from 'react-router-dom'
 
 import {
   Box,
@@ -7,6 +9,7 @@ import {
   GridItem,
   Heading,
   Text,
+  HStack,
   Button,
   Avatar,
   Center,
@@ -14,25 +17,43 @@ import {
   Badge,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 
-const TutorFound = () => {
-  const [tutorName, setTutorName] = useState('')
+const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
+  const navigate = useNavigate()
+  const [tutorId, setTutorId] = useState('')
+  const tutorValue = useGetTutorByIdQuery(tutorId)
+  const [updateHr, updateHrResult] = useUpdateHRRequestMutation()
+  const declinedTutors: [] = []
+  const tutor = tutorValue.data?.id
+
+  useEffect(() => {
+    console.log(hrById)
+    // @ts-ignore
+    tutors.map((tutor) => {
+      setTutorId(tutor)
+    })
+  }, [])
 
   return (
-    <Grid position="relative" id="tutor" templateColumns={'1fr, 2fr'}>
+    <Grid
+      mt={50}
+      templateRows={'0.3fr, 2fr'}
+      justifyContent="center"
+      alignItems="center"
+      h="50vh"
+    >
       <GridItem>
-        <Flex direction="column" align="center" justifyContent="space-evenly">
-          <Heading fontFamily="sans-serif" as="h3" fontWeight="200">
-            Tutor is ready to help!
-          </Heading>
-        </Flex>
+        <Heading fontSize={'20px'} fontFamily="montserrat">
+          Tutor is available to help!
+        </Heading>
       </GridItem>
-
-      <GridItem>
+      <GridItem mb={30}>
         <Center py={6}>
           <Box
-            maxW={'320px'}
-            w={'full'}
+            w={'22rem'}
             bg={useColorModeValue('white', 'gray.900')}
             boxShadow={'2xl'}
             rounded={'lg'}
@@ -41,11 +62,11 @@ const TutorFound = () => {
           >
             <Avatar
               size={'xl'}
-              src={
-                'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-              }
+              src={'...'}
               alt={'Avatar Alt'}
               mb={4}
+              // @ts-ignore
+              name={tutorValue !== undefined && tutorValue?.data?.name}
               pos={'relative'}
               _after={{
                 content: '""',
@@ -60,45 +81,48 @@ const TutorFound = () => {
               }}
             />
             <Heading fontSize={'2xl'} fontFamily={'body'}>
-              Tutor
+              {tutorValue !== undefined && tutorValue?.data?.name}
             </Heading>
 
             <Text
               textAlign={'center'}
               color={useColorModeValue('gray.700', 'gray.400')}
-              py={8}
+              py={2}
             >
-              Front End Developer
-              <br />
-              10 years experience with JavaScript
+              <Text>
+                <FontAwesomeIcon icon={faStar} />{' '}
+                {tutorValue.data?.avg_rating ? tutorValue.data?.avg_rating : 0}
+              </Text>
+              <Text>
+                {' '}
+                Completed help requests:{' '}
+                {tutorValue.data?.completed_help_requests
+                  ? tutorValue.data?.completed_help_requests
+                  : 0}
+              </Text>
             </Text>
-
-            <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
-              <Badge
-                px={2}
-                py={1}
-                bg={useColorModeValue('gray.50', 'gray.800')}
-                fontWeight={'400'}
-              >
-                #redux
-              </Badge>
-              <Badge
-                px={2}
-                py={1}
-                bg={useColorModeValue('gray.50', 'gray.800')}
-                fontWeight={'400'}
-              >
-                #react
-              </Badge>
-              <Badge
-                px={2}
-                py={1}
-                bg={useColorModeValue('gray.50', 'gray.800')}
-                fontWeight={'400'}
-              >
-                #vue
-              </Badge>
-            </Stack>
+            <Grid templateColumns="1fr, 1fr">
+              <GridItem>
+                <Text> Tech languages: </Text>
+                {tutorValue !== undefined &&
+                  // @ts-ignore
+                  tutorValue.data?.programming_languages.map((lang) => {
+                    return (
+                      <Flex justifyContent="center" direction="row">
+                        <Badge
+                          borderRadius="10px"
+                          px={2}
+                          py={1}
+                          my={2}
+                          fontWeight={'400'}
+                        >
+                          {lang} - years of experience
+                        </Badge>
+                      </Flex>
+                    )
+                  })}
+              </GridItem>
+            </Grid>
 
             <Stack mt={8} direction={'row'} spacing={4}>
               <Button
@@ -115,11 +139,19 @@ const TutorFound = () => {
                 Accept
               </Button>
               <Button
+                onClick={() => {
+                  //@ts-ignore
+                  declinedTutors.push(tutor)
+                  updateHr({
+                    id: hrById.data.id,
+                    declined_tutors: declinedTutors,
+                  })
+                  navigate('/student-dashboard')
+                }}
                 opacity="0.5"
                 flex={1}
                 fontSize={'sm'}
                 variant="outline"
-                color={'white'}
                 _hover={{
                   bg: 'blue.500',
                 }}

@@ -13,6 +13,8 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
   const [deleteHr, deleteHrResult] = useDeleteHRRequestMutation()
   const [updateHr, updateHrResult] = useUpdateHRRequestMutation()
 
+  const interestedTutors: [] = []
+
   const [userId, setUserId] = useState()
 
   const navigate = useNavigate()
@@ -25,12 +27,12 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
   }, [])
 
   const handleClick = () => {
-    hrData.interested_tutors.push(hrData.id)
-    // updateHr({ id: hrData.id, tutor_id: userId })
-    console.log(hrData.interested_tutors)
-    console.log(hrData.id)
-    console.log(hrData)
-    // navigate('/chat')
+    //@ts-ignore
+    interestedTutors.push(userId)
+    updateHr({
+      id: hrData.id,
+      interested_tutors: interestedTutors,
+    })
   }
 
   return (
@@ -40,7 +42,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
       justifyContent="center"
       px="10"
     >
-      <Button onClick={() => console.log(hrData)}></Button>
+
       <Button
         colorScheme="indigo"
         fontFamily="montserrat"
