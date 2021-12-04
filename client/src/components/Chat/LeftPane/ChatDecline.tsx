@@ -74,9 +74,10 @@ const ChatActions = (props: any) => {
       padding="1rem"
       marginTop={'1rem'}
       height="100%"
+      width="100%"
       justifyContent="space-between"
     >
-      <Heading fontFamily="montserrat" letterSpacing={1} size="mg">
+      {/* <Heading fontFamily="montserrat" letterSpacing={1} size="mg">
         Actions
       </Heading>
       <Text>
@@ -86,7 +87,7 @@ const ChatActions = (props: any) => {
       <Text mt="0.5rem">
         If either of you decline to proceed, or the timer finishes, you will not
         be charged for the elapsed time.
-      </Text>
+      </Text> */}
 
       {/* TESTING */}
       <Button w="100px" onClick={onOpen}>
