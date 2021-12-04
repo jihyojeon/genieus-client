@@ -30,4 +30,11 @@ export function disconnectFromSocket() {
   console.log('disconencted from socket', socket)
 }
 
+export function checkAndReconnectToSocket(userID: string) {
+  if (!socket.connected) {
+    socket.auth = { userID }
+    socket.connect()
+  }
+}
+
 export default socket

@@ -6,11 +6,16 @@ import {
   Heading,
   Text,
   useDisclosure,
-  Button,
 } from '@chakra-ui/react'
 import ModalFavourites from './ModalFavourites'
 
-const FavouriteTutor = ({ tutor }: { tutor: any }) => {
+const FavouriteTutor = ({
+  tutor,
+  connected,
+}: {
+  tutor: any
+  connected: boolean
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
@@ -38,7 +43,7 @@ const FavouriteTutor = ({ tutor }: { tutor: any }) => {
               content: '""',
               w: 4,
               h: 4,
-              bg: 'green.300',
+              bg: connected ? 'green.300' : 'gray.300',
               border: '2px solid white',
               rounded: 'full',
               pos: 'absolute',
