@@ -4,7 +4,6 @@ import { Box, Flex, Text, Checkbox, Button } from '@chakra-ui/react'
 import TutorFound from '../StudentHR/TutorFound'
 import {
   useAddHRRequestMutation,
-  useGetHrRequestByValueQuery,
   useGetHRRequestByIdQuery,
 } from '../../redux/services/helpRequestService'
 
@@ -24,34 +23,21 @@ const ButtonBar = ({
   const [buttonClicked, setbuttonClicked] = useState(false)
   const [addHRRequest, addHRRequestResult] = useAddHRRequestMutation()
   //@ts-ignore
-  // const getHrById = useGetHRRequestByIdQuery(hrId)
+  const hrById = useGetHRRequestByIdQuery(addHRRequestResult?.data?.id, {
+    pollingInterval: 3000,
+  })
+  console.log(hrById.data)
 
   const [SelectFav, setSelectFav] = useState(false)
-
-  const getHrByValue = useGetHrRequestByValueQuery(
-    //@ts-ignore
-    {
-      student_id: userId,
-
-      // tutor_id: getHrById.data?.tutor.id,
-      status: 'assigned',
-    }
-    // { pollingInterval: 3000 }
-  )
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       //@ts-ignore
       setUserId(item.uid)
     })
-
-    //@ts-ignore
-    // getHrByValue.data.map((item) => {
-    //   //@ts-ignore
-    //   sethrId(item.id)
-    // })
   }, [])
-  console.log(getHrByValue.data)
+  //@ts-ignore
+  console.log('RESULT OUT OF FUNC', addHRRequestResult?.data?.id)
 
   return (
     <Flex
@@ -93,8 +79,7 @@ const ButtonBar = ({
               favourites_only: SelectFav,
               tags: tags,
             })
-            console.log(addHRRequestResult)
-            console.log(getHrByValue.data)
+            console.log('RESULT:', addHRRequestResult)
           }}
           ml={105}
           letterSpacing={2}
@@ -138,9 +123,8 @@ const ButtonBar = ({
           You can continue to update your request after submitting
         </Text>
       </Box>
-      {getHrByValue?.data?.length && buttonClicked == true ? (
-        <TutorFound data={getHrByValue.data} />
-      ) : null}
+
+      <TutorFound />
     </Flex>
   )
 }
