@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { Box, Icon, Image, VStack } from '@chakra-ui/react'
+import { Box, Icon, Heading, Image, VStack } from '@chakra-ui/react'
 import { SunIcon } from '@chakra-ui/icons'
 import StarIcon from '../../assets/icons/star.svg'
 
 const StarRating = ({ size, icon, scale, fillColor, strokeColor }: any) => {
   const [rating, setRating] = useState(0)
+  // TODO: 1) RETURN "rating" TO PARENT COMPONENT FOR SUBMISSION ON SUBMIT CLICK 
   const buttons = []
 
   const onClick = (idx: any) => {
@@ -15,32 +16,28 @@ const StarRating = ({ size, icon, scale, fillColor, strokeColor }: any) => {
         setRating(idx)
       }
     }
-    console.log('Click')
-    console.log(rating)
   }
 
-  // TODO: NEEDS FIXING
   const RatingIcon = ({ fill }: any) => {
     return (
+      
+      // TODO: 2) REPLACE SUN ICONS WITH STAR ICONS BELOW
+          <SunIcon
+            size={`${size}px`}
+            color={fill ? "red" : "blue" }
+            stroke={strokeColor}
+            onClick={onClick}
+            fillOpacity={fill ? '100%' : '0'}
+          />
 
-          // <SunIcon
-          //   // name={SunIcon}
-          //   size={`${size}px`}
-          //   color={fill ? "red" : "blue" }
-          //   stroke={strokeColor}
-          //   onClick={onClick}
-          //   fillOpacity={fill ? '100%' : '0'}
-          // />
-
-
-      <Image
-        src={StarIcon}
-        size={`${size}px`}
-        color={fill ? 'red' : 'blue'}
-        stroke={strokeColor}
-        onClick={onClick}
-        fillOpacity={fill ? '100%' : '0'}
-      />
+        // <Image
+        //   src={StarIcon}
+        //   size={`${size}px`}
+        //   color={fill ? 'red' : 'blue'}
+        //   stroke={strokeColor}
+        //   onClick={onClick}
+        //   fillOpacity={fill ? '100%' : '0'}
+        // />
     )
   }
 
@@ -66,9 +63,18 @@ const StarRating = ({ size, icon, scale, fillColor, strokeColor }: any) => {
   }
 
   return (
-    <VStack isInline mt={8} justify="center">
+    <Box>
+
+    <VStack justify="center" mt={4}>
+      <Heading size="sm">
+      2. Please rate your tutor
+    </Heading>
+      </VStack>
+    <VStack isInline mt={2} justify="center">
+      {/* TODO: ADD LINE SPACING */}
       {buttons}
     </VStack>
+    </Box>
   )
 }
 

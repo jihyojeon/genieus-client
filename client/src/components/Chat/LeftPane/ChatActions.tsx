@@ -10,6 +10,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import ModalDecline from './ModalDecline'
+import ModalComplete from './ModalComplete'
 // import { useBeforeunload } from 'react-beforeunload'
 
 const ChatActions = (props: any) => {
@@ -22,37 +23,35 @@ const ChatActions = (props: any) => {
   const zoomUrl = props.zoomUrl
   const seconds = props.seconds
 
-  
-  // TODO: TAKE THIS STATUS FROM SIGN-IN DETAILS
+  // TODO: 1) TAKE THIS STATUS FROM SIGN-IN DETAILS
   const [isTutor, setIsTutor] = useState(true)
 
+  const decline = () => {
+    console.log('Decline session')
+  }
+
   const zoomButtonHandler = () => {
-    // TODO: 1) REPLACE COUNTDOWN TIMER WITH CREDIT REMAINING
     // TODO: 2) HANDLE RECORDING OF ELAPSED TIME
-    
-    console.log(zoomUrl)
     navigator.clipboard.writeText(zoomUrl)
     window.open(zoomUrl)
   }
-  
+
   const complete = () => {
-    // TODO: ALLOW EITHER STUDENT OR TUTOR TO CLICK COMPLETE
-    // TODO: STOP TIMER AND RECORD VALUE
-    // TODO: DISPLAY MODAL POPUP FOR BOTH
-    // TODO: IF TUTOR -> RETURN TO TUTOR DASHBOARD
-    // TODO: IF STUDENT -> RETURN TO STUDENT DASHBOARD
+    // TODO: 3) ALLOW EITHER STUDENT OR TUTOR TO CLICK COMPLETE AND REPLICATE POPUP ON BOTH 
+    // TODO: 4) ALLOW EITHER STUDENT OR TUTOR TO CLICK COMPLETE
+    // TODO: 6) STOP TIMER AND RECORD VALUE
     console.log('Complete session')
   }
-  
-  // TODO: ALL) DISPLAY WARNING IF ATTEMPT TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS CURRENTLY ON CHAT PAGE
+
+  // TODO: 7) DISPLAY WARNING IF ATTEMPTING TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS CURRENTLY ON CHAT PAGE
   // useBeforeunload(
   //   () =>
   //     'Closing this tab will not allow you to mark the session as complete and will cause excessive billing.  Are you sure you wish to close this tab? '
   // )
 
   // CODE TO WARN AGAINST CLOSING THE CHAT WINDOW
-  // window.addEventListener("beforeunload", (ev) => 
-  // {  
+  // window.addEventListener("beforeunload", (ev) =>
+  // {
   //     ev.preventDefault();
   //     return ev.returnValue = 'Are you sure you want to close?';
   // });
@@ -64,8 +63,6 @@ const ChatActions = (props: any) => {
   //   window.removeEventListener('onbeforeunload', this.handleWindowClose);
   // }
   // // ----
-
-
 
   return (
     <Flex direction="column">
@@ -97,7 +94,6 @@ const ChatActions = (props: any) => {
           name={name}
           imageUrl={imageUrl}
         />
-        {/* TESTING */}
 
         <Divider mt="0.5rem" />
         <Text>If wishing to proceed, click Open Zoom below.</Text>
@@ -109,9 +105,16 @@ const ChatActions = (props: any) => {
           Once your help request is complete, click the button below to mark
           your call as complete.
         </Text>
-        <Button w="100px" onClick={complete}>
+        <Button w="100px" onClick={onOpen}>
           Complete
         </Button>
+        {/* TODO: RESOLVE TWO MODALS ON SAME SCREEN ISSUE */}
+        {/* <ModalComplete
+          isOpen={isOpen}
+          onClose={onClose}
+          name={name}
+          imageUrl={imageUrl}
+        /> */}
       </Box>
     </Flex>
   )
