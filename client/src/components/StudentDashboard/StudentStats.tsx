@@ -1,11 +1,8 @@
 import {
   Box,
-  chakra,
   Flex,
-  SimpleGrid,
   Heading,
   Stat,
-  Button,
   Wrap,
   WrapItem,
   StatLabel,
@@ -19,7 +16,6 @@ import { GoLocation } from 'react-icons/go'
 import { auth } from '../../firebase'
 import react, { useEffect, useState } from 'react'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
-import moment from 'moment'
 
 interface StatsCardProps {
   title: string
@@ -65,7 +61,12 @@ export default function BasicStatistics() {
   //@ts-ignore
   const student = useGetStudentByIdQuery(userId)
 
-  const formatData = moment(student?.data?.subscription_expiry).format('l')
+  function displayDate (date: Date) {
+    let day = date.toString().slice(8,10)
+    let month = date.toString().slice(5,7)
+    let year = date.toString().slice(0,4)
+    return `${day}/${month}/${year}`
+  }
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
@@ -103,7 +104,14 @@ export default function BasicStatistics() {
           <StatsCard
             title={'Expiration date'}
             //@ts-ignore
-            stat={formatData}
+            stat={student.error
+            ? 'error'
+            : student.isLoading
+            ? 'loading'
+            : student.data
+            ? (student.data.subscription_expiry ? displayDate(student.data.subscription_expiry) : 'N/A')
+            : 'N/A'
+          }
             icon={<FiServer size={'3em'} />}
           />
           <StatsCard

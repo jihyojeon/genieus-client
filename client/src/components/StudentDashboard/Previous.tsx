@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Box, Flex, Heading, Text, Button } from '@chakra-ui/react'
 import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
 import { auth } from '../../firebase'
-import moment from 'moment'
 
 const Previous = () => {
   const [userId, setUserId] = useState()
@@ -15,6 +14,16 @@ const Previous = () => {
   }, [])
   //@ts-ignore
   const getHrRequests = useGetHrRequestByValueQuery({ student_id: userId })
+  
+  function displayDate (date: Date) {
+    let day = date.toString().slice(8,10)
+    let month = date.toString().slice(5,7)
+    let year = date.toString().slice(0,4)
+    return `${day}/${month}/${year}`
+  }
+  
+  
+  
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
     <Flex py={3} ml={7} color={'white'} flexDirection="column">
@@ -55,7 +64,7 @@ const Previous = () => {
               >
                 <Text>Issue solved - {el.issue}</Text>
                 {/* <Text>Tutor - {el.tutor}</Text> */}
-                <Text>Date: {moment(el.createdAt).format('l')}</Text>
+                <Text>Date: {displayDate(el.createdAt)}</Text>
                 <Text>Langauge: {el.language}</Text>
 
                 <Text>Rating - {el.rating}</Text>
