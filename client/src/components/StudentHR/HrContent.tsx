@@ -176,13 +176,12 @@ const HrContent = ({ settutorComplete }: any) => {
                   )}
                   <Popover>
                     <PopoverTrigger>
-                      <Button>Search</Button>
+                      <Button>Choose Language</Button>
                     </PopoverTrigger>
                     <Portal>
                       <PopoverContent>
                         <PopoverArrow />
 
-                        <PopoverCloseButton />
                         <PopoverBody>
                           <FormControl>
                             <Input

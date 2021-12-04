@@ -21,12 +21,7 @@ import {
 } from '@chakra-ui/react'
 
 const HrContent = ({ setStudentReady, hrData }: any) => {
-  const imageObj = {
-    js: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
-    python: 'http://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png',
-    cplus:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png',
-  }
+
 
   const [value, setValue] = useState('')
   const [codeValue, setcodeValue] = useState('')
