@@ -1,31 +1,52 @@
-import { useState } from 'react'
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { useState, useEffect } from 'react'
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
+//  @ts-ignore
 const ChatDuration = (props: any) => {
-  const [duration, setDuration] = useState()
+  // TODO: REFRESHING PAGE RESETS COUNTDOWN TIMER - NEED TO PREVENT THIS
+  const minutes: number = 0.1
+  const seconds: number = minutes * 60
 
-  const MINUTES: number = 3
-  const SECONDS: number = MINUTES * 60
+  // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
+  const subscriptionRemainingMins: number = 35
+  const subscriptionRemainingSecs: number =
+    subscriptionRemainingMins * 60 - seconds
+
+  const [clockRunning, setClockRunning] = useState(true)
+  const [canDecline, setCanDecline] = useState(true)
+  const [duration, setDuration] = useState(seconds)
+
+  // useEffect(() => {
+  //   console.log('USEEFFECT TRIGGERED')
+  //   // TODO: RE-RENDER SCREEN BUT WITH SUBSCRIPTION TIMER
+  // }, [canDecline === false])
 
   const timerProps = {
-    isPlaying: true,
+    isPlaying: clockRunning,
     size: 170,
     strokeWidth: 10,
   }
 
-  // TODO: IMPLEMENT ACTION WHEN COUNTDOWN TIMER REACHES LIMIT
-  // TODO: FIX LOGIC TO CHANGE MINUTES TO SECONDS WHEN UNDER 60 SECONDS LEFT - USE STATE
+  const countDownExpired = () => {
+    console.log('TIME EXPIRED')
+    setCanDecline(false)
+    console.log('CAN DECLINE: ', canDecline)
+    setDuration(subscriptionRemainingSecs)
+    console.log('DURATION: ', duration)
+    setClockRunning(true)
+    console.log('CLOCK RUNNING: ', clockRunning)
+    // TODO: IMPLEMENT REPLACEMENT CLOCK
+    // TODO: 1. pass "canDecline" state to "ChatActions" component to negate "Decline" button (grey out button or replace popup with one stating declining is no longer possible)
+    // TODO: 2. start countdown clock from (remaining subscription minutes) minus (minutes)
+  }
 
-  const renderTime = ({ remainingTime }: any) => {
+  const renderCountDown = ({ remainingTime }: any) => {
     if (remainingTime === 0) {
-      console.log('Countdown time ended')
-      return <Text>{MINUTES} minute window expired</Text>
-      // TODO: POPUP + START BILLING + ?
-    } else {
+      countDownExpired()
+    } else if (remainingTime <= 60) {
       return (
-        <Box
-        >
+        <Box>
           <Text
             color="black"
             fontFamily="montserrat"
@@ -33,10 +54,7 @@ const ChatDuration = (props: any) => {
             fontSize={25}
             fontWeight={800}
           >
-            {Math.ceil(remainingTime)}
-            {/* {remainingTime < 60
-              ? { remainingTime }
-              : Math.ceil(remainingTime / 60)} */}
+            {remainingTime}
           </Text>
           <Text
             color="black"
@@ -46,7 +64,38 @@ const ChatDuration = (props: any) => {
             fontWeight={400}
           >
             seconds
-            {/* {remainingTime < 60 ? "seconds" : "minutes"} */}
+          </Text>
+          <Text
+            color="black"
+            fontFamily="montserrat"
+            letterSpacing={1}
+            fontSize={20}
+            fontWeight={400}
+          >
+            remaining
+          </Text>
+        </Box>
+      )
+    } else {
+      return (
+        <Box>
+          <Text
+            color="black"
+            fontFamily="montserrat"
+            letterSpacing={1}
+            fontSize={25}
+            fontWeight={800}
+          >
+            {Math.ceil(remainingTime / 60)}
+          </Text>
+          <Text
+            color="black"
+            fontFamily="montserrat"
+            letterSpacing={1}
+            fontSize={20}
+            fontWeight={400}
+          >
+            mins
           </Text>
           <Text
             color="black"
@@ -64,19 +113,19 @@ const ChatDuration = (props: any) => {
 
   return (
     <Flex direction="row">
-        <CountdownCircleTimer
-          {...timerProps}
-          isPlaying
-          colors={[
-            ['#004777', 0.33],
-            ['#F7B801', 0.33],
-            ['#A30000', 0.33],
-          ]}
-          duration={SECONDS}
-          onComplete={() => [true, SECONDS]}
-        >
-          {renderTime}
-        </CountdownCircleTimer>
+      <CountdownCircleTimer
+        {...timerProps}
+        isPlaying={clockRunning}
+        colors={[
+          ['#004777', 0.33],
+          ['#F7B801', 0.33],
+          ['#A30000', 0.33],
+        ]}
+        duration={duration}
+        onComplete={() => [false, duration]}
+      >
+        {renderCountDown}
+      </CountdownCircleTimer>
     </Flex>
   )
 }
