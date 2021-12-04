@@ -1,30 +1,21 @@
 import {
-  Image,
   Box,
   Flex,
   Text,
   Heading,
-  List,
-  UnorderedList,
-  ListItem,
   HStack,
   Tag,
   TagLabel,
-  Textarea,
   VStack,
   useDisclosure
 } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCog } from '@fortawesome/free-solid-svg-icons'
-
 
 import { auth } from '../../firebase'
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 
 
 export const TutorInformation = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const [userId, setUserId] = useState()
   //@ts-ignore
   const tutor = useGetTutorByIdQuery(userId)
@@ -117,9 +108,6 @@ export const TutorInformation = () => {
             </VStack>
           </Flex>
         </Flex>
-      </Box>
-      <Box>
-        
       </Box>
     </Flex>
   )

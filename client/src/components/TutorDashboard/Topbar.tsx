@@ -14,7 +14,6 @@ import {
 import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 import Logo from '../../assets/icons/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { auth } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
 import { faCog } from '@fortawesome/free-solid-svg-icons'
