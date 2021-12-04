@@ -26,7 +26,6 @@
     "firebase": "^9.5.0",
     "framer-motion": "^4.1.17",
     "lottie-react": "^2.1.0",
-    "moment": "^2.29.1",
     "prismjs": "^1.25.0",
     "react": "^17.0.2",
     "react-awesome-stars-rating": "^0.6.0",
