@@ -20,6 +20,7 @@ import { faCog } from '@fortawesome/free-solid-svg-icons'
 import ModalEditTutorProfile from './ModalEditTutorProfile' 
 
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
+import { disconnectFromSocket } from '../../redux/services/socket'
 //@ts-ignore
 export default function Topbar() {
   const navigate = useNavigate()
@@ -41,6 +42,7 @@ export default function Topbar() {
       .signOut()
       .then(() => navigate('/'))
       .catch((err) => console.log(err))
+    disconnectFromSocket()
   }
 
   return (
