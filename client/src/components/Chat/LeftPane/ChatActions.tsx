@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Box,
@@ -8,6 +8,7 @@ import {
   Heading,
   Text,
   useDisclosure,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import ModalDecline from './ModalDecline'
 import ModalComplete from './ModalComplete'
@@ -37,7 +38,7 @@ const ChatActions = (props: any) => {
   }
 
   const complete = () => {
-    // TODO: 3) ALLOW EITHER STUDENT OR TUTOR TO CLICK COMPLETE AND REPLICATE POPUP ON BOTH 
+    // TODO: 3) ALLOW EITHER STUDENT OR TUTOR TO CLICK COMPLETE AND REPLICATE POPUP ON BOTH
     // TODO: 4) ALLOW EITHER STUDENT OR TUTOR TO CLICK COMPLETE
     // TODO: 6) STOP TIMER AND RECORD VALUE
     console.log('Complete session')
@@ -65,57 +66,59 @@ const ChatActions = (props: any) => {
   // // ----
 
   return (
-    <Flex direction="column">
-      <Box bg="grey" borderRadius="1rem" padding="1rem" marginTop={'1rem'}>
-        <Heading
-          fontFamily="montserrat"
-          letterSpacing={1}
-          fontSize={25}
-          fontWeight={400}
-        >
-          Actions
-        </Heading>
-        <Text>
-          You have {seconds / 60} minutes to further discuss your problem and
-          finalise whether to proceed with this help request.
-        </Text>
-        <Text mt="0.5rem">
-          If either of you decline to proceed, or the timer finishes, you will
-          not be charged for the elapsed time.
-        </Text>
+    <Flex
+      alignItems="center"
+      bg={useColorModeValue('gray.100', 'gray.700')}
+      borderRadius="1rem"
+      direction="column"
+      padding="1rem"
+      marginTop={'1rem'}
+      height="100%"
+      justifyContent="space-between"
+    >
+      <Heading fontFamily="montserrat" letterSpacing={1} size="mg">
+        Actions
+      </Heading>
+      <Text>
+        You have {seconds / 60} minutes to further discuss your problem and
+        finalise whether to proceed with this help request.
+      </Text>
+      <Text mt="0.5rem">
+        If either of you decline to proceed, or the timer finishes, you will not
+        be charged for the elapsed time.
+      </Text>
 
-        {/* TESTING */}
-        <Button w="100px" onClick={onOpen}>
-          Decline
-        </Button>
-        <ModalDecline
-          isOpen={isOpen}
-          onClose={onClose}
-          name={name}
-          imageUrl={imageUrl}
-        />
+      {/* TESTING */}
+      <Button w="100px" onClick={onOpen}>
+        Decline
+      </Button>
+      <ModalDecline
+        isOpen={isOpen}
+        onClose={onClose}
+        name={name}
+        imageUrl={imageUrl}
+      />
 
-        <Divider mt="0.5rem" />
-        <Text>If wishing to proceed, click Open Zoom below.</Text>
-        <Button w="100px" onClick={zoomButtonHandler}>
-          Open Zoom
-        </Button>
-        <Divider mt="0.5rem" />
-        <Text>
-          Once your help request is complete, click the button below to mark
-          your call as complete.
-        </Text>
-        <Button w="100px" onClick={onOpen}>
-          Complete
-        </Button>
-        {/* TODO: RESOLVE TWO MODALS ON SAME SCREEN ISSUE */}
-        {/* <ModalComplete
+      <Divider mt="0.5rem" />
+      <Text>If wishing to proceed, click Open Zoom below.</Text>
+      <Button w="100px" onClick={zoomButtonHandler}>
+        Open Zoom
+      </Button>
+      <Divider mt="0.5rem" />
+      <Text>
+        Once your help request is complete, click the button below to mark your
+        call as complete.
+      </Text>
+      <Button w="100px" onClick={onOpen}>
+        Complete
+      </Button>
+      {/* TODO: RESOLVE TWO MODALS ON SAME SCREEN ISSUE */}
+      {/* <ModalComplete
           isOpen={isOpen}
           onClose={onClose}
           name={name}
           imageUrl={imageUrl}
         /> */}
-      </Box>
     </Flex>
   )
 }

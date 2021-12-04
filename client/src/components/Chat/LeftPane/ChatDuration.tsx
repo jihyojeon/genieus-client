@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 //  @ts-ignore
 const ChatDuration = (props: any) => {
   // TODO: REFRESHING PAGE RESETS COUNTDOWN TIMER - NEED TO PREVENT THIS
-  const minutes: number = 0.1
+  const minutes: number = 1.5
   const seconds: number = minutes * 60
 
   // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
@@ -48,7 +48,6 @@ const ChatDuration = (props: any) => {
       return (
         <Box>
           <Text
-            color="black"
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={25}
@@ -57,7 +56,6 @@ const ChatDuration = (props: any) => {
             {remainingTime}
           </Text>
           <Text
-            color="black"
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={20}
@@ -66,7 +64,7 @@ const ChatDuration = (props: any) => {
             seconds
           </Text>
           <Text
-            color="black"
+            // color={useColorModeValue('white', 'black')}
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={20}
@@ -80,7 +78,7 @@ const ChatDuration = (props: any) => {
       return (
         <Box>
           <Text
-            color="black"
+            // color={useColorModeValue('white', 'black')}
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={25}
@@ -89,7 +87,7 @@ const ChatDuration = (props: any) => {
             {Math.ceil(remainingTime / 60)}
           </Text>
           <Text
-            color="black"
+            // color={useColorModeValue('white', 'black')}
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={20}
@@ -98,7 +96,7 @@ const ChatDuration = (props: any) => {
             mins
           </Text>
           <Text
-            color="black"
+            // color={useColorModeValue('white', 'black')}
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={20}

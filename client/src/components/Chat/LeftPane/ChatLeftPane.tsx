@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
 import ChatDuration from './ChatDuration'
 import ChatActions from './ChatActions'
 import ChatParticipant from './ChatParticipant'
@@ -11,11 +11,13 @@ const ChatLeftPane = (props: any) => {
   const imageUrl: string = props.imageUrl // PROVIDES MUG SHOT OF OTHER PARTY
 
   return (
-    <Flex direction="column">
-      <Box
-        align="center"
-        bg="lightgrey"
-        borderRadius={'1rem'}
+    <Flex direction="column" maxW="30rem" justify="stretch">
+      <Flex
+        direction="column"
+        alignItems="center"
+        textAlign="center"
+        justify="stretch"
+        height="80vh"
         padding="0.5rem"
         paddingLeft="1.5rem"
         paddingBottom="1rem"
@@ -36,7 +38,7 @@ const ChatLeftPane = (props: any) => {
         }}
       >
         <Box
-          bg="grey"
+          bg={useColorModeValue('gray.100', 'gray.700')}
           borderRadius="1rem"
           marginTop={'1rem'}
           padding="1rem"
@@ -52,8 +54,9 @@ const ChatLeftPane = (props: any) => {
           imageUrl={imageUrl}
           seconds={seconds}
           zoomUrl={zoomUrl}
+          grow={1}
         />
-      </Box>
+      </Flex>
     </Flex>
   )
 }
