@@ -14,11 +14,13 @@ import {
 import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 import Logo from '../../assets/icons/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { auth } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
+import { faCog } from '@fortawesome/free-solid-svg-icons'
+import ModalEditTutorProfile from './ModalEditTutorProfile' 
 
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
+import { disconnectFromSocket } from '../../redux/services/socket'
 //@ts-ignore
 export default function Topbar() {
   const navigate = useNavigate()
@@ -40,6 +42,7 @@ export default function Topbar() {
       .signOut()
       .then(() => navigate('/'))
       .catch((err) => console.log(err))
+    disconnectFromSocket()
   }
 
   return (
@@ -66,26 +69,14 @@ export default function Topbar() {
                         : undefined}
                     </Text>
                   </Flex>
-                  {/* Average Rating */}
-                  <Flex alignItems="center" justifyContent="center">
-                    <Flex alignItems="center" direction="row">
-                      <Text mr={2}>
-                        {' '}
-                        {tutor.error
-                          ? 'error'
-                          : tutor.isLoading
-                          ? 'loading'
-                          : tutor.data
-                          ? tutor.data.avg_rating
-                          : undefined}
-                      </Text>
-                      {/* @ts-ignore */}
-                      {tutor.data
-                        ? tutor.data.avg_rating && (
-                            <FontAwesomeIcon icon={faStar} />
-                          )
-                        : null}
-                    </Flex>
+                  <Flex alignItems="center" justifyContent="space-around">
+                  <Box
+                    _hover={{ opacity: 0.8, color: 'indigo.400' }}
+                    onClick={onOpen}
+                    ml={5}
+                  >
+                  <FontAwesomeIcon size="1x" icon={faCog} />
+                  </Box>
                     <Button
                       opacity="0.6"
                       variant="ghost"
@@ -126,6 +117,8 @@ export default function Topbar() {
           </Flex>
         </Flex>
       </Box>
+      {/*@ts-ignore*/}
+      <ModalEditTutorProfile tutor={tutor.data} isOpen={isOpen} onClose={onClose} />
     </>
   )
 }

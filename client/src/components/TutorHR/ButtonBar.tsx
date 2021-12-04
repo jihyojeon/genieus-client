@@ -25,7 +25,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
   }, [])
 
   const handleClick = () => {
-    // hrData.interested_tutors.push(hrData.id)
+    hrData.interested_tutors.push(hrData.id)
     // updateHr({ id: hrData.id, tutor_id: userId })
     console.log(hrData.interested_tutors)
     console.log(hrData.id)
@@ -40,7 +40,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
       justifyContent="center"
       px="10"
     >
-      <Button onClick={() => console.log(hrData.interested_tutors)}></Button>
+      <Button onClick={() => console.log(hrData)}></Button>
       <Button
         colorScheme="indigo"
         fontFamily="montserrat"

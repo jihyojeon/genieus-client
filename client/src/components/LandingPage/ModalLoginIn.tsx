@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
@@ -25,8 +25,8 @@ import {
   FormHelperText,
 } from '@chakra-ui/react'
 import Logo from '../../assets/icons/logo.svg'
-import { Link, useNavigate } from 'react-router-dom'
-import { useGetStudentByIdQuery } from '../../redux/services/studentService'
+import { useNavigate } from 'react-router-dom'
+import { connectToSocket } from '../../redux/services/socket'
 
 //@ts-ignore
 const ModalLogIn = ({ isOpen, onClose }) => {
@@ -34,22 +34,12 @@ const ModalLogIn = ({ isOpen, onClose }) => {
 
   const [loginEmail, setLoginEmail] = useState('')
   const [loginpassword, setLoginPassword] = useState('')
-  const [isLoggedIn, setisLoggedIn] = useState(false)
   const [errormsg, seterrormsg] = useState('')
-
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       navigate('/student-dashboard')
-  //     }
-  //   })
-  //   return unsubscribe
-  // }, [])
 
   const login = async () => {
     try {
       await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
-
+      connectToSocket(auth)
       navigate('/student-dashboard')
     } catch (error) {
       console.log(error)
