@@ -23,34 +23,37 @@ export default function ChatInput({ sendHandler }: ChatInputProps) {
           }}
         >
           <FormControl>
-            <Input
-              border="2px"
-              borderRadius="1rem"
-              colorScheme="indigo"
-              letterSpacing={2}
-              minHeight="4rem"
-              mr="2rem"
-              padding={8}
-              placeholder="Chat Input"
-              variant="outline"
-              value={messageInput}
-              onChange={(e) => setMessageInput(e.target.value)}
-            />
+            <Flex direction="row">
+              <Input
+                border="2px"
+                borderRadius="1rem"
+                colorScheme="indigo"
+                letterSpacing={2}
+                minHeight="4rem"
+                mr="1rem"
+                padding={8}
+                placeholder="Chat Input"
+                variant="outline"
+                width="35vw"
+                value={messageInput}
+                onChange={(e) => setMessageInput(e.target.value)}
+              />
+              <Button
+                type="submit"
+                border="2px"
+                borderRadius="1rem"
+                colorScheme="indigo"
+                letterSpacing={2}
+                ml="1rem"
+                r
+                padding={8}
+                variant="solid"
+                width="10rem"
+              >
+                Send
+              </Button>
+            </Flex>
           </FormControl>
-          <Button
-            type="submit"
-            border="2px"
-            borderRadius="1rem"
-            colorScheme="indigo"
-            letterSpacing={2}
-            ml="2rem"
-            r
-            padding={8}
-            variant="outline"
-            width="10rem"
-          >
-            Send
-          </Button>
         </form>
       </Flex>
     </Box>

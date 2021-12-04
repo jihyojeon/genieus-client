@@ -1,6 +1,5 @@
 import { Box, Flex, FormControl, Button, Input } from '@chakra-ui/react'
-import ChatBubbleSent from './ChatBubbleSent'
-import ChatBubbleReceived from './ChatBubbleReceived'
+import ChatBubble from './ChatBubble'
 import socket, {
   checkAndReconnectToSocket,
 } from '../../../redux/services/socket'
@@ -40,7 +39,7 @@ const ChatRightPane = (props: any) => {
       socket.emit('join help request', helpRequest.id)
       socket.on('existing messages', (messages) => {
         console.log(messages)
-        setMsgs(messages)
+        messages && setMsgs(messages)
       })
       socket.on('user joined chat', (user) => {
         console.log(user)
@@ -48,8 +47,9 @@ const ChatRightPane = (props: any) => {
       socket.on('user left chat', (user) => {
         console.log(user)
       })
-      socket.on('get messages', (message: Message) => {
-        console.log(message)
+      socket.on('get message', (message: Message) => {
+        console.log('get message', message)
+        setMsgs((priorMsgs) => [...priorMsgs, message])
       })
     }
     return () => {
@@ -57,23 +57,38 @@ const ChatRightPane = (props: any) => {
     }
   }, [userID])
 
-  const sendHandler = (message: string) => {
+  const sendHandler = (content: string) => {
     if (socket.connected) {
+      const message = {
+        content,
+        authorID: userID || 'unknown',
+        postedDate: new Date(),
+      }
+      setMsgs((priorMsgs) => [...priorMsgs, message])
       socket.emit('post message', helpRequest.id, message)
     }
   }
+
+  const messages = msgs.map((msg) => {
+    return (
+      <ChatBubble
+        message={msg.content}
+        fromSelf={msg?.authorID === userID ? true : false}
+      />
+    )
+  })
 
   return (
     <>
       <Flex
         direction="column"
         // TODO: FIX THIS HEIGHT SO IT HANDLES DYNAMIC RESIZING
-        height={'72%'}
       >
         <Box
           paddingRight={'0.5rem'}
           pl="1rem"
           overflowY={'scroll'}
+          height="70vh"
           sx={{
             '&::-webkit-scrollbar': {
               backgroundColor: `rgba(150, 150, 190, 0.15)`,
@@ -86,15 +101,7 @@ const ChatRightPane = (props: any) => {
             },
           }}
         >
-          <ChatBubbleSent />
-          <ChatBubbleReceived />
-          <ChatBubbleReceived />
-          <ChatBubbleSent />
-          <ChatBubbleReceived />
-          <ChatBubbleSent />
-          <ChatBubbleReceived />
-          <ChatBubbleSent />
-          <ChatBubbleReceived />
+          {messages}
         </Box>
       </Flex>
       <ChatInput sendHandler={sendHandler} />
