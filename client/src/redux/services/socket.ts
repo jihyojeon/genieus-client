@@ -1,3 +1,4 @@
+import { Auth } from '@firebase/auth'
 import { io } from 'socket.io-client'
 import { Socket } from 'socket.io-client'
 
@@ -15,5 +16,13 @@ const socket: ExtendedSocket = io(URL, { autoConnect: false })
 socket.onAny((event, ...args) => {
   console.log(event, args)
 })
+
+export function connectToSocket(auth: Auth) {
+  if (auth.currentUser?.uid) {
+    socket.auth = { userID: auth.currentUser.uid }
+    socket.connect()
+    console.log('connected to socket', socket)
+  }
+}
 
 export default socket

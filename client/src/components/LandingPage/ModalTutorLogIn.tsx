@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { signInWithGoogle } from '../../firebase'
@@ -25,7 +25,8 @@ import {
   FormHelperText,
 } from '@chakra-ui/react'
 import Logo from '../../assets/icons/logo.svg'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { connectToSocket } from '../../redux/services/socket'
 
 //@ts-ignore
 const ModalTutorLogIn = ({ isOpen, onClose }) => {
@@ -33,37 +34,18 @@ const ModalTutorLogIn = ({ isOpen, onClose }) => {
 
   const [loginEmail, setLoginEmail] = useState('')
   const [loginpassword, setLoginPassword] = useState('')
-  const [isLoggedIn, setisLoggedIn] = useState(false)
   const [errormsg, seterrormsg] = useState('')
 
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       navigate('/student-dashboard')
-  //     }
-  //   })
-  //   return unsubscribe
-  // }, [])
-
   const login = async () => {
-    await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
-      .then((user) => {
-        navigate('/tutor-dashboard')
-        console.log(auth.currentUser?.email)
-      })
-      .catch((err) => {
-        console.log(err)
-        seterrormsg('Please enter valid details...')
-      })
+    try {
+      await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
+      connectToSocket(auth)
+      navigate('/tutor-dashboard')
+    } catch (err) {
+      console.error(err)
+      seterrormsg('Please enter valid details...')
+    }
   }
-
-  // const handleAccountStatus = () => {
-  //   auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       ;<Redirect to="/student-dashboard" />
-  //     }
-  //   })
-  // }
 
   const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)

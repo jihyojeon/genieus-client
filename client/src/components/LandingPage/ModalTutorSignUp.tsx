@@ -26,11 +26,11 @@ import {
   Center,
   FormHelperText,
 } from '@chakra-ui/react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAddTutorMutation } from '../../redux/services/tutorService'
 
 import Logo from '../../assets/icons/logo.svg'
-import { useDeprecatedAnimatedState } from 'framer-motion'
+import { connectToSocket } from '../../redux/services/socket'
 
 //@ts-ignore
 const ModalTutorSignUp = ({ isOpen, onClose }) => {
@@ -47,10 +47,9 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
         registerEmail,
         registerPassword
       )
-
-      const userId = await auth.currentUser?.uid
-      console.log(registerEmail, userId, username)
-      await auth.onAuthStateChanged((user) => {})
+      const userId = auth.currentUser?.uid
+      connectToSocket(auth)
+      auth.onAuthStateChanged(() => {})
       await addTutor({
         email: registerEmail,
         id: userId,
