@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import {
   Button,
+  Flex,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -61,31 +62,25 @@ const ModalDecline = ({ isOpen, onClose, name, imageUrl }) => {
               <ModalBody>
                 <Avatar size={'2xl'} src={imageUrl} alt={'Avatar Alt'} />
                 <Text mt="3rem">
-                  {isTutor ? 'Clicking "Confirm" will return you to the Tutor Dashboard' : 'Clicking "Confirm" will return you to the the Help Request Screen to await another tutor'}
+                  {isTutor
+                    ? 'Clicking "Confirm" will return you to the Tutor Dashboard'
+                    : 'Clicking "Confirm" will return you to the the Help Request Screen to await another tutor'}
                 </Text>
               </ModalBody>
-              <ModalFooter>
-                <Stack
-                  align={'center'}
-                  justify={'center'}
-                  direction={'column'}
-                  mt={6}
-                >
+              <Flex justify="center">
+                <ModalFooter >
                   <Stack direction={'column'} spacing={4}>
                     <Button
                       flex={1}
                       padding="1rem"
                       fontSize={'sm'}
                       rounded={'full'}
+                      width="8rem"
                       _focus={{
                         bg: 'gray.200',
                       }}
-                      // TODO: CONDITIONAL: RETURN TO
                       onClick={abandonAction}
                     >
-                      {/* TODO: CONDITIONAL TEXT TUTOR/STUDENT
-                      STUDENT: [YES] RETURN TO HELP REQUEST
-                    TUTOR: [YES] RETURN TO TUTOR DASHBOARD */}
                       Confirm
                     </Button>
                     <Button
@@ -105,12 +100,13 @@ const ModalDecline = ({ isOpen, onClose, name, imageUrl }) => {
                         bg: 'blue.500',
                       }}
                       onClick={onClose}
-                    >
+                      width="8rem"
+                      >
                       Back to chat
                     </Button>
                   </Stack>
-                </Stack>
-              </ModalFooter>
+                </ModalFooter>
+              </Flex>
             </Box>
           </Center>
         </ModalContent>

@@ -22,8 +22,7 @@ const ChatActions = (props: any) => {
   const zoomUrl = props.zoomUrl
   const seconds = props.seconds
 
-  // TODO: ALL) DISPLAY WARNING IF ATTEMPT TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS CURRENTLY ON CHAT PAGE
-
+  
   // TODO: TAKE THIS STATUS FROM SIGN-IN DETAILS
   const [isTutor, setIsTutor] = useState(true)
 
@@ -35,7 +34,7 @@ const ChatActions = (props: any) => {
     navigator.clipboard.writeText(zoomUrl)
     window.open(zoomUrl)
   }
-
+  
   const complete = () => {
     // TODO: ALLOW EITHER STUDENT OR TUTOR TO CLICK COMPLETE
     // TODO: STOP TIMER AND RECORD VALUE
@@ -44,7 +43,8 @@ const ChatActions = (props: any) => {
     // TODO: IF STUDENT -> RETURN TO STUDENT DASHBOARD
     console.log('Complete session')
   }
-
+  
+  // TODO: ALL) DISPLAY WARNING IF ATTEMPT TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS CURRENTLY ON CHAT PAGE
   // useBeforeunload(
   //   () =>
   //     'Closing this tab will not allow you to mark the session as complete and will cause excessive billing.  Are you sure you wish to close this tab? '
