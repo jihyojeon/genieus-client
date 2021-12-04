@@ -2,28 +2,18 @@ import React, { useState, useEffect, ReactNode } from 'react'
 import {
   Flex,
   Box,
-  Heading,
-  Text,
-  HStack,
-  VStack,
-  TagLabel,
-  Textarea,
-  Tag,
-  useDisclosure,
-  Button,
   useColorModeValue,
   Stat,
   StatLabel,
   StatNumber,
   SimpleGrid
 } from '@chakra-ui/react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCog } from '@fortawesome/free-solid-svg-icons'
 import { auth } from '../../firebase'
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 import { BsPerson } from 'react-icons/bs';
-import { FiServer } from 'react-icons/fi';
-import { GoLocation } from 'react-icons/go';
+import { AiOutlineStar } from "react-icons/ai";
+import { BiTimeFive } from "react-icons/bi";
+import { AiOutlineDollarCircle } from 'react-icons/ai'
 
 
 export const TutorStats = () => {
@@ -108,7 +98,7 @@ export const TutorStats = () => {
             : tutor.data
             ? (tutor.data.avg_rating ? tutor.data.avg_rating.toString() : 'N/A')
             : 'N/A'}
-          icon={<FiServer size={'3em'} />}
+          icon={<AiOutlineStar size={'3em'} />}
         />
         <StatsCard
           title={'Monthly Hours'}
@@ -119,7 +109,7 @@ export const TutorStats = () => {
             : tutor.data
             ? (tutor.data.time_completed ? displayTimeinHHMM(tutor.data.time_completed) : 'N/A')
             : 'N/A'}
-          icon={<GoLocation size={'3em'} />}
+          icon={<BiTimeFive size={'3em'} />}
         />
         <StatsCard
           title={'Monthly Earnings'}
@@ -130,7 +120,7 @@ export const TutorStats = () => {
             : tutor.data
             ? (tutor.data.time_completed ? `$${(tutor.data.time_completed*40/3600).toFixed(2)}` : 'N/A')
             : 'N/A'}
-          icon={<GoLocation size={'3em'} />}
+          icon={<AiOutlineDollarCircle size={'3em'} />}
         />
       </SimpleGrid>
     </Box>
