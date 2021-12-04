@@ -91,14 +91,21 @@ const Favourites = () => {
       </Heading>
 
       <Box>
-        {/* @ts-ignore */}
         {favouriteTutor.isSuccess && favouriteTutor.data.length !== 0 ? (
-          favouriteTutor.data.map((tutor: any) => (
-            <FavouriteTutor
-              tutor={tutor}
-              connected={tutorConnectedStatus[tutor.id] || false}
-            />
-          ))
+          favouriteTutor.data
+            .slice()
+            // sort online tutors first
+            .sort(
+              (a, b) =>
+                (tutorConnectedStatus[b.id] ? 1 : 0) -
+                (tutorConnectedStatus[a.id] ? 1 : 0)
+            )
+            .map((tutor: any) => (
+              <FavouriteTutor
+                tutor={tutor}
+                connected={tutorConnectedStatus[tutor.id] || false}
+              />
+            ))
         ) : (
           <Text textAlign="center" mt={10} fontSize={'20px'} opacity="0.6">
             Your favourite tutors will be displayed here!{' '}
