@@ -5,7 +5,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 //  @ts-ignore
 const ChatDuration = (props: any) => {
   // TODO: REFRESHING PAGE RESETS COUNTDOWN TIMER - NEED TO PREVENT THIS
-  const minutes: number = 0.1
+  const minutes: number = 1.5
   const seconds: number = minutes * 60
 
   // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
