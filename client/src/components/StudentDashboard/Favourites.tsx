@@ -58,9 +58,21 @@ const Favourites = () => {
         })
         setTutorConnectedStatus(onlineStatus)
       })
+      socket.on('user connected', (user) => {
+        setTutorConnectedStatus((prior) =>
+          Object.assign({}, prior, { [user]: true })
+        )
+      })
+      socket.on('user disconnected', (user) => {
+        console.log('userID', user)
+        setTutorConnectedStatus((prior) =>
+          Object.assign({}, prior, { [user]: false })
+        )
+      })
     }
   }, [userId])
   const { isOpen, onOpen, onClose } = useDisclosure()
+  console.log(tutorConnectedStatus)
 
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE

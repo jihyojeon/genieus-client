@@ -43,7 +43,7 @@ const FavouriteTutor = ({
               content: '""',
               w: 4,
               h: 4,
-              bg: connected ? 'green.300' : 'gray.300',
+              bg: connected ? 'green.500' : 'gray.400',
               border: '2px solid white',
               rounded: 'full',
               pos: 'absolute',
