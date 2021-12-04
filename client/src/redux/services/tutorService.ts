@@ -11,6 +11,7 @@ export default interface TutorType {
   bio: string
   avg_rating: number | undefined
   completed_help_requests: number
+  time_completed: number
   tags: string[]
   programming_languages: string[]
 }
