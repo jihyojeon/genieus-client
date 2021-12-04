@@ -8,13 +8,16 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
+  ModalCloseButton,
   Text,
+  Heading,
   Avatar,
   Box,
   Center,
   Stack,
+  Link,
+  Badge,
   useColorModeValue,
-  VStack,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 
@@ -24,7 +27,7 @@ const ModalDecline = ({ isOpen, onClose, name, imageUrl }) => {
   const navigate = useNavigate()
 
   // TODO: DECIDES WHERE TO NAVIGATE ON DECLINE.
-  const [isTutor, setIsTutor] = useState(false)
+  const [isTutor, setIsTutor] = useState(true)
 
   const abandonAction = () => {
     if (isTutor) {
@@ -54,24 +57,25 @@ const ModalDecline = ({ isOpen, onClose, name, imageUrl }) => {
                   color={useColorModeValue('gray.700', 'gray.400')}
                   px={3}
                 >
-                  Do you really wish to decline this Help Request with {name}?
+                  Confirm you wish to decline this Help Request with {name}
                 </Text>
               </ModalHeader>
 
               <ModalBody>
                 <Avatar size={'2xl'} src={imageUrl} alt={'Avatar Alt'} />
-                <Text mt="3rem">
-                  {isTutor ? 'Clicking "Confirm" will return you to the Tutor Dashboard' : 'Clicking "Confirm" will return you to the the Help Request Screen to await another tutor'}
+                <Text>
+                  You will return to [if tutor] your Dashboard [or if student]
+                  your Help Request
                 </Text>
               </ModalBody>
               <ModalFooter>
                 <Stack
                   align={'center'}
                   justify={'center'}
-                  direction={'column'}
+                  direction={'row'}
                   mt={6}
                 >
-                  <Stack direction={'column'} spacing={4}>
+                  <Stack mt={8} direction={'row'} spacing={4}>
                     <Button
                       flex={1}
                       padding="1rem"
@@ -86,7 +90,7 @@ const ModalDecline = ({ isOpen, onClose, name, imageUrl }) => {
                       {/* TODO: CONDITIONAL TEXT TUTOR/STUDENT
                       STUDENT: [YES] RETURN TO HELP REQUEST
                     TUTOR: [YES] RETURN TO TUTOR DASHBOARD */}
-                      Confirm
+                      Abandon
                     </Button>
                     <Button
                       flex={1}
@@ -106,7 +110,7 @@ const ModalDecline = ({ isOpen, onClose, name, imageUrl }) => {
                       }}
                       onClick={onClose}
                     >
-                      Back to chat
+                      Resume Chat
                     </Button>
                   </Stack>
                 </Stack>
