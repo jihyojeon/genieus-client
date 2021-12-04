@@ -148,10 +148,10 @@ export default function WithSpeechBubbles() {
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                'https://obamawhitehouse.archives.gov/sites/whitehouse.gov/files/images/twitter_cards_potus.jpg'
+                'https://en.wikipedia.org/wiki/File:Michelle_Obama_2013_official_portrait.jpg'
               }
-              name={'Barak Obama'}
-              title={'Former US President'}
+              name={'Michelle Obama'}
+              title={'Former First Lady'}
             />
           </Testimonial>
         </Stack>
