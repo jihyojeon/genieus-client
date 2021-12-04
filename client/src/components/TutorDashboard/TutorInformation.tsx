@@ -21,7 +21,6 @@ import { faCog } from '@fortawesome/free-solid-svg-icons'
 
 import { auth } from '../../firebase'
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
-import ModalEditTutorProfile from './ModalEditTutorProfile'
 
 
 export const TutorInformation = () => {
@@ -51,13 +50,6 @@ export const TutorInformation = () => {
           >
             Tutor Information:
           </Heading>
-          <Box
-          _hover={{ opacity: 0.8, color: 'indigo.400' }}
-          onClick={onOpen}
-          ml={5}
-        >
-          <FontAwesomeIcon size="sm" icon={faCog} />
-        </Box>
         </Flex>
 
         <Flex direction="column">
@@ -129,8 +121,6 @@ export const TutorInformation = () => {
       <Box>
         
       </Box>
-      {/*@ts-ignore*/}
-      <ModalEditTutorProfile tutor={tutor.data} isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }

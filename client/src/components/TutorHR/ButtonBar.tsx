@@ -40,7 +40,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
       justifyContent="center"
       px="10"
     >
-      <Button onClick={() => console.log(hrData.interested_tutors)}></Button>
+      <Button onClick={() => console.log(hrData)}></Button>
       <Button
         colorScheme="indigo"
         fontFamily="montserrat"
