@@ -44,7 +44,7 @@ export default function Pricing() {
           Subscriptions that fit your need!
         </Heading>
         <Text fontSize="lg">Your first call is completely free!</Text>
-      </VStack >
+      </VStack>
       <Stack
         direction={{ base: 'column', md: 'row' }}
         textAlign="center"
@@ -53,61 +53,60 @@ export default function Pricing() {
         py={10}
       >
         <PriceWrapper>
-          <Box
-          maxWidth="20rem">
 
+          <Box maxWidth="20rem">
+            <Box
+              color={useColorModeValue('gray.500', 'gray.100')}
+              py={4}
+              px={12}
+            >
+              <Text fontWeight="500" fontSize="2xl">
+                Basic
 
-          <Box color={useColorModeValue('gray.500', 'gray.100')} py={4} px={12} >
-            <Text fontWeight="500" fontSize="2xl">
-              {/* TODO: INSERT NAME OF PACKAGE HERE */}
-              {/* {getSubscriptions.data &&
-                getSubscriptions.data.Basic.subscription_name} */}
-            </Text>
-            <HStack justifyContent="center">
-              <Text fontSize="3xl" fontWeight="600">
-                £
               </Text>
-              <Text fontSize="5xl" fontWeight="900">
-                10
-              </Text>
-              <Text fontSize="3xl" color="gray.500">
-                /month
-              </Text>
-            </HStack>
-          </Box>
-          <VStack
-            bg={useColorModeValue('gray.50', 'gray.700')}
-            py={4}
-            borderBottomRadius={'xl'}
-          >
-            <List spacing={3} textAlign="start" px={12}>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color="green.500" />
-                45 minutes of help requests a month.
-              </ListItem>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color="green.500" />
-                Roll-over of 20 minutes to following month.
-              </ListItem>
-            </List>
-            <Box w="80%" pt={7}>
-              <Button
-                onClick={onOpen}
-                w="full"
-                colorScheme="indigo"
-                variant="outline"
-              >
-                Start trial
-              </Button>
+              <HStack justifyContent="center">
+                <Text fontSize="3xl" fontWeight="600">
+                  £
+                </Text>
+                <Text fontSize="5xl" fontWeight="900">
+                  10
+                </Text>
+                <Text fontSize="3xl" color="gray.500">
+                  /month
+                </Text>
+              </HStack>
             </Box>
-          </VStack>
+            <VStack
+              bg={useColorModeValue('gray.50', 'gray.700')}
+              py={4}
+              borderBottomRadius={'xl'}
+            >
+              <List spacing={3} textAlign="start" px={12}>
+                <ListItem>
+                  <ListIcon as={FaCheckCircle} color="green.500" />
+                  45 minutes of help requests a month.
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={FaCheckCircle} color="green.500" />
+                  Roll-over of 20 minutes to following month.
+                </ListItem>
+              </List>
+              <Box w="80%" pt={7}>
+                <Button
+                  onClick={onOpen}
+                  w="full"
+                  colorScheme="indigo"
+                  variant="outline"
+                >
+                  Start trial
+                </Button>
+              </Box>
+            </VStack>
           </Box>
         </PriceWrapper>
 
         <PriceWrapper>
-          <Box
-            position="relative"
-            maxWidth="20rem">
+          <Box position="relative" maxWidth="20rem">
             <Box
               position="absolute"
               top="-16px"
@@ -165,14 +164,13 @@ export default function Pricing() {
                   <ListIcon as={FaCheckCircle} color="green.500" />
                   Access to "Favourite Tutor" functions.
                 </ListItem>
-
               </List>
 
               <Box w="80%" pt={7}>
                 <Button
                   onClick={() =>
                     //@ts-ignore
-                    console.log(getSubscriptions.data.Max.subscription_name)
+                    console.log(getSubscriptions.data.max.subscription_name)
                   }
                   w="full"
                   colorScheme="indigo"
@@ -185,60 +183,62 @@ export default function Pricing() {
         </PriceWrapper>
         <PriceWrapper>
           <Box maxWidth="20rem">
-            
-
-          <Box color={useColorModeValue('gray.500', 'gray.100')} py={4} px={12}>
-            <Text fontWeight="500" fontSize="2xl">
-              Max
-            </Text>
-            <HStack justifyContent="center">
-              <Text fontSize="3xl" fontWeight="600">
-                £
+            <Box
+              color={useColorModeValue('gray.500', 'gray.100')}
+              py={4}
+              px={12}
+            >
+              <Text fontWeight="500" fontSize="2xl">
+                Max
               </Text>
-              <Text fontSize="5xl" fontWeight="900">
-                30
-              </Text>
-              <Text fontSize="3xl" color="gray.500">
-                /month
-              </Text>
-            </HStack>
-          </Box>
-
-          <VStack
-            bg={useColorModeValue('gray.50', 'gray.700')}
-            py={4}
-            borderBottomRadius={'xl'}
-          >
-            <List spacing={3} textAlign="start" px={12}>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color="green.500" />
-                200 minutes of help request a month.
-              </ListItem>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color="green.500" />
-                Access to "Favourite Tutor" functions.
-              </ListItem>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color="green.500" />
-                Priority tutor service.
-              </ListItem>
-              <ListItem>
-                <ListIcon as={FaCheckCircle} color="green.500" />
-                VIP help request options. 
-              </ListItem>
-            </List>
-            <Box w="80%" pt={7}>
-              <Button
-                onClick={onOpen}
-                w="full"
-                colorScheme="indigo"
-                variant="outline"
-              >
-                Start trial
-              </Button>
+              <HStack justifyContent="center">
+                <Text fontSize="3xl" fontWeight="600">
+                  £
+                </Text>
+                <Text fontSize="5xl" fontWeight="900">
+                  30
+                </Text>
+                <Text fontSize="3xl" color="gray.500">
+                  /month
+                </Text>
+              </HStack>
             </Box>
+
+            <VStack
+              bg={useColorModeValue('gray.50', 'gray.700')}
+              py={4}
+              borderBottomRadius={'xl'}
+            >
+              <List spacing={3} textAlign="start" px={12}>
+                <ListItem>
+                  <ListIcon as={FaCheckCircle} color="green.500" />
+                  200 minutes of help request a month.
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={FaCheckCircle} color="green.500" />
+                  Access to "Favourite Tutor" functions.
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={FaCheckCircle} color="green.500" />
+                  Priority tutor service.
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={FaCheckCircle} color="green.500" />
+                  VIP help request options.
+                </ListItem>
+              </List>
+              <Box w="80%" pt={7}>
+                <Button
+                  onClick={onOpen}
+                  w="full"
+                  colorScheme="indigo"
+                  variant="outline"
+                >
+                  Start trial
+                </Button>
+              </Box>
             </VStack>
-            </Box>
+          </Box>
         </PriceWrapper>
       </Stack>
       <ModalSignUp isOpen={isOpen} onClose={onClose} />

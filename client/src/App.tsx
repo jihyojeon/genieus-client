@@ -1,6 +1,11 @@
 import React from 'react'
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from 'react-router-dom'
 import Chat from './pages/Chat'
 import Feedback from './pages/Feedback'
 import LandingPage from './pages/LandingPage'
@@ -9,6 +14,7 @@ import StudentHR from './pages/StudentHR'
 import TutorClose from './pages/TutorClose'
 import TutorDashboard from './pages/TutorDashboard'
 import TutorHR from './pages/TutorHR'
+import { auth } from './firebase'
 
 const App = () => {
   return (

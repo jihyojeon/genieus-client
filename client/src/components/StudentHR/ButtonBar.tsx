@@ -1,6 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { auth } from '../../firebase'
 import { Box, Flex, Text, Checkbox, Button } from '@chakra-ui/react'
-import { useAddHRRequestMutation } from '../../redux/services/helpRequestService'
+import TutorFound from '../StudentHR/TutorFound'
+import {
+  useAddHRRequestMutation,
+  useGetHrRequestByValueQuery,
+  useGetHRRequestByIdQuery,
+} from '../../redux/services/helpRequestService'
 
 const ButtonBar = ({
   getHRData,
@@ -8,13 +14,45 @@ const ButtonBar = ({
   setloadingBtn,
   settutorComplete,
   userId,
+  setUserId,
   value,
   selectValue,
   codeValue,
   tags,
 }: any) => {
+  const [hrId, sethrId] = useState()
+  const [buttonClicked, setbuttonClicked] = useState(false)
   const [addHRRequest, addHRRequestResult] = useAddHRRequestMutation()
+  //@ts-ignore
+  // const getHrById = useGetHRRequestByIdQuery(hrId)
+
   const [SelectFav, setSelectFav] = useState(false)
+
+  const getHrByValue = useGetHrRequestByValueQuery(
+    //@ts-ignore
+    {
+      student_id: userId,
+
+      // tutor_id: getHrById.data?.tutor.id,
+      status: 'assigned',
+    }
+    // { pollingInterval: 3000 }
+  )
+
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+
+    //@ts-ignore
+    // getHrByValue.data.map((item) => {
+    //   //@ts-ignore
+    //   sethrId(item.id)
+    // })
+  }, [])
+  console.log(getHrByValue.data)
+
   return (
     <Flex
       px="10"
@@ -46,6 +84,7 @@ const ButtonBar = ({
       {!loadingBtn === true ? (
         <Button
           onClick={() => {
+            setbuttonClicked(true)
             addHRRequest({
               student_id: userId,
               description: value,
@@ -55,19 +94,7 @@ const ButtonBar = ({
               tags: tags,
             })
             console.log(addHRRequestResult)
-
-            getHRData()
-            setTimeout(() => {
-              settutorComplete(true)
-              setloadingBtn(false)
-
-              window.scrollTo({
-                left: 0,
-                top: document.body.scrollHeight,
-                behavior: 'smooth',
-              })
-            }, 3000)
-            setloadingBtn(true)
+            console.log(getHrByValue.data)
           }}
           ml={105}
           letterSpacing={2}
@@ -111,8 +138,24 @@ const ButtonBar = ({
           You can continue to update your request after submitting
         </Text>
       </Box>
+      {getHrByValue?.data?.length && buttonClicked == true ? (
+        <TutorFound data={getHrByValue.data} />
+      ) : null}
     </Flex>
   )
 }
 
 export default ButtonBar
+
+// getHRData()
+// setTimeout(() => {
+//   settutorComplete(true)
+//   setloadingBtn(false)
+
+//   window.scrollTo({
+//     left: 0,
+//     top: document.body.scrollHeight,
+//     behavior: 'smooth',
+//   })
+// }, 3000)
+// setloadingBtn(true)

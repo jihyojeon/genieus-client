@@ -35,7 +35,6 @@ const HrContent = ({ settutorComplete }: any) => {
   const [selectValue, setSelectValue] = useState('')
   const [userId, setUserId] = useState()
   let tags = value.match(/#[a-z]+/gi)
-  console.log(tags)
 
   let handleInputChange = (e: any): void => {
     let inputValue = e.target.value
@@ -198,6 +197,7 @@ const HrContent = ({ settutorComplete }: any) => {
         setloadingBtn={setloadingBtn}
         getHRData={getHRData}
         codeValue={codeValue}
+        setUserId={setUserId}
       />
     </Box>
   )

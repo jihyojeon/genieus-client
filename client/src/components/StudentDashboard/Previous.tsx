@@ -54,10 +54,10 @@ const Previous = () => {
                 width="300px"
               >
                 <Text>Issue solved - {el.issue}</Text>
-                <Text>Tutor - {el.tutor}</Text>
+                {/* <Text>Tutor - {el.tutor}</Text> */}
                 <Text>Date: {moment(el.createdAt).format('l')}</Text>
                 <Text>Langauge: {el.language}</Text>
-                {/* TODO: CHANGE TO STAR RATING */}
+
                 <Text>Rating - {el.rating}</Text>
               </Flex>
             </Box>
