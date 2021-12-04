@@ -53,6 +53,7 @@ export default function Pricing() {
         py={10}
       >
         <PriceWrapper>
+
           <Box maxWidth="20rem">
             <Box
               color={useColorModeValue('gray.500', 'gray.100')}
@@ -61,6 +62,7 @@ export default function Pricing() {
             >
               <Text fontWeight="500" fontSize="2xl">
                 Basic
+
               </Text>
               <HStack justifyContent="center">
                 <Text fontSize="3xl" fontWeight="600">
