@@ -158,9 +158,60 @@ const HrContent = ({ settutorComplete }: any) => {
                     placeholder="Select language"
                     isRequired
                   >
-                    <option value="javascript">JavaScript</option>
-                    <option value="python">Python</option>
-                    <option value="cplus">C++</option>
+                    <option>c</option>
+
+                    <option>coffeescript</option>
+                    <option>cpp</option>
+                    <option>csharp</option>
+                    <option>csp</option>
+                    <option>css</option>
+                    <option>dart</option>
+                    <option>dockerfile</option>
+
+                    <option>elixir</option>
+                    <option>flow9</option>
+
+                    <option>go</option>
+                    <option>graphql</option>
+                    <option>handlebars</option>
+                    <option>hcl</option>
+                    <option>html</option>
+                    <option>ini</option>
+                    <option>java</option>
+                    <option>javascript</option>
+                    <option>json</option>
+                    <option>julia</option>
+                    <option>kotlin</option>
+                    <option>less</option>
+                    <option>markdown</option>
+                    <option>mysql</option>
+                    <option>pascal</option>
+                    <option>perl</option>
+                    <option>pgsql</option>
+                    <option>php</option>
+                    <option>plaintext</option>
+                    <option>powerquery</option>
+                    <option>powershell</option>
+                    <option>pug</option>
+                    <option>python</option>
+                    <option>r</option>
+                    <option>razor</option>
+                    <option>redis</option>
+                    <option>redshift</option>
+                    <option>restructuredtext</option>
+                    <option>ruby</option>
+                    <option>rust</option>
+                    <option>sb</option>
+                    <option>scala</option>
+                    <option>scheme</option>
+                    <option>scss</option>
+                    <option>shell</option>
+                    <option>sol</option>
+                    <option>sparql</option>
+                    <option>sql</option>
+                    <option>swift</option>
+                    <option>typescript</option>
+                    <option>xml</option>
                   </Select>
                 </Flex>
               </Flex>
@@ -174,7 +225,7 @@ const HrContent = ({ settutorComplete }: any) => {
               >
                 <Editor
                   height="50vh"
-                  defaultLanguage="javascript"
+                  language={selectValue}
                   defaultValue="// Provide sample code to help outline your problem..."
                   value={codeValue}
                   onChange={handleEditorChange}
