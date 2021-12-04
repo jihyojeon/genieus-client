@@ -26,22 +26,13 @@ const ButtonBar = ({
   codeValue,
   tags,
 }: any) => {
-  const [hrId, sethrId] = useState()
-  const [buttonClicked, setbuttonClicked] = useState(false)
   const [addHRRequest, addHRRequestResult] = useAddHRRequestMutation()
   const [loadingBtn, setloadingBtn] = useState(false)
+  const [SelectFav, setSelectFav] = useState(false)
   //@ts-ignore
   const hrById = useGetHRRequestByIdQuery(addHRRequestResult?.data?.id, {
     pollingInterval: 3000,
   })
-
-  const TutorPresent = () => {
-    setloadingBtn(false)
-    // @ts-ignore
-    return <TutorFound tutors={hrById.data.interested_tutors} />
-  }
-
-  const [SelectFav, setSelectFav] = useState(false)
 
   useEffect(() => {
     if (hrById.data?.interested_tutors.length !== 0) {
@@ -153,7 +144,10 @@ const ButtonBar = ({
         <Flex justifyContent="center">
           {hrById.data && hrById.data.interested_tutors.length !== 0 ? (
             //@ts-ignore
-            <TutorFound tutors={hrById.data.interested_tutors} />
+            <TutorFound
+              hrById={hrById}
+              tutors={hrById.data.interested_tutors}
+            />
           ) : (
             <Text mt={5} fontFamily="montserrat" fontSize="15px">
               Available tutors will be displayed below...

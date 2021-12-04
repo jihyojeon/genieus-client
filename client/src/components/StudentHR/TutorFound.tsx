@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { useUpdateHRRequestMutation } from '../../redux/services/helpRequestService'
+import { useNavigate } from 'react-router-dom'
 
 import {
   Box,
@@ -19,11 +21,16 @@ import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
-const TutorFound = ({ tutors }: { tutors: any[] }) => {
+const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
+  const navigate = useNavigate()
   const [tutorId, setTutorId] = useState('')
   const tutorValue = useGetTutorByIdQuery(tutorId)
+  const [updateHr, updateHrResult] = useUpdateHRRequestMutation()
+  const declinedTutors: [] = []
+  const tutor = tutorValue.data?.id
 
   useEffect(() => {
+    console.log(hrById)
     // @ts-ignore
     tutors.map((tutor) => {
       setTutorId(tutor)
@@ -132,6 +139,15 @@ const TutorFound = ({ tutors }: { tutors: any[] }) => {
                 Accept
               </Button>
               <Button
+                onClick={() => {
+                  //@ts-ignore
+                  declinedTutors.push(tutor)
+                  updateHr({
+                    id: hrById.data.id,
+                    declined_tutors: declinedTutors,
+                  })
+                  navigate('/student-dashboard')
+                }}
                 opacity="0.5"
                 flex={1}
                 fontSize={'sm'}
