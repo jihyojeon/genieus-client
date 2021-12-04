@@ -14,7 +14,7 @@ import ModalDecline from './ModalDecline'
 import ModalComplete from './ModalComplete'
 // import { useBeforeunload } from 'react-beforeunload'
 
-const ChatActions = (props: any) => {
+const ChatZoom = (props: any) => {
   const navigate = useNavigate()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -76,51 +76,13 @@ const ChatActions = (props: any) => {
       height="100%"
       justifyContent="space-between"
     >
-      <Heading fontFamily="montserrat" letterSpacing={1} size="mg">
-        Actions
-      </Heading>
-      <Text>
-        You have {seconds / 60} minutes to further discuss your problem and
-        finalise whether to proceed with this help request.
-      </Text>
-      <Text mt="0.5rem">
-        If either of you decline to proceed, or the timer finishes, you will not
-        be charged for the elapsed time.
-      </Text>
-
-      {/* TESTING */}
-      <Button w="100px" onClick={onOpen}>
-        Decline
-      </Button>
-      <ModalDecline
-        isOpen={isOpen}
-        onClose={onClose}
-        name={name}
-        imageUrl={imageUrl}
-      />
-
       <Divider mt="0.5rem" />
       <Text>If wishing to proceed, click Open Zoom below.</Text>
       <Button w="100px" onClick={zoomButtonHandler}>
         Open Zoom
       </Button>
-      <Divider mt="0.5rem" />
-      <Text>
-        Once your help request is complete, click the button below to mark your
-        call as complete.
-      </Text>
-      <Button w="100px" onClick={onOpen}>
-        Complete
-      </Button>
-      {/* TODO: RESOLVE TWO MODALS ON SAME SCREEN ISSUE */}
-      {/* <ModalComplete
-          isOpen={isOpen}
-          onClose={onClose}
-          name={name}
-          imageUrl={imageUrl}
-        /> */}
     </Flex>
   )
 }
 
-export default ChatActions
+export default ChatZoom

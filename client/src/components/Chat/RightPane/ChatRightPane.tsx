@@ -1,10 +1,10 @@
-import { Box, Flex, FormControl, Button, Input } from '@chakra-ui/react'
+import React, { useState, useEffect } from 'react'
+import { Box, Flex } from '@chakra-ui/react'
 import ChatBubble from './ChatBubble'
 import socket, {
   checkAndReconnectToSocket,
 } from '../../../redux/services/socket'
 import { auth } from '../../../firebase'
-import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import ChatInput from './ChatInput'
 
