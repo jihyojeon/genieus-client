@@ -1,31 +1,21 @@
 import {
-  Image,
   Box,
   Flex,
   Text,
   Heading,
-  List,
-  UnorderedList,
-  ListItem,
   HStack,
   Tag,
   TagLabel,
-  Textarea,
   VStack,
   useDisclosure
 } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCog } from '@fortawesome/free-solid-svg-icons'
-
 
 import { auth } from '../../firebase'
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
-import ModalEditTutorProfile from './ModalEditTutorProfile'
 
 
 export const TutorInformation = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const [userId, setUserId] = useState()
   //@ts-ignore
   const tutor = useGetTutorByIdQuery(userId)
@@ -51,13 +41,6 @@ export const TutorInformation = () => {
           >
             Tutor Information:
           </Heading>
-          <Box
-          _hover={{ opacity: 0.8, color: 'indigo.400' }}
-          onClick={onOpen}
-          ml={5}
-        >
-          <FontAwesomeIcon size="sm" icon={faCog} />
-        </Box>
         </Flex>
 
         <Flex direction="column">
@@ -126,11 +109,6 @@ export const TutorInformation = () => {
           </Flex>
         </Flex>
       </Box>
-      <Box>
-        
-      </Box>
-      {/*@ts-ignore*/}
-      <ModalEditTutorProfile tutor={tutor.data} isOpen={isOpen} onClose={onClose} />
     </Flex>
   )
 }
