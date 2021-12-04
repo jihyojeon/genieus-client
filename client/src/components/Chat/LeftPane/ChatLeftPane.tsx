@@ -1,7 +1,9 @@
 import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
-import ChatDuration from './ChatDuration'
-import ChatActions from './ChatActions'
 import ChatParticipant from './ChatParticipant'
+import ChatDuration from './ChatDuration'
+import ChatDecline from './ChatDecline'
+import ChatZoom from './ChatZoom'
+import ChatComplete from './ChatComplete'
 
 const ChatLeftPane = (props: any) => {
   // PROPS FOR CHAT
@@ -44,12 +46,32 @@ const ChatLeftPane = (props: any) => {
           padding="1rem"
           width="100%"
         >
-          <Flex direction="row" align="flex-end">
-            <ChatDuration seconds={seconds} />
-            <ChatParticipant name={name} imageUrl={imageUrl} />
-          </Flex>
+          <ChatParticipant name={name} imageUrl={imageUrl} />
         </Box>
-        <ChatActions
+        <Box
+          bg={useColorModeValue('gray.100', 'gray.700')}
+          borderRadius="1rem"
+          marginTop={'1rem'}
+          padding="1rem"
+          width="100%"
+        >
+          <ChatDuration seconds={seconds} />
+        </Box>
+        <ChatDecline
+          name={name}
+          imageUrl={imageUrl}
+          seconds={seconds}
+          zoomUrl={zoomUrl}
+          grow={1}
+        />
+        <ChatZoom
+          name={name}
+          imageUrl={imageUrl}
+          seconds={seconds}
+          zoomUrl={zoomUrl}
+          grow={1}
+        />
+        <ChatComplete
           name={name}
           imageUrl={imageUrl}
           seconds={seconds}

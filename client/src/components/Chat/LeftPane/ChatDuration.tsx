@@ -5,7 +5,7 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 //  @ts-ignore
 const ChatDuration = (props: any) => {
   // TODO: REFRESHING PAGE RESETS COUNTDOWN TIMER - NEED TO PREVENT THIS
-  const minutes: number = 1.5
+  const minutes: number = 3
   const seconds: number = minutes * 60
 
   // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
@@ -64,7 +64,6 @@ const ChatDuration = (props: any) => {
             seconds
           </Text>
           <Text
-            // color={useColorModeValue('white', 'black')}
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={20}
@@ -78,7 +77,6 @@ const ChatDuration = (props: any) => {
       return (
         <Box>
           <Text
-            // color={useColorModeValue('white', 'black')}
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={25}
@@ -87,7 +85,6 @@ const ChatDuration = (props: any) => {
             {Math.ceil(remainingTime / 60)}
           </Text>
           <Text
-            // color={useColorModeValue('white', 'black')}
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={20}
@@ -96,7 +93,6 @@ const ChatDuration = (props: any) => {
             mins
           </Text>
           <Text
-            // color={useColorModeValue('white', 'black')}
             fontFamily="montserrat"
             letterSpacing={1}
             fontSize={20}
@@ -110,7 +106,7 @@ const ChatDuration = (props: any) => {
   }
 
   return (
-    <Flex direction="row">
+    <Flex direction="row" justify="center" align="center">
       <CountdownCircleTimer
         {...timerProps}
         isPlaying={clockRunning}
