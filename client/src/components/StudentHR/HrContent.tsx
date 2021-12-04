@@ -1,4 +1,3 @@
-import FocusLock from 'react-focus-lock'
 import React, { useState, useEffect } from 'react'
 import Split from 'react-split'
 import ButtonBar from './ButtonBar'
@@ -12,58 +11,51 @@ import {
   Box,
   Image,
   GridItem,
-  UnorderedList,
   ListItem,
+  ListIcon,
   Heading,
   Flex,
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
-  useDisclosure,
-  IconButton,
   PopoverBody,
   PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
   Portal,
   Input,
-  Select,
   Text,
   HStack,
   FormControl,
-  FormLabel,
   useColorModeValue,
   Tag,
   TagLabel,
-  Stack,
-  ButtonGroup,
   Button,
   Textarea,
 } from '@chakra-ui/react'
 import { connectToSocket } from '../../redux/services/socket'
 
 const HrContent = ({ settutorComplete }: any) => {
-  const languageKey = Object.keys(ProgrammingLanguages)
+  const languageKeys = Object.keys(ProgrammingLanguages)
 
   const [value, setValue] = useState('')
-  const [codeValue, setcodeValue] = useState('')
-  const [loadingBtn, setloadingBtn] = useState(false)
+  const [codeValue, setCodeValue] = useState('')
+  const [loadingBtn, setLoadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
   const [searchValue, setSearchValue] = useState('')
-  const [filteredLanguages, setfilteredLanguages] = useState(languageKey)
+  const [filteredLanguages, setFilteredLanguages] = useState(languageKeys)
   const [userId, setUserId] = useState()
   let tags = value.match(/#[a-z]+/gi)
 
   const filterLanguages = (e: any) => {
     setSearchValue(e.target.value)
-    setfilteredLanguages(
-      languageKey.filter((language: string) => {
+    setFilteredLanguages(
+      languageKeys.filter((language: string) => {
         console.log(searchValue, filteredLanguages)
 
         return searchValue
           ? language.toLowerCase().includes(searchValue.toLowerCase())
-          : languageKey
+          : languageKeys
       })
     )
   }
@@ -73,7 +65,7 @@ const HrContent = ({ settutorComplete }: any) => {
     setValue(inputValue)
   }
   function handleEditorChange(value: any, event: any): void {
-    setcodeValue(value)
+    setCodeValue(value)
   }
 
   // Form output
@@ -172,9 +164,16 @@ const HrContent = ({ settutorComplete }: any) => {
                       src={ProgrammingLanguages[selectValue]}
                     />
                   )}
-                  <Tag mr={5} variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>{selectValue}</TagLabel>
-                  </Tag>
+                  {selectValue && (
+                    <Tag
+                      mr={5}
+                      variant="outline"
+                      size="lg"
+                      colorScheme="indigo"
+                    >
+                      <TagLabel>{selectValue}</TagLabel>
+                    </Tag>
+                  )}
                   <Popover>
                     <PopoverTrigger>
                       <Button>Search</Button>
@@ -201,7 +200,21 @@ const HrContent = ({ settutorComplete }: any) => {
                                 onClick={() => setSelectValue(lang)}
                                 listStyleType={'none'}
                               >
-                                {lang}
+                                <Flex alignItems="center" direction="row">
+                                  {/*@ts-ignore*/}
+                                  <Image
+                                    mr={5}
+                                    height="1rem"
+                                    width="1rem"
+                                    borderRadius="5"
+                                    // @ts-ignore
+                                    src={ProgrammingLanguages[lang]}
+                                  />
+                                  <Text>
+                                    {lang.charAt(0).toUpperCase() +
+                                      lang.substr(1).toLowerCase()}
+                                  </Text>
+                                </Flex>
                               </ListItem>
                             )
                           })}
@@ -209,72 +222,6 @@ const HrContent = ({ settutorComplete }: any) => {
                       </PopoverContent>
                     </Portal>
                   </Popover>
-
-                  {/* <Select
-                    onChange={(e) => setSelectValue(e.target.value)}
-                    value={selectValue}
-                    colorScheme="indigo"
-                    borderColor="indigo.300"
-                    maxW={'200px'}
-                    variant="outline"
-                    placeholder="Select language"
-                    isRequired
-                  >
-                    <option>c</option>
-
-                    <option>coffeescript</option>
-                    <option>cpp</option>
-                    <option>csharp</option>
-                    <option>csp</option>
-                    <option>css</option>
-                    <option>dart</option>
-                    <option>dockerfile</option>
-
-                    <option>elixir</option>
-                    <option>flow9</option>
-
-                    <option>go</option>
-                    <option>graphql</option>
-                    <option>handlebars</option>
-                    <option>hcl</option>
-                    <option>html</option>
-                    <option>ini</option>
-                    <option>java</option>
-                    <option>javascript</option>
-                    <option>json</option>
-                    <option>julia</option>
-                    <option>kotlin</option>
-                    <option>less</option>
-                    <option>markdown</option>
-                    <option>mysql</option>
-                    <option>pascal</option>
-                    <option>perl</option>
-                    <option>pgsql</option>
-                    <option>php</option>
-                    <option>plaintext</option>
-                    <option>powerquery</option>
-                    <option>powershell</option>
-                    <option>pug</option>
-                    <option>python</option>
-                    <option>r</option>
-                    <option>razor</option>
-                    <option>redis</option>
-                    <option>redshift</option>
-                    <option>restructuredtext</option>
-                    <option>ruby</option>
-                    <option>rust</option>
-                    <option>sb</option>
-                    <option>scala</option>
-                    <option>scheme</option>
-                    <option>scss</option>
-                    <option>shell</option>
-                    <option>sol</option>
-                    <option>sparql</option>
-                    <option>sql</option>
-                    <option>swift</option>
-                    <option>typescript</option>
-                    <option>xml</option>
-                  </Select> */}
                 </Flex>
               </Flex>
               <Box
