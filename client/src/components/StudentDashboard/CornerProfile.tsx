@@ -17,13 +17,7 @@ import { SettingsIcon } from '@chakra-ui/icons'
 import ModalEditProfile from './ModalEditProfile'
 import { useNavigate } from 'react-router-dom'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
-
-// TODO: DUMMY OBJECT - PULL FROM DATABASE
-const userDetailsObj: any = {
-  name: 'David',
-  tier: 'Pro',
-  avatar: 'https://bit.ly/sage-adebayo',
-}
+import { disconnectFromSocket } from '../../redux/services/socket'
 
 const CornerProfile = () => {
   const navigate = useNavigate()
@@ -45,9 +39,8 @@ const CornerProfile = () => {
       .signOut()
       .then(() => navigate('/'))
       .catch((err) => console.log(err))
+    disconnectFromSocket()
   }
-
-  const [userDetails, setUserDetails] = useState(userDetailsObj)
 
   return (
     <Flex justifyContent="flex-end" mr={5} px={0} py={0} h="10vh">
@@ -100,7 +93,12 @@ const CornerProfile = () => {
           </Stack>
         </Flex>
       </Flex>
-      <ModalEditProfile student={student.data} userId={userId} isOpen={isOpen} onClose={onClose} />
+      <ModalEditProfile
+        student={student.data}
+        userId={userId}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </Flex>
   )
 }

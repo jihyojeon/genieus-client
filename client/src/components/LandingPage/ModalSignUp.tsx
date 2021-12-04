@@ -31,18 +31,9 @@ import {
   FormHelperText,
   Center,
 } from '@chakra-ui/react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAddStudentMutation } from '../../redux/services/studentService'
-
-// {
-//   email : string
-//   name : string
-//   id : string
-//   subscription_type: ('basic', 'pro', 'max')
-//   photo_url: string
-//   spoken_language: string[]
-//   location?: string
-// }
+import { connectToSocket } from '../../redux/services/socket'
 
 //@ts-ignore
 const ModalSignUp = ({ isOpen, onClose }) => {
@@ -62,9 +53,8 @@ const ModalSignUp = ({ isOpen, onClose }) => {
         registerPassword
       )
 
-      const userId = await auth.currentUser?.uid
-      console.log(registerEmail, userId, username, radioValue)
-
+      const userId = auth.currentUser?.uid
+      connectToSocket(auth)
       await addStudent({
         email: registerEmail,
         id: userId,

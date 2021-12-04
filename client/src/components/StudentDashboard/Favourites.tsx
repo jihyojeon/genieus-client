@@ -20,9 +20,20 @@ import {
 import { useAddFavouriteTutorMutation } from '../../redux/services/studentService'
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 import FavouriteTutor from './FavouriteTutor'
+import socket, { checkAndReconnectToSocket } from '../../redux/services/socket'
+
+type ConnectedUsersRes = {
+  userID: string
+  connected: boolean
+}
+type ConnectedUsers = {
+  [userID: string]: boolean
+}
 
 const Favourites = () => {
-  const [userId, setUserId] = useState()
+  const [userId, setUserId] = useState<string | undefined>()
+  const [tutorConnectedStatus, setTutorConnectedStatus] =
+    useState<ConnectedUsers>({})
 
   //@ts-ignore
   const favouriteTutor = useGetFavouriteTutorsByIdQuery(userId)
@@ -36,8 +47,32 @@ const Favourites = () => {
       setUserId(item.uid)
     })
   }, [])
-
+  useEffect(() => {
+    if (userId) {
+      checkAndReconnectToSocket(userId)
+      socket.emit('request status')
+      socket.on('users', (users: ConnectedUsersRes[]) => {
+        const onlineStatus: ConnectedUsers = {}
+        users.forEach((user) => {
+          onlineStatus[user.userID] = user.connected
+        })
+        setTutorConnectedStatus(onlineStatus)
+      })
+      socket.on('user connected', (user) => {
+        setTutorConnectedStatus((prior) =>
+          Object.assign({}, prior, { [user]: true })
+        )
+      })
+      socket.on('user disconnected', (user) => {
+        console.log('userID', user)
+        setTutorConnectedStatus((prior) =>
+          Object.assign({}, prior, { [user]: false })
+        )
+      })
+    }
+  }, [userId])
   const { isOpen, onOpen, onClose } = useDisclosure()
+  console.log(tutorConnectedStatus)
 
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
@@ -59,7 +94,10 @@ const Favourites = () => {
         {/* @ts-ignore */}
         {favouriteTutor.isSuccess && favouriteTutor.data.length !== 0 ? (
           favouriteTutor.data.map((tutor: any) => (
-            <FavouriteTutor tutor={tutor} />
+            <FavouriteTutor
+              tutor={tutor}
+              connected={tutorConnectedStatus[tutor.id] || false}
+            />
           ))
         ) : (
           <Text textAlign="center" mt={10} fontSize={'20px'} opacity="0.6">

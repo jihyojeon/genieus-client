@@ -42,6 +42,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
       justifyContent="center"
       px="10"
     >
+
       <Button
         colorScheme="indigo"
         fontFamily="montserrat"
