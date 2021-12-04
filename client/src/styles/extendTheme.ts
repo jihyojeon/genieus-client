@@ -1,4 +1,5 @@
 import { extendTheme, withDefaultColorScheme } from '@chakra-ui/react'
+import { mode } from '@chakra-ui/theme-tools'
 import { ButtonStyle as Button } from './styleComponents/ButtonStyle'
 
 // 2. Extend the theme to include custom colors, fonts, etc
