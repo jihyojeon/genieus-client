@@ -148,7 +148,7 @@ export default function WithSpeechBubbles() {
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                'https://en.wikipedia.org/wiki/File:Michelle_Obama_2013_official_portrait.jpg'
+                'https://upload.wikimedia.org/wikipedia/commons/4/4b/Michelle_Obama_2013_official_portrait.jpg'
               }
               name={'Michelle Obama'}
               title={'Former First Lady'}
