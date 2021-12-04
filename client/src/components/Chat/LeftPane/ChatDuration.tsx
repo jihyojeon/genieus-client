@@ -3,7 +3,7 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 const ChatDuration = (props: any) => {
-  const [duration, setDuration] = useState(Date.now())
+  const [duration, setDuration] = useState()
 
   const MINUTES: number = 3
   const SECONDS: number = MINUTES * 60
@@ -21,6 +21,7 @@ const ChatDuration = (props: any) => {
     if (remainingTime === 0) {
       console.log('Countdown time ended')
       return <Text>{MINUTES} minute window expired</Text>
+      // TODO: POPUP + START BILLING + ?
     } else {
       return (
         <Box

@@ -10,6 +10,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import ModalDecline from './ModalDecline'
+// import { useBeforeunload } from 'react-beforeunload'
 
 const ChatActions = (props: any) => {
   const navigate = useNavigate()
@@ -21,14 +22,15 @@ const ChatActions = (props: any) => {
   const zoomUrl = props.zoomUrl
   const seconds = props.seconds
 
+  // TODO: ALL) DISPLAY WARNING IF ATTEMPT TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS CURRENTLY ON CHAT PAGE
+
   // TODO: TAKE THIS STATUS FROM SIGN-IN DETAILS
   const [isTutor, setIsTutor] = useState(true)
 
   const zoomButtonHandler = () => {
-    // TODO: 1) REPLACE COUNTDOWN TIMER WITH CLOCK
-    // TODO: DISPLAY WARNING IF ATTEMPT TO CLOSE THIS WINDOW
-    // TODO: HANDLE RECORDING OF ELAPSED TIME
-    // TODO: DISPLAY PERIODIC WARNINGS
+    // TODO: 1) REPLACE COUNTDOWN TIMER WITH CREDIT REMAINING
+    // TODO: 2) HANDLE RECORDING OF ELAPSED TIME
+    
     console.log(zoomUrl)
     navigator.clipboard.writeText(zoomUrl)
     window.open(zoomUrl)
@@ -42,6 +44,28 @@ const ChatActions = (props: any) => {
     // TODO: IF STUDENT -> RETURN TO STUDENT DASHBOARD
     console.log('Complete session')
   }
+
+  // useBeforeunload(
+  //   () =>
+  //     'Closing this tab will not allow you to mark the session as complete and will cause excessive billing.  Are you sure you wish to close this tab? '
+  // )
+
+  // CODE TO WARN AGAINST CLOSING THE CHAT WINDOW
+  // window.addEventListener("beforeunload", (ev) => 
+  // {  
+  //     ev.preventDefault();
+  //     return ev.returnValue = 'Are you sure you want to close?';
+  // });
+  // componentDidMount: function() {
+  //   window.addEventListener('onbeforeunload', this.handleWindowClose);
+  // },
+
+  // componentWillUnmount: function() {
+  //   window.removeEventListener('onbeforeunload', this.handleWindowClose);
+  // }
+  // // ----
+
+
 
   return (
     <Flex direction="column">
@@ -67,7 +91,12 @@ const ChatActions = (props: any) => {
         <Button w="100px" onClick={onOpen}>
           Decline
         </Button>
-        <ModalDecline isOpen={isOpen} onClose={onClose} name={name} imageUrl={imageUrl}/>
+        <ModalDecline
+          isOpen={isOpen}
+          onClose={onClose}
+          name={name}
+          imageUrl={imageUrl}
+        />
         {/* TESTING */}
 
         <Divider mt="0.5rem" />
