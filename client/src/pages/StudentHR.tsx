@@ -12,13 +12,14 @@ const StudentHR = () => {
     <Box>
       <TopBar />
       <HrContent settutorComplete={settutorComplete} />
-      {tutorComplete && (
-        <Box mt={10} p={0}>
-          <TutorFound />
-        </Box>
-      )}
     </Box>
   )
 }
 
 export default StudentHR
+
+// {tutorComplete && (
+//   <Box mt={10} p={0}>
+//     <TutorFound />
+//   </Box>
+// )}

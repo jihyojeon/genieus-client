@@ -7,6 +7,7 @@ export default interface HRType {
   language: string
   code: string
   favourites_only: boolean
+  tutor: any
 }
 
 export const helpRequestApi = createApi({
@@ -17,6 +18,7 @@ export const helpRequestApi = createApi({
     getHRRequests: builder.query<HRType, void>({
       query: () => `/helprequest`,
     }),
+
     getHrRequestByValue: builder.query<
       HRType[],
       {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import {
   Box,
@@ -11,18 +11,26 @@ import {
   Avatar,
   Center,
   Stack,
-
   Badge,
   useColorModeValue,
 } from '@chakra-ui/react'
 
-const TutorFound = () => {
+const TutorFound = ({ data }: { data: any }) => {
+  const [tutorName, setTutorName] = useState('')
+
+  useEffect(() => {
+    data.map((item: any) => {
+      setTutorName(item.tutor.name)
+    })
+  })
+
   return (
     <Grid position="relative" id="tutor" templateColumns={'1fr, 2fr'}>
       <GridItem>
         <Flex direction="column" align="center" justifyContent="space-evenly">
+          <Button onClick={() => console.log(data)}> </Button>
           <Heading fontFamily="sans-serif" as="h3" fontWeight="200">
-            Lindsey is ready to help!
+            {tutorName} is ready to help!
           </Heading>
         </Flex>
       </GridItem>
@@ -59,7 +67,7 @@ const TutorFound = () => {
               }}
             />
             <Heading fontSize={'2xl'} fontFamily={'body'}>
-              Lindsey James
+              {tutorName}
             </Heading>
 
             <Text
