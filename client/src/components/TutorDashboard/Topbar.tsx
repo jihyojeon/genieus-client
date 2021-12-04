@@ -19,6 +19,7 @@ import { auth } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
 
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
+import { disconnectFromSocket } from '../../redux/services/socket'
 //@ts-ignore
 export default function Topbar() {
   const navigate = useNavigate()
@@ -40,6 +41,7 @@ export default function Topbar() {
       .signOut()
       .then(() => navigate('/'))
       .catch((err) => console.log(err))
+    disconnectFromSocket()
   }
 
   return (

@@ -25,4 +25,9 @@ export function connectToSocket(auth: Auth) {
   }
 }
 
+export function disconnectFromSocket() {
+  socket.disconnect()
+  console.log('disconencted from socket', socket)
+}
+
 export default socket

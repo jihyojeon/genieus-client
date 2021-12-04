@@ -34,7 +34,6 @@ const ModalLogIn = ({ isOpen, onClose }) => {
 
   const [loginEmail, setLoginEmail] = useState('')
   const [loginpassword, setLoginPassword] = useState('')
-  const [isLoggedIn, setisLoggedIn] = useState(false)
   const [errormsg, seterrormsg] = useState('')
 
   const login = async () => {
