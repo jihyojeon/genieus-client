@@ -1,4 +1,4 @@
-{
+export const ProgrammingLanguages = {
   "android" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg",
   "angularjs" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
   "bash" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg",
