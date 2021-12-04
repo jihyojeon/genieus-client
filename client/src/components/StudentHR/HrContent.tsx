@@ -1,40 +1,72 @@
+import FocusLock from 'react-focus-lock'
 import React, { useState, useEffect } from 'react'
 import Split from 'react-split'
 import ButtonBar from './ButtonBar'
 import Editor from '@monaco-editor/react'
 import '../../styles/example.css'
 import { auth } from '../../firebase'
+import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
 import {
   Grid,
   Box,
   Image,
   GridItem,
+  UnorderedList,
+  ListItem,
   Heading,
   Flex,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  useDisclosure,
+  IconButton,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  Portal,
+  Input,
   Select,
   Text,
   HStack,
+  FormControl,
+  FormLabel,
   useColorModeValue,
   Tag,
   TagLabel,
+  Stack,
+  ButtonGroup,
+  Button,
   Textarea,
 } from '@chakra-ui/react'
+import { connectToSocket } from '../../redux/services/socket'
 
 const HrContent = ({ settutorComplete }: any) => {
-  const imageObj = {
-    js: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
-    python: 'http://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png',
-    cplus:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png',
-  }
+  const languageKey = Object.keys(ProgrammingLanguages)
 
   const [value, setValue] = useState('')
   const [codeValue, setcodeValue] = useState('')
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
+  const [searchValue, setSearchValue] = useState('')
+  const [filteredLanguages, setfilteredLanguages] = useState(languageKey)
   const [userId, setUserId] = useState()
   let tags = value.match(/#[a-z]+/gi)
+
+  const filterLanguages = (e: any) => {
+    setSearchValue(e.target.value)
+    setfilteredLanguages(
+      languageKey.filter((language: string) => {
+        console.log(searchValue, filteredLanguages)
+
+        return searchValue
+          ? language.toLowerCase().includes(searchValue.toLowerCase())
+          : languageKey
+      })
+    )
+  }
 
   let handleInputChange = (e: any): void => {
     let inputValue = e.target.value
@@ -137,18 +169,48 @@ const HrContent = ({ settutorComplete }: any) => {
                       width="30px"
                       borderRadius="5"
                       // @ts-ignore
-                      src={
-                        selectValue === 'javascript'
-                          ? imageObj.js
-                          : selectValue === 'python'
-                          ? imageObj.python
-                          : selectValue === 'cplus'
-                          ? imageObj.cplus
-                          : null
-                      }
+                      src={ProgrammingLanguages[selectValue]}
                     />
                   )}
-                  <Select
+                  <Tag mr={5} variant="outline" size="lg" colorScheme="indigo">
+                    <TagLabel>{selectValue}</TagLabel>
+                  </Tag>
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button>Search</Button>
+                    </PopoverTrigger>
+                    <Portal>
+                      <PopoverContent>
+                        <PopoverArrow />
+
+                        <PopoverCloseButton />
+                        <PopoverBody>
+                          <FormControl>
+                            <Input
+                              value={searchValue}
+                              type="text"
+                              onChange={(e) => filterLanguages(e)}
+                              placeholder="Choose langauge..."
+                            ></Input>
+                          </FormControl>
+                        </PopoverBody>
+                        <PopoverFooter>
+                          {filteredLanguages.slice(0, 5).map((lang) => {
+                            return (
+                              <ListItem
+                                onClick={() => setSelectValue(lang)}
+                                listStyleType={'none'}
+                              >
+                                {lang}
+                              </ListItem>
+                            )
+                          })}
+                        </PopoverFooter>
+                      </PopoverContent>
+                    </Portal>
+                  </Popover>
+
+                  {/* <Select
                     onChange={(e) => setSelectValue(e.target.value)}
                     value={selectValue}
                     colorScheme="indigo"
@@ -212,7 +274,7 @@ const HrContent = ({ settutorComplete }: any) => {
                     <option>swift</option>
                     <option>typescript</option>
                     <option>xml</option>
-                  </Select>
+                  </Select> */}
                 </Flex>
               </Flex>
               <Box
