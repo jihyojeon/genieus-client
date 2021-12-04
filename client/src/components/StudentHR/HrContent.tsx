@@ -193,8 +193,6 @@ const HrContent = ({ settutorComplete }: any) => {
         userId={userId}
         selectValue={selectValue}
         settutorComplete={settutorComplete}
-        loadingBtn={loadingBtn}
-        setloadingBtn={setloadingBtn}
         getHRData={getHRData}
         codeValue={codeValue}
         setUserId={setUserId}
