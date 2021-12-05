@@ -106,10 +106,17 @@ const ModalSignUp = ({
       isOpen={isOpen}
       onClose={() => {
         onClose()
-        setbasicClicked(false)
-        setproClicked(false)
-        //@ts-ignore
-        setmaxClicked(false)
+        {
+          basicClicked && setbasicClicked(false)
+        }
+
+        {
+          proClicked && setproClicked(false)
+        }
+
+        {
+          maxClicked && setmaxClicked(false)
+        }
       }}
     >
       <ModalOverlay />

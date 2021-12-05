@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useState, useEffect } from 'react'
 import {
   Box,
   Stack,
@@ -37,6 +37,15 @@ export default function Pricing() {
   const [proClicked, setproClicked] = useState(false)
   const [maxClicked, setmaxClicked] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  // useEffect(() => {
+  //   //@ts-ignore
+  //   setbasicClicked(false)
+  //   //@ts-ignore
+  //   setproClicked(false)
+  //   //@ts-ignore
+  //   setmaxClicked(false)
+  // }, [basicClicked, proClicked, maxClicked])
 
   const getSubscriptions = useGetSubscriptionsQuery()
 
