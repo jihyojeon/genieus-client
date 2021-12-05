@@ -68,6 +68,8 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
           ? seterrormsg('Password must be more that 6 characters...')
           : errmsg.includes('(auth/email-already-in-use).')
           ? seterrormsg('Email is already in use...')
+          : errmsg.includes('(auth/missing-email).')
+          ? seterrormsg('Please enter a valid email...')
           : seterrormsg(error.message)
       }
     }
@@ -122,6 +124,9 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              <FormHelperText>
+                Password must be more than six characters
+              </FormHelperText>
             </FormControl>
 
             <HStack>
@@ -143,20 +148,20 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
         <ModalCloseButton />
 
         <ModalFooter>
-          <Flex
-            justifyContent="center"
-            fontFamily="montserrat"
-            mr={55}
-            align="center"
-            direction="column"
-            color="#cc0000"
-            opacity="0.7"
-          >
-            <Text color="#cc0000" opacity="0.7" fontFamily="montserrat" mb={2} textAlign="center">
+          <Flex w="100%" direction="column">
+            <Text
+              color="#cc0000"
+              opacity="0.7"
+              fontFamily="montserrat"
+              mb={3}
+              textAlign="center"
+            >
               {errormsg}
             </Text>
+            <Button w="100%" onClick={signup}>
+              Submit
+            </Button>
           </Flex>
-          <Button onClick={signup}>Submit</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

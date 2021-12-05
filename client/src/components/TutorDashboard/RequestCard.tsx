@@ -15,6 +15,7 @@ import {
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import HRType from '../../redux/services/helpRequestService'
+import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
 const imageObj = {
   python:
@@ -23,6 +24,7 @@ const imageObj = {
 
 //@ts-ignore
 export const RequestCard = ({ hr }: HRType) => {
+  console.log(hr)
   const navigate = useNavigate()
   return (
     <Center
@@ -51,7 +53,8 @@ export const RequestCard = ({ hr }: HRType) => {
             height="25px"
             top={2}
             left={5}
-            src={imageObj.python}
+            //@ts-ignore
+            src={ProgrammingLanguages[hr.language]}
           />
         </Box>
         <Flex justify={'center'} mt={-10}>

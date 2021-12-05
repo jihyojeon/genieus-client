@@ -61,7 +61,7 @@ const Hero = () => {
                   onClick={() => {
                     window.scrollTo({
                       left: 0,
-                      top: 800,
+                      top: 700,
                       behavior: 'smooth',
                     })
                   }}

@@ -176,20 +176,25 @@ const HrContent = ({ settutorComplete }: any) => {
                   )}
                   <Popover>
                     <PopoverTrigger>
-                      <Button>Search</Button>
+                      <Button
+                        opacity="0.6"
+                        variant="outline"
+                        colorScheme="indigo"
+                      >
+                        Choose Language
+                      </Button>
                     </PopoverTrigger>
                     <Portal>
                       <PopoverContent>
                         <PopoverArrow />
 
-                        <PopoverCloseButton />
                         <PopoverBody>
                           <FormControl>
                             <Input
                               value={searchValue}
                               type="text"
                               onChange={(e) => filterLanguages(e)}
-                              placeholder="Choose langauge..."
+                              placeholder="Choose language..."
                             ></Input>
                           </FormControl>
                         </PopoverBody>
@@ -197,7 +202,9 @@ const HrContent = ({ settutorComplete }: any) => {
                           {filteredLanguages.slice(0, 5).map((lang) => {
                             return (
                               <ListItem
-                                onClick={() => setSelectValue(lang)}
+                                onClick={() => {
+                                  setSelectValue(lang)
+                                }}
                                 listStyleType={'none'}
                               >
                                 <Flex alignItems="center" direction="row">
@@ -210,7 +217,13 @@ const HrContent = ({ settutorComplete }: any) => {
                                     // @ts-ignore
                                     src={ProgrammingLanguages[lang]}
                                   />
-                                  <Text>
+                                  <Text
+                                    _hover={{
+                                      cursor: 'pointer',
+                                      opacity: '0.7',
+                                      color: 'indigo.300',
+                                    }}
+                                  >
                                     {lang.charAt(0).toUpperCase() +
                                       lang.substr(1).toLowerCase()}
                                   </Text>
