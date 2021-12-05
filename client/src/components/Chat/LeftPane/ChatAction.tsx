@@ -12,12 +12,13 @@ import {
 } from '@chakra-ui/react'
 import ModalDecline from './ModalDecline'
 import ModalComplete from './ModalComplete'
-// import { useBeforeunload } from 'react-beforeunload'
 
 const ChatAction = (props: any) => {
   const navigate = useNavigate()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const [canDecline, setCanDecline] = useState(true)
 
   const name = props.name
   const imageUrl = props.imageUrl
@@ -45,45 +46,38 @@ const ChatAction = (props: any) => {
     console.log('Complete session')
   }
 
-  // TODO: 7) DISPLAY WARNING IF ATTEMPTING TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS CURRENTLY ON CHAT PAGE
-  // useBeforeunload(
-  //   () =>
-  //     'Closing this tab will not allow you to mark the session as complete and will cause excessive billing.  Are you sure you wish to close this tab? '
-  // )
+  const TESTING = () => {
+    if (canDecline) {
+      console.log('TESTING 1')
+      setCanDecline(false)
+    } else {
+      console.log('TESTING 2')
+      setCanDecline(true)
+    }
+  }
 
-  // CODE TO WARN AGAINST CLOSING THE CHAT WINDOW
-  // window.addEventListener("beforeunload", (ev) =>
-  // {
-  //     ev.preventDefault();
-  //     return ev.returnValue = 'Are you sure you want to close?';
-  // });
-  // componentDidMount: function() {
-  //   window.addEventListener('onbeforeunload', this.handleWindowClose);
-  // },
-
-  // componentWillUnmount: function() {
-  //   window.removeEventListener('onbeforeunload', this.handleWindowClose);
-  // }
-  // // ----
-
-  const actionButton = ( action : string) => {
+  const actionButton = (action: string) => {
+    // DECLINE BUTTON
     if (action === 'decline') {
-      console.log('Decline? ', action)
-      return (
-        <Box>
-          <Button w="15ch" onClick={onOpen}>
-            Decline
-          </Button>
-          <ModalDecline
-            isOpen={isOpen}
-            onClose={onClose}
-            name={name}
-            imageUrl={imageUrl}
-          />
-        </Box>
-      )
+      // TODO: MAKE RENDERING OF THIS BOX AND BUTTON VANISH ONCE DECLINING WINDOW HAS RUN OUT
+      if (canDecline) {
+        return (
+          <Box>
+            <Button w="15ch" onClick={onOpen}>
+              Decline
+            </Button>
+            <ModalDecline
+              isOpen={isOpen}
+              onClose={onClose}
+              name={name}
+              imageUrl={imageUrl}
+            />
+          </Box>
+        )
+      }
+
+    // ZOOM BUTTON
     } else if (action === 'zoom') {
-      console.log('Zoom? ', action)
       return (
         <Box>
           <Button w="15ch" onClick={zoomButtonHandler}>
@@ -97,8 +91,9 @@ const ChatAction = (props: any) => {
           /> */}
         </Box>
       )
+
+    // COMPLETE BUTTON
     } else if (action === 'complete') {
-      console.log('Complete? ', action)
       return (
         <Box>
           <Button w="15ch" onClick={onOpen}>
@@ -112,38 +107,71 @@ const ChatAction = (props: any) => {
           />
         </Box>
       )
+
+    // TESTING BUTTON
+    } else if (action === 'test') {
+      return (
+        <Box>
+          <Button w="15ch" onClick={TESTING}>
+            TESTING
+          </Button>
+          <ModalComplete
+            isOpen={isOpen}
+            onClose={onClose}
+            name={name}
+            imageUrl={imageUrl}
+          />
+        </Box>
+      )
     }
   }
 
-  const actionText = ( action : string) => {
+  const actionText = (action: string) => {
+
+    // DECLINE TEXT
     if (action === 'decline') {
-      console.log('Decline? ', action)
-      return (
-        <Box>
-          <Text>
-            You have {seconds / 60} minutes to further discuss your problem and
-            finalise whether to proceed with this help request.
-          </Text>
-          <Text mt="0.5rem">
-            If either of you decline to proceed, or the timer finishes, you will not
-            be charged for the elapsed time.
-          </Text>
-        </Box>
-      )
+      // TODO: MAKE RENDERING OF THIS BOX AND BUTTON VANISH ONCE DECLINING WINDOW HAS RUN OUT
+      // TODO: CHANGE TEXT IF STUDENT
+      if (canDecline) {
+        return (
+          <Box>
+            <Text>
+              You have {seconds / 60} minutes to further discuss your problem
+              and finalise whether to proceed with this help request.
+            </Text>
+            <Text mt="0.5rem">
+              If either of you decline to proceed before the timer finishes, you
+              will not be charged.
+            </Text>
+          </Box>
+        )
+      }
+
+    // ZOOM TEXT
     } else if (action === 'zoom') {
-      console.log('Zoom? ', action)
       return (
         <Box>
           <Text>If wishing to proceed, click Open Zoom below.</Text>
         </Box>
       )
+
+    // COMPLETE TEXT
     } else if (action === 'complete') {
-      console.log('Complete? ', action)
       return (
         <Box>
           <Text>
-            Once your help request is complete, click the button below to mark your
-            call as complete.
+            Once your help request is complete, click the button below to mark
+            your call as complete.
+          </Text>
+        </Box>
+      )
+
+    // TESTING TEXT
+    } else if (action === 'test') {
+      return (
+        <Box>
+          <Text>
+            Delete this after testing
           </Text>
         </Box>
       )
@@ -162,8 +190,8 @@ const ChatAction = (props: any) => {
       width="100%"
       justifyContent="space-between"
     >
-      {actionButton(action)}
       {actionText(action)}
+      {actionButton(action)}
     </Flex>
   )
 }

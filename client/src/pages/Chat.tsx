@@ -1,21 +1,37 @@
-import React from 'react'
-import { Box, Grid, GridItem } from '@chakra-ui/react'
+import {
+  Grid,
+  GridItem,
+  // useColorModeValue
+} from '@chakra-ui/react'
 import ChatLeftPane from '../components/Chat/LeftPane/ChatLeftPane'
 import ChatRightPane from '../components/Chat/RightPane/ChatRightPane'
 import ChatTopBar from '../components/Chat/TopPane/ChatTopBar'
+// import { useBeforeunload } from 'react-beforeunload'
 
-//
-// CONSTANTS PROP DRILLED THROUGHOUT CHAT COMPONENTS - CHANGE HERE
-//
+  // TODO: FIXES REQUIRED:
+  // TODO: 1. REFRESHING PAGE RESETS COUNTDOWN TIMER
+  // TODO: DISPLAY WARNING IF ATTEMPTING TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS COMMENTED OUT ABOVE AND BELOW?
+  // TODO: 2. REFACTOR PROP-DRILLING (START IN CHAT PAGE?)
+  // useBeforeunload(
+  //   () =>
+  //     'Closing this tab will not allow you to mark the session as complete and will cause excessive billing.  Are you sure you wish to close this tab? '
+  // )
 
-const minutes: number = 3 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE IN MINUTES
-const seconds: number = minutes * 60 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE CONVERTED TO SECONDS
-const zoomUrl =
-  'https://zoom.us/j/91414924610?pwd=RHk3ZGxVMDlPY2lvMlU4R3RnSk1ZUT09' // ZOOM URL (COPIED TO CLIPBOARD AND USED IN BUTTON)
-const participantsObj: any = {
-  name: 'Vic', // PROVIDES NAME OF OTHER PARTY
-  image: 'https://bit.ly/dan-abramov', // PROVIDES MUG SHOT OF OTHER PARTY
-}
+  // CODE TO WARN AGAINST CLOSING THE CHAT WINDOW
+  // window.addEventListener("beforeunload", (ev) =>
+  // {
+  //     ev.preventDefault();
+  //     return ev.returnValue = 'Are you sure you want to close?';
+  // });
+  // componentDidMount: function() {
+  //   window.addEventListener('onbeforeunload', this.handleWindowClose);
+  // },
+
+  // componentWillUnmount: function() {
+  //   window.removeEventListener('onbeforeunload', this.handleWindowClose);
+  // }
+  // // ----
+
 
 const Chat = () => {
   return (
@@ -27,16 +43,11 @@ const Chat = () => {
       templateRows="1fr auto"
     >
       <GridItem rowSpan={1} colSpan={3}>
-        <ChatTopBar seconds={seconds} zoomUrl={zoomUrl} />
+        <ChatTopBar />
       </GridItem>
 
       <GridItem rowSpan={1} colSpan={1}>
-        <ChatLeftPane
-          seconds={seconds}
-          zoomUrl={zoomUrl}
-          name={participantsObj.name}
-          imageUrl={participantsObj.image}
-        />
+        <ChatLeftPane />
       </GridItem>
 
       <GridItem rowSpan={1} colSpan={2}>

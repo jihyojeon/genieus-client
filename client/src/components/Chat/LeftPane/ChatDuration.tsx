@@ -1,44 +1,61 @@
 import { useState, useEffect } from 'react'
-import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  // useColorModeValue
+} from '@chakra-ui/react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 //  @ts-ignore
 const ChatDuration = (props: any) => {
-  // TODO: REFRESHING PAGE RESETS COUNTDOWN TIMER - NEED TO PREVENT THIS
-  const minutes: number = 3
-  const seconds: number = minutes * 60
+  
+  // TODO: TEST DATA------------REPLACE
+  const seconds: number = 10
+  const subscriptionRemainingSecs: number = 30
+  
+  // TODO: TEST DATA------------UNCOMMENT
+  // const seconds: number = props.seconds
+  // const subscriptionRemainingSecs: number =
+  //   subscriptionRemainingMins * 60 - seconds
 
-  // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
-  const subscriptionRemainingMins: number = 35
-  const subscriptionRemainingSecs: number =
-    subscriptionRemainingMins * 60 - seconds
-
+  const [isTutor, setIsTutor] = useState(false)
+  const [initialTimer, setInitialTimer] = useState(seconds)
+  const [secondTimer, setSecondTimer] = useState(subscriptionRemainingSecs)
   const [clockRunning, setClockRunning] = useState(true)
   const [canDecline, setCanDecline] = useState(true)
-  const [duration, setDuration] = useState(seconds)
+  const [key, setKey] = useState(0) // needed for re-setting clock after initial timer
 
-  // useEffect(() => {
-  //   console.log('USEEFFECT TRIGGERED')
-  //   // TODO: RE-RENDER SCREEN BUT WITH SUBSCRIPTION TIMER
-  // }, [canDecline === false])
-
-  const timerProps = {
-    isPlaying: clockRunning,
-    size: 170,
-    strokeWidth: 10,
-  }
 
   const countDownExpired = () => {
-    console.log('TIME EXPIRED')
+    console.log('COUNTDOWNEXPIRED FUNCTION TRIGGERED')
     setCanDecline(false)
-    console.log('CAN DECLINE: ', canDecline)
-    setDuration(subscriptionRemainingSecs)
-    console.log('DURATION: ', duration)
-    setClockRunning(true)
-    console.log('CLOCK RUNNING: ', clockRunning)
-    // TODO: IMPLEMENT REPLACEMENT CLOCK
     // TODO: 1. pass "canDecline" state to "ChatActions" component to negate "Decline" button (grey out button or replace popup with one stating declining is no longer possible)
-    // TODO: 2. start countdown clock from (remaining subscription minutes) minus (minutes)
+
+    if (isTutor) {
+      // TODO: TUTOR SHOULD NOW SEE A CLOCK COUNTING UP TO SHOW TIME ON CALL
+      return (
+        <Text>Show Time Elapsed Instead</Text>
+      )
+    } else {
+      setClockRunning(true)
+      setInitialTimer(secondTimer)
+      setKey(1)
+    }
+  }
+
+  const declineClicked = () => {
+    console.log('CD DECLINED')
+  }
+
+  const zoomClicked = () => {
+    console.log('CD ZOOM CLICKED')
+    setSecondTimer(subscriptionRemainingSecs)
+  }
+
+  const completeClicked = () => {
+    console.log('CD COMPLETED')
   }
 
   const renderCountDown = ({ remainingTime }: any) => {
@@ -106,17 +123,24 @@ const ChatDuration = (props: any) => {
   }
 
   return (
-    <Flex direction="row" justify="center" align="center">
+    <Flex direction="column" justify="center" align="center">
       <CountdownCircleTimer
-        {...timerProps}
-        isPlaying={clockRunning}
+        // initialRemainingTime={initialTimer}
         colors={[
           ['#004777', 0.33],
           ['#F7B801', 0.33],
           ['#A30000', 0.33],
         ]}
-        duration={duration}
-        onComplete={() => [false, duration]}
+        duration={initialTimer}
+        isPlaying={clockRunning}
+        key={key}
+        rotation={'clockwise'}
+        size={170}
+        strokeWidth={10}
+        onComplete={() => {
+          // console.log('TIMER ENDED')
+          return [false, 0]
+        }}
       >
         {renderCountDown}
       </CountdownCircleTimer>
