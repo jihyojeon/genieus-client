@@ -66,13 +66,18 @@ export const RequestCard = ({ hr }: HRType) => {
           />
         </Flex>
 
-        <Box p={6} display={'flex'} flexDirection={'column'} alignItems={'center'}>
+        <Box
+          p={6}
+          display={'flex'}
+          flexDirection={'column'}
+          alignItems={'center'}
+        >
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'lg'} fontWeight={500} fontFamily={'body'}>
               {hr.student.name}
             </Heading>
           </Stack>
-          <Text fontSize="13">{hr.description.substring(0,150)}</Text>
+          <Text fontSize="13">{hr.description.substring(0, 150)}</Text>
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             {/*@ts-ignore*/}
@@ -84,7 +89,6 @@ export const RequestCard = ({ hr }: HRType) => {
               )
             })}
           </Stack>
-
         </Box>
         <Button
           position={'absolute'}

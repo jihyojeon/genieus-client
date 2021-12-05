@@ -24,6 +24,7 @@ import {
   Radio,
   InputGroup,
   FormLabel,
+  FormErrorMessage,
   Input,
   Box,
   InputRightElement,
@@ -73,6 +74,8 @@ const ModalSignUp = ({ isOpen, onClose }) => {
           ? seterrormsg('Password must be more that 6 characters...')
           : errmsg.includes('(auth/email-already-in-use).')
           ? seterrormsg('Email is already in use...')
+          : errmsg.includes('(auth/missing-email).')
+          ? seterrormsg('Please enter a valid email...')
           : seterrormsg(error.message)
       }
     }
@@ -111,6 +114,7 @@ const ModalSignUp = ({ isOpen, onClose }) => {
                 type="email"
               />
               <FormHelperText>We'll never share your email.</FormHelperText>
+              <FormErrorMessage>{errormsg}</FormErrorMessage>
             </FormControl>
             <FormControl id="email" isRequired>
               <FormLabel>Password</FormLabel>
@@ -198,12 +202,14 @@ const ModalSignUp = ({ isOpen, onClose }) => {
             color="#cc0000"
             opacity="0.7"
           >
-            <Text mb={2} textAlign="center">
+            <Text my={2} textAlign="center">
               {errormsg}
             </Text>
           </Flex>
           <FormControl>
-            <Button onClick={signup}>Next</Button>
+            <Button my={3} w={'100%'} onClick={signup}>
+              Next
+            </Button>
           </FormControl>
         </ModalBody>
 
