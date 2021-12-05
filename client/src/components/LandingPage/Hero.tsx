@@ -165,6 +165,7 @@ const Hero = () => {
         height="100px"
         width="100vw"
       ></Box>
+      {/* @ts-ignore */}
       <ModalSignUp isOpen={isOpen} onClose={onClose} />
     </Box>
   )

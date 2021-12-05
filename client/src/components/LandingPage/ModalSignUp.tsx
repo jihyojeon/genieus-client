@@ -37,7 +37,25 @@ import { useAddStudentMutation } from '../../redux/services/studentService'
 import { connectToSocket } from '../../redux/services/socket'
 
 //@ts-ignore
-const ModalSignUp = ({ isOpen, onClose }) => {
+const ModalSignUp = ({
+  isOpen,
+  onClose,
+  proClicked,
+  basicClicked,
+  maxClicked,
+  setbasicClicked,
+  setproClicked,
+  setmaxClicked,
+}: {
+  maxClicked: boolean
+  proClicked: boolean
+  basicClicked: boolean
+  onClose: any
+  isOpen: any
+  setbasicClicked: any
+  setproClicked: any
+  setmaxClicked: any
+}) => {
   let navigate = useNavigate()
   const [addStudent, addStudentResult] = useAddStudentMutation()
 
@@ -84,7 +102,16 @@ const ModalSignUp = ({ isOpen, onClose }) => {
   const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={() => {
+        onClose()
+        setbasicClicked(false)
+        setproClicked(false)
+        //@ts-ignore
+        setmaxClicked(false)
+      }}
+    >
       <ModalOverlay />
       <ModalContent fontFamily="sans-serif">
         <ModalHeader m={0} fontWeight="400" align="center" fontSize="30px">
@@ -185,9 +212,50 @@ const ModalSignUp = ({ isOpen, onClose }) => {
               >
                 <RadioGroup onChange={setRadioValue} value={radioValue}>
                   <Stack direction="row">
-                    <Radio value="pro">Basic</Radio>
-                    <Radio value="max">Pro</Radio>
-                    <Radio value="basic">Max</Radio>
+                    {basicClicked ? (
+                      <Radio
+                        size="md"
+                        name="basic"
+                        colorScheme="indigo"
+                        defaultChecked
+                      >
+                        Basic
+                      </Radio>
+                    ) : (
+                      <Radio size="md" name="basic" colorScheme="indigo">
+                        Basic
+                      </Radio>
+                    )}
+
+                    {proClicked ? (
+                      <Radio
+                        size="md"
+                        name="pro"
+                        colorScheme="indigo"
+                        defaultChecked
+                      >
+                        Pro
+                      </Radio>
+                    ) : (
+                      <Radio size="md" name="pro" colorScheme="indigo">
+                        Pro
+                      </Radio>
+                    )}
+
+                    {maxClicked ? (
+                      <Radio
+                        size="md"
+                        name="max"
+                        colorScheme="indigo"
+                        defaultChecked
+                      >
+                        Max
+                      </Radio>
+                    ) : (
+                      <Radio size="md" name="max" colorScheme="indigo">
+                        Max
+                      </Radio>
+                    )}
                   </Stack>
                 </RadioGroup>
               </HStack>

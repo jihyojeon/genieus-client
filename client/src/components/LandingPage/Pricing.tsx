@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 import {
   Box,
   Stack,
@@ -33,6 +33,9 @@ function PriceWrapper({ children }: { children: ReactNode }) {
 }
 
 export default function Pricing() {
+  const [basicClicked, setbasicClicked] = useState(false)
+  const [proClicked, setproClicked] = useState(false)
+  const [maxClicked, setmaxClicked] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const getSubscriptions = useGetSubscriptionsQuery()
@@ -95,7 +98,10 @@ export default function Pricing() {
               </List>
               <Box w="80%" pt={7}>
                 <Button
-                  onClick={onOpen}
+                  onClick={() => {
+                    onOpen()
+                    setbasicClicked(true)
+                  }}
                   w="full"
                   colorScheme="indigo"
                   variant="outline"
@@ -169,7 +175,14 @@ export default function Pricing() {
               </List>
 
               <Box w="80%" pt={7}>
-                <Button onClick={onOpen} w="full" colorScheme="indigo">
+                <Button
+                  onClick={() => {
+                    onOpen()
+                    setproClicked(true)
+                  }}
+                  w="full"
+                  colorScheme="indigo"
+                >
                   Start trial
                 </Button>
               </Box>
@@ -220,7 +233,10 @@ export default function Pricing() {
               </List>
               <Box w="80%" pt={7}>
                 <Button
-                  onClick={onOpen}
+                  onClick={() => {
+                    onOpen()
+                    setmaxClicked(true)
+                  }}
                   w="full"
                   colorScheme="indigo"
                   variant="outline"
@@ -232,7 +248,16 @@ export default function Pricing() {
           </Box>
         </PriceWrapper>
       </Stack>
-      <ModalSignUp isOpen={isOpen} onClose={onClose} />
+      <ModalSignUp
+        maxClicked={maxClicked}
+        basicClicked={basicClicked}
+        proClicked={proClicked}
+        isOpen={isOpen}
+        onClose={onClose}
+        setbasicClicked={setbasicClicked}
+        setproClicked={setproClicked}
+        setmaxClicked={setmaxClicked}
+      />
     </Box>
   )
 }
