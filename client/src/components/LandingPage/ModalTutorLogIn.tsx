@@ -41,9 +41,15 @@ const ModalTutorLogIn = ({ isOpen, onClose }) => {
       await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
       connectToSocket(auth)
       navigate('/tutor-dashboard')
-    } catch (err) {
-      console.error(err)
-      seterrormsg('Please enter valid details...')
+    } catch (error) {
+      if (error instanceof Error) {
+        let errmsg = error.message.split(' ')
+        errmsg.includes('(auth/invalid-email).')
+          ? seterrormsg('Please enter a valid email...')
+          : errmsg.includes('(auth/wrong-password).')
+          ? seterrormsg('Incorrect password...')
+          : seterrormsg('Please enter valid details...')
+      }
     }
   }
 
@@ -110,7 +116,13 @@ const ModalTutorLogIn = ({ isOpen, onClose }) => {
         <ModalFooter>
           {/* LINK */}
           <Flex w="100%" direction="column">
-            <Text mb={2} textAlign="center">
+            <Text
+              color="#cc0000"
+              opacity="0.7"
+              fontFamily="montserrat"
+              mb={2}
+              textAlign="center"
+            >
               {' '}
               {errormsg}
             </Text>

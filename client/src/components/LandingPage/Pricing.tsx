@@ -53,7 +53,6 @@ export default function Pricing() {
         py={10}
       >
         <PriceWrapper>
-
           <Box maxWidth="20rem">
             <Box
               color={useColorModeValue('gray.500', 'gray.100')}
@@ -62,7 +61,6 @@ export default function Pricing() {
             >
               <Text fontWeight="500" fontSize="2xl">
                 Basic
-
               </Text>
               <HStack justifyContent="center">
                 <Text fontSize="3xl" fontWeight="600">
@@ -89,6 +87,10 @@ export default function Pricing() {
                 <ListItem>
                   <ListIcon as={FaCheckCircle} color="green.500" />
                   Roll-over of 20 minutes to following month.
+                </ListItem>
+                <ListItem>
+                  <ListIcon as={FaCheckCircle} color="green.500" />
+                  Flexible plan
                 </ListItem>
               </List>
               <Box w="80%" pt={7}>
@@ -167,14 +169,7 @@ export default function Pricing() {
               </List>
 
               <Box w="80%" pt={7}>
-                <Button
-                  onClick={() =>
-                    //@ts-ignore
-                    console.log(getSubscriptions.data.max.subscription_name)
-                  }
-                  w="full"
-                  colorScheme="indigo"
-                >
+                <Button onClick={onOpen} w="full" colorScheme="indigo">
                   Start trial
                 </Button>
               </Box>
@@ -221,10 +216,6 @@ export default function Pricing() {
                 <ListItem>
                   <ListIcon as={FaCheckCircle} color="green.500" />
                   Priority tutor service.
-                </ListItem>
-                <ListItem>
-                  <ListIcon as={FaCheckCircle} color="green.500" />
-                  VIP help request options.
                 </ListItem>
               </List>
               <Box w="80%" pt={7}>

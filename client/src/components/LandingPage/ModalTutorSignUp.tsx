@@ -39,6 +39,7 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
   const [username, setUsername] = useState('')
   const [registerEmail, setRegisterEmail] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
+  const [errormsg, seterrormsg] = useState('')
 
   const signup = async () => {
     try {
@@ -58,7 +59,17 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
       })
       navigate('/tutor-dashboard')
     } catch (error) {
-      console.log(error)
+      if (error instanceof Error) {
+        let errmsg = error.message.split(' ')
+        console.log(errmsg)
+        errmsg.includes('(auth/invalid-email).')
+          ? seterrormsg('Please enter a valid email...')
+          : errmsg.includes('Password')
+          ? seterrormsg('Password must be more that 6 characters...')
+          : errmsg.includes('(auth/email-already-in-use).')
+          ? seterrormsg('Email is already in use...')
+          : seterrormsg(error.message)
+      }
     }
   }
 
@@ -132,9 +143,20 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
         <ModalCloseButton />
 
         <ModalFooter>
-          <Button w="100%" onClick={signup}>
-            Sign Up
-          </Button>
+          <Flex
+            justifyContent="center"
+            fontFamily="montserrat"
+            mr={55}
+            align="center"
+            direction="column"
+            color="#cc0000"
+            opacity="0.7"
+          >
+            <Text color="#cc0000" opacity="0.7" fontFamily="montserrat" mb={2} textAlign="center">
+              {errormsg}
+            </Text>
+          </Flex>
+          <Button onClick={signup}>Submit</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
