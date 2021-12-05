@@ -10,6 +10,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
+import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
 // Modals
 import ModalSignUp from './ModalSignUp'
@@ -73,7 +74,7 @@ const Hero = () => {
           </Flex>
         </GridItem>
 
-        <GridItem >
+        <GridItem>
           <Box>
             <Flex
               h="80vh"
@@ -81,63 +82,77 @@ const Hero = () => {
               justifyContent="center"
               alignItems="flex-start"
             >
-
               <Lottie animationData={codingLottie} style={{ height: '80vh' }}>
-              <Box position="relative">
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png"
-                  boxSize="60px"
-                  position="absolute"
-                  top="40vh"
-                  right="90%"
-                  borderRadius="50px"
-                />
+                <Box position="relative">
+                  <Image
+                    src={ProgrammingLanguages.javascript}
+                    boxSize="50px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="40vh"
+                    right="90%"
+                    borderRadius="50px"
+                  />
 
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
-                  boxSize="60px"
-                  position="absolute"
-                  top="10vh"
-                  right="75%"
-                  borderRadius="full"
-                />
+                  <Image
+                    src={ProgrammingLanguages.python}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="10vh"
+                    right="75%"
+                    borderRadius="full"
+                  />
 
-                <Image
-                  src="https://cdn.worldvectorlogo.com/logos/java.svg"
-                  boxSize="60px"
-                  position="absolute"
-                  top="70vh"
-                  right="70%"
-                  borderRadius="50px"
-                />
+                  <Image
+                    src={ProgrammingLanguages.java}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="70vh"
+                    right="70%"
+                    borderRadius="50px"
+                  />
 
-                <Image
-                  src="https://cdn.worldvectorlogo.com/logos/react-1.svg"
-                  boxSize="60px"
-                  position="absolute"
-                  top="5vh"
-                  right="55%"
-                  borderRadius="50px"
-                />
+                  <Image
+                    src={ProgrammingLanguages.react}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="5vh"
+                    right="55%"
+                    borderRadius="50px"
+                  />
 
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png"
-                  boxSize="60px"
-                  position="absolute"
-                  top="10vh"
-                  right="20%"
-                  borderRadius="full"
-                />
+                  <Image
+                    src={ProgrammingLanguages.firebase}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="10vh"
+                    right="20%"
+                    borderRadius="full"
+                  />
 
-                <Image
-                  src="https://cdn.worldvectorlogo.com/logos/redux.svg"
-                  boxSize="60px"
-                  position="absolute"
-                  top="65vh"
-                  right="15%"
-                  borderRadius="20px"
-                />
-              </Box>
+                  <Image
+                    src={ProgrammingLanguages.redux}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="65vh"
+                    right="15%"
+                    borderRadius="20px"
+                  />
+                  <Image
+                    src={ProgrammingLanguages.c}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="35vh"
+                    right="5%"
+                    borderRadius="20px"
+                  />
+                </Box>
               </Lottie>
             </Flex>
           </Box>
