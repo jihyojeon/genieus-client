@@ -17,7 +17,7 @@ import {
 // TODO: REBUIILD THIS IN FULL
 
 //@ts-ignore
-const ModalChat = ({ isOpen, onClose }) => {
+const ModalBio = ({ isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
@@ -111,4 +111,4 @@ const ModalChat = ({ isOpen, onClose }) => {
   )
 }
 
-export default ModalChat
+export default ModalBio

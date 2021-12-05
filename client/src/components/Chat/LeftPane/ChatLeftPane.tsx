@@ -9,8 +9,9 @@ import ChatDuration from './ChatDuration'
 import ChatAction from './ChatAction'
 
 const ChatLeftPane = (props: any) => {
-  // TODO: REMOVE TEST "1234" VALUE BELOW
-  const [userId, setUserId] = useState("1234")
+  // TODO: REMOVE TEST "1234" VALUE BELOW AND UNCOMMENT SUBSEQUENT USESTATE
+  const [userId, setUserId] = useState('1234')
+  // const [userId, setUserId] = useState()
   const student = useGetStudentByIdQuery(userId)
   const tutor = useGetTutorByIdQuery(userId)
 
@@ -21,21 +22,14 @@ const ChatLeftPane = (props: any) => {
     })
   }, [])
 
-
-
-  // PROPS FOR CHAT
-  const participantsObj: any = {
-    name: 'Vic', // PROVIDES NAME OF OTHER PARTY
-    image: 'https://bit.ly/dan-abramov', // PROVIDES MUG SHOT OF OTHER PARTY
-  }
-
-  // TODO CHANGED FROM "2" TO "0.05" FOR QUICK TESTING
-  const minutes: number = 2 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE IN MINUTES
-  const seconds: number = minutes * 60 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE
-  const name: string = participantsObj.name // PROVIDES NAME OF OTHER PARTY
-  const imageUrl: string = participantsObj.image // PROVIDES MUG SHOT OF OTHER PARTY
+  const name: string = 'Vic' // PROVIDES NAME OF OTHER PARTY
+  const imageUrl: string = 'https://bit.ly/dan-abramov' // PROVIDES MUG SHOT OF OTHER PARTY
   const zoomUrl =
     'https://zoom.us/j/91414924610?pwd=RHk3ZGxVMDlPY2lvMlU4R3RnSk1ZUT09' // ZOOM URL (COPIED TO CLIPBOARD AND USED IN BUTTON)
+
+  // MASTER VALUE FOR INITIAL CHAT DURATION IS SET BELOW
+  const minutes: number = 2 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE IN MINUTES
+  const seconds: number = minutes * 60 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE
 
   // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
   const subscriptionRemainingMins: number = 35
@@ -53,7 +47,7 @@ const ChatLeftPane = (props: any) => {
         padding="0.5rem"
         paddingLeft="1.5rem"
         paddingBottom="1rem"
-        // TODO: ADD SCROLLBAR TO GLOBAL STYLE?
+        // TODO: MAKE THIS SCROLLBAR STYLE GLOBAL?
         overflowY={'scroll'}
         sx={{
           '&::-webkit-scrollbar': {
@@ -69,38 +63,18 @@ const ChatLeftPane = (props: any) => {
           },
         }}
       >
-        <Box
-          alignItems="center"
-          bg={useColorModeValue('gray.100', 'gray.700')}
-          borderRadius="1rem"
-          direction="column"
-          padding="1rem"
-          marginTop={'1rem'}
-          height="100%"
-          width="100%"
-          justifyContent="space-between"
-        >
-          <ChatParticipant
-            name={name}
-            imageUrl={imageUrl}
-          />
-        </Box>
-        <Box
-          alignItems="center"
-          bg={useColorModeValue('gray.100', 'gray.700')}
-          borderRadius="1rem"
-          direction="column"
-          padding="1rem"
-          marginTop={'1rem'}
-          height="100%"
-          width="100%"
-          justifyContent="space-between"
-        >
-          <ChatDuration
-            seconds={seconds}
-          />
-        </Box>
+        {/* PROFILE COMPONENT */}
+        {/* TODO: ADD ON HOVER TO HIGHLIGHT CLICKABILITY FOR MODALBIO POPUP */}
+        <ChatParticipant
+          name={name}
+          imageUrl={imageUrl}
+          // TODO: DRILL IN FURTHER BIO DETAILS FOR MODAL
+        />
 
+        {/* CLOCK COUNTER COMPONENT */}
+        <ChatDuration seconds={seconds} />
+
+        {/* DECLINE COMPONENT */}
         <ChatAction
           action={'decline'}
           name={name}
@@ -109,6 +83,8 @@ const ChatLeftPane = (props: any) => {
           zoomUrl={zoomUrl}
           grow={1}
         />
+
+        {/* ZOOM COMPONENT */}
         <ChatAction
           action={'zoom'}
           name={name}
@@ -117,6 +93,8 @@ const ChatLeftPane = (props: any) => {
           zoomUrl={zoomUrl}
           grow={1}
         />
+
+        {/* COMPLETE COMPONENT */}
         <ChatAction
           action={'complete'}
           name={name}
@@ -126,6 +104,7 @@ const ChatLeftPane = (props: any) => {
           grow={1}
         />
 
+        {/* TODO: REMOVE BEFORE DEPLOYMENT */}
         <ChatAction
           action={'test'}
           name={name}
@@ -134,7 +113,6 @@ const ChatLeftPane = (props: any) => {
           zoomUrl={zoomUrl}
           grow={1}
         />
-
       </Flex>
     </Flex>
   )
