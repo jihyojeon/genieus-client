@@ -24,7 +24,7 @@ import {
 import { useRemoveFavouriteTutorMutation } from '../../redux/services/studentService'
 
 //@ts-ignore
-const ModalFavourites = ({ isOpen, onClose, tutor }) => {
+const ModalFavourites = ({ isOpen, onClose, tutor, connected }) => {
   const [removeTutor, removeTutorResult] = useRemoveFavouriteTutorMutation()
   const [userId, setUserId] = useState()
 
@@ -65,7 +65,7 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                     content: '""',
                     w: 4,
                     h: 4,
-                    bg: 'green.300',
+                    bg: connected ? 'green.500' : 'gray.400',
                     border: '2px solid white',
                     rounded: 'full',
                     pos: 'absolute',
@@ -76,10 +76,9 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                 <Heading fontSize={'2xl'} fontFamily={'body'}>
                   {tutor.name}
                 </Heading>
-
                 <Flex mt={5} direction="column" alignItems="flex-start">
                   <Text fontWeight="bold" color="indigo.400" fontSize={'22px'}>
-                    Languages:
+                    Languages
                   </Text>
 
                   {!loading &&
@@ -95,21 +94,24 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                       )
                     })}
 
-                  <Flex mt={5} direction="column" alignItems="flex-start">
+                  <Flex mt={3} direction="column" alignItems="flex-start">
                     <Text
                       fontWeight="bold"
                       color="indigo.400"
                       fontSize={'22px'}
                     >
-                      Personal Info:{' '}
+                      Personal Info
                     </Text>
-                    <Text my={5} fontSize={'18px'}>
-                      Bio: {tutor.bio}
+                    <Text color="indigo.400" fontSize={'18px'} my={2}>
+                      Bio
                     </Text>
-                    <Text fontSize={'18px'}>Location: {tutor.location}</Text>
+                    <Text fontSize={'18px'}>{tutor.bio}</Text>
+                    <Text color="indigo.400" fontSize={'18px'} my={2}>
+                      Location
+                    </Text>
+                    <Text fontSize={'18px'}>{tutor.location}</Text>
                   </Flex>
                 </Flex>
-
                 <Wrap
                   align={'flex-start'}
                   justify={'flex-start'}
@@ -135,7 +137,6 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                       )
                     })}
                 </Wrap>
-
                 <Stack
                   d="flex"
                   alignItems="center"

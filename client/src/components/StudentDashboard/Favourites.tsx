@@ -47,6 +47,7 @@ const Favourites = () => {
       setUserId(item.uid)
     })
   }, [])
+
   useEffect(() => {
     if (userId) {
       checkAndReconnectToSocket(userId)

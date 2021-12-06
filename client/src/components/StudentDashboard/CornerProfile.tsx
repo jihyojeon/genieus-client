@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 import { disconnectFromSocket } from '../../redux/services/socket'
 import { ColorModeSwitcher } from '../../ColorModeSwitcher'
+import { error } from 'console'
 
 const CornerProfile = () => {
   const navigate = useNavigate()
@@ -35,12 +36,14 @@ const CornerProfile = () => {
     })
   }, [])
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => navigate('/'))
-      .catch((err) => console.log(err))
-    disconnectFromSocket()
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut()
+      navigate('/')
+      disconnectFromSocket()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
@@ -66,10 +69,9 @@ const CornerProfile = () => {
                 <Flex alignItems="center" justifyContent="center">
                   <Flex alignItems="center" direction="row">
                     <IconButton
-                      // TODO: ICON IS TOO DARK IN DARK MODE
                       aria-label="Edit Profile"
                       color={useColorModeValue('#000', '#fff')}
-                      bg="gray.700"
+                      bg={useColorModeValue('gray.100', 'gray.700')}
                       height="20px"
                       icon={<SettingsIcon />}
                       size="small"
@@ -77,7 +79,11 @@ const CornerProfile = () => {
                       width="20px"
                     />
                   </Flex>
-                  <Button onClick={handleSignOut} opacity="0.6" variant="ghost">
+                  <Button
+                    onClick={handleSignOut}
+                    color={useColorModeValue('blue.500', 'blue.300')}
+                    variant="ghost"
+                  >
                     Log Out
                   </Button>
                 </Flex>

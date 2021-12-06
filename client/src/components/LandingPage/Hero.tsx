@@ -10,6 +10,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
+import '../../styles/Landing.css'
 import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
 // Modals
@@ -92,6 +93,7 @@ const Hero = () => {
                     top="40vh"
                     right="90%"
                     borderRadius="50px"
+                    id="lang"
                   />
 
                   <Image
@@ -102,6 +104,7 @@ const Hero = () => {
                     top="10vh"
                     right="75%"
                     borderRadius="full"
+                    id="lang"
                   />
 
                   <Image
@@ -112,6 +115,7 @@ const Hero = () => {
                     top="70vh"
                     right="70%"
                     borderRadius="50px"
+                    id="lang"
                   />
 
                   <Image
@@ -122,6 +126,7 @@ const Hero = () => {
                     top="5vh"
                     right="55%"
                     borderRadius="50px"
+                    id="lang"
                   />
 
                   <Image
@@ -132,6 +137,7 @@ const Hero = () => {
                     top="10vh"
                     right="20%"
                     borderRadius="full"
+                    id="lang"
                   />
 
                   <Image
@@ -142,6 +148,7 @@ const Hero = () => {
                     top="65vh"
                     right="15%"
                     borderRadius="20px"
+                    id="lang"
                   />
                   <Image
                     src={ProgrammingLanguages.c}
@@ -151,6 +158,7 @@ const Hero = () => {
                     top="35vh"
                     right="5%"
                     borderRadius="20px"
+                    id="lang"
                   />
                 </Box>
               </Lottie>

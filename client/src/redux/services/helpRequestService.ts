@@ -23,8 +23,8 @@ export const helpRequestApi = createApi({
     getHrRequestByValue: builder.query<
       HRType[],
       {
-        student_id: string
-        tutor_id: string
+        student_id?: string
+        tutor_id?: string
         language?: string
         status?: string
       }

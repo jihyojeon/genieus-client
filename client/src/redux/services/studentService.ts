@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import TutorType from './tutorService'
 
-interface StudentType {
+export interface StudentType {
   email: string
   name: string
   id: string
@@ -15,6 +15,9 @@ interface StudentType {
   favourite_tutors: string[]
   blocked_tutors: string[]
   bio: string
+  time_remaining: number
+  createdAt: Date
+  updatedAt: Date
 }
 
 export const studentApi = createApi({
@@ -124,7 +127,7 @@ export const studentApi = createApi({
       query: ({ studentId, tutorId }) => ({
         url: `/student/${studentId}/block/remove`,
         method: 'PUT',
-        body: { tutor_id: tutorId }
+        body: { tutor_id: tutorId },
       }),
       invalidatesTags: ['Student'],
     }),

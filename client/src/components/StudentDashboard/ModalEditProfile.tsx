@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { ref, getDownloadURL, uploadBytesResumable } from 'firebase/storage'
+import { storage } from '../../firebase'
 
 import {
   Button,
@@ -23,15 +25,40 @@ import { useUpdateStudentByIdMutation } from '../../redux/services/studentServic
 
 //@ts-ignore
 const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
+  const [progress, setProgress] = useState(0)
   const [updateName, setupdateName] = useState('')
   const [updateBio, setupdateBio] = useState('')
+  const [Url, setUrl] = useState('')
   const [updateStudent, updateStudentResult] = useUpdateStudentByIdMutation()
-  const [photoFile, setphotoFile] = useState(null)
+  const [photoFile, setphotoFile] = useState(Url)
+  const [avatarBadge, setAvatarBadge] = useState('')
 
   useEffect(() => {
     setupdateName(student?.name)
     setupdateBio(student?.bio)
-  }, [student?.name, student?.bio])
+    setUrl(student?.photo_url)
+    //@ts-ignore
+  }, [student?.name, student?.bio, student?.photo_url])
+
+  const uploadFiles = (file: any) => {
+    //
+    if (!file) return
+    const storageRef = ref(storage, `files/${file.name}`)
+    const uploadTask = uploadBytesResumable(storageRef, file)
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setUrl(downloadURL)
+        })
+      },
+      (error) => console.log(error)
+    )
+  }
+  uploadFiles(photoFile)
+  console.log('URl', Url)
+  console.log(student)
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -59,9 +86,8 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                       <Avatar
                         size="xl"
                         name={student?.name}
-                        src={
-                          photoFile !== null ? photoFile : student?.photo_url
-                        }
+                        //@ts-ignore
+                        src={avatarBadge}
                       >
                         <AvatarBadge
                           as={IconButton}
@@ -75,7 +101,7 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                             updateStudent({
                               id: userId,
                               //@ts-ignore
-                              photo_url: null,
+                              // photo_url: null,
                             })
                           }
                         />
@@ -95,10 +121,14 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                           w="full"
                           type="file"
                           style={{ display: 'none' }}
-                          onChange={(e) =>
+                          onChange={(e) => {
                             //@ts-ignore
-                            setphotoFile(URL.createObjectURL(e.target.files[0]))
-                          }
+                            setphotoFile(e.target.files[0])
+                            setAvatarBadge(
+                              //@ts-ignore
+                              URL.createObjectURL(e.target.files[0])
+                            )
+                          }}
                         />
                       </FormControl>
                     </Center>
@@ -139,14 +169,17 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                   </Button>
                   <Button
                     onClick={() => {
+                      uploadFiles(photoFile)
+                      console.log('URl', Url)
+
                       //@ts-ignore
                       updateStudent({
                         id: userId,
                         name: updateName,
                         bio: updateBio,
-                        //@ts-ignore
-                        photo_url: photoFile,
+                        photo_url: Url,
                       })
+
                       onClose()
                     }}
                     bg={'blue.400'}

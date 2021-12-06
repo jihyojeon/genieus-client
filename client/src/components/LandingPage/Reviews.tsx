@@ -90,9 +90,9 @@ const TestimonialAvatar = ({
 export default function WithSpeechBubbles() {
   return (
     <Box py={'10vh'}>
-      <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
+      <Container maxW={'7xl'} py={3} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
-          <Heading color="gray.500">Our clients Speak</Heading>
+          <Heading>Our clients Speak</Heading>
           <Text color="gray.500">
             We work with coding students and professionals around the world
           </Text>
