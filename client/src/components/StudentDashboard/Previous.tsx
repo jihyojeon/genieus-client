@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import {
   Box,
   Flex,
+  Grid,
   Heading,
   Text,
-  Button,
   useColorModeValue,
 } from '@chakra-ui/react'
 import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
@@ -66,28 +66,33 @@ const Previous = () => {
     }
   }
 
+  const bgColor = useColorModeValue('gray.100', 'gray.700')
+
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
     <Flex py={3} ml={7} flexDirection="column">
       <Heading as="h1" size="lg" fontWeight="300" pb="0.5rem">
         Recent Help Requests
       </Heading>
-      <Flex
-        flexDirection="row"
-        justify="flex-start"
-        overflowY={'auto'}
-        width={'100%'}
+      <Grid
+        m="5"
+        templateColumns="repeat(3, 1fr)"
+        templateRows="repeat(5, 1fr)"
       >
         {sortedHR?.map((el: any) => {
           return (
             <Box
               key={el.key}
-              width="300px"
+              width="250px"
               boxShadow="base"
               m={5}
               p={5}
               rounded={'lg'}
               onClick={() => navigate('/student-hr', { state: el })}
+              _hover={{
+                bg: bgColor,
+                cursor: 'pointer',
+              }}
             >
               <Text>{displayDate(el.createdAt)}</Text>
               <Text>
@@ -98,7 +103,7 @@ const Previous = () => {
             </Box>
           )
         })}
-      </Flex>
+      </Grid>
     </Flex>
   )
 }

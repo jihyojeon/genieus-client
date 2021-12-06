@@ -18,7 +18,6 @@ import {
   useRemoveFavouriteTutorMutation,
 } from '../../redux/services/studentService'
 import { useAddFavouriteTutorMutation } from '../../redux/services/studentService'
-import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 import FavouriteTutor from './FavouriteTutor'
 import socket, { checkAndReconnectToSocket } from '../../redux/services/socket'
 
@@ -87,7 +86,7 @@ const Favourites = () => {
         fontWeight="300"
         pb={'1rem'}
         ml={10}
-        mt={20}
+        mt={10}
         mb={5}
         pt={5}
       >
