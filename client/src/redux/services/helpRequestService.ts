@@ -11,11 +11,7 @@ export default interface HRType {
   language: string
   code: string
   favourites_only: boolean
-
- 
-  interested_tutors: any
   status: any
-
   tutor_id: string
   time_opened: Date
   time_accepted: Date
@@ -24,7 +20,6 @@ export default interface HRType {
   zoom_url: string
   student: { id: string; name: string; photo_url: string }
   tutor: { id: string; name: string; photo_url: string }
-
 }
 
 export const helpRequestApi = createApi({
