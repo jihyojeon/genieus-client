@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Avatar,
   Button,
@@ -52,6 +52,37 @@ const mockHelpRequest = {
 }
 
 const Feedback = () => {
+  const [rating, setRating] = useState(0)
+  const [comments, setComments] = useState('')
+  const [isFavourite, setIsFavourite] = useState(false)
+  const [isBlocked, setIsBlocked] = useState(false)
+
+  const handleRating = (idx: any) => {
+    if (!isNaN(idx)) {
+      if (rating === 1 && idx === 1) {
+        setRating(0)
+      } else {
+        setRating(idx)
+      }
+    }
+  }
+  const handleFavourite = () => {
+    if (!isFavourite && isBlocked) {
+      setIsFavourite(true)
+      setIsBlocked(false)
+    } else {
+      setIsFavourite(!isFavourite)
+    }
+  }
+  const handleBlocked = () => {
+    if (!isBlocked && isFavourite) {
+      setIsBlocked(true)
+      setIsFavourite(false)
+    } else {
+      setIsBlocked(!isBlocked)
+    }
+  }
+
   const navigate = useNavigate()
   // TODO: get help request from location state or other approach
   // const location = useLocation()
@@ -76,7 +107,7 @@ const Feedback = () => {
       >
         <form>
           <VStack spacing="1.5rem">
-            <Heading textAlign="center">
+            <Heading textAlign="center" size="lg">
               How was your call with {tutor.name}?
             </Heading>
             <Text color="gray.500" textAlign="center">
@@ -84,53 +115,63 @@ const Feedback = () => {
               minutes, {helpRequest.call_length % 60} seconds
             </Text>
             {tutor.photo_url && <Avatar size="2xl" src={tutor.photo_url} />}
-            <StarRating
-              size={32}
-              icon="StarIcon"
-              scale={5}
-              fillColor="gold"
-              strokeColor="grey"
-            />
-            <FormControl>
-              <Textarea placeHolder="Add any comments here..." />
+            <FormControl isRequired>
+              <FormLabel>Rating</FormLabel>
+              <StarRating clickHandler={handleRating} rating={rating} />
             </FormControl>
-            <Flex alignItems="flex-start">
-              <FormControl>
-                <Checkbox
-                  defaultIsNotChecked
-                  colorScheme="green"
-                  _hover={{
-                    color: 'green.500',
-                    transition: 'color .2s linear',
-                  }}
-                >
-                  <Icon as={FaHeart} w={3} h={3} />
-                  &nbsp; Favourite
-                </Checkbox>
-                <FormHelperText>
-                  If you enjoyed working with {tutor.name} add them to your
-                  favourites. You can prioritize your favourite tutors in future
-                  requests.
-                </FormHelperText>
-              </FormControl>
-              <FormControl ml={6}>
-                <Checkbox
-                  defaultIsNotChecked
-                  colorScheme="red"
-                  _hover={{ color: 'red.500', transition: 'color .2s linear' }}
-                >
-                  <Icon as={FaBan} w={3} h={3} />
-                  &nbsp;Block
-                </Checkbox>
-                <FormHelperText>
-                  Everyone responds differently to certain teaching styles. If
-                  you prefer {tutor.name} isn't assigned to your future
-                  requests, check the box above.
-                </FormHelperText>
-              </FormControl>
-            </Flex>
+            <FormControl>
+              <FormLabel>Comments for tutor</FormLabel>
+              <Textarea
+                placeHolder="Add any comments to share with your tutor ..."
+                onChange={(e) => setComments(e.target.value)}
+                value={comments}
+              />
+            </FormControl>
+            <Box>
+              <FormLabel alignSelf="flex-start">Tutor options</FormLabel>
+              <Flex alignItems="flex-start">
+                <FormControl>
+                  <Checkbox
+                    colorScheme="indigo"
+                    isChecked={isFavourite}
+                    onChange={handleFavourite}
+                    _hover={{
+                      color: 'indigo.500',
+                      transition: 'color .2s linear',
+                    }}
+                  >
+                    <Icon as={FaHeart} w={3} h={3} />
+                    &nbsp; Favourite
+                  </Checkbox>
+                  <FormHelperText>
+                    If you enjoyed working with {tutor.name} add them to your
+                    favourites. You can prioritize your favourite tutors in
+                    future requests.
+                  </FormHelperText>
+                </FormControl>
+                <FormControl ml={6}>
+                  <Checkbox
+                    isChecked={isBlocked}
+                    onChange={handleBlocked}
+                    colorScheme="red"
+                    _hover={{
+                      color: 'red.500',
+                      transition: 'color .2s linear',
+                    }}
+                  >
+                    <Icon as={FaBan} w={3} h={3} />
+                    &nbsp;Block
+                  </Checkbox>
+                  <FormHelperText>
+                    Everyone responds differently to certain teaching styles. If
+                    you prefer {tutor.name} isn't assigned to your future
+                    requests, check the box above.
+                  </FormHelperText>
+                </FormControl>
+              </Flex>
+            </Box>
             <FormControl textAlign="center">
-              <Button mt="1rem" mb="2rem" onClick={submitHandler} type="button">
+              <Button mt="1rem" onClick={submitHandler} type="button">
                 Submit
               </Button>
             </FormControl>

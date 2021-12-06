@@ -1,23 +1,37 @@
-import { useState } from 'react'
-import { IconButton, HStack } from '@chakra-ui/react'
+import React from 'react'
+import {
+  IconButton,
+  HStack,
+  Stat,
+  StatNumber,
+  StatLabel,
+  Flex,
+} from '@chakra-ui/react'
 import { FaStar } from 'react-icons/fa'
 
-const StarRating = ({ size, icon, scale, fillColor, strokeColor }: any) => {
-  const [rating, setRating] = useState(0)
+type StarRatingProps = {
+  clickHandler: (idx: number) => void
+  rating: number
+}
 
+const StarRating = ({ clickHandler, rating }: StarRatingProps) => {
+  const scale = 5
   const buttons = []
 
-  const clickHandler = (idx: any) => {
-    if (!isNaN(idx)) {
-      if (rating === 1 && idx === 1) {
-        setRating(0)
-      } else {
-        setRating(idx)
-      }
-    }
+  type RatingButtonProps = {
+    idx: number
+    hasFill: boolean
   }
 
-  const RatingButton = ({ idx, fill }: any) => {
+  const fillColors = [
+    'red.400',
+    'orange.400',
+    'yellow.500',
+    '#83bb48',
+    'green.400',
+  ]
+
+  const RatingButton = ({ idx, hasFill }: RatingButtonProps) => {
     return (
       <IconButton
         icon={<FaStar size="1.6rem" />}
@@ -25,19 +39,24 @@ const StarRating = ({ size, icon, scale, fillColor, strokeColor }: any) => {
         borderRadius="50%"
         variant="ghost"
         size="md"
-        color={fill ? 'indigo.600' : 'gray.300'}
+        color={hasFill ? fillColors[rating - 1] : 'gray.300'}
         onClick={() => clickHandler(idx)}
-        fillOpacity={fill ? '100%' : '0'}
+        fillOpacity={hasFill ? '100%' : '0'}
       />
     )
   }
   for (let i = 1; i <= scale; i++) {
-    buttons.push(<RatingButton key={i} idx={i} fill={i <= rating} />)
+    buttons.push(<RatingButton key={i} idx={i} hasFill={i <= rating} />)
   }
   return (
-    <HStack isInline justify="center">
-      {buttons}
-    </HStack>
+    <Flex justifyContent="space-between">
+      <HStack isInline>{buttons}</HStack>
+      <Stat textAlign="end">
+        <StatNumber>
+          {rating} <StatLabel sx={{ display: 'inline' }}>/5</StatLabel>
+        </StatNumber>
+      </Stat>
+    </Flex>
   )
 }
 
