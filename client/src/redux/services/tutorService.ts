@@ -22,7 +22,7 @@ export const tutorApi = createApi({
   tagTypes: ['Tutor'],
   endpoints: (builder) => ({
     getTutorById: builder.query<TutorType, string>({
-      query: (id) => (id ? `/tutor/${id}` : '/'),
+      query: (id) => `/tutor/${id}`,
       providesTags: ['Tutor'],
     }),
 
