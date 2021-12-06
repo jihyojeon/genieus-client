@@ -25,7 +25,6 @@ export default function StudentProfile() {
   const navigate = useNavigate()
   const [userId, setUserId] = useState('')
   const queryResponse = useGetStudentByIdQuery(userId, { skip: !userId })
-  console.log(queryResponse)
   const student = queryResponse.data
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
@@ -39,7 +38,6 @@ export default function StudentProfile() {
       await auth.signOut()
       navigate('/')
       disconnectFromSocket()
-      console.log(auth)
     } catch (error) {
       console.error(error)
     }

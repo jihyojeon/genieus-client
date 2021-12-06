@@ -79,12 +79,12 @@ const Previous = () => {
           )
         )
       } else {
-        return <Text as="mark">Please rate your tutor!</Text>
+        return
       }
     }
   }
 
-  const bgColor = useColorModeValue('gray.100', 'gray.900')
+  const bgColor = useColorModeValue('gray.100', 'gray.700')
 
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
