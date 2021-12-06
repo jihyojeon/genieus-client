@@ -14,6 +14,7 @@ import { BsPerson } from 'react-icons/bs';
 import { AiOutlineStar } from "react-icons/ai";
 import { BiTimeFive } from "react-icons/bi";
 import { AiOutlineDollarCircle } from 'react-icons/ai'
+import {displayTimeinHHMM} from './utils';
 
 
 export const TutorStats = () => {
@@ -28,15 +29,6 @@ export const TutorStats = () => {
       setUserId(item.uid)
     })
   }, [])
-
-  function displayTimeinHHMM(seconds: number) {
-    let hour: string|number = Math.floor(seconds/3600);
-    let minute: string|number = Math.floor((seconds - hour*3600)/60)
-    if (hour < 10) hour = "0" + hour;
-    if (minute < 10) minute = "0" + minute;
-    return `${hour}:${minute}`
-  }
-
 
   interface StatsCardProps {
     title: string;
