@@ -57,8 +57,6 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
     )
   }
   uploadFiles(photoFile)
-  console.log('URl', Url)
-  console.log(student)
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

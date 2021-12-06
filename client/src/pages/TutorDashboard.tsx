@@ -1,19 +1,15 @@
 import React from 'react'
-import {
-  Box,
-  Grid,
-  GridItem,
-} from '@chakra-ui/react'
-import Topbar from '../components/TutorDashboard/Topbar'
+import { Box, Grid, GridItem } from '@chakra-ui/react'
+// import Topbar from '../components/TutorDashboard/Topbar'
 import { IncomingRequests } from '../components/TutorDashboard/IncomingRequests'
 import { TutorInformation } from '../components/TutorDashboard/TutorInformation'
 import { TutorStats } from '../components/TutorDashboard/TutorStats'
+import TopBar from '../components/TopBar/TopBar'
 
 const TutorDashboard = () => {
-
   return (
     <Box>
-      <Topbar />
+      <TopBar />
       <Grid
         h="90vh"
         py={2}

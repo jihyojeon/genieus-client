@@ -21,15 +21,14 @@ export const tutorApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_BASE_URL }),
   tagTypes: ['Tutor'],
   endpoints: (builder) => ({
-    
     getTutorById: builder.query<TutorType, string>({
-      query: (id) => `tutor/${id}`,
-      providesTags: ['Tutor']
+      query: (id) => (id ? `/tutor/${id}` : '/'),
+      providesTags: ['Tutor'],
     }),
 
     getAllTutors: builder.query<TutorType[], void>({
       query: () => `/tutor`,
-      providesTags: ['Tutor']
+      providesTags: ['Tutor'],
     }),
 
     addTutor: builder.mutation<TutorType, any>({
@@ -38,9 +37,9 @@ export const tutorApi = createApi({
         method: 'POST',
         body: user,
       }),
-      invalidatesTags: ['Tutor']
+      invalidatesTags: ['Tutor'],
     }),
-    
+
     updateTutor: builder.mutation<
       TutorType,
       Partial<TutorType> & Pick<TutorType, 'id'>
@@ -50,7 +49,7 @@ export const tutorApi = createApi({
         method: 'PATCH',
         body: user,
       }),
-      invalidatesTags: ['Tutor']
+      invalidatesTags: ['Tutor'],
     }),
 
     deleteTutor: builder.mutation<TutorType, any>({
@@ -58,7 +57,7 @@ export const tutorApi = createApi({
         url: `/tutor/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Tutor']
+      invalidatesTags: ['Tutor'],
     }),
   }),
 })
