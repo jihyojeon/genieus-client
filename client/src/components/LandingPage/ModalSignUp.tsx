@@ -152,7 +152,7 @@ const ModalSignUp = ({
               <FormHelperText>We'll never share your email.</FormHelperText>
               <FormErrorMessage>{errormsg}</FormErrorMessage>
             </FormControl>
-            <FormControl id="email" isRequired>
+            <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup size="md">
                 <Input

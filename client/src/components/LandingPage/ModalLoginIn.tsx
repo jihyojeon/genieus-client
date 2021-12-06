@@ -97,7 +97,7 @@ const ModalLogIn = ({ isOpen, onClose }) => {
                 We'll never share your email.
               </FormHelperText>
             </FormControl>
-            <FormControl my={4} id="email" isRequired>
+            <FormControl my={4} id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup size="md">
                 <Input
