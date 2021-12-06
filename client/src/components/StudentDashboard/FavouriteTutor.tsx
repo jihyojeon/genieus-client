@@ -21,8 +21,6 @@ const FavouriteTutor = ({
 
   return (
     <Box key={tutor.dur}>
-      {/* TODO: CHANGE TO BUTTON OR ADD VIEW/REMOVE BUTTON AND CARRY FORWARD DETAILS */}
-
       <Flex
         onClick={onOpen}
         _hover={{ cursor: 'pointer', opacity: 0.7 }}
@@ -57,25 +55,21 @@ const FavouriteTutor = ({
         <Flex
           align="flex-start"
           flexDirection="column"
-          justify="flex-start"
+          justify="center"
           ml="20px"
         >
           <Heading fontSize={25} fontWeight={300}>
             {tutor.name}
           </Heading>
-          <Text fontSize={20} fontWeight={200}>
-            Experience
-          </Text>
-
-          {tutor.programming_languages.map((lang: any) => {
-            return (
-              <Box>
-                <Text fontSize={15} fontWeight={200}>
+          <Flex flexDirection="row">
+            {tutor.programming_languages.map((lang: any) => {
+              return (
+                <Text fontSize={15} fontWeight={200} mr={3}>
                   {lang}
                 </Text>
-              </Box>
-            )
-          })}
+              )
+            })}
+          </Flex>
         </Flex>
       </Flex>
 

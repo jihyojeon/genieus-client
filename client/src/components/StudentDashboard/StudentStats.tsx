@@ -93,7 +93,6 @@ export default function BasicStatistics() {
       justifyContent="center"
       direction="column"
       h="50vh"
-      pt={5}
       px={{ base: 2, sm: 12, md: 17 }}
     >
       <Heading fontFamily="montserrat" fontWeight="400" ml={5}>
