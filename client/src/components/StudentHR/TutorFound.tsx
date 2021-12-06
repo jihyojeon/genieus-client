@@ -127,7 +127,7 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
             <Stack mt={8} direction={'row'} spacing={4}>
               <Button
                 onClick={() => {
-                  navigate('/chat', { state: hrById })
+                  navigate('/chat', { state: hrById.data })
                 }}
                 flex={1}
                 fontSize={'sm'}

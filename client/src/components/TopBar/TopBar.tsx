@@ -21,7 +21,7 @@ const TopBar = ({ heading, tutor = false }: TopBarProps) => {
       <Logo />
       {heading && <Heading>{heading}</Heading>}
       <Flex alignItems="center">
-        {tutor ? <StudentProfile /> : <TutorProfile />}
+        {tutor ? <TutorProfile /> : <StudentProfile />}
         <ColorModeSwitcher />
       </Flex>
     </Flex>
