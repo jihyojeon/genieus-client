@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Box,
@@ -18,13 +18,13 @@ const ChatAction = (props: any) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const [canDecline, setCanDecline] = useState(true)
-
   const name = props.name
   const imageUrl = props.imageUrl
   const zoomUrl = props.zoomUrl
   const seconds = props.seconds
   const action = props.action
+  const text = props.text
+  const canDecline = props.canDecline
 
   // TODO: 1) TAKE THIS STATUS FROM SIGN-IN DETAILS
   const [isTutor, setIsTutor] = useState(true)
@@ -32,6 +32,8 @@ const ChatAction = (props: any) => {
   const decline = () => {
     console.log('Decline session')
   }
+
+  console.log('Decline State', props.DeclineState)
 
   const zoomButtonHandler = () => {
     // TODO: 2) HANDLE RECORDING OF ELAPSED TIME
@@ -46,16 +48,6 @@ const ChatAction = (props: any) => {
     console.log('Complete session')
   }
 
-  const TESTING = () => {
-    if (canDecline) {
-      console.log('TESTING 1')
-      setCanDecline(false)
-    } else {
-      console.log('TESTING 2')
-      setCanDecline(true)
-    }
-  }
-
   const actionButton = (action: string) => {
     // DECLINE BUTTON
     if (action === 'decline') {
@@ -64,7 +56,7 @@ const ChatAction = (props: any) => {
         return (
           <Box>
             <Button w="15ch" onClick={onOpen}>
-              Decline
+              Decline {text}
             </Button>
             <ModalDecline
               isOpen={isOpen}
@@ -74,9 +66,11 @@ const ChatAction = (props: any) => {
             />
           </Box>
         )
+      } else {
+        return <Text></Text>
       }
 
-    // ZOOM BUTTON
+      // ZOOM BUTTON
     } else if (action === 'zoom') {
       return (
         <Box>
@@ -92,7 +86,7 @@ const ChatAction = (props: any) => {
         </Box>
       )
 
-    // COMPLETE BUTTON
+      // COMPLETE BUTTON
     } else if (action === 'complete') {
       return (
         <Box>
@@ -107,27 +101,10 @@ const ChatAction = (props: any) => {
           />
         </Box>
       )
-
-    // TESTING BUTTON
-    } else if (action === 'test') {
-      return (
-        <Box>
-          <Button w="15ch" onClick={TESTING}>
-            TESTING
-          </Button>
-          <ModalComplete
-            isOpen={isOpen}
-            onClose={onClose}
-            name={name}
-            imageUrl={imageUrl}
-          />
-        </Box>
-      )
     }
   }
 
   const actionText = (action: string) => {
-
     // DECLINE TEXT
     if (action === 'decline') {
       // TODO: MAKE RENDERING OF THIS BOX AND BUTTON VANISH ONCE DECLINING WINDOW HAS RUN OUT
@@ -136,8 +113,8 @@ const ChatAction = (props: any) => {
         return (
           <Box>
             <Text>
-              You have {seconds / 60} minutes to further discuss your problem
-              and finalise whether to proceed with this help request.
+              You have {seconds / 60} minutes to further discuss your problem and
+              finalise whether to proceed with this help request.
             </Text>
             <Text mt="0.5rem">
               If either of you decline to proceed before the timer finishes, you
@@ -145,9 +122,13 @@ const ChatAction = (props: any) => {
             </Text>
           </Box>
         )
+      } else {
+        return (
+          <Text>It is no longer possible to decline this session</Text>
+        )
       }
 
-    // ZOOM TEXT
+      // ZOOM TEXT
     } else if (action === 'zoom') {
       return (
         <Box>
@@ -155,23 +136,13 @@ const ChatAction = (props: any) => {
         </Box>
       )
 
-    // COMPLETE TEXT
+      // COMPLETE TEXT
     } else if (action === 'complete') {
       return (
         <Box>
           <Text>
             Once your help request is complete, click the button below to mark
             your call as complete.
-          </Text>
-        </Box>
-      )
-
-    // TESTING TEXT
-    } else if (action === 'test') {
-      return (
-        <Box>
-          <Text>
-            Delete this after testing
           </Text>
         </Box>
       )

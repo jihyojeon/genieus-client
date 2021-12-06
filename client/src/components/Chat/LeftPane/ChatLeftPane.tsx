@@ -3,7 +3,7 @@ import { auth } from '../../../firebase'
 import { useGetStudentByIdQuery } from '../../../redux/services/studentService'
 import { useGetTutorByIdQuery } from '../../../redux/services/tutorService'
 
-import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
+import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import ChatParticipant from './ChatParticipant'
 import ChatDuration from './ChatDuration'
 import ChatAction from './ChatAction'
@@ -36,6 +36,43 @@ const ChatLeftPane = (props: any) => {
   const subscriptionRemainingSecs: number =
     subscriptionRemainingMins * 60 - seconds
 
+  //  TESTING --------------
+  const [canDecline, setCanDecline] = useState(true)
+
+  const cannotDecline = () => {
+    if (canDecline) {
+      setCanDecline(false)
+    } else {
+      setCanDecline(true)
+    }
+    // text==="FIRST" ? setText('') : setText('FIRST')
+    // if (canDecline) {
+    //   setCanDecline(false)
+    //   text="SECOND"
+    // } else {
+    //   setCanDecline(true)
+    //   text="THIRD"
+    // }
+  }
+
+  const declineBox = () => {
+    return (
+      <Box>
+        <ChatAction
+          action={'decline'}
+          name={name}
+          imageUrl={imageUrl}
+          seconds={seconds}
+          zoomUrl={zoomUrl}
+          grow={1}
+          canDecline={canDecline}
+        />
+      </Box>
+    )
+  }
+
+  //  TESTING --------------
+
   return (
     <Flex direction="column" maxW="30rem" justify="stretch">
       <Flex
@@ -63,26 +100,28 @@ const ChatLeftPane = (props: any) => {
           },
         }}
       >
+        {/* TESTING */}
+        <Button onClick={cannotDecline}>DeclineState</Button>
+        {/* TESTING */}
+
         {/* PROFILE COMPONENT */}
         {/* TODO: ADD ON HOVER TO HIGHLIGHT CLICKABILITY FOR MODALBIO POPUP */}
-        <ChatParticipant
-          name={name}
-          imageUrl={imageUrl}
-          // TODO: DRILL IN FURTHER BIO DETAILS FOR MODAL
-        />
+        <ChatParticipant name={name} imageUrl={imageUrl} />
 
         {/* CLOCK COUNTER COMPONENT */}
         <ChatDuration seconds={seconds} />
 
         {/* DECLINE COMPONENT */}
-        <ChatAction
+        {canDecline ? declineBox() : null}
+        {/* <ChatAction
           action={'decline'}
           name={name}
           imageUrl={imageUrl}
           seconds={seconds}
           zoomUrl={zoomUrl}
           grow={1}
-        />
+          canDecline={canDecline}
+        /> */}
 
         {/* ZOOM COMPONENT */}
         <ChatAction
@@ -97,16 +136,6 @@ const ChatLeftPane = (props: any) => {
         {/* COMPLETE COMPONENT */}
         <ChatAction
           action={'complete'}
-          name={name}
-          imageUrl={imageUrl}
-          seconds={seconds}
-          zoomUrl={zoomUrl}
-          grow={1}
-        />
-
-        {/* TODO: REMOVE BEFORE DEPLOYMENT */}
-        <ChatAction
-          action={'test'}
           name={name}
           imageUrl={imageUrl}
           seconds={seconds}
