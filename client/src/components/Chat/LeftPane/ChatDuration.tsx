@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import { useState } from 'react'
+import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 
 type ChatDurationProps = {
@@ -26,10 +26,8 @@ const ChatDuration = ({
     setKey(1)
   }
 
-  const renderCountDown = ({ remainingTime }: any) => {
-    if (remainingTime === 0) {
-      countDownExpired()
-    } else if (remainingTime <= 60) {
+  const renderCountDown = ({ remainingTime }: { remainingTime: number }) => {
+    if (remainingTime <= 60) {
       return (
         <Box>
           <Text fontFamily="montserrat" fontSize={25} fontWeight={800}>
@@ -74,7 +72,6 @@ const ChatDuration = ({
     >
       <Flex direction="column" justify="center" align="center">
         <CountdownCircleTimer
-          // initialRemainingTime={initialTimer}
           colors={[
             ['#004777', 0.33],
             ['#F7B801', 0.33],
@@ -87,7 +84,7 @@ const ChatDuration = ({
           size={170}
           strokeWidth={10}
           onComplete={() => {
-            return [false, 0]
+            countDownExpired()
           }}
         >
           {renderCountDown}

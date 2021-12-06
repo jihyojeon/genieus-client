@@ -31,7 +31,13 @@ const ActionComplete = ({ helpRequest }: ActionCompleteProps) => {
         <FaCheck />
         &nbsp;&nbsp;Completed
       </Button>
-      <Button w="15ch" mt={'1rem'} onClick={submitIncompleteHandler}>
+      <Button
+        w="15ch"
+        mt={'1rem'}
+        onClick={submitIncompleteHandler}
+        variant="outline"
+        _hover={{ color: 'red.500' }}
+      >
         <FaTimes />
         &nbsp;&nbsp;Incomplete
       </Button>

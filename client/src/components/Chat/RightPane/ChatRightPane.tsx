@@ -89,7 +89,7 @@ const ChatRightPane = (props: any) => {
           paddingRight={'0.5rem'}
           pl="1rem"
           height="70vh"
-          overflowY={'scroll'}
+          overflowY={'auto'}
           sx={{
             '&::-webkit-scrollbar': {
               backgroundColor: `rgba(150, 150, 190, 0.15)`,

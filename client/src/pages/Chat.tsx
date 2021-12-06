@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import {
-  Grid,
-  GridItem,
+  Box,
+  Flex,
   Heading,
+  Text,
   // useColorModeValue
 } from '@chakra-ui/react'
 import ChatLeftPane from '../components/Chat/LeftPane/ChatLeftPane'
@@ -10,32 +11,6 @@ import ChatRightPane from '../components/Chat/RightPane/ChatRightPane'
 import TopBar from '../components/TopBar/TopBar'
 import { useLocation } from 'react-router-dom'
 import { auth } from '../firebase'
-
-// TODO: FIXES REQUIRED:
-// TODO: 1. REFRESHING PAGE RESETS COUNTDOWN TIMER
-// TODO: DISPLAY WARNING IF ATTEMPTING TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS COMMENTED OUT ABOVE AND BELOW?
-// TODO: 2. REFACTOR PROP-DRILLING (START IN CHAT PAGE?)
-// import { useBeforeunload } from 'react-beforeunload'
-
-// useBeforeunload(
-//   () =>
-//     'Closing this tab will not allow you to mark the session as complete and will cause excessive billing.  Are you sure you wish to close this tab? '
-// )
-
-// CODE TO WARN AGAINST CLOSING THE CHAT WINDOW
-// window.addEventListener("beforeunload", (ev) =>
-// {
-//     ev.preventDefault();
-//     return ev.returnValue = 'Are you sure you want to close?';
-// });
-// componentDidMount: function() {
-//   window.addEventListener('onbeforeunload', this.handleWindowClose);
-// },
-
-// componentWillUnmount: function() {
-//   window.removeEventListener('onbeforeunload', this.handleWindowClose);
-// }
-// // ----
 
 const mockHelpRequest = {
   id: '73668645-b761-4ae2-ac96-e1a52dde2ac8',
@@ -67,7 +42,7 @@ const mockHelpRequest = {
   tutor: {
     id: 'sIOHhUgNX8PNU0eDXHAKM2Lnpz43',
     name: 'Tutor Name',
-    photo_url: 'https://randomuser.me/api/portraits/men/75.jpg',
+    photo_url: 'https://randomuser.me/api/portraits/men/74.jpg',
   },
 }
 
@@ -84,35 +59,57 @@ const Chat = () => {
   }, [])
 
   const location = useLocation()
-  const helpRequest: any = mockHelpRequest
-  const isTutor = userId === helpRequest.tutor_id
-  if (!helpRequest) return <Heading>Error, not a valid help request</Heading>
+  const helpRequest: any = location.state
+  console.log(helpRequest)
+  const isTutor = userId === helpRequest?.tutor_id
   if (!userId) return <Heading>Loading ...</Heading>
   return (
-    <Grid
-      gap={3}
-      overflowY={'hidden'}
-      padding="3"
-      templateColumns="repeat(3, 1fr)"
-      templateRows="1fr auto"
-    >
-      <GridItem rowSpan={1} colSpan={3}>
-        <TopBar heading={'Chat'} tutor={isTutor} />
-      </GridItem>
-
-      <GridItem rowSpan={1} colSpan={1}>
-        <ChatLeftPane
-          helpRequest={mockHelpRequest}
-          userId={userId}
-          isTutor={isTutor}
-        />
-      </GridItem>
-
-      <GridItem rowSpan={1} colSpan={2}>
-        <ChatRightPane />
-      </GridItem>
-    </Grid>
+    <Box p={'1rem'}>
+      <TopBar heading={'Chat'} tutor={isTutor} />
+      {helpRequest ? (
+        <Flex w={'100%'}>
+          <ChatLeftPane
+            helpRequest={helpRequest}
+            userId={userId}
+            isTutor={isTutor}
+          />
+          <Box flexGrow={1} maxW="90ch" margin="auto">
+            <ChatRightPane />
+          </Box>
+        </Flex>
+      ) : (
+        <Text size="xl">
+          No ongoing help request, please create/accept a new help request.
+        </Text>
+      )}
+    </Box>
   )
 }
 
 export default Chat
+
+// TODO: FIXES REQUIRED:
+// TODO: 1. REFRESHING PAGE RESETS COUNTDOWN TIMER
+// TODO: DISPLAY WARNING IF ATTEMPTING TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS COMMENTED OUT ABOVE AND BELOW?
+// TODO: 2. REFACTOR PROP-DRILLING (START IN CHAT PAGE?)
+// import { useBeforeunload } from 'react-beforeunload'
+
+// useBeforeunload(
+//   () =>
+//     'Closing this tab will not allow you to mark the session as complete and will cause excessive billing.  Are you sure you wish to close this tab? '
+// )
+
+// CODE TO WARN AGAINST CLOSING THE CHAT WINDOW
+// window.addEventListener("beforeunload", (ev) =>
+// {
+//     ev.preventDefault();
+//     return ev.returnValue = 'Are you sure you want to close?';
+// });
+// componentDidMount: function() {
+//   window.addEventListener('onbeforeunload', this.handleWindowClose);
+// },
+
+// componentWillUnmount: function() {
+//   window.removeEventListener('onbeforeunload', this.handleWindowClose);
+// }
+// // ----

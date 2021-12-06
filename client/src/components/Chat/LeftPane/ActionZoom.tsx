@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@chakra-ui/button'
+import { FaVideo } from 'react-icons/fa'
 
 type ActionZoomProps = {
   zoom_url: string
@@ -12,7 +13,8 @@ const ActionZoom = ({ zoom_url }: ActionZoomProps) => {
   }
   return (
     <Button w="15ch" mt={'1rem'} onClick={zoomButtonHandler}>
-      Open Zoom
+      <FaVideo />
+      &nbsp;&nbsp; Open Zoom
     </Button>
   )
 }
