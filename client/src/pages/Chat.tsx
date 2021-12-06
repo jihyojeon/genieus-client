@@ -85,7 +85,9 @@ const Chat = () => {
 
   const location = useLocation()
   const helpRequest: any = mockHelpRequest
+  const isTutor = userId === helpRequest.tutor_id
   if (!helpRequest) return <Heading>Error, not a valid help request</Heading>
+  if (!userId) return <Heading>Loading ...</Heading>
   return (
     <Grid
       gap={3}
@@ -95,12 +97,16 @@ const Chat = () => {
       templateRows="1fr auto"
     >
       <GridItem rowSpan={1} colSpan={3}>
-        <TopBar heading={'Chat'} tutor={userId === helpRequest.tutor_id} />
+        <TopBar heading={'Chat'} tutor={isTutor} />
       </GridItem>
 
-      {/* <GridItem rowSpan={1} colSpan={1}>
-        <ChatLeftPane helpRequest={mockHelpRequest}/>
-      </GridItem> */}
+      <GridItem rowSpan={1} colSpan={1}>
+        <ChatLeftPane
+          helpRequest={mockHelpRequest}
+          userId={userId}
+          isTutor={isTutor}
+        />
+      </GridItem>
 
       <GridItem rowSpan={1} colSpan={2}>
         <ChatRightPane />
