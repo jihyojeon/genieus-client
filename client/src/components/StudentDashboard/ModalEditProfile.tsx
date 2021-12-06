@@ -157,17 +157,6 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                 </FormControl>
                 <Stack spacing={6} direction={['column', 'row']}>
                   <Button
-                    bg={'red.400'}
-                    color={'white'}
-                    w="full"
-                    onClick={onClose}
-                    _hover={{
-                      bg: 'red.500',
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
                     onClick={() => {
                       uploadFiles(photoFile)
                       console.log('URl', Url)
@@ -190,6 +179,9 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                     }}
                   >
                     Submit
+                  </Button>
+                  <Button variant="outline" w="full" onClick={onClose}>
+                    Cancel
                   </Button>
                 </Stack>
               </Stack>

@@ -52,9 +52,8 @@ const StarRating = ({ clickHandler, rating }: StarRatingProps) => {
     <Flex justifyContent="space-between">
       <HStack isInline>{buttons}</HStack>
       <Stat textAlign="end">
-        <StatNumber>
-          {rating} <StatLabel sx={{ display: 'inline' }}>/5</StatLabel>
-        </StatNumber>
+        <StatNumber sx={{ display: 'inline' }}>{rating}</StatNumber>
+        <StatLabel sx={{ display: 'inline' }}>/5</StatLabel>
       </Stat>
     </Flex>
   )
