@@ -32,11 +32,7 @@ const PreviousRequests = () => {
         fontWeight="400"
         color="indigo.400"
         letterSpacing={0.5}
-        onClick={() => {
-          console.log(helpRequests.data)
-          }
-        }
-      >
+       >
         Previous Requests:
       </Box>
       <List 
