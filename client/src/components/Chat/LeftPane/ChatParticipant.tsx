@@ -6,6 +6,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
+import { BiOutline } from 'react-icons/bi'
 import ModalBio from './ModalBio'
 
 const ChatParticipant = (props: any) => {
@@ -16,7 +17,8 @@ const ChatParticipant = (props: any) => {
   // TODO: 2. PASS ALL DATA TO CHATBIO MODAL
 
   const name: string = props.name
-  const imageUrl: string = props.imageUrl
+  const photo_url: string = props.photo_url
+  const bio: string = props.bio
 
   return (
     <Box
@@ -34,7 +36,7 @@ const ChatParticipant = (props: any) => {
       <Avatar
         bg="grey"
         size={'xl'}
-        src={imageUrl}
+        src={photo_url}
         zIndex="10"
       ></Avatar>
       <Heading
@@ -50,6 +52,10 @@ const ChatParticipant = (props: any) => {
       <ModalBio
         isOpen={isOpen}
         onClose={onClose}
+        name={name}
+        photo_url={photo_url}
+        hr={props.hr}
+        bio={bio}
         // TODO: ADD BIO DATA
       />
     </Box>

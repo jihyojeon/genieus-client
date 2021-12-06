@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom'
 
 //@ts-ignore
 
-const ModalComplete = ({ isOpen, onClose, name, imageUrl }) => {
+const ModalComplete = ({ isOpen, onClose, name, photo_url }) => {
   const navigate = useNavigate()
 
   // TODO: ISTUTOR FLAG (true/false) DECIDES WHERE TO NAVIGATE TO ON BUTTON CLICK
@@ -61,7 +61,7 @@ const ModalComplete = ({ isOpen, onClose, name, imageUrl }) => {
               </ModalHeader>
 
               <ModalBody>
-                <Avatar size={'2xl'} src={imageUrl} alt={'Avatar Alt'} />
+                <Avatar size={'2xl'} src={photo_url} alt={'Avatar Alt'} />
                 {/* TODO: INSERT HELP REQUEST STATS HERE FOR REVIEW */}
                 <Text mt="2rem">INSERT HELP REQUEST STATS HERE</Text>
               </ModalBody>
