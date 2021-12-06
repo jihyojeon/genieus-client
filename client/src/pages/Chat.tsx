@@ -6,12 +6,14 @@ import {
 import ChatLeftPane from '../components/Chat/LeftPane/ChatLeftPane'
 import ChatRightPane from '../components/Chat/RightPane/ChatRightPane'
 import ChatTopBar from '../components/Chat/TopPane/ChatTopBar'
-// import { useBeforeunload } from 'react-beforeunload'
 
-  // TODO: FIXES REQUIRED:
-  // TODO: 1. REFRESHING PAGE RESETS COUNTDOWN TIMER
-  // TODO: DISPLAY WARNING IF ATTEMPTING TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS COMMENTED OUT ABOVE AND BELOW?
-  // TODO: 2. REFACTOR PROP-DRILLING (START IN CHAT PAGE?)
+// TODO: FIXES REQUIRED:
+// TODO: 1. REFRESHING PAGE RESETS COUNTDOWN TIMER
+// TODO: DISPLAY WARNING IF ATTEMPTING TO CLOSE THIS WINDOW - ATTEMPT AT THIS IS COMMENTED OUT ABOVE AND BELOW?
+// TODO: 2. REFACTOR PROP-DRILLING (START IN CHAT PAGE?)
+  // import { useBeforeunload } from 'react-beforeunload'
+
+  
   // useBeforeunload(
   //   () =>
   //     'Closing this tab will not allow you to mark the session as complete and will cause excessive billing.  Are you sure you wish to close this tab? '

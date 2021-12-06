@@ -104,19 +104,19 @@ const HrContent = ({ settutorComplete }: any) => {
                 >
                   Description
                 </Heading>
+                <Flex spacing={2} justify="flex-end">
                 {tags !== null ? (
                   tags.map((tag) => {
                     return (
-                      <HStack spacing={2}>
-                        <Tag variant="outline" size="lg" colorScheme="indigo">
+                      <Tag variant="outline" size="lg" colorScheme="indigo" ml="0.25rem" flexWrap="wrap">
                           <TagLabel>{tag}</TagLabel>
                         </Tag>
-                      </HStack>
                     )
                   })
-                ) : (
-                  <Text> Tags displayed here...</Text>
-                )}
+                  ) : (
+                    <Text> Tags displayed here...</Text>
+                    )}
+                    </Flex>
               </Flex>
 
               <Box pt={5}>

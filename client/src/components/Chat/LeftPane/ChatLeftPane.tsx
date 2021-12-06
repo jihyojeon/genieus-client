@@ -14,7 +14,6 @@ const ChatLeftPane = (props: any) => {
 
 
   //  >-------------- user id logic
-
   // TODO: REMOVE TEST "1234" VALUE BELOW AND UNCOMMENT SUBSEQUENT USESTATE
   const [userId, setUserId] = useState('1234')
   // const [userId, setUserId] = useState()
@@ -27,11 +26,9 @@ const ChatLeftPane = (props: any) => {
       setUserId(item.uid)
     })
   }, [])
-
   //  >-------------- 
 
   //  >-------------- populate component with user data
-
   const bio: string = 'dummy bio'
 
   // MASTER VALUE FOR INITIAL CHAT DURATION IS SET BELOW
@@ -43,6 +40,29 @@ const ChatLeftPane = (props: any) => {
   const subscriptionRemainingSecs: number =
     subscriptionRemainingMins * 60 - seconds
 
+  const mockStudent = {
+    joined_date: '2020-12-02T15:53:37.806Z',
+    location: "New Studentland",
+    bio: "This is my STUDENT bio string",
+    spoken_language: "Studenteese",
+    subscription_type: "Pro",
+    lastpayment_date: '2021-11-02T15:53:37.806Z',
+    subscription_expiry: '2021-12-12T15:53:37.806Z',
+    time_remaining: 45,  
+  }
+
+  const mockTutor = {
+    joined_date: '2020-12-02T15:53:37.806Z',
+    location: "Old Tutorland",
+    bio: "This is my TUTOR bio string",
+    spoken_language: "Tutoreese",
+    avg_rating: 4.5,
+    completed_help_requests: 29,
+    tags: ["#this", "that", "#those"],
+    programming_languages: ["JS","Angular","Fortran"],
+    time_completed: 201,  
+  }
+  
   const mockHelpRequest = {
     id: '73668645-b761-4ae2-ac96-e1a52dde2ac8',
     status: 'closed-compelted',
