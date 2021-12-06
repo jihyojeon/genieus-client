@@ -109,7 +109,7 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
               />
               <FormHelperText>We'll never share your email.</FormHelperText>
             </FormControl>
-            <FormControl id="email" isRequired>
+            <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup size="md">
                 <Input
