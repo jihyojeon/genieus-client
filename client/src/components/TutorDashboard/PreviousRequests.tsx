@@ -13,7 +13,7 @@ import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestSer
 const PreviousRequests = () => {
   const [userId, setUserId] = useState()
 
-  const helpRequests = useGetHrRequestByValueQuery({tutor_id : userId})
+  const helpRequests = useGetHrRequestByValueQuery({tutor_id : userId}, {skip: !userId})
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
