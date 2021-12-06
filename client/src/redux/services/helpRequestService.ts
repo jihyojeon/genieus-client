@@ -9,6 +9,7 @@ export default interface HRType {
   favourites_only: boolean
   tutor: any
   interested_tutors: any
+  status: any
 }
 
 export const helpRequestApi = createApi({

@@ -127,6 +127,12 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
             <Stack mt={8} direction={'row'} spacing={4}>
               <Button
                 onClick={() => {
+                  console.log(hrById)
+                  updateHr({
+                    id: hrById.data.id,
+                    status: 'assigned',
+                  })
+
                   navigate('/chat', { state: hrById })
                 }}
                 flex={1}

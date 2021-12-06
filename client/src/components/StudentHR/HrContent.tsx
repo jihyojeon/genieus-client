@@ -51,8 +51,6 @@ const HrContent = ({ settutorComplete }: any) => {
     setSearchValue(e.target.value)
     setFilteredLanguages(
       languageKeys.filter((language: string) => {
-        console.log(searchValue, filteredLanguages)
-
         return searchValue
           ? language.toLowerCase().includes(searchValue.toLowerCase())
           : languageKeys
@@ -105,18 +103,24 @@ const HrContent = ({ settutorComplete }: any) => {
                   Description
                 </Heading>
                 <Flex spacing={2} justify="flex-end">
-                {tags !== null ? (
-                  tags.map((tag) => {
-                    return (
-                      <Tag variant="outline" size="lg" colorScheme="indigo" ml="0.25rem" flexWrap="wrap">
+                  {tags !== null ? (
+                    tags.map((tag) => {
+                      return (
+                        <Tag
+                          variant="outline"
+                          size="lg"
+                          colorScheme="indigo"
+                          ml="0.25rem"
+                          flexWrap="wrap"
+                        >
                           <TagLabel>{tag}</TagLabel>
                         </Tag>
-                    )
-                  })
+                      )
+                    })
                   ) : (
                     <Text> Tags displayed here...</Text>
-                    )}
-                    </Flex>
+                  )}
+                </Flex>
               </Flex>
 
               <Box pt={5}>
@@ -247,7 +251,7 @@ const HrContent = ({ settutorComplete }: any) => {
               >
                 <Editor
                   height="50vh"
-                  language={selectValue}
+                  language={selectValue.toLowerCase()}
                   defaultValue="// Provide sample code to help outline your problem..."
                   value={codeValue}
                   onChange={handleEditorChange}
