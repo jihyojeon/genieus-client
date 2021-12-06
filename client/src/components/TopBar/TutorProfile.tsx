@@ -30,7 +30,7 @@ export default function TutorProfile() {
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       if (item) {
-        setUserId(item.uid)
+        item && setUserId(item.uid)
       }
     })
   }, [])

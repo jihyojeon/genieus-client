@@ -29,7 +29,7 @@ export default function StudentProfile() {
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       //@ts-ignore
-      setUserId(item.uid)
+      item && setUserId(item.uid)
     })
   }, [])
 
