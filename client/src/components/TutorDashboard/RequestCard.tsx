@@ -78,9 +78,9 @@ export const RequestCard = ({ hr }: HRType) => {
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             {/*@ts-ignore*/}
-            {hr.tags?.map((tag) => {
+            {hr.tags?.map((tag, index) => {
               return (
-                <Badge px={2} py={1} fontWeight={'400'}>
+                <Badge key={index} px={2} py={1} fontWeight={'400'}>
                   {tag}
                 </Badge>
               )

@@ -81,9 +81,9 @@ export const TutorInformation = () => {
         <Flex mt={4} direction="column">
           <Text>Spoken languages:</Text>
           <Wrap mt={2} spacing={2}>
-            {spokenLanguage && spokenLanguage.map(language => {
+            {spokenLanguage && spokenLanguage.map((language, index) => {
               return (
-                <WrapItem>
+                <WrapItem key={index}>
                   <Tag variant="outline" size="lg" colorScheme="indigo">
                     <TagLabel>{language}</TagLabel>
                     <TagCloseButton onClick={() => removeLanguage(language)}/>
@@ -118,9 +118,9 @@ export const TutorInformation = () => {
 
           <Flex>
             <Wrap align="left" mt={2} spacing={2}>
-              {tutor.data?.programming_languages?.map(language => {
+              {tutor.data?.programming_languages?.map((language, index) => {
                 return (
-                  <WrapItem>
+                  <WrapItem key={index}>
                   <Tag variant="outline" size="lg" colorScheme="indigo">
                     <TagLabel fontWeight="bold">
                       {language}
