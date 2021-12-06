@@ -7,7 +7,7 @@ const Logo = () => {
       alignItems="center"
       color={useColorModeValue('indigo.600', 'indigo.300')}
     >
-      <Box w="2.2rem">
+      <Box w="1.8rem">
         <svg
           viewBox="0 0 102 198"
           fill="none"
@@ -23,13 +23,7 @@ const Logo = () => {
           />
         </svg>
       </Box>
-      <Heading
-        ml={5}
-        size="lg"
-        fontFamily="montserrat"
-        fontWeight="300"
-        position="relative"
-      >
+      <Heading ml={5} size="lg" fontFamily="montserrat" position="relative">
         GENIE
         <span
           style={{

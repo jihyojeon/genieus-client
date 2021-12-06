@@ -4,7 +4,7 @@ import TopBar from '../components/TopBar/TopBar'
 
 const Feedback = () => (
   <>
-    <TopBar />
+    <TopBar heading="Feedback" />
     <FeedbackForm />
   </>
 )

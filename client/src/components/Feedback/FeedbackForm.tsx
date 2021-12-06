@@ -13,6 +13,7 @@ import {
   FormControl,
   FormHelperText,
   FormLabel,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import StarRating from '../Feedback/StarRating'
 import { FaHeart, FaBan } from 'react-icons/fa'
@@ -21,9 +22,7 @@ import {
   useAddBlockedTutorMutation,
   useAddFavouriteTutorMutation,
   useGetFavouriteTutorsByIdQuery,
-  useRemoveBlockedTutorMutation,
   useRemoveFavouriteTutorMutation,
-  useUpdateStudentByIdMutation,
 } from '../../redux/services/studentService'
 import { useUpdateHRRequestMutation } from '../../redux/services/helpRequestService'
 
@@ -151,8 +150,8 @@ const FeedbackForm = () => {
 
   return (
     <Flex
-      border={'1px solid'}
-      borderColor="gray.100"
+      // border={'1px solid'}
+      backgroundColor={useColorModeValue('white', 'gray.700')}
       direction="column"
       shadow="lg"
       align="center"
@@ -197,7 +196,7 @@ const FeedbackForm = () => {
           <FormControl>
             <FormLabel>Comments for tutor</FormLabel>
             <Textarea
-              placeHolder="Add any comments to share with your tutor ..."
+              placeholder="Add any comments to share with your tutor ..."
               onChange={(e) => setComments(e.target.value)}
               value={comments}
             />

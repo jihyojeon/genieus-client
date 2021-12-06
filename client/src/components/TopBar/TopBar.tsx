@@ -1,22 +1,27 @@
 import React from 'react'
-import { Box, Flex, Heading } from '@chakra-ui/react'
+import { Flex, Heading } from '@chakra-ui/react'
 import Logo from './Logo'
-import Profile from './Profile'
+import StudentProfile from './StudentProfile'
 import ColorModeSwitcher from './ColorModeSwitcher'
+import TutorProfile from './TutorProfile'
 
 type TopBarProps = {
   heading?: string
-  children?: React.ReactNode
+  tutor?: boolean
 }
 
-const TopBar = ({ heading, children }: TopBarProps) => {
+const TopBar = ({ heading, tutor = false }: TopBarProps) => {
   return (
-    <Flex justifyContent="space-between" p="0 1rem" alignItems="center">
+    <Flex
+      justifyContent="space-between"
+      p="0 1rem"
+      alignItems="center"
+      m=".5rem 1rem"
+    >
       <Logo />
       {heading && <Heading>{heading}</Heading>}
-      children
       <Flex alignItems="center">
-        <Profile />
+        {tutor ? <StudentProfile /> : <TutorProfile />}
         <ColorModeSwitcher />
       </Flex>
     </Flex>
