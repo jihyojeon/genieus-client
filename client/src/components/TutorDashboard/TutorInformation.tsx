@@ -7,25 +7,44 @@ import {
   Tag,
   TagLabel,
   VStack,
-  useDisclosure
+  useDisclosure,
+  Wrap,
+  WrapItem,
+  CloseButton,
+  TagCloseButton
 } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 
 import { auth } from '../../firebase'
-import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
+import { useGetTutorByIdQuery, useUpdateTutorMutation} from '../../redux/services/tutorService'
 
 
 export const TutorInformation = () => {
   const [userId, setUserId] = useState()
+  const [spokenLanguage, setSpokenLanguage] = useState([])
   //@ts-ignore
   const tutor = useGetTutorByIdQuery(userId)
+  const [updateTutor, updateTutorResult] = useUpdateTutorMutation()
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
-      //@ts-ignore
+      // @ts-ignore
       setUserId(item.uid)
     })
   }, [])
+
+  useEffect(() => {
+    //@ts-ignore
+    setSpokenLanguage(tutor.data?.spoken_language)
+  },[tutor.data?.spoken_language])
+
+  function removeLanguage(language: string){
+    updateTutor({
+      //@ts-ignore
+      id: tutor.data.id,
+      spoken_language: spokenLanguage.filter(lang => lang !== language),
+    })
+  }
 
 
   return (
@@ -61,15 +80,18 @@ export const TutorInformation = () => {
 
         <Flex mt={4} direction="column">
           <Text>Spoken languages:</Text>
-          <HStack mt={3} spacing={5}>
-            {tutor.data?.spoken_language?.map(language => {
+          <Wrap mt={2} spacing={2}>
+            {spokenLanguage && spokenLanguage.map(language => {
               return (
-                <Tag variant="outline" size="lg" colorScheme="indigo">
-                  <TagLabel>{language}</TagLabel>
-                </Tag>
+                <WrapItem>
+                  <Tag variant="outline" size="lg" colorScheme="indigo">
+                    <TagLabel>{language}</TagLabel>
+                    <TagCloseButton onClick={() => removeLanguage(language)}/>
+                  </Tag>
+                </WrapItem>
               )
             })}
-          </HStack>
+          </Wrap>
         </Flex>
 
         <Flex mt={4} direction="column" maxW="15rem">
@@ -95,17 +117,19 @@ export const TutorInformation = () => {
           <Text>Your Tech Expertise:</Text>
 
           <Flex>
-            <VStack align="left" mt={3} spacing={5}>
+            <Wrap align="left" mt={2} spacing={2}>
               {tutor.data?.programming_languages?.map(language => {
                 return (
+                  <WrapItem>
                   <Tag variant="outline" size="lg" colorScheme="indigo">
                     <TagLabel fontWeight="bold">
                       {language}
                     </TagLabel>
                   </Tag>
+                  </WrapItem>
                 )
               })}
-            </VStack>
+            </Wrap>
           </Flex>
         </Flex>
       </Box>
