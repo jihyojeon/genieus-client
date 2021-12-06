@@ -1,13 +1,10 @@
 import {
   Avatar,
   Box,
-  Flex,
   Heading,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
-import { BiOutline } from 'react-icons/bi'
-import ModalBio from './ModalBio'
 
 type ChatParticipantProps = {
   hr: any
@@ -17,10 +14,10 @@ type ChatParticipantProps = {
 const ChatParticipant = ({ hr, isTutor }: ChatParticipantProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const name: string = isTutor ? hr.student.name : hr.tutor.name
+  const name: string = isTutor ? hr.student?.name : hr.tutor?.name
   const photo_url: string = isTutor
-    ? hr.student.photo_url
-    : hr.tutor.name.photo_url
+    ? hr.student?.photo_url
+    : hr.tutor?.photo_url
 
   return (
     <Box

@@ -5,7 +5,6 @@ import socket, {
   checkAndReconnectToSocket,
 } from '../../../redux/services/socket'
 import { auth } from '../../../firebase'
-import { useLocation } from 'react-router-dom'
 import ChatInput from './ChatInput'
 
 type Message = {
@@ -13,17 +12,13 @@ type Message = {
   content: string
   postedDate: Date
 }
+type ChatRightPaneProps = {
+  helpRequest: any
+}
 
-const ChatRightPane = (props: any) => {
+const ChatRightPane = ({ helpRequest }: ChatRightPaneProps) => {
   const [userID, setUserID] = useState<string | undefined>()
   const [msgs, setMsgs] = useState<Message[]>([])
-  // getting help request data from react router
-  // TODO: once Louis has setup routing to chat, get help request from location
-  // maybe prop drill from chat?
-  // const location = useLocation();
-  // const {helpRequest} = location.state;
-  // ! MOCK DATA - delete
-  const helpRequest = { id: '4a40f48e-9d9c-41aa-a410-7454bc0d6080' } // jihyo test jeon
 
   // get userID from firebase
   useEffect(() => {
@@ -81,15 +76,12 @@ const ChatRightPane = (props: any) => {
 
   return (
     <>
-      <Flex
-        direction="column"
-        // TODO: FIX THIS HEIGHT SO IT HANDLES DYNAMIC RESIZING
-      >
+      <Flex direction="column">
         <Box
           paddingRight={'0.5rem'}
           pl="1rem"
           height="70vh"
-          overflowY={'scroll'}
+          overflowY={'auto'}
           sx={{
             '&::-webkit-scrollbar': {
               backgroundColor: `rgba(150, 150, 190, 0.15)`,

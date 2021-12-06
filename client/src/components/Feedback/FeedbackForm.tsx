@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import StarRating from '../Feedback/StarRating'
 import { FaHeart, FaBan } from 'react-icons/fa'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   useAddBlockedTutorMutation,
   useAddFavouriteTutorMutation,
@@ -26,47 +26,11 @@ import {
 } from '../../redux/services/studentService'
 import { useUpdateHRRequestMutation } from '../../redux/services/helpRequestService'
 
-const mockHelpRequest = {
-  id: '73668645-b761-4ae2-ac96-e1a52dde2ac8',
-  status: 'closed-compelted',
-  description: 'this is a description',
-  time_opened: '2021-12-02T15:53:37.806Z',
-  time_accepted: '2021-12-02T15:53:37.806Z',
-  time_closed: '2021-12-02T15:53:37.806Z',
-  rating: null,
-  feedback_comments: null,
-  tags: null,
-  language: 'fortran',
-  code: 'this is some code',
-  zoom_url: 'http://zoom.com/132123412341234',
-  call_length: 211,
-  favourites_only: false,
-  tutor_id: 'sIOHhUgNX8PNU0eDXHAKM2Lnpz43',
-  student_id: 'spammyboi23',
-  interested_tutors: ['sIOHhUgNX8PNU0eDXHAKM2Lnpz43'],
-  declined_tutors: null,
-  createdAt: '2021-12-02T15:53:37.806Z',
-  updatedAt: '2021-12-02T15:53:37.806Z',
-  student: {
-    id: 'spammyboi23',
-    name: 'string',
-    photo_url: 'string',
-  },
-  tutor: {
-    id: 'sIOHhUgNX8PNU0eDXHAKM2Lnpz43',
-    name: 'Obama',
-    photo_url: 'https://randomuser.me/api/portraits/men/75.jpg',
-  },
-}
-
-const FeedbackForm = () => {
+const FeedbackForm = ({ helpRequest }: { helpRequest: any }) => {
   // HELP REQUEST & STUDENT INFO
   const navigate = useNavigate()
-  // TODO: get help request from location state or other approach
-  // const location = useLocation()
-  // const helpRequest = location.state
-  const helpRequest = mockHelpRequest
-  const { tutor } = mockHelpRequest
+  let { tutor } = helpRequest
+  if (!tutor) tutor = { id: 'none', name: 'not found', photo_url: 'notfound' }
   const userId = helpRequest.student_id
   const favouriteTutors = useGetFavouriteTutorsByIdQuery(userId)
 
@@ -81,6 +45,7 @@ const FeedbackForm = () => {
   useEffect(() => {
     const checkAlreadyFavourite =
       favouriteTutors.isSuccess &&
+      favouriteTutors.data &&
       favouriteTutors.data.map((tutor) => tutor.id).includes(tutor.id)
     setIsFavourite(checkAlreadyFavourite)
     setAlreadyFavourite(checkAlreadyFavourite)
@@ -147,7 +112,6 @@ const FeedbackForm = () => {
     }
     navigate('/student-dashboard')
   }
-
   return (
     <Flex
       // border={'1px solid'}
