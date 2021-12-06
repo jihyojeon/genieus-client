@@ -38,15 +38,6 @@ export default function Pricing() {
   const [maxClicked, setmaxClicked] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  // useEffect(() => {
-  //   //@ts-ignore
-  //   setbasicClicked(false)
-  //   //@ts-ignore
-  //   setproClicked(false)
-  //   //@ts-ignore
-  //   setmaxClicked(false)
-  // }, [basicClicked, proClicked, maxClicked])
-
   const getSubscriptions = useGetSubscriptionsQuery()
 
   return (

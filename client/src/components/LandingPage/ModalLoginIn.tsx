@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+
 import { auth } from '../../firebase'
-import { signInWithGoogle } from '../../firebase'
+// import { signInWithGoogle } from '../../firebase'
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+
 import { FcGoogle } from 'react-icons/fc'
 
 import {
@@ -35,6 +38,17 @@ const ModalLogIn = ({ isOpen, onClose }) => {
   const [loginEmail, setLoginEmail] = useState('')
   const [loginpassword, setLoginPassword] = useState('')
   const [errormsg, seterrormsg] = useState('')
+  const provider = new GoogleAuthProvider()
+
+  const signInWithGoogle = async () => {
+    await signInWithPopup(auth, provider)
+      .then((result) => {
+        navigate('/student-dashboard')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   const login = async () => {
     try {
@@ -99,7 +113,9 @@ const ModalLogIn = ({ isOpen, onClose }) => {
               </InputGroup>
             </FormControl>
             <Button
-              onClick={signInWithGoogle}
+              onClick={() => {
+                signInWithGoogle()
+              }}
               w={'25rem'}
               variant={'outline'}
               leftIcon={<FcGoogle />}
