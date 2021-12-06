@@ -13,11 +13,10 @@ import {
 import { ReactNode } from 'react'
 import { BsPerson } from 'react-icons/bs'
 import { FiServer } from 'react-icons/fi'
-import { GoLocation } from 'react-icons/go'
 import { auth } from '../../firebase'
-import react, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
-import { stat } from 'fs'
+import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
 
 interface StatsCardProps {
   title: string
@@ -69,7 +68,12 @@ function StatsCard(props: StatsCardProps) {
 export default function BasicStatistics() {
   const [userId, setUserId] = useState()
   //@ts-ignore
-  const student = useGetStudentByIdQuery(userId)
+  const student = useGetStudentByIdQuery(userId, { skip: !userId })
+  const helpRequestsSolved = useGetHrRequestByValueQuery({
+    student_id: userId,
+    status: 'closed-complete',
+  })
+  const numberofRequestsCompleted = helpRequestsSolved?.data?.length
 
   function displayDate(date: Date) {
     let day = date.toString().slice(8, 10)
@@ -131,7 +135,7 @@ export default function BasicStatistics() {
         <WrapItem>
           <StatsCard
             title={'Requests completed'}
-            stat={'5,000'}
+            stat={String(numberofRequestsCompleted)}
             icon={<BsPerson size={'3em'} />}
           />
           <StatsCard
