@@ -87,6 +87,9 @@ const Favourites = () => {
         fontWeight="300"
         pb={'1rem'}
         ml={10}
+        mt={20}
+        mb={5}
+        pt={5}
       >
         Favourite Tutors
       </Heading>

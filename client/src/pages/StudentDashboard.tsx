@@ -20,7 +20,8 @@ const StudentDashboard = () => {
       overflowY={'hidden'}
       padding="5"
       templateColumns="repeat(3, 1fr)"
-      templateRows="auto 1fr auto"
+      templateRows="repeat(4, 1fr)"
+      // templateRows="auto 1fr auto"
     >
       {/* CREATE REQUEST BUTTON */}
       <GridItem rowSpan={1} colSpan={2}>

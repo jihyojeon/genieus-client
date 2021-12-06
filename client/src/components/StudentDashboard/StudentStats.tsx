@@ -37,9 +37,8 @@ function StatsCard(props: StatsCardProps) {
       py={'5'}
       m={5}
       w={'30vh'}
-      shadow={'xl'}
-      border={'1px solid'}
-      borderColor={useColorModeValue('gray.800', 'gray.500')}
+      shadow={'base'}
+      bg={useColorModeValue('gray.100', 'gray.700')}
       rounded={'lg'}
     >
       <Flex justifyContent={'space-between'}>
