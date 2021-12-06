@@ -15,9 +15,27 @@ import {
 } from '@chakra-ui/react'
 
 // TODO: REBUIILD THIS IN FULL
+type ModalBioProps = {
+  isOpen: boolean
+  onClose: () => void
+  name: string
+  photo_url: string
+  hr: any
+  student: any
+  tutor: any
+  isTutor: boolean
+}
 
-//@ts-ignore
-const ModalBio = ({ isOpen, onClose, name, photo_url, hr, bio }) => {
+const ModalBio = ({
+  isOpen,
+  onClose,
+  name,
+  photo_url,
+  hr,
+  student,
+  tutor,
+  isTutor,
+}: ModalBioProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
@@ -54,20 +72,26 @@ const ModalBio = ({ isOpen, onClose, name, photo_url, hr, bio }) => {
                 <Heading fontSize={'2xl'} fontFamily={'body'}>
                   {name}
                 </Heading>
-                
+
                 <Text
                   textAlign={'center'}
                   color={useColorModeValue('gray.700', 'gray.400')}
                   px={3}
                 >
-                  Coder, Millwall Fan,
+                  {isTutor ? tutor.spoken_languages : student.spoken_languages}
                 </Text>
+                <Text
+                  textAlign={'center'}
+                  color={useColorModeValue('gray.700', 'gray.400')}
+                  px={3}
+                >
+                  {isTutor ? tutor.joined_date : student.joined_date}
+                </Text>
+
                 <Heading fontSize={'2xl'} fontFamily={'body'} mt="1rem">
-                Bio
+                  Bio
                 </Heading>
-                <Text>
-                  {bio}
-                </Text>
+                <Text>{isTutor ? tutor.bio : student.bio}</Text>
 
                 <Stack
                   align={'center'}

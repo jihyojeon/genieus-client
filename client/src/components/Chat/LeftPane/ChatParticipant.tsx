@@ -33,12 +33,7 @@ const ChatParticipant = (props: any) => {
       width="100%"
       justifyContent="space-between"
     >
-      <Avatar
-        bg="grey"
-        size={'xl'}
-        src={photo_url}
-        zIndex="10"
-      ></Avatar>
+      <Avatar bg="grey" size={'xl'} src={photo_url} zIndex="10"></Avatar>
       <Heading
         fontFamily="montserrat"
         fontSize={25}
@@ -52,10 +47,12 @@ const ChatParticipant = (props: any) => {
       <ModalBio
         isOpen={isOpen}
         onClose={onClose}
-        name={name}
-        photo_url={photo_url}
+        name={props.name}
+        photo_url={props.photo_url}
         hr={props.hr}
-        bio={bio}
+        student={props.student}
+        tutor={props.mockTutor}
+        isTutor={props.isTutor}
         // TODO: ADD BIO DATA
       />
     </Box>

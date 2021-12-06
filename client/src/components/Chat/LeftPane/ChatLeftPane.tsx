@@ -3,7 +3,6 @@ import { auth } from '../../../firebase'
 import { useGetStudentByIdQuery } from '../../../redux/services/studentService'
 import { useGetTutorByIdQuery } from '../../../redux/services/tutorService'
 
-
 import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 
 import ChatParticipant from './ChatParticipant'
@@ -11,8 +10,6 @@ import ChatDuration from './ChatDuration'
 import ChatAction from './ChatAction'
 
 const ChatLeftPane = (props: any) => {
-
-
   //  >-------------- user id logic
   // TODO: REMOVE TEST "1234" VALUE BELOW AND UNCOMMENT SUBSEQUENT USESTATE
   const [userId, setUserId] = useState('1234')
@@ -26,7 +23,7 @@ const ChatLeftPane = (props: any) => {
       setUserId(item.uid)
     })
   }, [])
-  //  >-------------- 
+  //  >--------------
 
   //  >-------------- populate component with user data
   const bio: string = 'dummy bio'
@@ -42,27 +39,27 @@ const ChatLeftPane = (props: any) => {
 
   const mockStudent = {
     joined_date: '2020-12-02T15:53:37.806Z',
-    location: "New Studentland",
-    bio: "This is my STUDENT bio string",
-    spoken_language: "Studenteese",
-    subscription_type: "Pro",
+    location: 'New Studentland',
+    bio: 'This is my STUDENT bio string',
+    spoken_language: 'Studenteese',
+    subscription_type: 'Pro',
     lastpayment_date: '2021-11-02T15:53:37.806Z',
     subscription_expiry: '2021-12-12T15:53:37.806Z',
-    time_remaining: 45,  
+    time_remaining: 45,
   }
 
   const mockTutor = {
     joined_date: '2020-12-02T15:53:37.806Z',
-    location: "Old Tutorland",
-    bio: "This is my TUTOR bio string",
-    spoken_language: "Tutoreese",
+    location: 'Old Tutorland',
+    bio: 'This is my TUTOR bio string',
+    spoken_language: 'Tutoreese',
     avg_rating: 4.5,
     completed_help_requests: 29,
-    tags: ["#this", "that", "#those"],
-    programming_languages: ["JS","Angular","Fortran"],
-    time_completed: 201,  
+    tags: ['#this', 'that', '#those'],
+    programming_languages: ['JS', 'Angular', 'Fortran'],
+    time_completed: 201,
   }
-  
+
   const mockHelpRequest = {
     id: '73668645-b761-4ae2-ac96-e1a52dde2ac8',
     status: 'closed-compelted',
@@ -133,7 +130,6 @@ const ChatLeftPane = (props: any) => {
 
   // --------------<
 
-
   return (
     <Flex direction="column" maxW="30rem" justify="stretch">
       <Flex
@@ -161,28 +157,22 @@ const ChatLeftPane = (props: any) => {
           },
         }}
       >
-
-
         {/* PROFILE COMPONENT */}
         {/* TODO: ADD ON HOVER TO HIGHLIGHT CLICKABILITY FOR MODALBIO POPUP */}
         <ChatParticipant
           name={name}
           photo_url={photo_url}
           hr={mockHelpRequest}
-          bio={bio}
+          student={mockStudent}
+          tutor={mockTutor}
+          isTutor={isTutor}
         />
 
         {/* CLOCK COUNTER COMPONENT */}
-        <ChatDuration
-
-          seconds={seconds}
-          setCanDecline={setCanDecline}
-        />
-
+        <ChatDuration seconds={seconds} setCanDecline={setCanDecline} />
 
         {/* DECLINE COMPONENT */}
         {canDecline && declineBox()}
-
 
         {/* ZOOM COMPONENT */}
         <ChatAction
@@ -197,7 +187,6 @@ const ChatLeftPane = (props: any) => {
         {/* COMPLETE COMPONENT */}
         <ChatAction
           action={'complete'}
-
           name={name}
           photo_url={photo_url}
           seconds={seconds}
