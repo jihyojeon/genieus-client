@@ -1,4 +1,6 @@
+
 import React, { useEffect, useState } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 import {
   Box,
@@ -18,13 +20,16 @@ const ChatAction = (props: any) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+
   const name = props.name
   const imageUrl = props.imageUrl
   const zoomUrl = props.zoomUrl
   const seconds = props.seconds
   const action = props.action
+
   const text = props.text
   const canDecline = props.canDecline
+
 
   // TODO: 1) TAKE THIS STATUS FROM SIGN-IN DETAILS
   const [isTutor, setIsTutor] = useState(true)
@@ -33,7 +38,9 @@ const ChatAction = (props: any) => {
     console.log('Decline session')
   }
 
+
   console.log('Decline State', props.DeclineState)
+
 
   const zoomButtonHandler = () => {
     // TODO: 2) HANDLE RECORDING OF ELAPSED TIME
@@ -48,6 +55,7 @@ const ChatAction = (props: any) => {
     console.log('Complete session')
   }
 
+
   const actionButton = (action: string) => {
     // DECLINE BUTTON
     if (action === 'decline') {
@@ -56,7 +64,9 @@ const ChatAction = (props: any) => {
         return (
           <Box>
             <Button w="15ch" onClick={onOpen}>
+
               Decline {text}
+
             </Button>
             <ModalDecline
               isOpen={isOpen}
@@ -66,11 +76,13 @@ const ChatAction = (props: any) => {
             />
           </Box>
         )
+
       } else {
         return <Text></Text>
       }
 
       // ZOOM BUTTON
+
     } else if (action === 'zoom') {
       return (
         <Box>
@@ -86,7 +98,9 @@ const ChatAction = (props: any) => {
         </Box>
       )
 
+
       // COMPLETE BUTTON
+
     } else if (action === 'complete') {
       return (
         <Box>
@@ -101,10 +115,12 @@ const ChatAction = (props: any) => {
           />
         </Box>
       )
+
     }
   }
 
   const actionText = (action: string) => {
+
     // DECLINE TEXT
     if (action === 'decline') {
       // TODO: MAKE RENDERING OF THIS BOX AND BUTTON VANISH ONCE DECLINING WINDOW HAS RUN OUT
@@ -122,11 +138,13 @@ const ChatAction = (props: any) => {
             </Text>
           </Box>
         )
+
       } else {
         return <Text>It is no longer possible to decline this session</Text>
       }
 
       // ZOOM TEXT
+
     } else if (action === 'zoom') {
       return (
         <Box>
@@ -134,7 +152,9 @@ const ChatAction = (props: any) => {
         </Box>
       )
 
+
       // COMPLETE TEXT
+
     } else if (action === 'complete') {
       return (
         <Box>
@@ -144,6 +164,7 @@ const ChatAction = (props: any) => {
           </Text>
         </Box>
       )
+
     }
   }
 
@@ -157,7 +178,9 @@ const ChatAction = (props: any) => {
       marginTop={'1rem'}
       height="100%"
       width="100%"
+
       justifyContent="center"
+
     >
       {actionText(action)}
       {actionButton(action)}
