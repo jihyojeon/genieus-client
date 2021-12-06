@@ -1,12 +1,15 @@
+import React, { useState, useEffect } from 'react'
 import {
   Grid,
   GridItem,
+  Heading,
   // useColorModeValue
 } from '@chakra-ui/react'
 import ChatLeftPane from '../components/Chat/LeftPane/ChatLeftPane'
 import ChatRightPane from '../components/Chat/RightPane/ChatRightPane'
-// import ChatTopBarOld from '../components/Chat/TopPane/ChatTopBar'
 import ChatTopBar from '../components/TopBar/TopBar'
+import { useLocation } from 'react-router-dom'
+import { auth } from '../firebase'
 
 // TODO: FIXES REQUIRED:
 // TODO: 1. REFRESHING PAGE RESETS COUNTDOWN TIMER
@@ -35,6 +38,19 @@ import ChatTopBar from '../components/TopBar/TopBar'
 // // ----
 
 const Chat = () => {
+  const [userId, setUserId] = useState<string | null>(null)
+
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+  }, [])
+
+  const location = useLocation()
+  const helpRequest: any = location.state
+  console.log(helpRequest)
+  if (!helpRequest) return <Heading>Error, not a valid help request</Heading>
   return (
     <Grid
       gap={3}
@@ -44,17 +60,16 @@ const Chat = () => {
       templateRows="1fr auto"
     >
       <GridItem rowSpan={1} colSpan={3}>
-        {/* <ChatTopBarOld /> */}
-        <ChatTopBar />
+        <ChatTopBar heading={'Chat'} tutor={userId === helpRequest.tutor_id} />
       </GridItem>
-
+      {/* 
       <GridItem rowSpan={1} colSpan={1}>
         <ChatLeftPane />
       </GridItem>
 
       <GridItem rowSpan={1} colSpan={2}>
         <ChatRightPane />
-      </GridItem>
+      </GridItem> */}
     </Grid>
   )
 }
