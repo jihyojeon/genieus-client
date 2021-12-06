@@ -35,8 +35,9 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    console.log(getHrById)
     //@ts-ignore
-    if (getHrById.data !== undefined && getHrById.data.status === 'assigned') {
+    if (getHrById.data) {
       setloadingButton(false)
       window.scrollTo({
         left: 0,
@@ -44,11 +45,13 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
         behavior: 'smooth',
       })
     }
+
     auth.onAuthStateChanged((item) => {
       //@ts-ignore
       setUserId(item.uid)
     })
-  }, [])
+    //@ts-ignore
+  }, [getHrById.data?.status])
 
   const handleClick = () => {
     //@ts-ignore
@@ -71,6 +74,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
           <Button
             colorScheme="indigo"
             fontFamily="montserrat"
+            left={0}
             letterSpacing={2}
             ml={105}
             onClick={onOpen}
