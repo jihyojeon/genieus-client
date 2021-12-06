@@ -22,7 +22,10 @@ const Previous = () => {
     })
   }, [])
   //@ts-ignore
-  const getHrRequests = useGetHrRequestByValueQuery({ student_id: userId }).data
+  const getHrRequests = useGetHrRequestByValueQuery(
+    { student_id: userId },
+    { skip: !userId }
+  ).data
   const sortedHR = getHrRequests
     ?.slice()
     .sort(
@@ -106,7 +109,7 @@ const Previous = () => {
               pl={5}
               pr={5}
               rounded={'lg'}
-              onClick={() => navigate('/student-hr', { state: el })}
+              onClick={() => navigate('/previous-hr', { state: el })}
               bg={bgColor}
               opacity={0.8}
               _hover={{
