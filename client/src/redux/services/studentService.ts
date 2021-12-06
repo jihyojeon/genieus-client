@@ -31,7 +31,7 @@ export const studentApi = createApi({
     }),
 
     getStudentById: builder.query<StudentType, string>({
-      query: (id) => `/student/${id}`,
+      query: (id) => (id ? `/student/${id}` : '/'),
       providesTags: ['Student'],
     }),
 
