@@ -20,11 +20,14 @@ import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 import { displayTimeinMMSS, displayDate } from './utils';
 import { BiTimeFive } from "react-icons/bi";
 import { AiOutlineDollarCircle, AiOutlineCalendar, AiOutlineStar } from 'react-icons/ai'
+import { useNavigate } from 'react-router-dom'
+
 
 
 
 
 export default function PreviousRequestCard({ hr }: any) {
+  const navigate = useNavigate()
   return (
     <Center 
       py={6}
@@ -122,6 +125,9 @@ export default function PreviousRequestCard({ hr }: any) {
             }}
             _focus={{
               bg: 'green.500',
+            }}
+            onClick={() => {
+              navigate('/previous-hr', { state: hr })
             }}>
             See Feedback
           </Button>
