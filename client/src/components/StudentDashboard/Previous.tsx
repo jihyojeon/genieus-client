@@ -7,10 +7,10 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
+import { FaStar } from 'react-icons/fa'
 import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
 import { auth } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
-import { GrHelp } from 'react-icons/gr'
 
 const Previous = () => {
   const [userId, setUserId] = useState()
@@ -56,19 +56,32 @@ const Previous = () => {
   }
 
   function displayRating(el: any) {
-    if (el.status === 'pending') {
+    if (el.status === 'pending' || el.status === 'assigned') {
       return
     } else {
       if (el.rating) {
-        // return
+        let stars = []
+        for (let i = 0; i < 5; i++) {
+          if (i < el.rating) {
+            stars.push(1)
+          } else {
+            stars.push(0)
+          }
+        }
+        return stars.map((el) =>
+          el ? (
+            <FaStar size="1.2rem" fillOpacity="100%" />
+          ) : (
+            <FaStar size="1.2rem" fillOpacity="15%" />
+          )
+        )
       } else {
         return <Text as="mark">Please rate your tutor!</Text>
       }
     }
   }
 
-  const bgColor = useColorModeValue('gray.100', 'gray.700')
-  const iconColor = { color: useColorModeValue('gray.700', 'gray.100') }
+  const bgColor = useColorModeValue('gray.100', 'gray.900')
 
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
@@ -88,23 +101,32 @@ const Previous = () => {
               width="270px"
               boxShadow="base"
               m={2}
-              p={5}
+              pt={2}
+              pb={2}
+              pl={5}
+              pr={5}
               rounded={'lg'}
               onClick={() => navigate('/student-hr', { state: el })}
+              bg={bgColor}
+              opacity={0.8}
               _hover={{
-                bg: bgColor,
+                opacity: '1',
+                bg: 'gray.700',
                 cursor: 'pointer',
+                color: 'white',
               }}
             >
               <Flex>
-                <GrHelp size={'1.5em'} style={iconColor} />
-                <Box ml={3}>
+                {/* <GrHelp size={'1.5em'} style={iconColor} /> */}
+                <Box ml={3} justify="center">
                   <Text as="kbd">{displayDate(el.createdAt)}</Text>
                   <Text>{el.language}</Text>
                   <Text>
                     Tutor : {el.tutor_id ? el.tutor.name : 'not assigned yet'}
                   </Text>
-                  {displayRating(el)}
+                  <Flex m={2} mb={0}>
+                    {displayRating(el)}
+                  </Flex>
                 </Box>
               </Flex>
             </Box>

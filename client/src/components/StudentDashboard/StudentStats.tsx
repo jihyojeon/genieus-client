@@ -24,6 +24,10 @@ interface StatsCardProps {
 }
 function StatsCard(props: StatsCardProps) {
   let { title, stat, icon } = props
+  const gradient = useColorModeValue(
+    'linear(to-r, blue.400, teal.500)',
+    'linear(to-l, blue.300, teal.100)'
+  )
 
   if (typeof stat === 'number') {
     const mins = String(stat % 60).padStart(2, '0')
@@ -46,7 +50,7 @@ function StatsCard(props: StatsCardProps) {
             {title}
           </StatLabel>
           <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-            <Text bgGradient="linear(to-l, #7928CA, #FF0080)" bgClip="text">
+            <Text bgGradient={gradient} bgClip="text">
               {stat}
             </Text>
           </StatNumber>
