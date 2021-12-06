@@ -30,10 +30,7 @@ export default function PreviousRequestCard({ hr }: any) {
   const navigate = useNavigate()
   return (
     <Center 
-      py={6}
-      // border="1px solid"
-      // borderColor="rgba(0, 66, 156, .4)"
-      // borderRadius="10px"
+      py={2}
       fontFamily="montserrat"
       mx={6}
       my={2}
