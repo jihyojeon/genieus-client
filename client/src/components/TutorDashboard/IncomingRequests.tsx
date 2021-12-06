@@ -12,6 +12,7 @@ export const IncomingRequests = () => {
   //@ts-ignore
   const helpRequests = useGetPendingHRByIdQuery(userId, {
     pollingInterval: 3000,
+    skip: !userId
   })
 
   useEffect(() => {

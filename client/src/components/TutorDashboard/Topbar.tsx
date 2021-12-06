@@ -35,7 +35,7 @@ export default function Topbar() {
   }, [])
 
   //@ts-ignore
-  const tutor = useGetTutorByIdQuery(userId)
+  const tutor = useGetTutorByIdQuery(userId, {skip: !userId})
 
   const handleSignOut = () => {
     auth
