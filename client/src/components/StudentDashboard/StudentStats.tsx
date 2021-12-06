@@ -8,6 +8,7 @@ import {
   StatLabel,
   StatNumber,
   useColorModeValue,
+  Text,
 } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { BsPerson } from 'react-icons/bs'
@@ -16,14 +17,21 @@ import { GoLocation } from 'react-icons/go'
 import { auth } from '../../firebase'
 import react, { useEffect, useState } from 'react'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
+import { stat } from 'fs'
 
 interface StatsCardProps {
   title: string
-  stat: string
+  stat: string | number | undefined
   icon: ReactNode
 }
 function StatsCard(props: StatsCardProps) {
-  const { title, stat, icon } = props
+  let { title, stat, icon } = props
+
+  if (typeof stat === 'number') {
+    const mins = String(stat % 60).padStart(2, '0')
+    const hrs = String(Math.floor(stat / 60 / 60)).padStart(2, '0')
+    stat = `${hrs}:${mins}`
+  }
   return (
     <Stat
       px={{ base: 2, md: 4 }}
@@ -41,7 +49,9 @@ function StatsCard(props: StatsCardProps) {
             {title}
           </StatLabel>
           <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-            {stat}
+            <Text bgGradient="linear(to-l, #7928CA, #FF0080)" bgClip="text">
+              {stat}
+            </Text>
           </StatNumber>
         </Box>
         <Box
@@ -61,10 +71,10 @@ export default function BasicStatistics() {
   //@ts-ignore
   const student = useGetStudentByIdQuery(userId)
 
-  function displayDate (date: Date) {
-    let day = date.toString().slice(8,10)
-    let month = date.toString().slice(5,7)
-    let year = date.toString().slice(0,4)
+  function displayDate(date: Date) {
+    let day = date.toString().slice(8, 10)
+    let month = date.toString().slice(5, 7)
+    let year = date.toString().slice(0, 4)
     return `${day}/${month}/${year}`
   }
 
@@ -104,20 +114,18 @@ export default function BasicStatistics() {
           <StatsCard
             title={'Expiration date'}
             //@ts-ignore
-            stat={student.error
-            ? 'error'
-            : student.isLoading
-            ? 'loading'
-            : student.data
-            ? (student.data.subscription_expiry ? displayDate(student.data.subscription_expiry) : 'N/A')
-            : 'N/A'
-          }
+            stat={
+              student.error
+                ? 'error'
+                : student.isLoading
+                ? 'loading'
+                : student.data
+                ? student.data.subscription_expiry
+                  ? displayDate(student.data.subscription_expiry)
+                  : 'N/A'
+                : 'N/A'
+            }
             icon={<FiServer size={'3em'} />}
-          />
-          <StatsCard
-            title={'Minutes on call'}
-            stat={'7'}
-            icon={<GoLocation size={'3em'} />}
           />
         </WrapItem>
         <WrapItem>
@@ -128,13 +136,8 @@ export default function BasicStatistics() {
           />
           <StatsCard
             title={'Hours remaining'}
-            stat={'1,000'}
+            stat={student?.data?.time_remaining}
             icon={<FiServer size={'3em'} />}
-          />
-          <StatsCard
-            title={'Minutes on call'}
-            stat={'7'}
-            icon={<GoLocation size={'3em'} />}
           />
         </WrapItem>
       </Wrap>
