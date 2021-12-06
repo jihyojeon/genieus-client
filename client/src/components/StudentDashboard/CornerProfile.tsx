@@ -18,6 +18,7 @@ import ModalEditProfile from './ModalEditProfile'
 import { useNavigate } from 'react-router-dom'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 import { disconnectFromSocket } from '../../redux/services/socket'
+import { ColorModeSwitcher } from '../../ColorModeSwitcher'
 
 const CornerProfile = () => {
   const navigate = useNavigate()
@@ -92,6 +93,7 @@ const CornerProfile = () => {
             </Flex>
           </Stack>
         </Flex>
+        <ColorModeSwitcher />
       </Flex>
       <ModalEditProfile
         student={student.data}

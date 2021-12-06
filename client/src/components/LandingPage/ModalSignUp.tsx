@@ -24,6 +24,7 @@ import {
   Radio,
   InputGroup,
   FormLabel,
+  FormErrorMessage,
   Input,
   Box,
   InputRightElement,
@@ -36,7 +37,25 @@ import { useAddStudentMutation } from '../../redux/services/studentService'
 import { connectToSocket } from '../../redux/services/socket'
 
 //@ts-ignore
-const ModalSignUp = ({ isOpen, onClose }) => {
+const ModalSignUp = ({
+  isOpen,
+  onClose,
+  proClicked,
+  basicClicked,
+  maxClicked,
+  setbasicClicked,
+  setproClicked,
+  setmaxClicked,
+}: {
+  maxClicked: boolean
+  proClicked: boolean
+  basicClicked: boolean
+  onClose: any
+  isOpen: any
+  setbasicClicked: any
+  setproClicked: any
+  setmaxClicked: any
+}) => {
   let navigate = useNavigate()
   const [addStudent, addStudentResult] = useAddStudentMutation()
 
@@ -44,6 +63,7 @@ const ModalSignUp = ({ isOpen, onClose }) => {
   const [registerEmail, setRegisterEmail] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
   const [username, setUsername] = useState('')
+  const [errormsg, seterrormsg] = useState('')
 
   const signup = async () => {
     try {
@@ -63,14 +83,42 @@ const ModalSignUp = ({ isOpen, onClose }) => {
       })
       navigate('/student-dashboard')
     } catch (error) {
-      console.log(error)
+      if (error instanceof Error) {
+        let errmsg = error.message.split(' ')
+        console.log(errmsg)
+        errmsg.includes('(auth/invalid-email).')
+          ? seterrormsg('Please enter a valid email...')
+          : errmsg.includes('Password')
+          ? seterrormsg('Password must be more that 6 characters...')
+          : errmsg.includes('(auth/email-already-in-use).')
+          ? seterrormsg('Email is already in use...')
+          : errmsg.includes('(auth/missing-email).')
+          ? seterrormsg('Please enter a valid email...')
+          : seterrormsg(error.message)
+      }
     }
   }
 
   const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={() => {
+        onClose()
+        {
+          basicClicked && setbasicClicked(false)
+        }
+
+        {
+          proClicked && setproClicked(false)
+        }
+
+        {
+          maxClicked && setmaxClicked(false)
+        }
+      }}
+    >
       <ModalOverlay />
       <ModalContent fontFamily="sans-serif">
         <ModalHeader m={0} fontWeight="400" align="center" fontSize="30px">
@@ -100,6 +148,7 @@ const ModalSignUp = ({ isOpen, onClose }) => {
                 type="email"
               />
               <FormHelperText>We'll never share your email.</FormHelperText>
+              <FormErrorMessage>{errormsg}</FormErrorMessage>
             </FormControl>
             <FormControl id="email" isRequired>
               <FormLabel>Password</FormLabel>
@@ -110,12 +159,16 @@ const ModalSignUp = ({ isOpen, onClose }) => {
                   type={show ? 'text' : 'password'}
                   placeholder="Enter password"
                 />
+
                 <InputRightElement width="4.5rem">
                   <Button h="1.75rem" size="sm" onClick={handleClick}>
                     {show ? 'Hide' : 'Show'}
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              <FormHelperText>
+                Password must be more than six characters
+              </FormHelperText>
             </FormControl>
 
             <HStack>
@@ -132,42 +185,129 @@ const ModalSignUp = ({ isOpen, onClose }) => {
               </Button>
             </HStack>
 
-            <FormControl ml="120" mt="4" as="fieldset">
+            <FormControl
+              display="flex"
+              justifyContent="center"
+              ml="0"
+              mt="4"
+              as="fieldset"
+            >
               <FormLabel as="legend">
-                <Flex direction="row" justifyContent="center">
+                <Flex
+                  alignItems="center"
+                  direction="row"
+                  justifyContent="center"
+                  w={'30vw'}
+                >
                   <Text
-                    fontFamily="chivo"
+                    fontFamily="montserrat"
                     fontWeight="bold"
                     letterSpacing="2.5"
                     fontSize="18px"
+                    textAlign="center"
                   >
                     Please select a subscription type
                   </Text>
                 </Flex>
               </FormLabel>
 
-              <HStack spacing="24px">
+              <HStack
+                display="flex"
+                justifyContent="left"
+                mr={8}
+                spacing="24px"
+              >
                 <RadioGroup onChange={setRadioValue} value={radioValue}>
                   <Stack direction="row">
-                    <Radio value="pro">Pro</Radio>
-                    <Radio value="max">Max</Radio>
-                    <Radio value="basic">Basic</Radio>
+                    {basicClicked ? (
+                      <Radio
+                        size="md"
+                        name="basic"
+                        colorScheme="indigo"
+                        defaultChecked
+                      >
+                        Basic
+                      </Radio>
+                    ) : (
+                      <Radio size="md" name="basic" colorScheme="indigo">
+                        Basic
+                      </Radio>
+                    )}
+
+                    {proClicked ? (
+                      <Radio
+                        size="md"
+                        name="pro"
+                        colorScheme="indigo"
+                        defaultChecked
+                      >
+                        Pro
+                      </Radio>
+                    ) : (
+                      <Radio size="md" name="pro" colorScheme="indigo">
+                        Pro
+                      </Radio>
+                    )}
+
+                    {maxClicked ? (
+                      <Radio
+                        size="md"
+                        name="max"
+                        colorScheme="indigo"
+                        defaultChecked
+                      >
+                        Max
+                      </Radio>
+                    ) : (
+                      <Radio size="md" name="max" colorScheme="indigo">
+                        Max
+                      </Radio>
+                    )}
                   </Stack>
                 </RadioGroup>
               </HStack>
             </FormControl>
           </Flex>
+          <Flex
+            justifyContent="center"
+            fontFamily="montserrat"
+            mr={55}
+            align="center"
+            direction="column"
+            color="#cc0000"
+            opacity="0.7"
+          >
+            <Text my={2} textAlign="center">
+              {errormsg}
+            </Text>
+          </Flex>
+          <FormControl>
+            <Button my={3} w={'100%'} onClick={signup}>
+              Next
+            </Button>
+          </FormControl>
         </ModalBody>
 
         <ModalCloseButton />
 
-        <ModalFooter>
-          <Flex fontFamily="chivo" mr={45} align="left">
-            <Text mr={2}> Already a user? </Text>
-            <Box onClick={isOpen}> Login </Box>
+        {/* <ModalFooter>
+          <Flex
+            justifyContent="center"
+            fontFamily="montserrat"
+            mr={55}
+            align="center"
+            direction="column"
+            color="#cc0000"
+            opacity="0.7"
+          >
+            <Text mb={2} textAlign="center">
+              {errormsg}
+            </Text>
           </Flex>
-          <Button onClick={signup}>Next</Button>
-        </ModalFooter>
+          <FormControl>
+            <Button onClick={signup}>Next</Button>
+          </FormControl>
+        </ModalFooter> */}
       </ModalContent>
     </Modal>
   )

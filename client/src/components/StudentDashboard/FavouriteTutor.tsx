@@ -6,6 +6,7 @@ import {
   Heading,
   Text,
   useDisclosure,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import ModalFavourites from './ModalFavourites'
 
@@ -25,7 +26,7 @@ const FavouriteTutor = ({
       <Flex
         onClick={onOpen}
         _hover={{ cursor: 'pointer', opacity: 0.7 }}
-        bg={'gray.700'}
+        bg={useColorModeValue('gray.200', 'gray.900')}
         borderRadius={'10px'}
         flexDirection="row"
         justify="flex-start"

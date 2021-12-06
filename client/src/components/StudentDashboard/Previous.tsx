@@ -14,19 +14,17 @@ const Previous = () => {
   }, [])
   //@ts-ignore
   const getHrRequests = useGetHrRequestByValueQuery({ student_id: userId })
-  
-  function displayDate (date: Date) {
-    let day = date.toString().slice(8,10)
-    let month = date.toString().slice(5,7)
-    let year = date.toString().slice(0,4)
+
+  function displayDate(date: Date) {
+    let day = date.toString().slice(8, 10)
+    let month = date.toString().slice(5, 7)
+    let year = date.toString().slice(0, 4)
     return `${day}/${month}/${year}`
   }
-  
-  
-  
+
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
-    <Flex py={3} ml={7} color={'white'} flexDirection="column">
+    <Flex py={3} ml={7} flexDirection="column">
       <Heading as="h1" size="lg" fontWeight="300" pb="0.5rem">
         Recent Help Requests
       </Heading>

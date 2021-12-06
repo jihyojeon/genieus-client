@@ -39,6 +39,7 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
   const [username, setUsername] = useState('')
   const [registerEmail, setRegisterEmail] = useState('')
   const [registerPassword, setRegisterPassword] = useState('')
+  const [errormsg, seterrormsg] = useState('')
 
   const signup = async () => {
     try {
@@ -58,7 +59,19 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
       })
       navigate('/tutor-dashboard')
     } catch (error) {
-      console.log(error)
+      if (error instanceof Error) {
+        let errmsg = error.message.split(' ')
+        console.log(errmsg)
+        errmsg.includes('(auth/invalid-email).')
+          ? seterrormsg('Please enter a valid email...')
+          : errmsg.includes('Password')
+          ? seterrormsg('Password must be more that 6 characters...')
+          : errmsg.includes('(auth/email-already-in-use).')
+          ? seterrormsg('Email is already in use...')
+          : errmsg.includes('(auth/missing-email).')
+          ? seterrormsg('Please enter a valid email...')
+          : seterrormsg(error.message)
+      }
     }
   }
 
@@ -111,6 +124,9 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              <FormHelperText>
+                Password must be more than six characters
+              </FormHelperText>
             </FormControl>
 
             <HStack>
@@ -132,9 +148,20 @@ const ModalTutorSignUp = ({ isOpen, onClose }) => {
         <ModalCloseButton />
 
         <ModalFooter>
-          <Button w="100%" onClick={signup}>
-            Sign Up
-          </Button>
+          <Flex w="100%" direction="column">
+            <Text
+              color="#cc0000"
+              opacity="0.7"
+              fontFamily="montserrat"
+              mb={3}
+              textAlign="center"
+            >
+              {errormsg}
+            </Text>
+            <Button w="100%" onClick={signup}>
+              Submit
+            </Button>
+          </Flex>
         </ModalFooter>
       </ModalContent>
     </Modal>
