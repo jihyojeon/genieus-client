@@ -29,8 +29,9 @@ export default function TutorProfile() {
   console.log(tutor)
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
-      //@ts-ignore
-      setUserId(item.uid)
+      if (item) {
+        setUserId(item.uid)
+      }
     })
   }, [])
 
