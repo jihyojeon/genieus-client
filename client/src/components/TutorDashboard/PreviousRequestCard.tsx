@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
 import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages';
-import { displayTimeinMMSS, displayDate } from './utils';
+import { displayTimeinHHMMSS, displayDate } from './utils';
 import { BiTimeFive } from "react-icons/bi";
 import { AiOutlineDollarCircle, AiOutlineCalendar, AiOutlineStar } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
@@ -105,7 +105,7 @@ export default function PreviousRequestCard({ hr }: any) {
             </ListItem>
             <ListItem>
               <ListIcon as={BiTimeFive} color="green.400" />
-              {displayTimeinMMSS(hr.call_length)}
+              {displayTimeinHHMMSS(hr.call_length)}
             </ListItem>
             <ListItem>
               <ListIcon as={AiOutlineCalendar} color="green.400" />
