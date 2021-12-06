@@ -11,11 +11,11 @@ import {
   Textarea,
   useColorModeValue,
 } from '@chakra-ui/react'
-import TopBar from '../components/TutorHR/TopBar'
 import { useLocation } from 'react-router'
 import Split from 'react-split'
 import Editor from '@monaco-editor/react'
 import { useGetTutorByIdQuery } from '../redux/services/tutorService'
+import TopBar from '../components/TopBar/TopBar'
 
 const PreviousHelpRequest = () => {
   const location = useLocation()
@@ -27,8 +27,8 @@ const PreviousHelpRequest = () => {
   return (
     <Box>
       {/* @ts-ignore */}
-      <TopBar hrData={location.state} />
-      {/* <HrContent hrData={location.state} setStudentReady={setStudentReady} /> */}
+      {/* <TopBar hrData={location.state} /> */}
+      <TopBar />
       <Box>
         <Grid p={10} templateColumns="repeat(2, 1fr)" gap={10}>
           {/* Description Box */}
