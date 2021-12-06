@@ -74,7 +74,7 @@ const Chat = () => {
             isTutor={isTutor}
           />
           <Box flexGrow={1} maxW="90ch" margin="auto">
-            <ChatRightPane />
+            <ChatRightPane helpRequest={helpRequest} />
           </Box>
         </Flex>
       ) : (

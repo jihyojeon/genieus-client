@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import StarRating from '../Feedback/StarRating'
 import { FaHeart, FaBan } from 'react-icons/fa'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   useAddBlockedTutorMutation,
   useAddFavouriteTutorMutation,
@@ -26,13 +26,11 @@ import {
 } from '../../redux/services/studentService'
 import { useUpdateHRRequestMutation } from '../../redux/services/helpRequestService'
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ helpRequest }: { helpRequest: any }) => {
   // HELP REQUEST & STUDENT INFO
   const navigate = useNavigate()
-  const location = useLocation()
-  const helpRequest = location.state
-  // const helpRequest = mockHelpRequest
-  const { tutor } = helpRequest
+  let { tutor } = helpRequest
+  if (!tutor) tutor = { id: 'none', name: 'not found', photo_url: 'notfound' }
   const userId = helpRequest.student_id
   const favouriteTutors = useGetFavouriteTutorsByIdQuery(userId)
 
@@ -47,6 +45,7 @@ const FeedbackForm = () => {
   useEffect(() => {
     const checkAlreadyFavourite =
       favouriteTutors.isSuccess &&
+      favouriteTutors.data &&
       favouriteTutors.data.map((tutor) => tutor.id).includes(tutor.id)
     setIsFavourite(checkAlreadyFavourite)
     setAlreadyFavourite(checkAlreadyFavourite)
@@ -113,7 +112,6 @@ const FeedbackForm = () => {
     }
     navigate('/student-dashboard')
   }
-
   return (
     <Flex
       // border={'1px solid'}

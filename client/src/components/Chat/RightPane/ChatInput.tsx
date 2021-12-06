@@ -1,4 +1,4 @@
-import { Box, Button, Flex, FormControl, Input } from '@chakra-ui/react'
+import { Button, Flex, FormControl, Input } from '@chakra-ui/react'
 import { useState } from 'react'
 
 type ChatInputProps = {
@@ -7,8 +7,6 @@ type ChatInputProps = {
 
 export default function ChatInput({ sendHandler }: ChatInputProps) {
   const [messageInput, setMessageInput] = useState('')
-  // TODO: MAKE CHAT STICK TO BOTTOM OF SCREEN
-  // TODO: CATCH TEXT INPUT
 
   return (
     <Flex direction="row" justify="flex-start" align="center" mt="1rem">
