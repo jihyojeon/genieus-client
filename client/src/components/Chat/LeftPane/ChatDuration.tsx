@@ -21,12 +21,9 @@ const ChatDuration = ({
 
   const countDownExpired = () => {
     setCanDecline(false)
-  }
-  const declineClicked = () => {
-    console.log('CD DECLINED')
-  }
-  const completeClicked = () => {
-    console.log('CD COMPLETED')
+    setClockRunning(true)
+    setInitialTimer(secondTimer)
+    setKey(1)
   }
 
   const renderCountDown = ({ remainingTime }: any) => {
@@ -90,7 +87,6 @@ const ChatDuration = ({
           size={170}
           strokeWidth={10}
           onComplete={() => {
-            // console.log('TIMER ENDED')
             return [false, 0]
           }}
         >

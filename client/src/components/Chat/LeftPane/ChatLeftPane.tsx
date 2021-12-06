@@ -29,7 +29,7 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
   const student = studentQuery.data
 
   // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE
-  const initialTime: number = 30000
+  const initialTime: number = 10
 
   // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
   const subscriptionRemainingSecs: number = student?.time_remaining || 9999
