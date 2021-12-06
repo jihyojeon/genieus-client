@@ -8,31 +8,40 @@ import {
   StatLabel,
   StatNumber,
   useColorModeValue,
+  Text,
 } from '@chakra-ui/react'
 import { ReactNode } from 'react'
-import { BsPerson } from 'react-icons/bs'
-import { FiServer } from 'react-icons/fi'
-import { GoLocation } from 'react-icons/go'
+import { BsPerson, BsCalendar, BsCodeSlash, BsWatch } from 'react-icons/bs'
 import { auth } from '../../firebase'
-import react, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
+import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
 
 interface StatsCardProps {
   title: string
-  stat: string
+  stat: string | number | undefined
   icon: ReactNode
 }
 function StatsCard(props: StatsCardProps) {
-  const { title, stat, icon } = props
+  let { title, stat, icon } = props
+  const gradient = useColorModeValue(
+    'linear(to-r, blue.400, teal.500)',
+    'linear(to-l, blue.300, teal.100)'
+  )
+
+  if (typeof stat === 'number') {
+    const mins = String(stat % 60).padStart(2, '0')
+    const hrs = String(Math.floor(stat / 60 / 60)).padStart(2, '0')
+    stat = `${hrs}:${mins}`
+  }
   return (
     <Stat
       px={{ base: 2, md: 4 }}
       py={'5'}
       m={5}
       w={'30vh'}
-      shadow={'xl'}
-      border={'1px solid'}
-      borderColor={useColorModeValue('gray.800', 'gray.500')}
+      shadow={'base'}
+      bg={useColorModeValue('gray.100', 'gray.700')}
       rounded={'lg'}
     >
       <Flex justifyContent={'space-between'}>
@@ -41,7 +50,9 @@ function StatsCard(props: StatsCardProps) {
             {title}
           </StatLabel>
           <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-            {stat}
+            <Text bgGradient={gradient} bgClip="text">
+              {stat}
+            </Text>
           </StatNumber>
         </Box>
         <Box
@@ -59,12 +70,17 @@ function StatsCard(props: StatsCardProps) {
 export default function BasicStatistics() {
   const [userId, setUserId] = useState()
   //@ts-ignore
-  const student = useGetStudentByIdQuery(userId)
+  const student = useGetStudentByIdQuery(userId, { skip: !userId })
+  const helpRequestsSolved = useGetHrRequestByValueQuery({
+    student_id: userId,
+    status: 'closed-complete',
+  })
+  const numberofRequestsCompleted = helpRequestsSolved?.data?.length
 
-  function displayDate (date: Date) {
-    let day = date.toString().slice(8,10)
-    let month = date.toString().slice(5,7)
-    let year = date.toString().slice(0,4)
+  function displayDate(date: Date) {
+    let day = date.toString().slice(8, 10)
+    let month = date.toString().slice(5, 7)
+    let year = date.toString().slice(0, 4)
     return `${day}/${month}/${year}`
   }
 
@@ -78,13 +94,12 @@ export default function BasicStatistics() {
   return (
     <Flex
       alignItems="flex-start"
-      justifyContent="center"
+      mt={10}
       direction="column"
-      h="50vh"
-      pt={5}
+      h="40vh"
       px={{ base: 2, sm: 12, md: 17 }}
     >
-      <Heading fontFamily="montserrat" fontWeight="400" ml={5}>
+      <Heading fontFamily="montserrat" fontWeight="400" ml={5} mb={5}>
         Your Account:
       </Heading>
       <Wrap
@@ -104,37 +119,30 @@ export default function BasicStatistics() {
           <StatsCard
             title={'Expiration date'}
             //@ts-ignore
-            stat={student.error
-            ? 'error'
-            : student.isLoading
-            ? 'loading'
-            : student.data
-            ? (student.data.subscription_expiry ? displayDate(student.data.subscription_expiry) : 'N/A')
-            : 'N/A'
-          }
-            icon={<FiServer size={'3em'} />}
-          />
-          <StatsCard
-            title={'Minutes on call'}
-            stat={'7'}
-            icon={<GoLocation size={'3em'} />}
+            stat={
+              student.error
+                ? 'error'
+                : student.isLoading
+                ? 'loading'
+                : student.data
+                ? student.data.subscription_expiry
+                  ? displayDate(student.data.subscription_expiry)
+                  : 'N/A'
+                : 'N/A'
+            }
+            icon={<BsCalendar size={'3em'} />}
           />
         </WrapItem>
         <WrapItem>
           <StatsCard
             title={'Requests completed'}
-            stat={'5,000'}
-            icon={<BsPerson size={'3em'} />}
+            stat={String(numberofRequestsCompleted)}
+            icon={<BsCodeSlash size={'3em'} />}
           />
           <StatsCard
             title={'Hours remaining'}
-            stat={'1,000'}
-            icon={<FiServer size={'3em'} />}
-          />
-          <StatsCard
-            title={'Minutes on call'}
-            stat={'7'}
-            icon={<GoLocation size={'3em'} />}
+            stat={student?.data?.time_remaining}
+            icon={<BsWatch size={'3em'} />}
           />
         </WrapItem>
       </Wrap>

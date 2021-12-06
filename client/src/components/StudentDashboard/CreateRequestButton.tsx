@@ -1,5 +1,10 @@
 import React from 'react'
-import { Button, Flex, useDisclosure } from '@chakra-ui/react'
+import {
+  Button,
+  Flex,
+  useDisclosure,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../../firebase'
 
@@ -19,14 +24,20 @@ const CreateRequestButton = () => {
   return (
     <Flex justify={'flex-start'} align={'center'} height={'100%'}>
       <Button
+        _hover={{
+          bgGradient: useColorModeValue(
+            'linear(to-r, blue.500, teal.300)',
+            'linear(to-r, blue.300, teal.100)'
+          ),
+          color: useColorModeValue('white', 'black'),
+        }}
         borderRadius={'10px'}
-        // TODO: CREATE LIGHTER, STRONGER, SHADOW UNDER BUTTON
         variant="outline"
-        boxShadow="dark-lg"
+        boxShadow="base"
         fontSize="3xl"
-        fontWeight={300}
+        fontWeight={500}
         ml={8}
-        height={'70%'}
+        height={'100%'}
         onClick={handleClick}
         width={'20rem'}
       >
@@ -37,3 +48,6 @@ const CreateRequestButton = () => {
 }
 
 export default CreateRequestButton
+function mode(arg0: string, arg1: string) {
+  throw new Error('Function not implemented.')
+}
