@@ -48,9 +48,9 @@ export const IncomingRequests = () => {
           : helpRequests.isLoading
           ? 'loading'
           : helpRequests.data
-          ? helpRequests.data.map((hr) => {
+          ? helpRequests.data.map((hr, index) => {
               //@ts-ignore
-              return <RequestCard hr={hr} />
+              return <RequestCard key={index} hr={hr} />
             })
           : undefined}
       </List>

@@ -17,14 +17,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import HRType from '../../redux/services/helpRequestService'
 import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
-const imageObj = {
-  python:
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png',
-}
-
 //@ts-ignore
 export const RequestCard = ({ hr }: HRType) => {
-  console.log(hr)
   const navigate = useNavigate()
   return (
     <Center
@@ -84,9 +78,9 @@ export const RequestCard = ({ hr }: HRType) => {
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             {/*@ts-ignore*/}
-            {hr.tags?.map((tag) => {
+            {hr.tags?.map((tag, index) => {
               return (
-                <Badge px={2} py={1} fontWeight={'400'}>
+                <Badge key={index} px={2} py={1} fontWeight={'400'}>
                   {tag}
                 </Badge>
               )

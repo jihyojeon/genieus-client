@@ -116,17 +116,6 @@ const ModalEditTutorProfile = ({ isOpen, onClose, tutor}) => {
               type="location"
             />
           </FormControl>
-          <FormControl id="spoken_languages">
-            <FormLabel>Spoken Languages:</FormLabel>
-            <Input
-              placeholder="Elvish, Parseltongue"
-              _placeholder={{ color: 'gray.500' }}
-              //@ts-ignore
-              onChange={(e) => setSpokenLanguage(e.target.value.split(', '))}
-              value={spokenLanguage ? spokenLanguage.join(', ') : undefined}
-              type="spoken_languages"
-              />
-          </FormControl>
           <FormControl id="bio">
             <FormLabel>Bio:</FormLabel>
             <Textarea
@@ -135,17 +124,6 @@ const ModalEditTutorProfile = ({ isOpen, onClose, tutor}) => {
               onChange={(e) => setBio(e.target.value)}
               value={bio}
               type="bio"
-            />
-          </FormControl>
-          <FormControl id="tech_stack">
-            <FormLabel>Tech Stack:</FormLabel>
-            <Input
-              placeholder="Python, Javascript"
-              _placeholder={{ color: 'gray.500' }}
-              //@ts-ignore
-              onChange={(e) => setTechStack(e.target.value.split(', '))}
-              value={techStack ? techStack.join(', ') : undefined}
-              type="tech_stack"
             />
           </FormControl>
           <Stack spacing={6} direction={['column', 'row']}>
