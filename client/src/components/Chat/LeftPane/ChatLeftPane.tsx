@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { auth } from '../../../firebase'
-import { Heading } from '@chakra-ui/layout'
+import React, { useState } from 'react'
 import { useGetStudentByIdQuery } from '../../../redux/services/studentService'
-import { useGetTutorByIdQuery } from '../../../redux/services/tutorService'
 
-import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 
 import ChatParticipant from './ChatParticipant'
 import ChatDuration from './ChatDuration'
-import ChatAction from './ChatAction'
+import ActionBox from './ActionBox'
+import ActionZoom from './ActionZoom'
+import ActionDecline from './ActionDecline'
+import ActionComplete from './ActionComplete'
 
 type ChatLeftPaneProps = {
   helpRequest: any
@@ -28,10 +28,7 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
 
   const student = studentQuery.data
 
-  // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE
   const initialTime: number = 10
-
-  // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
   const subscriptionRemainingSecs: number = student?.time_remaining || 9999
 
   return (
@@ -70,27 +67,23 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
         />
       )}
       {canDecline && (
-        <Box marginBottom={'1rem'}>
-          <ChatAction
-            action={'decline'}
-            seconds={initialTime}
-            grow={1}
-            canDecline={true}
-          />
-        </Box>
+        <ActionBox>
+          <Text>
+            You have {initialTime} seconds before billing starts to decide
+            whether you want to stay on the call or go back and look for another
+            tutor.
+          </Text>
+          <ActionDecline helpRequestId={helpRequest.id} />
+        </ActionBox>
       )}
-      <ChatAction
-        action={'zoom'}
-        seconds={initialTime}
-        zoom_url={helpRequest.zoom_url}
-        grow={1}
-      />
-      <ChatAction
-        action={'complete'}
-        seconds={initialTime}
-        zoomUrl={helpRequest.zoom_url}
-        grow={1}
-      />
+      <ActionBox>
+        <Text>Launch video call</Text>
+        <ActionZoom zoom_url={helpRequest.zoom_url} />
+      </ActionBox>
+      <ActionBox>
+        <Text>End the call</Text>
+        <ActionComplete helpRequest={helpRequest} />
+      </ActionBox>
     </Flex>
   )
 }

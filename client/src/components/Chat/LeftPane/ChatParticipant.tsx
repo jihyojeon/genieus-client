@@ -1,13 +1,10 @@
 import {
   Avatar,
   Box,
-  Flex,
   Heading,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
-import { BiOutline } from 'react-icons/bi'
-import ModalBio from './ModalBio'
 
 type ChatParticipantProps = {
   hr: any
