@@ -153,10 +153,7 @@ const PreviousHelpRequest = () => {
         <Flex justify="center" align="center" flexDirection="column">
           <Text fontSize="3xl">{hrData.tutor.name}</Text>
           <Flex m={3}>{displayRating(hrData)}</Flex>
-          <Text fontSize="lg">
-            {'테스트 피드백'}
-            {hrData.feedback_comments}
-          </Text>
+          <Text fontSize="lg">{hrData.feedback_comments}</Text>
         </Flex>
       </Box>
     </Box>
