@@ -64,11 +64,6 @@ const Previous = () => {
         return <Text>'Please rate your tutor!'</Text>
       }
     }
-    // {el.status === 'pending'
-    //               ? ''
-    //               : el.rating
-    //               ? el.rating
-    //               : 'rate pls'}
   }
 
   return (

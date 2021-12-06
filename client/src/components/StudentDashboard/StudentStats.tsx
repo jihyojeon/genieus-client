@@ -11,8 +11,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { ReactNode } from 'react'
-import { BsPerson } from 'react-icons/bs'
-import { FiServer } from 'react-icons/fi'
+import { BsPerson, BsCalendar, BsCodeSlash, BsWatch } from 'react-icons/bs'
 import { auth } from '../../firebase'
 import { useEffect, useState } from 'react'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
@@ -128,19 +127,19 @@ export default function BasicStatistics() {
                   : 'N/A'
                 : 'N/A'
             }
-            icon={<FiServer size={'3em'} />}
+            icon={<BsCalendar size={'3em'} />}
           />
         </WrapItem>
         <WrapItem>
           <StatsCard
             title={'Requests completed'}
             stat={String(numberofRequestsCompleted)}
-            icon={<BsPerson size={'3em'} />}
+            icon={<BsCodeSlash size={'3em'} />}
           />
           <StatsCard
             title={'Hours remaining'}
             stat={student?.data?.time_remaining}
-            icon={<FiServer size={'3em'} />}
+            icon={<BsWatch size={'3em'} />}
           />
         </WrapItem>
       </Wrap>
