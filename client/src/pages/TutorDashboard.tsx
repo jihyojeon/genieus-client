@@ -5,6 +5,7 @@ import { IncomingRequests } from '../components/TutorDashboard/IncomingRequests'
 import { TutorInformation } from '../components/TutorDashboard/TutorInformation'
 import { TutorStats } from '../components/TutorDashboard/TutorStats'
 import TopBar from '../components/TopBar/TopBar'
+import PreviousRequests from '../components/TutorDashboard/PreviousRequests'
 
 const TutorDashboard = () => {
   return (
@@ -30,6 +31,7 @@ const TutorDashboard = () => {
           <TutorStats />
         </GridItem>
       </Grid>
+      <PreviousRequests/>
     </Box>
   )
 }
