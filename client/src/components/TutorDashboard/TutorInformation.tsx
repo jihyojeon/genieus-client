@@ -280,8 +280,7 @@ export const TutorInformation = () => {
                                       color: 'indigo.300',
                                     }}
                                   >
-                                    {lang.charAt(0).toUpperCase() +
-                                      lang.substr(1).toLowerCase()}
+                                    {lang}
                                   </Text>
                                 </Flex>
                               </ListItem>
