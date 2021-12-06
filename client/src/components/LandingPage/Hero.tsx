@@ -86,7 +86,7 @@ const Hero = () => {
               <Lottie animationData={codingLottie} style={{ height: '80vh' }}>
                 <Box position="relative">
                   <Image
-                    src={ProgrammingLanguages.javascript}
+                    src={ProgrammingLanguages.JavaScript}
                     boxSize="50px"
                     position="absolute"
                     opacity="0.6"
@@ -97,7 +97,7 @@ const Hero = () => {
                   />
 
                   <Image
-                    src={ProgrammingLanguages.python}
+                    src={ProgrammingLanguages.Python}
                     boxSize="60px"
                     position="absolute"
                     opacity="0.6"
@@ -108,7 +108,7 @@ const Hero = () => {
                   />
 
                   <Image
-                    src={ProgrammingLanguages.java}
+                    src={ProgrammingLanguages.Java}
                     boxSize="60px"
                     position="absolute"
                     opacity="0.6"
@@ -119,7 +119,7 @@ const Hero = () => {
                   />
 
                   <Image
-                    src={ProgrammingLanguages.react}
+                    src={ProgrammingLanguages.React}
                     boxSize="60px"
                     position="absolute"
                     opacity="0.6"
@@ -130,7 +130,7 @@ const Hero = () => {
                   />
 
                   <Image
-                    src={ProgrammingLanguages.firebase}
+                    src={ProgrammingLanguages.Firebase}
                     boxSize="60px"
                     position="absolute"
                     opacity="0.6"
@@ -141,7 +141,7 @@ const Hero = () => {
                   />
 
                   <Image
-                    src={ProgrammingLanguages.redux}
+                    src={ProgrammingLanguages.Redux}
                     boxSize="60px"
                     position="absolute"
                     opacity="0.6"
@@ -151,7 +151,7 @@ const Hero = () => {
                     id="lang"
                   />
                   <Image
-                    src={ProgrammingLanguages.c}
+                    src={ProgrammingLanguages.C}
                     boxSize="60px"
                     position="absolute"
                     opacity="0.6"

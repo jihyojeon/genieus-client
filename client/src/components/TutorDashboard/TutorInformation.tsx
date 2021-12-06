@@ -213,7 +213,15 @@ export const TutorInformation = () => {
             {programmingLanguages && programmingLanguages.map((language, index) => {
               return (
                 <WrapItem key={index}>
+                  {/*@ts-ignore*/}
                   <Tag variant="outline" size="lg" colorScheme="indigo">
+                    <Image
+                      mr={2}
+                      height="1rem"
+                      width="1rem"
+                      borderRadius="5"
+                      src={ProgrammingLanguages[language]}
+                    />
                     <TagLabel>{language}</TagLabel>
                     <TagCloseButton onClick={() => removeProgrammingLanguage(language)}/>
                   </Tag>
