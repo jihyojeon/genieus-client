@@ -74,16 +74,18 @@ const ModalSignUp = ({
       )
 
       const userId = auth.currentUser?.uid
-      connectToSocket(auth)
       await addStudent({
         email: registerEmail,
         id: userId,
         name: username,
         subscription_type: radioValue,
       })
+      console.log(auth.currentUser)
+      connectToSocket(auth)
       navigate('/student-dashboard')
     } catch (error) {
       if (error instanceof Error) {
+        console.log(error.message)
         let errmsg = error.message.split(' ')
         console.log(errmsg)
         errmsg.includes('(auth/invalid-email).')

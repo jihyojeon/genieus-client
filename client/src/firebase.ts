@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { getStorage } from 'firebase/storage'
 
 //@ts-ignore
 
@@ -16,6 +17,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)
+export const storage = getStorage(app)
+
 const provider = new GoogleAuthProvider()
 
 export const signInWithGoogle = () => {
@@ -27,4 +30,3 @@ export const signInWithGoogle = () => {
       console.log(err)
     })
 }
-
