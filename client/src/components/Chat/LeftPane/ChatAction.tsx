@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 import {
   Box,
@@ -23,6 +24,7 @@ const ChatAction = (props: any) => {
   const zoom_url = props.zoom_url
   const seconds = props.seconds
   const action = props.action
+
   const text = props.text
   const canDecline = props.canDecline
 

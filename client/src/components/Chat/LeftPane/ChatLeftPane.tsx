@@ -3,13 +3,18 @@ import { auth } from '../../../firebase'
 import { useGetStudentByIdQuery } from '../../../redux/services/studentService'
 import { useGetTutorByIdQuery } from '../../../redux/services/tutorService'
 
+
 import { Box, Button, Flex, Text, useColorModeValue } from '@chakra-ui/react'
+
 import ChatParticipant from './ChatParticipant'
 import ChatDuration from './ChatDuration'
 import ChatAction from './ChatAction'
 
 const ChatLeftPane = (props: any) => {
+
+
   //  >-------------- user id logic
+
   // TODO: REMOVE TEST "1234" VALUE BELOW AND UNCOMMENT SUBSEQUENT USESTATE
   const [userId, setUserId] = useState('1234')
   // const [userId, setUserId] = useState()
@@ -22,7 +27,8 @@ const ChatLeftPane = (props: any) => {
       setUserId(item.uid)
     })
   }, [])
-  //  >--------------
+
+  //  >-------------- 
 
   //  >-------------- populate component with user data
 
@@ -107,6 +113,7 @@ const ChatLeftPane = (props: any) => {
 
   // --------------<
 
+
   return (
     <Flex direction="column" maxW="30rem" justify="stretch">
       <Flex
@@ -134,6 +141,8 @@ const ChatLeftPane = (props: any) => {
           },
         }}
       >
+
+
         {/* PROFILE COMPONENT */}
         {/* TODO: ADD ON HOVER TO HIGHLIGHT CLICKABILITY FOR MODALBIO POPUP */}
         <ChatParticipant
@@ -144,10 +153,16 @@ const ChatLeftPane = (props: any) => {
         />
 
         {/* CLOCK COUNTER COMPONENT */}
-        <ChatDuration seconds={seconds} setCanDecline={setCanDecline} />
+        <ChatDuration
+
+          seconds={seconds}
+          setCanDecline={setCanDecline}
+        />
+
 
         {/* DECLINE COMPONENT */}
         {canDecline && declineBox()}
+
 
         {/* ZOOM COMPONENT */}
         <ChatAction
@@ -162,6 +177,7 @@ const ChatLeftPane = (props: any) => {
         {/* COMPLETE COMPONENT */}
         <ChatAction
           action={'complete'}
+
           name={name}
           photo_url={photo_url}
           seconds={seconds}

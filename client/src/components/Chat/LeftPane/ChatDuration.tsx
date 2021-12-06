@@ -6,7 +6,9 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 const ChatDuration = (props: any) => {
   // TODO: TEST DATA------------REPLACE
   const seconds: number = 10
+
   const subscriptionRemainingSecs: number = 600
+
 
   // TODO: TEST DATA------------UNCOMMENT
   // const seconds: number = props.seconds
@@ -17,6 +19,7 @@ const ChatDuration = (props: any) => {
   const [initialTimer, setInitialTimer] = useState(seconds)
   const [secondTimer, setSecondTimer] = useState(subscriptionRemainingSecs)
   const [clockRunning, setClockRunning] = useState(true)
+
   const [key, setKey] = useState(0) // needed for re-setting clock after initial timer
 
   const countDownExpired = () => {
