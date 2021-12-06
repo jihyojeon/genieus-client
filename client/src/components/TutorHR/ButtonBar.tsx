@@ -28,6 +28,8 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
     pollingInterval: 3000,
   })
 
+  //@ts-ignore
+
   const interestedTutors: [] = []
 
   const [userId, setUserId] = useState()
@@ -35,7 +37,6 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log(getHrById)
     //@ts-ignore
     if (getHrById.data) {
       setloadingButton(false)
@@ -70,13 +71,13 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
           flexDirection="row"
           justifyContent="center"
           px="10"
+          ml={3}
         >
           <Button
             colorScheme="indigo"
             fontFamily="montserrat"
             left={0}
             letterSpacing={2}
-            ml={105}
             onClick={onOpen}
             padding={8}
             variant="outline"
@@ -93,7 +94,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
               ml={105}
               letterSpacing={2}
               colorScheme="indigo"
-              variant="outline"
+              variant="solid"
               padding={8}
               fontFamily="montserrat"
             >
@@ -111,7 +112,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
                 ml={105}
                 letterSpacing={2}
                 colorScheme="indigo"
-                variant="outline"
+                variant="ghost"
                 padding={8}
               ></Button>
               <Button
