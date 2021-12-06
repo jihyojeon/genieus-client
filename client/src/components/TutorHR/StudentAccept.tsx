@@ -11,16 +11,20 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router'
+import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 
 const StudentAccept = ({ hrData }: { hrData: any }) => {
-  console.log(hrData)
+  const studentById = useGetStudentByIdQuery(hrData.student_id)
+
+  console.log(studentById.data)
   const navigate = useNavigate()
   return (
     <Flex
       direction="column"
       justifyContent="center"
       alignItems="center"
-      mb={20}
+      mb={10}
+      mr={20}
     >
       <Box
         position="relative"
@@ -30,9 +34,12 @@ const StudentAccept = ({ hrData }: { hrData: any }) => {
         bg={useColorModeValue('gray.200', 'gray.700')}
         w={'35vw'}
       >
-        <Heading fontFamily="montserrat" fontSize={'18px'} mb={5}>
+        <Heading fontFamily="montserrat" fontSize={'18px'} mb={1}>
           {hrData.student.name} is ready{' '}
         </Heading>
+        <Text opacity="0.5" mb={2}>
+          {studentById.data && studentById.data.email}{' '}
+        </Text>
         <Avatar
           position="absolute"
           size={'xl'}
