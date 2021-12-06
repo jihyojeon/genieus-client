@@ -97,14 +97,14 @@ const Chat = () => {
       <GridItem rowSpan={1} colSpan={3}>
         <TopBar heading={'Chat'} tutor={userId === helpRequest.tutor_id} />
       </GridItem>
-      {/* 
-      <GridItem rowSpan={1} colSpan={1}>
+
+      {/* <GridItem rowSpan={1} colSpan={1}>
         <ChatLeftPane helpRequest={mockHelpRequest}/>
-      </GridItem>
+      </GridItem> */}
 
       <GridItem rowSpan={1} colSpan={2}>
         <ChatRightPane />
-      </GridItem> */}
+      </GridItem>
     </Grid>
   )
 }
