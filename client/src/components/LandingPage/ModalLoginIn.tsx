@@ -42,8 +42,14 @@ const ModalLogIn = ({ isOpen, onClose }) => {
       connectToSocket(auth)
       navigate('/student-dashboard')
     } catch (error) {
-      console.log(error)
-      seterrormsg('Please enter valid details...')
+      if (error instanceof Error) {
+        let errmsg = error.message.split(' ')
+        errmsg.includes('(auth/invalid-email).')
+          ? seterrormsg('Please enter a valid email...')
+          : errmsg.includes('(auth/wrong-password).')
+          ? seterrormsg('Incorrect password...')
+          : seterrormsg('Please enter valid details...')
+      }
     }
   }
 
@@ -110,7 +116,13 @@ const ModalLogIn = ({ isOpen, onClose }) => {
         <ModalFooter>
           {/* LINK */}
           <Flex w="100%" direction="column">
-            <Text mb={2} textAlign="center">
+            <Text
+              color="#cc0000"
+              opacity="0.7"
+              fontFamily="montserrat"
+              mb={3}
+              textAlign="center"
+            >
               {' '}
               {errormsg}
             </Text>

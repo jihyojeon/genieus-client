@@ -14,7 +14,6 @@ const gridBackgroundColor: string = 'hsl(217, 22%, 19%)'
 const StudentDashboard = () => {
   return (
     <Grid
-      bg={gridBackgroundColor}
       gap={5}
       h="100vh"
       mh="100%"
