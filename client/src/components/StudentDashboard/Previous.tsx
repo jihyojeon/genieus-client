@@ -10,6 +10,7 @@ import {
 import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
 import { auth } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
+import { GrHelp } from 'react-icons/gr'
 
 const Previous = () => {
   const [userId, setUserId] = useState()
@@ -61,12 +62,13 @@ const Previous = () => {
       if (el.rating) {
         // return
       } else {
-        return <Text>'Please rate your tutor!'</Text>
+        return <Text as="mark">Please rate your tutor!</Text>
       }
     }
   }
 
   const bgColor = useColorModeValue('gray.100', 'gray.700')
+  const iconColor = { color: useColorModeValue('gray.700', 'gray.100') }
 
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
@@ -83,9 +85,9 @@ const Previous = () => {
           return (
             <Box
               key={el.key}
-              width="250px"
+              width="270px"
               boxShadow="base"
-              m={5}
+              m={2}
               p={5}
               rounded={'lg'}
               onClick={() => navigate('/student-hr', { state: el })}
@@ -94,12 +96,17 @@ const Previous = () => {
                 cursor: 'pointer',
               }}
             >
-              <Text>{displayDate(el.createdAt)}</Text>
-              <Text>
-                Tutor : {el.tutor_id ? el.tutor.name : 'not assigned yet'}
-              </Text>
-              <Text>{el.language}</Text>
-              {displayRating(el)}
+              <Flex>
+                <GrHelp size={'1.5em'} style={iconColor} />
+                <Box ml={3}>
+                  <Text as="kbd">{displayDate(el.createdAt)}</Text>
+                  <Text>{el.language}</Text>
+                  <Text>
+                    Tutor : {el.tutor_id ? el.tutor.name : 'not assigned yet'}
+                  </Text>
+                  {displayRating(el)}
+                </Box>
+              </Flex>
             </Box>
           )
         })}

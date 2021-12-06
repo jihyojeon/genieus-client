@@ -90,12 +90,12 @@ export default function BasicStatistics() {
   return (
     <Flex
       alignItems="flex-start"
-      justifyContent="center"
+      mt={10}
       direction="column"
-      h="50vh"
+      h="40vh"
       px={{ base: 2, sm: 12, md: 17 }}
     >
-      <Heading fontFamily="montserrat" fontWeight="400" ml={5}>
+      <Heading fontFamily="montserrat" fontWeight="400" ml={5} mb={5}>
         Your Account:
       </Heading>
       <Wrap

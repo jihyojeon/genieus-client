@@ -35,10 +35,12 @@ const Favourites = () => {
     useState<ConnectedUsers>({})
 
   //@ts-ignore
-  const favouriteTutor = useGetFavouriteTutorsByIdQuery(userId)
+  const favouriteTutor = useGetFavouriteTutorsByIdQuery(userId, {
+    skip: !userId,
+  })
 
-  const [addTutorToFav, addTutorToFavResult] = useAddFavouriteTutorMutation()
-  const [RemTutorToFav, RemTutorToFavResult] = useRemoveFavouriteTutorMutation()
+  // const [addTutorToFav, addTutorToFavResult] = useAddFavouriteTutorMutation()
+  // const [RemTutorToFav, RemTutorToFavResult] = useRemoveFavouriteTutorMutation()
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
@@ -64,7 +66,6 @@ const Favourites = () => {
         )
       })
       socket.on('user disconnected', (user) => {
-        console.log('userID', user)
         setTutorConnectedStatus((prior) =>
           Object.assign({}, prior, { [user]: false })
         )
@@ -72,7 +73,6 @@ const Favourites = () => {
     }
   }, [userId])
   const { isOpen, onOpen, onClose } = useDisclosure()
-  console.log(tutorConnectedStatus)
 
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
@@ -92,7 +92,6 @@ const Favourites = () => {
       >
         Favourite Tutors
       </Heading>
-
       <Box>
         {favouriteTutor.isSuccess && favouriteTutor.data.length !== 0 ? (
           favouriteTutor.data
