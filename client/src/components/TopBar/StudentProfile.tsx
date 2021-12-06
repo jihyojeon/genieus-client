@@ -42,7 +42,7 @@ export default function StudentProfile() {
       console.error(error)
     }
   }
-
+  console.log(student)
   const {
     isOpen: OpenModal,
     onOpen: onOpenModal,
