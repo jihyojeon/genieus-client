@@ -9,55 +9,46 @@ import ChatDuration from './ChatDuration'
 import ChatAction from './ChatAction'
 
 const ChatLeftPane = (props: any) => {
+
+  //  >-------------- user id logic
   // TODO: REMOVE TEST "1234" VALUE BELOW AND UNCOMMENT SUBSEQUENT USESTATE
   const [userId, setUserId] = useState('1234')
   // const [userId, setUserId] = useState()
   const student = useGetStudentByIdQuery(userId)
   const tutor = useGetTutorByIdQuery(userId)
-
+  
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       //@ts-ignore
       setUserId(item.uid)
     })
   }, [])
+  //  >-------------- 
 
+
+  //  >-------------- populate component with user data 
   const name: string = 'Vic' // PROVIDES NAME OF OTHER PARTY
   const imageUrl: string = 'https://bit.ly/dan-abramov' // PROVIDES MUG SHOT OF OTHER PARTY
   const zoomUrl =
-    'https://zoom.us/j/91414924610?pwd=RHk3ZGxVMDlPY2lvMlU4R3RnSk1ZUT09' // ZOOM URL (COPIED TO CLIPBOARD AND USED IN BUTTON)
-
+  'https://zoom.us/j/91414924610?pwd=RHk3ZGxVMDlPY2lvMlU4R3RnSk1ZUT09' // ZOOM URL (COPIED TO CLIPBOARD AND USED IN BUTTON)
+  
   // MASTER VALUE FOR INITIAL CHAT DURATION IS SET BELOW
   const minutes: number = 2 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE IN MINUTES
   const seconds: number = minutes * 60 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE
-
+  
   // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
   const subscriptionRemainingMins: number = 35
   const subscriptionRemainingSecs: number =
-    subscriptionRemainingMins * 60 - seconds
+  subscriptionRemainingMins * 60 - seconds
+  //   --------------<
 
-  //  TESTING --------------
+
+  //  >-------------- conditionally renders a "Decline" component based on canDecline state set in chatDuration component (on initial countdown clock ending) 
   const [canDecline, setCanDecline] = useState(true)
-
-  const cannotDecline = () => {
-    if (canDecline) {
-      setCanDecline(false)
-    } else {
-      setCanDecline(true)
-    }
-    // text==="FIRST" ? setText('') : setText('FIRST')
-    // if (canDecline) {
-    //   setCanDecline(false)
-    //   text="SECOND"
-    // } else {
-    //   setCanDecline(true)
-    //   text="THIRD"
-    // }
-  }
 
   const declineBox = () => {
     return (
-      <Box>
+      <Box marginBottom={'1rem'}>
         <ChatAction
           action={'decline'}
           name={name}
@@ -70,8 +61,8 @@ const ChatLeftPane = (props: any) => {
       </Box>
     )
   }
+  // --------------<
 
-  //  TESTING --------------
 
   return (
     <Flex direction="column" maxW="30rem" justify="stretch">
@@ -100,28 +91,19 @@ const ChatLeftPane = (props: any) => {
           },
         }}
       >
-        {/* TESTING */}
-        <Button onClick={cannotDecline}>DeclineState</Button>
-        {/* TESTING */}
 
         {/* PROFILE COMPONENT */}
         {/* TODO: ADD ON HOVER TO HIGHLIGHT CLICKABILITY FOR MODALBIO POPUP */}
         <ChatParticipant name={name} imageUrl={imageUrl} />
 
         {/* CLOCK COUNTER COMPONENT */}
-        <ChatDuration seconds={seconds} />
+        <ChatDuration
+          seconds={seconds}
+          setCanDecline={setCanDecline}
+        />
 
         {/* DECLINE COMPONENT */}
-        {canDecline ? declineBox() : null}
-        {/* <ChatAction
-          action={'decline'}
-          name={name}
-          imageUrl={imageUrl}
-          seconds={seconds}
-          zoomUrl={zoomUrl}
-          grow={1}
-          canDecline={canDecline}
-        /> */}
+        {canDecline && declineBox()}
 
         {/* ZOOM COMPONENT */}
         <ChatAction

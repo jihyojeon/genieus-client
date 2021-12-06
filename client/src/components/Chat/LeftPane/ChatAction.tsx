@@ -113,8 +113,8 @@ const ChatAction = (props: any) => {
         return (
           <Box>
             <Text>
-              You have {seconds / 60} minutes to further discuss your problem and
-              finalise whether to proceed with this help request.
+              You have {seconds / 60} minutes to further discuss your problem
+              and finalise whether to proceed with this help request.
             </Text>
             <Text mt="0.5rem">
               If either of you decline to proceed before the timer finishes, you
@@ -123,9 +123,7 @@ const ChatAction = (props: any) => {
           </Box>
         )
       } else {
-        return (
-          <Text>It is no longer possible to decline this session</Text>
-        )
+        return <Text>It is no longer possible to decline this session</Text>
       }
 
       // ZOOM TEXT
@@ -159,7 +157,7 @@ const ChatAction = (props: any) => {
       marginTop={'1rem'}
       height="100%"
       width="100%"
-      justifyContent="space-between"
+      justifyContent="center"
     >
       {actionText(action)}
       {actionButton(action)}
