@@ -26,7 +26,8 @@ const FavouriteTutor = ({
       <Flex
         onClick={onOpen}
         _hover={{ cursor: 'pointer', opacity: 0.7 }}
-        bg={useColorModeValue('gray.200', 'gray.900')}
+        bg={useColorModeValue('gray.200', 'gray.700')}
+        opacity={connected ? 1 : 0.4}
         borderRadius={'10px'}
         flexDirection="row"
         justify="flex-start"
@@ -78,7 +79,12 @@ const FavouriteTutor = ({
         </Flex>
       </Flex>
 
-      <ModalFavourites isOpen={isOpen} onClose={onClose} tutor={tutor} />
+      <ModalFavourites
+        isOpen={isOpen}
+        onClose={onClose}
+        tutor={tutor}
+        connected={connected}
+      />
     </Box>
   )
 }
