@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Avatar,
   Button,
@@ -17,6 +17,7 @@ import {
 import StarRating from '../components/Feedback/StarRating'
 import { FaHeart, FaBan } from 'react-icons/fa'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useGetFavouriteTutorsByIdQuery } from '../redux/services/studentService'
 
 const mockHelpRequest = {
   id: '73668645-b761-4ae2-ac96-e1a52dde2ac8',
@@ -52,10 +53,31 @@ const mockHelpRequest = {
 }
 
 const Feedback = () => {
+  const navigate = useNavigate()
+  // TODO: get help request from location state or other approach
+  // const location = useLocation()
+  // const helpRequest = location.state
+
+  const submitHandler = () => {
+    navigate('/student-dashboard')
+  }
+  const helpRequest = mockHelpRequest
+  const { tutor } = mockHelpRequest
+  const userId = helpRequest.student_id
+  const favouriteTutors = useGetFavouriteTutorsByIdQuery(userId)
+
   const [rating, setRating] = useState(0)
   const [comments, setComments] = useState('')
   const [isFavourite, setIsFavourite] = useState(false)
   const [isBlocked, setIsBlocked] = useState(false)
+
+  useEffect(() => {
+    const alreadyFavourite =
+      favouriteTutors.isSuccess &&
+      favouriteTutors.data.map((tutor) => tutor.id).includes(tutor.id)
+    console.log(favouriteTutors)
+    setIsFavourite(alreadyFavourite)
+  }, [favouriteTutors])
 
   const handleRating = (idx: any) => {
     if (!isNaN(idx)) {
@@ -83,16 +105,6 @@ const Feedback = () => {
     }
   }
 
-  const navigate = useNavigate()
-  // TODO: get help request from location state or other approach
-  // const location = useLocation()
-  // const helpRequest = location.state
-
-  const submitHandler = () => {
-    navigate('/student-dashboard')
-  }
-  const helpRequest = mockHelpRequest
-  const { tutor } = mockHelpRequest
   return (
     <Box maxW="lg" margin="auto">
       <Flex
