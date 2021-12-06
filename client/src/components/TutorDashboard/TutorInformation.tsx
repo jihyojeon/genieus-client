@@ -45,10 +45,10 @@ export const TutorInformation = () => {
   const [searchValue, setSearchValue] = useState('')
   const [filteredLanguages, setFilteredLanguages] = useState(languageKeys)
 
+  const [updateTutor, updateTutorResult] = useUpdateTutorMutation()
 
   //@ts-ignore
-  const tutor = useGetTutorByIdQuery(userId)
-  const [updateTutor, updateTutorResult] = useUpdateTutorMutation()
+  const tutor = useGetTutorByIdQuery(userId, {skip: !userId})
 
   const filterLanguages = (e: any) => {
     setSearchValue(e.target.value)
@@ -254,9 +254,9 @@ export const TutorInformation = () => {
                     </PopoverBody>
                   </FocusLock>
                   <PopoverFooter>
-                          {filteredLanguages.slice(0, 5).map((lang) => {
+                          {filteredLanguages.slice(0, 5).map((lang, index) => {
                             return (
-                              <ListItem
+                              <ListItem key={index}
                                 onClick={() => {
                                   setSearchValue(lang)
                                   addProgrammingLanguage(lang)
@@ -280,8 +280,7 @@ export const TutorInformation = () => {
                                       color: 'indigo.300',
                                     }}
                                   >
-                                    {lang.charAt(0).toUpperCase() +
-                                      lang.substr(1).toLowerCase()}
+                                    {lang}
                                   </Text>
                                 </Flex>
                               </ListItem>
