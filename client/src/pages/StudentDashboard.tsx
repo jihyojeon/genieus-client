@@ -1,15 +1,15 @@
 import React from 'react'
 import { Grid, GridItem } from '@chakra-ui/react'
-import Achievements from '../components/StudentDashboard/Achievements'
+// import Achievements from '../components/StudentDashboard/Achievements'
 import CornerProfile from '../components/StudentDashboard/CornerProfile'
 import CreateRequestButton from '../components/StudentDashboard/CreateRequestButton'
 import Favourites from '../components/StudentDashboard/Favourites'
-import Interactions from '../components/StudentDashboard/Interactions'
+// import Interactions from '../components/StudentDashboard/Interactions'
 import Previous from '../components/StudentDashboard/Previous'
 import Stats from '../components/StudentDashboard/StudentStats'
-import { auth } from '../firebase'
+// import { auth } from '../firebase'
 
-const gridBackgroundColor: string = 'hsl(217, 22%, 19%)'
+// const gridBackgroundColor: string = 'hsl(217, 22%, 19%)'
 
 const StudentDashboard = () => {
   return (
@@ -32,26 +32,9 @@ const StudentDashboard = () => {
         <CornerProfile />
       </GridItem>
 
-      {/* INTRACTIONS PANE */}
-      {/* <GridItem rowSpan={1} colSpan={1}>
-        <Interactions />
-      </GridItem> */}
-
       <GridItem w="80vh" rowSpan={1} colSpan={2}>
         <Stats />
       </GridItem>
-
-      {/* ACHIEVEMENTS PANE */}
-      {/* <GridItem
-        justifyContent="flex-end"
-        alignItems="flex-end"
-        w="30vh"
-        rowSpan={1}
-        colSpan={1}
-        ml={20}
-      >
-        <Achievements />
-      </GridItem> */}
 
       {/* FAVOURITES (RIGHT) PANE */}
       <GridItem rowSpan={2} colSpan={1}>
