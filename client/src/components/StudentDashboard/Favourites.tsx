@@ -18,7 +18,6 @@ import {
   useRemoveFavouriteTutorMutation,
 } from '../../redux/services/studentService'
 import { useAddFavouriteTutorMutation } from '../../redux/services/studentService'
-import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 import FavouriteTutor from './FavouriteTutor'
 import socket, { checkAndReconnectToSocket } from '../../redux/services/socket'
 
@@ -36,10 +35,12 @@ const Favourites = () => {
     useState<ConnectedUsers>({})
 
   //@ts-ignore
-  const favouriteTutor = useGetFavouriteTutorsByIdQuery(userId)
+  const favouriteTutor = useGetFavouriteTutorsByIdQuery(userId, {
+    skip: !userId,
+  })
 
-  const [addTutorToFav, addTutorToFavResult] = useAddFavouriteTutorMutation()
-  const [RemTutorToFav, RemTutorToFavResult] = useRemoveFavouriteTutorMutation()
+  // const [addTutorToFav, addTutorToFavResult] = useAddFavouriteTutorMutation()
+  // const [RemTutorToFav, RemTutorToFavResult] = useRemoveFavouriteTutorMutation()
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
@@ -65,7 +66,6 @@ const Favourites = () => {
         )
       })
       socket.on('user disconnected', (user) => {
-        console.log('userID', user)
         setTutorConnectedStatus((prior) =>
           Object.assign({}, prior, { [user]: false })
         )
@@ -73,7 +73,6 @@ const Favourites = () => {
     }
   }, [userId])
   const { isOpen, onOpen, onClose } = useDisclosure()
-  console.log(tutorConnectedStatus)
 
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
@@ -87,10 +86,12 @@ const Favourites = () => {
         fontWeight="300"
         pb={'1rem'}
         ml={10}
+        mt={10}
+        mb={5}
+        pt={5}
       >
         Favourite Tutors
       </Heading>
-
       <Box>
         {favouriteTutor.isSuccess && favouriteTutor.data.length !== 0 ? (
           favouriteTutor.data

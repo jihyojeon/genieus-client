@@ -52,7 +52,6 @@ const CornerProfile = () => {
         <Flex alignItems={'center'}>
           <Stack direction={'row'} spacing={7}>
             {/* User area  */}
-
             <Flex pt={4}>
               <Box>
                 <Text fontFamily="montserrat" fontSize={18} mr={5}>

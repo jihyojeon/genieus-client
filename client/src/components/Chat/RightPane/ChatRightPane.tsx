@@ -69,9 +69,10 @@ const ChatRightPane = (props: any) => {
     }
   }
 
-  const messages = msgs.map((msg) => {
+  const messages = msgs.map((msg, idx) => {
     return (
       <ChatBubble
+        key={idx}
         message={msg.content}
         fromSelf={msg?.authorID === userID ? true : false}
       />
