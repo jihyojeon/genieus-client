@@ -1,16 +1,40 @@
+import React, { useState, useEffect } from 'react'
+import { auth } from '../../../firebase'
+import { useGetStudentByIdQuery } from '../../../redux/services/studentService'
+import { useGetTutorByIdQuery } from '../../../redux/services/tutorService'
+
 import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
 import ChatParticipant from './ChatParticipant'
 import ChatDuration from './ChatDuration'
-import ChatDecline from './ChatDecline'
-import ChatZoom from './ChatZoom'
-import ChatComplete from './ChatComplete'
+import ChatAction from './ChatAction'
 
 const ChatLeftPane = (props: any) => {
-  // PROPS FOR CHAT
-  const seconds: number = props.seconds // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE
-  const zoomUrl: string = props.zoomUrl // ZOOM URL (COPIED TO CLIPBOARD AND USED IN BUTTON)
-  const name: string = props.name // PROVIDES NAME OF OTHER PARTY
-  const imageUrl: string = props.imageUrl // PROVIDES MUG SHOT OF OTHER PARTY
+  // TODO: REMOVE TEST "1234" VALUE BELOW AND UNCOMMENT SUBSEQUENT USESTATE
+  const [userId, setUserId] = useState('1234')
+  // const [userId, setUserId] = useState()
+  const student = useGetStudentByIdQuery(userId)
+  const tutor = useGetTutorByIdQuery(userId)
+
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      //@ts-ignore
+      setUserId(item.uid)
+    })
+  }, [])
+
+  const name: string = 'Vic' // PROVIDES NAME OF OTHER PARTY
+  const imageUrl: string = 'https://bit.ly/dan-abramov' // PROVIDES MUG SHOT OF OTHER PARTY
+  const zoomUrl =
+    'https://zoom.us/j/91414924610?pwd=RHk3ZGxVMDlPY2lvMlU4R3RnSk1ZUT09' // ZOOM URL (COPIED TO CLIPBOARD AND USED IN BUTTON)
+
+  // MASTER VALUE FOR INITIAL CHAT DURATION IS SET BELOW
+  const minutes: number = 2 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE IN MINUTES
+  const seconds: number = minutes * 60 // MAX LENGTH OF CHAT BEFORE ACCEPT/DECLINE
+
+  // TIMER WILL SWITCH TO TIME REMAINING ON SUBSCRIPTION AFTER INITIAL TIMER EXPIRES
+  const subscriptionRemainingMins: number = 35
+  const subscriptionRemainingSecs: number =
+    subscriptionRemainingMins * 60 - seconds
 
   return (
     <Flex direction="column" maxW="30rem" justify="stretch">
@@ -23,11 +47,11 @@ const ChatLeftPane = (props: any) => {
         padding="0.5rem"
         paddingLeft="1.5rem"
         paddingBottom="1rem"
-        // TODO: ADD SCROLLBAR FOR WHEN SCREEN HEIGHT IS REDUCED
+        // TODO: MAKE THIS SCROLLBAR STYLE GLOBAL?
         overflowY={'scroll'}
         sx={{
           '&::-webkit-scrollbar': {
-            backgroundColor: `rgba(150, 150, 190, 0.00)`,
+            backgroundColor: `rgba(150, 150, 190, 0.15)`,
             borderRadius: '8px',
             backgroundClip: 'padding-box',
             width: '16px',
@@ -39,39 +63,50 @@ const ChatLeftPane = (props: any) => {
           },
         }}
       >
-        <Box
-          bg={useColorModeValue('gray.100', 'gray.700')}
-          borderRadius="1rem"
-          marginTop={'1rem'}
-          padding="1rem"
-          width="100%"
-        >
-          <ChatParticipant name={name} imageUrl={imageUrl} />
-        </Box>
-        <Box
-          bg={useColorModeValue('gray.100', 'gray.700')}
-          borderRadius="1rem"
-          marginTop={'1rem'}
-          padding="1rem"
-          width="100%"
-        >
-          <ChatDuration seconds={seconds} />
-        </Box>
-        <ChatDecline
+        {/* PROFILE COMPONENT */}
+        {/* TODO: ADD ON HOVER TO HIGHLIGHT CLICKABILITY FOR MODALBIO POPUP */}
+        <ChatParticipant
+          name={name}
+          imageUrl={imageUrl}
+          // TODO: DRILL IN FURTHER BIO DETAILS FOR MODAL
+        />
+
+        {/* CLOCK COUNTER COMPONENT */}
+        <ChatDuration seconds={seconds} />
+
+        {/* DECLINE COMPONENT */}
+        <ChatAction
+          action={'decline'}
           name={name}
           imageUrl={imageUrl}
           seconds={seconds}
           zoomUrl={zoomUrl}
           grow={1}
         />
-        <ChatZoom
+
+        {/* ZOOM COMPONENT */}
+        <ChatAction
+          action={'zoom'}
           name={name}
           imageUrl={imageUrl}
           seconds={seconds}
           zoomUrl={zoomUrl}
           grow={1}
         />
-        <ChatComplete
+
+        {/* COMPLETE COMPONENT */}
+        <ChatAction
+          action={'complete'}
+          name={name}
+          imageUrl={imageUrl}
+          seconds={seconds}
+          zoomUrl={zoomUrl}
+          grow={1}
+        />
+
+        {/* TODO: REMOVE BEFORE DEPLOYMENT */}
+        <ChatAction
+          action={'test'}
           name={name}
           imageUrl={imageUrl}
           seconds={seconds}
