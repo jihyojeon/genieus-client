@@ -17,7 +17,7 @@ import {
 // TODO: REBUIILD THIS IN FULL
 
 //@ts-ignore
-const ModalBio = ({ isOpen, onClose }) => {
+const ModalBio = ({ isOpen, onClose, name, photo_url, hr, bio }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
@@ -36,9 +36,7 @@ const ModalBio = ({ isOpen, onClose }) => {
                 <Avatar
                   alt={'Avatar Alt'}
                   size={'xl'}
-                  src={
-                    'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-                  }
+                  src={photo_url}
                   mb={4}
                   pos={'relative'}
                   _after={{
@@ -54,8 +52,9 @@ const ModalBio = ({ isOpen, onClose }) => {
                   }}
                 />
                 <Heading fontSize={'2xl'} fontFamily={'body'}>
-                  Jihyo
+                  {name}
                 </Heading>
+                
                 <Text
                   textAlign={'center'}
                   color={useColorModeValue('gray.700', 'gray.400')}
@@ -64,11 +63,10 @@ const ModalBio = ({ isOpen, onClose }) => {
                   Coder, Millwall Fan,
                 </Text>
                 <Heading fontSize={'2xl'} fontFamily={'body'} mt="1rem">
-                  Bio
+                Bio
                 </Heading>
                 <Text>
-                  Superpower: speaks Korean, machine learning enthusiast, pro
-                  with Git and Speech-to-Text
+                  {bio}
                 </Text>
 
                 <Stack

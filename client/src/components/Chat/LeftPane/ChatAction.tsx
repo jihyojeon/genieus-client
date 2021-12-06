@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 import {
   Box,
@@ -18,13 +19,14 @@ const ChatAction = (props: any) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const [canDecline, setCanDecline] = useState(true)
-
   const name = props.name
-  const imageUrl = props.imageUrl
-  const zoomUrl = props.zoomUrl
+  const photo_url = props.photo_url
+  const zoom_url = props.zoom_url
   const seconds = props.seconds
   const action = props.action
+
+  const text = props.text
+  const canDecline = props.canDecline
 
   // TODO: 1) TAKE THIS STATUS FROM SIGN-IN DETAILS
   const [isTutor, setIsTutor] = useState(true)
@@ -33,10 +35,12 @@ const ChatAction = (props: any) => {
     console.log('Decline session')
   }
 
+  console.log('Decline State', props.DeclineState)
+
   const zoomButtonHandler = () => {
     // TODO: 2) HANDLE RECORDING OF ELAPSED TIME
-    navigator.clipboard.writeText(zoomUrl)
-    window.open(zoomUrl)
+    navigator.clipboard.writeText(zoom_url)
+    window.open(zoom_url)
   }
 
   const complete = () => {
@@ -46,16 +50,6 @@ const ChatAction = (props: any) => {
     console.log('Complete session')
   }
 
-  const TESTING = () => {
-    if (canDecline) {
-      console.log('TESTING 1')
-      setCanDecline(false)
-    } else {
-      console.log('TESTING 2')
-      setCanDecline(true)
-    }
-  }
-
   const actionButton = (action: string) => {
     // DECLINE BUTTON
     if (action === 'decline') {
@@ -63,63 +57,49 @@ const ChatAction = (props: any) => {
       if (canDecline) {
         return (
           <Box>
-            <Button w="15ch" onClick={onOpen}>
-              Decline
+            <Button w="15ch" mt={'1rem'} onClick={onOpen}>
+              Decline {text}
             </Button>
             <ModalDecline
               isOpen={isOpen}
               onClose={onClose}
               name={name}
-              imageUrl={imageUrl}
+              photo_url={photo_url}
             />
           </Box>
         )
+      } else {
+        return <Text></Text>
       }
 
-    // ZOOM BUTTON
+      // ZOOM BUTTON
     } else if (action === 'zoom') {
       return (
         <Box>
-          <Button w="15ch" onClick={zoomButtonHandler}>
+          <Button w="15ch" mt={'1rem'} onClick={zoomButtonHandler}>
             Open Zoom
           </Button>
           {/* <ModalZoom
             isOpen={isOpen}
             onClose={onClose}
             name={name}
-            imageUrl={imageUrl}
+            photo_url={photo_url}
           /> */}
         </Box>
       )
 
-    // COMPLETE BUTTON
+      // COMPLETE BUTTON
     } else if (action === 'complete') {
       return (
         <Box>
-          <Button w="15ch" onClick={onOpen}>
+          <Button w="15ch" mt={'1rem'} onClick={onOpen}>
             Complete
           </Button>
           <ModalComplete
             isOpen={isOpen}
             onClose={onClose}
             name={name}
-            imageUrl={imageUrl}
-          />
-        </Box>
-      )
-
-    // TESTING BUTTON
-    } else if (action === 'test') {
-      return (
-        <Box>
-          <Button w="15ch" onClick={TESTING}>
-            TESTING
-          </Button>
-          <ModalComplete
-            isOpen={isOpen}
-            onClose={onClose}
-            name={name}
-            imageUrl={imageUrl}
+            photo_url={photo_url}
           />
         </Box>
       )
@@ -127,12 +107,24 @@ const ChatAction = (props: any) => {
   }
 
   const actionText = (action: string) => {
-
     // DECLINE TEXT
     if (action === 'decline') {
       // TODO: MAKE RENDERING OF THIS BOX AND BUTTON VANISH ONCE DECLINING WINDOW HAS RUN OUT
       // TODO: CHANGE TEXT IF STUDENT
-      if (canDecline) {
+      if (isTutor) {
+        return (
+          <Box>
+            <Text>
+              You have {seconds / 60} minutes to further discuss your problem
+              and finalise whether to proceed with this help request.
+            </Text>
+            <Text mt="0.5rem">
+              If either of you decline to proceed before the timer finishes, no
+              payment will be made.
+            </Text>
+          </Box>
+        )
+      } else {
         return (
           <Box>
             <Text>
@@ -147,7 +139,7 @@ const ChatAction = (props: any) => {
         )
       }
 
-    // ZOOM TEXT
+      // ZOOM TEXT
     } else if (action === 'zoom') {
       return (
         <Box>
@@ -155,23 +147,13 @@ const ChatAction = (props: any) => {
         </Box>
       )
 
-    // COMPLETE TEXT
+      // COMPLETE TEXT
     } else if (action === 'complete') {
       return (
         <Box>
           <Text>
             Once your help request is complete, click the button below to mark
             your call as complete.
-          </Text>
-        </Box>
-      )
-
-    // TESTING TEXT
-    } else if (action === 'test') {
-      return (
-        <Box>
-          <Text>
-            Delete this after testing
           </Text>
         </Box>
       )
@@ -188,7 +170,7 @@ const ChatAction = (props: any) => {
       marginTop={'1rem'}
       height="100%"
       width="100%"
-      justifyContent="space-between"
+      justifyContent="center"
     >
       {actionText(action)}
       {actionButton(action)}
