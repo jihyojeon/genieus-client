@@ -41,7 +41,7 @@ export const TutorInformation = () => {
   const [userId, setUserId] = useState()
   const [spokenLanugages, setSpokenLanguages] = useState([])
   const [programmingLanguages, setProgrammingLanguages] = useState([])
-  const [addedLanguage, setAddedLanguage] = useState('')
+  const [addedSpokenLanguage, setAddedSpokenLanguage] = useState('')
   const [searchValue, setSearchValue] = useState('')
   const [filteredLanguages, setFilteredLanguages] = useState(languageKeys)
 
@@ -91,9 +91,9 @@ export const TutorInformation = () => {
     updateTutor({
       //@ts-ignore
       id: tutor.data.id,
-      spoken_language: [...spokenLanugages, addedLanguage]
+      spoken_language: [...spokenLanugages, addedSpokenLanguage]
     })
-    setAddedLanguage('')
+    setAddedSpokenLanguage('')
   }
 
   function removeProgrammingLanguage(language: string) {
@@ -104,11 +104,11 @@ export const TutorInformation = () => {
     })
   }
 
-  function addProgrammingLanguage() {
+  function addProgrammingLanguage(language: string) {
     updateTutor({
       //@ts-ignore
       id: tutor.data.id,
-      programming_languages: [...programmingLanguages, addedLanguage]
+      programming_languages: [...programmingLanguages, language]
     })
   }
 
@@ -173,8 +173,8 @@ export const TutorInformation = () => {
                         <Input
                           placeholder='Add a Language'
                           _placeholder={{ color: 'gray.500' }}
-                          onChange={(e) => setAddedLanguage(e.target.value)}
-                          value={addedLanguage}
+                          onChange={(e) => setAddedSpokenLanguage(e.target.value)}
+                          value={addedSpokenLanguage}
                           onKeyDown={(e) => e.key === 'Enter' && addSpokenLanguage()}
                           type="text"
                         />
@@ -238,7 +238,7 @@ export const TutorInformation = () => {
                           value={searchValue}
                           type="text"
                           onChange={(e) => filterLanguages(e)}
-                          onKeyDown={(e) => e.key === 'Enter' && addProgrammingLanguage()}
+                          onKeyDown={(e) => e.key === 'Enter' && addProgrammingLanguage(searchValue)}
                           placeholder='Add a Technology'
                           _placeholder={{ color: 'gray.500' }}
                         />
@@ -250,8 +250,8 @@ export const TutorInformation = () => {
                             return (
                               <ListItem
                                 onClick={() => {
-                                  setAddedLanguage(lang)
-                                  addProgrammingLanguage()
+                                  setSearchValue(lang)
+                                  addProgrammingLanguage(lang)
                                 }}
                                 listStyleType={'none'}
                               >
