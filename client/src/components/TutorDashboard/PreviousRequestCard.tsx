@@ -15,15 +15,11 @@ import {
   Tag,
   Avatar
 } from '@chakra-ui/react';
-import { CheckIcon } from '@chakra-ui/icons';
 import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages';
 import { displayTimeinHHMMSS, displayDate } from './utils';
 import { BiTimeFive } from "react-icons/bi";
 import { AiOutlineDollarCircle, AiOutlineCalendar, AiOutlineStar } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
-
-
-
 
 
 export default function PreviousRequestCard({ hr }: any) {
@@ -93,19 +89,19 @@ export default function PreviousRequestCard({ hr }: any) {
         <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={10}>
           <List spacing={3}>
             <ListItem>
-              <ListIcon as={AiOutlineStar} color="green.400" />
+              <ListIcon as={AiOutlineStar} />
               {hr.rating}
             </ListItem>
             <ListItem>
-              <ListIcon as={AiOutlineDollarCircle} color="green.400" />
+              <ListIcon as={AiOutlineDollarCircle} />
               ${(hr.call_length*40/60/60).toFixed(2)}
             </ListItem>
             <ListItem>
-              <ListIcon as={BiTimeFive} color="green.400" />
+              <ListIcon as={BiTimeFive} />
               {displayTimeinHHMMSS(hr.call_length)}
             </ListItem>
             <ListItem>
-              <ListIcon as={AiOutlineCalendar} color="green.400" />
+              <ListIcon as={AiOutlineCalendar} />
               {displayDate(hr.createdAt)}
             </ListItem>
           </List>
@@ -113,15 +109,10 @@ export default function PreviousRequestCard({ hr }: any) {
           <Button
             mt={10}
             w={'full'}
-            bg={'green.400'}
-            color={'white'}
             rounded={'xl'}
-            boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
             _hover={{
-              bg: 'green.500',
             }}
             _focus={{
-              bg: 'green.500',
             }}
             onClick={() => {
               navigate('/previous-hr', { state: hr })
