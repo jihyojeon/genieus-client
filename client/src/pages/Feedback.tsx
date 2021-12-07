@@ -1,23 +1,40 @@
 import React from 'react'
 import FeedbackForm from '../components/Feedback/FeedbackForm'
 import TopBar from '../components/TopBar/TopBar'
-import { useLocation } from 'react-router'
-import { Text } from '@chakra-ui/layout'
+import { useParams } from 'react-router'
+import { Box, Text, Link } from '@chakra-ui/react'
+import { useGetHRRequestByIdQuery } from '../redux/services/helpRequestService'
+import { Link as RouterLink } from 'react-router-dom'
 
 const Feedback = () => {
-  const location = useLocation()
-  let helpRequest = location.state
-  console.log(helpRequest)
-  return (
-    <>
-      <TopBar heading="Feedback" />
-      {helpRequest ? (
-        <FeedbackForm helpRequest={helpRequest} />
-      ) : (
-        <Text>Help Request ID Not Found</Text>
-      )}
-    </>
-  )
+  const { id } = useParams()
+  const hrById = useGetHRRequestByIdQuery(id || 'notfound')
+  const helpRequest = hrById.isSuccess ? hrById.data : null
+
+  if (helpRequest) {
+    if (helpRequest.rating) {
+      return (
+        <Box>
+          <Text>This help request already has a rating</Text>
+          <Link as={RouterLink} to="/student-dashboard/">
+            Go back
+          </Link>
+        </Box>
+      )
+    }
+    return (
+      <>
+        <TopBar heading="Feedback" />
+        {helpRequest ? (
+          <FeedbackForm helpRequest={helpRequest} />
+        ) : (
+          <Text>Help Request ID Not Found</Text>
+        )}
+      </>
+    )
+  } else {
+    return <Text>Loading ...</Text>
+  }
 }
 
 export default Feedback
