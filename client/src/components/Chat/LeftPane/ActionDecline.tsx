@@ -15,7 +15,7 @@ const ActionDecline = ({ helpRequestId }: { helpRequestId: string }) => {
 
   return (
     <Button w="15ch" mt={'1rem'} onClick={handleDecline}>
-      Decline
+      Decline Tutor
     </Button>
   )
 }
