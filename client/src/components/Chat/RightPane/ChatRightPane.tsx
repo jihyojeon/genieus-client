@@ -7,6 +7,7 @@ import socket, {
 } from '../../../redux/services/socket'
 import { auth } from '../../../firebase'
 import ChatInput from './ChatInput'
+import HRType from '../../../redux/services/helpRequestService'
 
 type Message = {
   authorID: string
@@ -14,11 +15,16 @@ type Message = {
   postedDate: Date
 }
 type ChatRightPaneProps = {
-  helpRequest: any
+  helpRequest: HRType
   sessionOpen: boolean
+  participantName: string
 }
 
-const ChatRightPane = ({ helpRequest, sessionOpen }: ChatRightPaneProps) => {
+const ChatRightPane = ({
+  helpRequest,
+  sessionOpen,
+  participantName,
+}: ChatRightPaneProps) => {
   const [userID, setUserID] = useState<string | undefined>()
   const [msgs, setMsgs] = useState<Message[]>([])
   const navigate = useNavigate()
@@ -27,7 +33,6 @@ const ChatRightPane = ({ helpRequest, sessionOpen }: ChatRightPaneProps) => {
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       setUserID(item?.uid)
-      console.log('setting userID', userID)
     })
   }, [])
   // setup socket
@@ -45,7 +50,6 @@ const ChatRightPane = ({ helpRequest, sessionOpen }: ChatRightPaneProps) => {
         console.log(user)
       })
       socket.on('get message', (message: Message) => {
-        console.log('adding message', message.content)
         setMsgs((priorMsgs) => [...priorMsgs, message])
       })
       socket.on('chat closed', () => {
@@ -59,7 +63,6 @@ const ChatRightPane = ({ helpRequest, sessionOpen }: ChatRightPaneProps) => {
 
   useEffect(() => {
     if (!sessionOpen) {
-      console.log('ending session')
       socket.emit('end session', helpRequest.id)
     }
   }, [sessionOpen])
@@ -82,6 +85,7 @@ const ChatRightPane = ({ helpRequest, sessionOpen }: ChatRightPaneProps) => {
         key={idx}
         message={msg.content}
         fromSelf={msg?.authorID === userID ? true : false}
+        from={msg?.authorID === userID ? 'You' : participantName}
       />
     )
   })

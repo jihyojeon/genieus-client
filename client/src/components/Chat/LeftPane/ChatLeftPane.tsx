@@ -26,10 +26,11 @@ const ChatLeftPane = ({
   const [canDecline, setCanDecline] = useState(true)
 
   const studentQuery = useGetStudentByIdQuery(helpRequest.student_id)
-  const initialTime: number = 10
-  const subscriptionRemainingSecs: number = studentQuery.isSuccess
+  const initialTime: number = 30
+  const subscriptionRemainingSecs = studentQuery.isSuccess
     ? studentQuery.data.time_remaining
-    : 999
+    : 0
+  const isValidTimeRemaining = subscriptionRemainingSecs > 0
   return (
     <Flex
       direction="column"
@@ -59,12 +60,18 @@ const ChatLeftPane = ({
       }}
     >
       <ChatParticipant hr={helpRequest} isTutor={isTutor} />
-      {!isTutor && (
+      {!isTutor && isValidTimeRemaining ? (
         <ChatDuration
           seconds={initialTime}
           subscriptionRemainingSecs={subscriptionRemainingSecs}
           setCanDecline={setCanDecline}
         />
+      ) : (
+        !isTutor && (
+          <ActionBox>
+            <Text>Error, subscription expired</Text>
+          </ActionBox>
+        )
       )}
       {!isTutor && canDecline && (
         <ActionBox>
