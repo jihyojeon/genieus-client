@@ -5,9 +5,7 @@ import {
   Button,
   Flex,
   Heading,
-  Image,
   Avatar,
-  AvatarBadge,
   useColorModeValue,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router'
@@ -49,7 +47,7 @@ const StudentAccept = ({ hrData }: { hrData: any }) => {
         ></Avatar>
         <Button
           onClick={() => {
-            navigate('/chat', { state: hrData })
+            navigate(`/chat${hrData.id}`)
           }}
         >
           Go to chat
