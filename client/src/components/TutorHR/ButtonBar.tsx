@@ -87,7 +87,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
             colorScheme="indigo"
             fontFamily="montserrat"
             left={0}
-            letterSpacing={3}
+            letterSpacing={1}
             onClick={onOpen}
             padding={8}
             variant="ghost"
@@ -103,7 +103,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
                 setloadingButton(true)
               }}
               ml={99}
-              letterSpacing={2}
+              letterSpacing={1}
               // colorScheme="indigo"
               variant="solid"
               padding={8}
@@ -129,7 +129,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
                 isLoading
                 loadingText="Waiting for Student response"
                 ml={105}
-                letterSpacing={2}
+                letterSpacing={1}
                 colorScheme="indigo"
                 variant="ghost"
                 padding={8}
@@ -153,7 +153,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
           <Button
             colorScheme="indigo"
             fontFamily="montserrat"
-            letterSpacing={2}
+            letterSpacing={1}
             ml={105}
             padding={8}
             variant="outline"

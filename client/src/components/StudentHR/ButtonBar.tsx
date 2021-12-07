@@ -120,7 +120,7 @@ const ButtonBar = ({
                 }}
                 // ml={105}
 
-                letterSpacing={2}
+                letterSpacing={1}
                 bg="indigo.400"
                 color="white"
                 variant="solid"
@@ -145,7 +145,7 @@ const ButtonBar = ({
                   isLoading
                   loadingText="Finding Tutor"
                   // ml={105}
-                  letterSpacing={2}
+                  letterSpacing={1}
                   colorScheme="indigo"
                   variant="outline"
                   padding={8}
@@ -185,7 +185,7 @@ const ButtonBar = ({
             </Flex>
           </Flex>
           <Box>
-            <Text fontFamily="montserrat" letterSpacing={0.5}>
+            <Text fontFamily="montserrat" letterSpacing={1}>
               Available tutors will be displayed below...
             </Text>
           </Box>
