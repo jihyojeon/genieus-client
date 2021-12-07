@@ -31,12 +31,11 @@ export const IncomingRequests = () => {
         fontWeight="400"
         color="indigo.400"
         letterSpacing={0.5}
-        onClick={() => console.log(helpRequests.data ? true : false)}
       >
         Open Requests:
       </Box>
       {/*@ts-ignore*/}
-      {helpRequests.data.length ? 
+      {helpRequests.data && helpRequests.data.length ? 
       <List
         display="flex"
         overflow="scroll"
