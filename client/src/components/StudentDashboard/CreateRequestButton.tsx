@@ -1,14 +1,13 @@
-import React from 'react'
 import {
   Button,
   Flex,
   useDisclosure,
   useColorModeValue,
+  Text,
+  HStack,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import { auth } from '../../firebase'
-
-const buttonColorPurple = '#A78BFA'
+import { BiEdit } from 'react-icons/bi'
 
 // TODO: NOT SURE THIS IS THE TEXTBOOK IMPLEMENTATION OF REACT ROUTING
 const CreateRequestButton = () => {
@@ -41,13 +40,13 @@ const CreateRequestButton = () => {
         onClick={handleClick}
         width={'20rem'}
       >
-        Create Request
+        <HStack>
+          <BiEdit />
+          <Text>Create Request</Text>
+        </HStack>
       </Button>
     </Flex>
   )
 }
 
 export default CreateRequestButton
-function mode(arg0: string, arg1: string) {
-  throw new Error('Function not implemented.')
-}

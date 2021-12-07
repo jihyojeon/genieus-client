@@ -16,9 +16,6 @@ import {
 } from '../../redux/services/helpRequestService'
 
 const ButtonBar = ({
-  getHRData,
-
-  settutorComplete,
   userId,
   setUserId,
   value,

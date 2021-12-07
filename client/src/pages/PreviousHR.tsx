@@ -5,6 +5,7 @@ import {
   GridItem,
   Heading,
   HStack,
+  Icon,
   Tag,
   TagLabel,
   Text,
@@ -20,6 +21,19 @@ import TopBar from '../components/TopBar/TopBar'
 const PreviousHelpRequest = () => {
   const location = useLocation()
   const hrData = location.state
+  const iconcolor = [
+    useColorModeValue('gray.400', 'gray.300'),
+    useColorModeValue('red.400', 'red.300'),
+    useColorModeValue('orange.400', 'orange.300'),
+    useColorModeValue('yellow.400', 'yellow.300'),
+    useColorModeValue('cyan.400', 'cyan.300'),
+  ]
+  const gradient = useColorModeValue(
+    'linear(to-r, blue.400, teal.500)',
+    'linear(to-l, blue.300, teal.100)'
+  )
+  const feedbackBg = useColorModeValue('gray.100', 'gray.700')
+  const iconsize = 10
 
   function displayRating(helprequest: any) {
     if (helprequest.status === 'pending' || helprequest.status === 'assigned') {
@@ -36,9 +50,20 @@ const PreviousHelpRequest = () => {
         }
         return stars.map((star) =>
           star ? (
-            <FaStar size="2rem" fillOpacity="100%" />
+            <Icon
+              as={FaStar}
+              w={iconsize}
+              h={iconsize}
+              color={iconcolor[helprequest.rating - 1]}
+            />
           ) : (
-            <FaStar size="2rem" fillOpacity="15%" />
+            <Icon
+              as={FaStar}
+              w={iconsize}
+              h={iconsize}
+              color={iconcolor[helprequest.rating - 1]}
+              opacity={0.2}
+            />
           )
         )
       }
@@ -147,9 +172,42 @@ const PreviousHelpRequest = () => {
         </Grid>
         {hrData.tutor && (
           <Flex justify="center" align="center" flexDirection="column">
-            <Text fontSize="3xl">{hrData.tutor.name}</Text>
+            <Text
+              fontSize="3xl"
+              bgGradient={
+                hrData.rating && hrData.rating === 5 ? gradient : 'none'
+              }
+              bgClip={hrData.rating && hrData.rating === 5 ? 'text' : 'none'}
+              fontWeight="bold"
+            >
+              {hrData.tutor.name}
+            </Text>
             <Flex m={3}>{displayRating(hrData)}</Flex>
-            <Text fontSize="lg">{hrData.feedback_comments}</Text>
+            {/* <Flex m={3}>
+              {displayRating({ status: 'closed-complete', rating: 1 })}
+            </Flex>
+            <Flex m={3}>
+              {displayRating({ status: 'closed-complete', rating: 2 })}
+            </Flex>
+            <Flex m={3}>
+              {displayRating({ status: 'closed-complete', rating: 3 })}
+            </Flex>
+            <Flex m={3}>
+              {displayRating({ status: 'closed-complete', rating: 4 })}
+            </Flex>
+            <Flex m={3}>
+              {displayRating({ status: 'closed-complete', rating: 5 })}
+            </Flex> */}
+            <Text
+              fontSize="lg"
+              bgColor={feedbackBg}
+              width="50rem"
+              height="10rem"
+              p={10}
+              borderRadius={20}
+            >
+              {hrData.feedback_comments}
+            </Text>
           </Flex>
         )}
       </Box>

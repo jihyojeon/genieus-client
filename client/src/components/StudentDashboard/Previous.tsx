@@ -4,10 +4,12 @@ import {
   Flex,
   Grid,
   Heading,
+  HStack,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react'
 import { FaStar } from 'react-icons/fa'
+import { BiBox } from 'react-icons/bi'
 import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
 import { auth } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
@@ -32,6 +34,7 @@ const Previous = () => {
       (a, b) =>
         new Date(b.time_opened).getTime() - new Date(a.time_opened).getTime()
     )
+    .slice(0, 9)
 
   function displayDate(date: Date) {
     const timeUnits = [
@@ -88,9 +91,12 @@ const Previous = () => {
 
   return (
     // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
-    <Flex py={3} ml={7} flexDirection="column">
-      <Heading as="h1" size="lg" fontWeight="300" pb="0.5rem">
-        Recent Help Requests
+    <Flex py={3} ml={1} flexDirection="column">
+      <Heading as="h1" size="lg" fontWeight="300" pb="0.5rem" ml={5}>
+        <HStack>
+          <BiBox />
+          <Text>Recent Help Requests</Text>
+        </HStack>
       </Heading>
       <Grid
         m="5"

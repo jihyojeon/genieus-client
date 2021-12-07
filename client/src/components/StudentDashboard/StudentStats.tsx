@@ -9,9 +9,11 @@ import {
   StatNumber,
   useColorModeValue,
   Text,
+  HStack,
 } from '@chakra-ui/react'
 import { ReactNode } from 'react'
-import { BsPerson, BsCalendar, BsCodeSlash, BsWatch } from 'react-icons/bs'
+import { BsPerson, BsCalendar, BsCodeSlash } from 'react-icons/bs'
+import { BiInfoCircle, BiTimeFive } from 'react-icons/bi'
 import { auth } from '../../firebase'
 import { useEffect, useState } from 'react'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
@@ -98,7 +100,10 @@ export default function BasicStatistics() {
       px={{ base: 2, sm: 12, md: 17 }}
     >
       <Heading fontFamily="montserrat" fontWeight="400" ml={5} mb={5}>
-        Your Account:
+        <HStack>
+          <BiInfoCircle />
+          <Text>Your Account</Text>
+        </HStack>
       </Heading>
       <Wrap
         mr={10}
@@ -111,7 +116,7 @@ export default function BasicStatistics() {
           <StatsCard
             title={'Subscription Type '}
             //@ts-ignore
-            stat={student.data?.subscription_type}
+            stat={student.data?.subscription_type.toUpperCase()}
             icon={<BsPerson size={'3em'} />}
           />
           <StatsCard
@@ -140,7 +145,7 @@ export default function BasicStatistics() {
           <StatsCard
             title={'Hours remaining'}
             stat={student?.data?.time_remaining}
-            icon={<BsWatch size={'3em'} />}
+            icon={<BiTimeFive size={'3em'} />}
           />
         </WrapItem>
       </Wrap>

@@ -14,7 +14,6 @@ type ChatParticipantProps = {
 const ChatParticipant = ({ hr, isTutor }: ChatParticipantProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  console.log(hr)
   const name: string = isTutor ? hr.student?.name : hr.tutor?.name
   const photo_url: string = isTutor
     ? hr.student?.photo_url
