@@ -71,24 +71,27 @@ const ChatDuration = ({
       justifyContent="space-between"
     >
       <Flex direction="column" justify="center" align="center">
-        <CountdownCircleTimer
-          colors={[
-            ['#004777', 0.33],
-            ['#F7B801', 0.33],
-            ['#A30000', 0.33],
-          ]}
-          duration={initialTimer || 0}
-          isPlaying={clockRunning}
-          key={key}
-          rotation={'clockwise'}
-          size={170}
-          strokeWidth={10}
-          onComplete={() => {
-            countDownExpired()
-          }}
-        >
-          {renderCountDown}
-        </CountdownCircleTimer>
+        {initialTimer && (
+          <CountdownCircleTimer
+            colors={[
+              ['#004777', 0.33],
+              ['#F7B801', 0.33],
+              ['#A30000', 0.33],
+            ]}
+            duration={initialTimer || 0}
+            isPlaying={clockRunning}
+            key={key}
+            rotation={'clockwise'}
+            size={170}
+            strokeWidth={10}
+            onComplete={() => {
+              setClockRunning(false)
+              countDownExpired()
+            }}
+          >
+            {renderCountDown}
+          </CountdownCircleTimer>
+        )}
       </Flex>
     </Box>
   )

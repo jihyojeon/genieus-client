@@ -47,7 +47,7 @@ const StudentAccept = ({ hrData }: { hrData: any }) => {
         ></Avatar>
         <Button
           onClick={() => {
-            navigate(`/chat${hrData.id}`)
+            navigate(`/chat/${hrData.id}`)
           }}
         >
           Go to chat
