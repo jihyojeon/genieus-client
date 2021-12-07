@@ -179,14 +179,11 @@ const ModalSignUp = ({
                 </FormHelperText>
               </FormControl>
 
-
               <FormControl>
                 <Button type="submit" my={3} w={'100%'} onClick={signup}>
                   Submit
                 </Button>
               </FormControl>
-
-
 
               <FormControl
                 display="flex"
@@ -284,20 +281,6 @@ const ModalSignUp = ({
                 {errormsg}
               </Text>
             </Flex>
-
-            <HStack>
-              <Button
-                mt={4}
-                onClick={signInWithGoogle}
-                w={'25rem'}
-                variant={'outline'}
-                leftIcon={<FcGoogle />}
-              >
-                <Center>
-                  <Text>Sign in with Google</Text>
-                </Center>
-              </Button>
-            </HStack>
           </form>
         </ModalBody>
 
@@ -317,7 +300,7 @@ const ModalSignUp = ({
               </Center>
             </Button>
           </HStack>
-        </ModalFooter> 
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )
