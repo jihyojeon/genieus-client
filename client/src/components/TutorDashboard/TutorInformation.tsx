@@ -161,7 +161,6 @@ export const TutorInformation = () => {
         </Flex>
         }
 
-
         <Flex mt={4} direction="column">
           <Text>Spoken languages:</Text>
           <Wrap mt={2} spacing={2}>
@@ -206,6 +205,8 @@ export const TutorInformation = () => {
           </Wrap>
         </Flex>
 
+        {
+        tutor.data && tutor.data.bio ? (
         <Flex mt={4} direction="column" maxW="15rem">
           <Text>Bio:</Text>
           <Text fontSize={"sm"} color="#ca84dbc7">{tutor.error
@@ -217,6 +218,16 @@ export const TutorInformation = () => {
                         : undefined}
           </Text>
         </Flex>
+        ) :
+        <Flex mt={4} direction="column" maxW="15rem">
+          <Text>Bio:</Text>
+          <HStack spacing={5}>
+            <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
+              <AddIcon onClick={onOpenModal}/>
+            </Tag>
+          </HStack>
+        </Flex>
+        }
 
         <Flex
           alignItems="flex-start"
