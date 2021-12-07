@@ -10,7 +10,7 @@ import PreviousRequests from '../components/TutorDashboard/PreviousRequests'
 const TutorDashboard = () => {
   return (
     <Box>
-      <TopBar />
+      <TopBar tutor={true}/>
       <Grid
         h="90vh"
         py={2}
