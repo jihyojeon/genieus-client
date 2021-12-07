@@ -64,25 +64,27 @@ const Chat = () => {
   const isTutor = userId === helpRequest?.tutor_id
   if (!userId) return <Heading>Loading ...</Heading>
   return (
-    <Box p={'1rem'}>
+    <>
       <TopBar heading={'Chat'} tutor={isTutor} />
-      {helpRequest ? (
-        <Flex w={'100%'}>
-          <ChatLeftPane
-            helpRequest={helpRequest}
-            userId={userId}
-            isTutor={isTutor}
-          />
-          <Box flexGrow={1} maxW="90ch" margin="auto">
-            <ChatRightPane helpRequest={helpRequest} />
-          </Box>
-        </Flex>
-      ) : (
-        <Text size="xl">
-          No ongoing help request, please create/accept a new help request.
-        </Text>
-      )}
-    </Box>
+      <Box p={'1rem'}>
+        {helpRequest ? (
+          <Flex w={'100%'}>
+            <ChatLeftPane
+              helpRequest={helpRequest}
+              userId={userId}
+              isTutor={isTutor}
+            />
+            <Box flexGrow={1} maxW="90ch" margin="auto">
+              <ChatRightPane helpRequest={helpRequest} />
+            </Box>
+          </Flex>
+        ) : (
+          <Text size="xl">
+            No ongoing help request, please create/accept a new help request.
+          </Text>
+        )}
+      </Box>
+    </>
   )
 }
 

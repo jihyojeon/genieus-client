@@ -30,7 +30,7 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
 
   const initialTime: number = 10
   const subscriptionRemainingSecs: number = student?.time_remaining || 9999
-
+  console.log(isTutor)
   return (
     <Flex
       direction="column"
