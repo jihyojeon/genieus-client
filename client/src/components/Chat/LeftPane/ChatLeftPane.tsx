@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useGetStudentByIdQuery } from '../../../redux/services/studentService'
 
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 
 import ChatParticipant from './ChatParticipant'
 import ChatDuration from './ChatDuration'
@@ -37,23 +37,24 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
       textAlign="center"
       justify={isTutor ? 'flex-start' : 'stretch'}
       height={isTutor ? 'fit-content' : '81vh'}
-      w="20rem"
+      w="18rem"
+      mr="0.5rem"
       paddingTop="0.5rem"
-      paddingLeft="1.5rem"
-      paddingRight="1.5rem"
+      paddingLeft="1rem"
+      paddingRight="1rem"
       paddingBottom="1rem"
       overflowY={'auto'}
       sx={{
         '&::-webkit-scrollbar': {
-          backgroundColor: `rgba(150, 150, 190, 0.15)`,
+          backgroundColor: useColorModeValue('indigo.50', 'gray.700'),
           borderRadius: '8px',
           backgroundClip: 'padding-box',
-          width: '16px',
+          width: '10px',
         },
         '&::-webkit-scrollbar-thumb': {
-          backgroundColor: `rgba(160, 160, 230, 0.45)`,
+          backgroundColor: useColorModeValue('indigo.50', 'gray.600'),
           borderRadius: '8px',
-          width: '16px',
+          width: '10px',
         },
       }}
     >
@@ -69,8 +70,7 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
         <ActionBox>
           <Text>
             You have {initialTime} seconds before billing starts to decide
-            whether you want to stay on the call or go back and look for another
-            tutor.
+            whether you want to stay on the call or look for another tutor.
           </Text>
           <ActionDecline helpRequestId={helpRequest.id} />
         </ActionBox>
