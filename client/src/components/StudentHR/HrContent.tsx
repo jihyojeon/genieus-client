@@ -12,7 +12,6 @@ import {
   Image,
   GridItem,
   ListItem,
-  ListIcon,
   Heading,
   Flex,
   Popover,
@@ -21,11 +20,9 @@ import {
   PopoverBody,
   PopoverFooter,
   PopoverArrow,
-  PopoverCloseButton,
   Portal,
   Input,
   Text,
-  HStack,
   FormControl,
   useColorModeValue,
   Tag,
@@ -33,14 +30,12 @@ import {
   Button,
   Textarea,
 } from '@chakra-ui/react'
-import { connectToSocket } from '../../redux/services/socket'
 
-const HrContent = ({ settutorComplete }: any) => {
+const HrContent = () => {
   const languageKeys = Object.keys(ProgrammingLanguages)
 
   const [value, setValue] = useState('')
   const [codeValue, setCodeValue] = useState('')
-  const [loadingBtn, setLoadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
   const [searchValue, setSearchValue] = useState('')
   const [filteredLanguages, setFilteredLanguages] = useState(languageKeys)
@@ -64,11 +59,6 @@ const HrContent = ({ settutorComplete }: any) => {
   }
   function handleEditorChange(value: any, event: any): void {
     setCodeValue(value)
-  }
-
-  // Form output
-  const getHRData = () => {
-    console.log(`${codeValue}, ${value}, ${selectValue}`)
   }
 
   useEffect(() => {
@@ -269,8 +259,6 @@ const HrContent = ({ settutorComplete }: any) => {
         value={value}
         userId={userId}
         selectValue={selectValue}
-        settutorComplete={settutorComplete}
-        getHRData={getHRData}
         codeValue={codeValue}
         setUserId={setUserId}
       />

@@ -16,9 +16,6 @@ import {
 } from '../../redux/services/helpRequestService'
 
 const ButtonBar = ({
-  getHRData,
-
-  settutorComplete,
   userId,
   setUserId,
   value,
@@ -134,8 +131,8 @@ const ButtonBar = ({
             </Flex>
           )}
 
-          <Box >
-            <Text fontFamily="montserrat" letterSpacing={0.5} >
+          <Box>
+            <Text fontFamily="montserrat" letterSpacing={0.5}>
               You can continue to update your request after submitting
             </Text>
           </Box>
