@@ -10,6 +10,8 @@ import {
   GridItem,
 } from '@chakra-ui/react'
 import TutorFound from '../StudentHR/TutorFound'
+import { BsCheck } from 'react-icons/bs'
+
 import {
   useAddHRRequestMutation,
   useGetHRRequestByIdQuery,
@@ -85,7 +87,7 @@ const ButtonBar = ({
             direction="column"
             align="center"
             justify={'center'}
-            marginLeft="8rem"
+            // marginRight="1rem"
           >
             {!loadingBtn === true ? (
               <Button
@@ -101,14 +103,21 @@ const ButtonBar = ({
                   })
                 }}
                 // ml={105}
-                // mr={105}
+
                 letterSpacing={2}
-                colorScheme="indigo"
-                variant="outline"
+                bg="indigo.400"
+                color="white"
+                variant="solid"
+                // color={'black'}
+                _hover={{
+                  bgGradient: 'linear(to-r, blue.500, teal.300)',
+                  color: 'gray.300',
+                }}
                 padding={8}
                 fontFamily="montserrat"
               >
                 Submit
+                {<BsCheck size={'2em'} style={{ marginLeft: '5px' }} />}
               </Button>
             ) : (
               <Flex
@@ -143,24 +152,25 @@ const ButtonBar = ({
             )}
 
             <Flex justifyContent="center">
-              {hrById.data &&
-              hrById.data.interested_tutors.length !== 0 &&
-              hrById.data.declined_tutors.length === 0 ? (
-                //@ts-ignore
-                <TutorFound
-                  hrById={hrById}
-                  tutors={hrById.data.interested_tutors}
-                />
-              ) : (
-                <Text mt={5} fontFamily="montserrat" fontSize="15px">
-                  Available tutors will be displayed below...
-                </Text>
-              )}
+              {
+                hrById.data &&
+                hrById.data.interested_tutors.length !== 0 &&
+                hrById.data.declined_tutors.length === 0 ? (
+                  //@ts-ignore
+                  <TutorFound
+                    hrById={hrById}
+                    tutors={hrById.data.interested_tutors}
+                  />
+                ) : null
+                // <Text mt={5} fontFamily="montserrat" fontSize="15px">
+                //   Available tutors will be displayed below...
+                // </Text>
+              }
             </Flex>
           </Flex>
           <Box>
             <Text fontFamily="montserrat" letterSpacing={0.5}>
-              You can continue to update your request after submitting
+              Available tutors will be displayed below...
             </Text>
           </Box>
         </Flex>
