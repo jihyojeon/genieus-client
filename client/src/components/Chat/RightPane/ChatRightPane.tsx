@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Flex } from '@chakra-ui/react'
+import { Flex, useColorModeValue } from '@chakra-ui/react'
 import ChatBubble from './ChatBubble'
 import socket, {
   checkAndReconnectToSocket,
@@ -24,16 +24,15 @@ const ChatRightPane = ({ helpRequest }: ChatRightPaneProps) => {
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       setUserID(item?.uid)
+      console.log('setting userID', userID)
     })
   }, [])
   // setup socket
   useEffect(() => {
     if (userID) {
       checkAndReconnectToSocket(userID)
-      console.log(socket)
       socket.emit('join help request', helpRequest.id)
       socket.on('existing messages', (messages) => {
-        console.log(messages)
         messages && setMsgs(messages)
       })
       socket.on('user joined chat', (user) => {
@@ -43,7 +42,7 @@ const ChatRightPane = ({ helpRequest }: ChatRightPaneProps) => {
         console.log(user)
       })
       socket.on('get message', (message: Message) => {
-        console.log('get message', message)
+        console.log('adding message', message.content)
         setMsgs((priorMsgs) => [...priorMsgs, message])
       })
     }
@@ -77,27 +76,28 @@ const ChatRightPane = ({ helpRequest }: ChatRightPaneProps) => {
   return (
     <>
       <Flex direction="column">
-        <Box
+        <Flex
+          direction={'column-reverse'}
           paddingRight={'0.5rem'}
           pl="1rem"
           height="70vh"
           overflowY={'auto'}
           sx={{
             '&::-webkit-scrollbar': {
-              backgroundColor: `rgba(150, 150, 190, 0.15)`,
+              backgroundColor: useColorModeValue('indigo.50', 'gray.700'),
               borderRadius: '8px',
               backgroundClip: 'padding-box',
-              width: '16px',
+              width: '10px',
             },
             '&::-webkit-scrollbar-thumb': {
-              backgroundColor: `rgba(160, 160, 230, 0.45)`,
+              backgroundColor: useColorModeValue('indigo.200', 'gray.600'),
               borderRadius: '8px',
-              width: '16px',
+              width: '10px',
             },
           }}
         >
-          {messages}
-        </Box>
+          <Flex direction="column">{messages}</Flex>
+        </Flex>
       </Flex>
       <ChatInput sendHandler={sendHandler} />
     </>

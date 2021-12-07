@@ -9,7 +9,6 @@ import {
   GridItem,
   Heading,
   Text,
-  HStack,
   Button,
   Avatar,
   Center,
@@ -127,17 +126,13 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
             <Stack mt={8} direction={'row'} spacing={4}>
               <Button
                 onClick={() => {
-
                   console.log(hrById)
                   updateHr({
                     id: hrById.data.id,
                     status: 'assigned',
+                    tutor_id: tutorId,
                   })
-
-                
-
-                  navigate('/chat', { state: hrById.data })
-
+                  navigate(`/chat/${hrById.data.id}`)
                 }}
                 flex={1}
                 fontSize={'sm'}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useGetStudentByIdQuery } from '../../../redux/services/studentService'
 
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 
 import ChatParticipant from './ChatParticipant'
 import ChatDuration from './ChatDuration'
@@ -21,40 +21,35 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
 
   const studentQuery = useGetStudentByIdQuery(helpRequest.student_id)
 
-  // TODO: replace this with better error handling
-  // if (!(tutorQuery.isSuccess && studentQuery.isSuccess)) {
-  //   return <Heading>Loading ...</Heading>
-  // }
-
   const student = studentQuery.data
 
   const initialTime: number = 10
   const subscriptionRemainingSecs: number = student?.time_remaining || 9999
-
   return (
     <Flex
       direction="column"
       alignItems="center"
       textAlign="center"
-      justify="stretch"
-      height="81vh"
-      w="20rem"
+      justify={isTutor ? 'flex-start' : 'stretch'}
+      height={isTutor ? 'fit-content' : '81vh'}
+      w="18rem"
+      mr="0.5rem"
       paddingTop="0.5rem"
-      paddingLeft="1.5rem"
-      paddingRight="1.5rem"
+      paddingLeft="1rem"
+      paddingRight="1rem"
       paddingBottom="1rem"
       overflowY={'auto'}
       sx={{
         '&::-webkit-scrollbar': {
-          backgroundColor: `rgba(150, 150, 190, 0.15)`,
+          backgroundColor: useColorModeValue('indigo.50', 'gray.700'),
           borderRadius: '8px',
           backgroundClip: 'padding-box',
-          width: '16px',
+          width: '10px',
         },
         '&::-webkit-scrollbar-thumb': {
-          backgroundColor: `rgba(160, 160, 230, 0.45)`,
+          backgroundColor: useColorModeValue('indigo.200', 'gray.600'),
           borderRadius: '8px',
-          width: '16px',
+          width: '10px',
         },
       }}
     >
@@ -66,12 +61,11 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
           setCanDecline={setCanDecline}
         />
       )}
-      {canDecline && (
+      {!isTutor && canDecline && (
         <ActionBox>
           <Text>
             You have {initialTime} seconds before billing starts to decide
-            whether you want to stay on the call or go back and look for another
-            tutor.
+            whether you want to stay on the call or look for another tutor.
           </Text>
           <ActionDecline helpRequestId={helpRequest.id} />
         </ActionBox>
@@ -80,10 +74,12 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
         <Text>Launch video call</Text>
         <ActionZoom zoom_url={helpRequest.zoom_url} />
       </ActionBox>
-      <ActionBox>
-        <Text>End the call</Text>
-        <ActionComplete helpRequest={helpRequest} />
-      </ActionBox>
+      {!isTutor && (
+        <ActionBox>
+          <Text>End the call</Text>
+          <ActionComplete helpRequest={helpRequest} />
+        </ActionBox>
+      )}
     </Flex>
   )
 }

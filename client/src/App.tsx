@@ -21,8 +21,8 @@ const App = () => {
         <Route path="/student-hr" element={<StudentHR />} />
         <Route path="/tutor-hr" element={<TutorHR />} />
         <Route path="/previous-hr" element={<PreviousHelpRequest />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/student-feedback" element={<Feedback />} />
+        <Route path="/chat/:id" element={<Chat />} />
+        <Route path="/student-feedback/:id" element={<Feedback />} />
         <Route path="/tutor-complete" element={<TutorClose />} />
       </Routes>
     </Router>

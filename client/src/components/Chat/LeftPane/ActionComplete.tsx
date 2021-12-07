@@ -17,12 +17,12 @@ const ActionComplete = ({ helpRequest }: ActionCompleteProps) => {
   const submitCompleteHandler = () => {
     updateHelpRequest({ id: helpRequest.id, status: 'closed-complete' })
     console.log(helpRequest)
-    return navigate('/student-feedback', { state: helpRequest })
+    return navigate(`/student-feedback/${helpRequest.id}`)
   }
 
   const submitIncompleteHandler = () => {
     updateHelpRequest({ id: helpRequest.id, status: 'closed-incomplete' })
-    return navigate('/student-feedback', { state: helpRequest })
+    return navigate(`/student-feedback/${helpRequest.id}`)
   }
 
   return (

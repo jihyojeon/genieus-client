@@ -9,45 +9,15 @@ import {
 import ChatLeftPane from '../components/Chat/LeftPane/ChatLeftPane'
 import ChatRightPane from '../components/Chat/RightPane/ChatRightPane'
 import TopBar from '../components/TopBar/TopBar'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { auth } from '../firebase'
-
-const mockHelpRequest = {
-  id: '73668645-b761-4ae2-ac96-e1a52dde2ac8',
-  status: 'closed-compelted',
-  description: 'this is a description',
-  time_opened: '2021-12-02T15:53:37.806Z',
-  time_accepted: '2021-12-02T15:53:37.806Z',
-  time_closed: '2021-12-02T15:53:37.806Z',
-  rating: null,
-  feedback_comments: null,
-  tags: null,
-  language: 'fortran',
-  code: 'this is some code',
-  zoom_url:
-    'https://zoom.us/j/91414924610?pwd=RHk3ZGxVMDlPY2lvMlU4R3RnSk1ZUT09',
-  call_length: 211,
-  favourites_only: false,
-  tutor_id: 'sIOHhUgNX8PNU0eDXHAKM2Lnpz43',
-  student_id: 'spammyboi23',
-  interested_tutors: ['sIOHhUgNX8PNU0eDXHAKM2Lnpz43'],
-  declined_tutors: null,
-  createdAt: '2021-12-02T15:53:37.806Z',
-  updatedAt: '2021-12-02T15:53:37.806Z',
-  student: {
-    id: 'spammyboi23',
-    name: 'Student Name',
-    photo_url: 'https://bit.ly/dan-abramov',
-  },
-  tutor: {
-    id: 'sIOHhUgNX8PNU0eDXHAKM2Lnpz43',
-    name: 'Tutor Name',
-    photo_url: 'https://randomuser.me/api/portraits/men/74.jpg',
-  },
-}
+import { useGetHRRequestByIdQuery } from '../redux/services/helpRequestService'
 
 const Chat = () => {
   const [userId, setUserId] = useState<string | null>(null)
+  const { id } = useParams()
+  const hrById = useGetHRRequestByIdQuery(id || 'notfound')
+  const helpRequest = hrById.isSuccess ? hrById.data : null
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
@@ -57,32 +27,30 @@ const Chat = () => {
       }
     })
   }, [])
-
-  const location = useLocation()
-  const helpRequest: any = location.state
-  console.log(helpRequest)
-  const isTutor = userId === helpRequest?.tutor_id
   if (!userId) return <Heading>Loading ...</Heading>
+  const isTutor = userId === helpRequest?.tutor_id
   return (
-    <Box p={'1rem'}>
+    <>
       <TopBar heading={'Chat'} tutor={isTutor} />
-      {helpRequest ? (
-        <Flex w={'100%'}>
-          <ChatLeftPane
-            helpRequest={helpRequest}
-            userId={userId}
-            isTutor={isTutor}
-          />
-          <Box flexGrow={1} maxW="90ch" margin="auto">
-            <ChatRightPane helpRequest={helpRequest} />
-          </Box>
-        </Flex>
-      ) : (
-        <Text size="xl">
-          No ongoing help request, please create/accept a new help request.
-        </Text>
-      )}
-    </Box>
+      <Box p={'1rem'}>
+        {helpRequest ? (
+          <Flex w={'100%'}>
+            <ChatLeftPane
+              helpRequest={helpRequest}
+              userId={userId}
+              isTutor={isTutor}
+            />
+            <Box flexGrow={1} maxW="90ch" margin="auto">
+              <ChatRightPane helpRequest={helpRequest} />
+            </Box>
+          </Flex>
+        ) : (
+          <Text size="xl">
+            No ongoing help request, please create/accept a new help request.
+          </Text>
+        )}
+      </Box>
+    </>
   )
 }
 

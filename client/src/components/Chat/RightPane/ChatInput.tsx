@@ -1,5 +1,6 @@
 import { Button, Flex, FormControl, Input } from '@chakra-ui/react'
 import { useState } from 'react'
+import { FaPaperPlane } from 'react-icons/fa'
 
 type ChatInputProps = {
   sendHandler: (message: string) => void
@@ -23,30 +24,15 @@ export default function ChatInput({ sendHandler }: ChatInputProps) {
         <FormControl>
           <Flex direction="row">
             <Input
-              border="2px"
-              borderRadius="1rem"
-              colorScheme="indigo"
-              letterSpacing={2}
-              minHeight="4rem"
-              mr="1rem"
-              padding={8}
-              placeholder="Chat Input"
-              variant="outline"
-              width="100%"
+              mr=".5rem"
+              padding={6}
+              placeholder="Send a message ..."
               value={messageInput}
               onChange={(e) => setMessageInput(e.target.value)}
             />
-            <Button
-              type="submit"
-              border="2px"
-              borderRadius="1rem"
-              colorScheme="indigo"
-              letterSpacing={2}
-              padding={8}
-              variant="solid"
-              width="10rem"
-            >
-              Send
+            <Button type="submit" padding={6} variant="solid" width="10rem">
+              <FaPaperPlane />
+              &nbsp;&nbsp; Send
             </Button>
           </Flex>
         </FormControl>
