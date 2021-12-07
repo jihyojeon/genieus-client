@@ -21,7 +21,9 @@ import {
   PopoverBody,
   PopoverFooter,
   ListItem,
-  Image
+  Image,
+  Button,
+  useDisclosure,
 } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import  FocusLock from "react-focus-lock"
@@ -30,6 +32,8 @@ import { auth } from '../../firebase'
 import { useGetTutorByIdQuery, useUpdateTutorMutation} from '../../redux/services/tutorService'
 
 import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
+
+import ModalEditTutorProfile from './ModalEditTutorProfile'
 
 export const TutorInformation = () => {
   const languageKeys = Object.keys(ProgrammingLanguages)
@@ -45,6 +49,12 @@ export const TutorInformation = () => {
 
   //@ts-ignore
   const tutor = useGetTutorByIdQuery(userId, {skip: !userId})
+
+  const {
+    isOpen: OpenModal,
+    onOpen: onOpenModal,
+    onClose: onModalClose,
+  } = useDisclosure()
 
   const filterLanguages = (e: any) => {
     setSearchValue(e.target.value)
@@ -123,6 +133,8 @@ export const TutorInformation = () => {
           </Heading>
         </Flex>
 
+        {
+        tutor.data && tutor.data.location ? (
         <Flex direction="column">
           <Text>Location:</Text>
           <HStack spacing={5}>
@@ -138,6 +150,17 @@ export const TutorInformation = () => {
             </Tag>
           </HStack>
         </Flex>
+        ) : 
+        <Flex direction="column">
+          <Text>Location:</Text>
+          <HStack spacing={5}>
+            <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
+              <AddIcon onClick={onOpenModal}/>
+            </Tag>
+          </HStack>
+        </Flex>
+        }
+
 
         <Flex mt={4} direction="column">
           <Text>Spoken languages:</Text>
@@ -304,6 +327,11 @@ export const TutorInformation = () => {
           </Wrap>
         </Flex>
       </Box>
+      <ModalEditTutorProfile
+            tutor={tutor.data}
+            isOpen={OpenModal}
+            onClose={onModalClose}
+          />
     </Flex>
   )
 }
