@@ -7,22 +7,31 @@ import { useNavigate } from 'react-router-dom'
 
 type ActionCompleteProps = {
   helpRequest: any
+  setSessionOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ActionComplete = ({ helpRequest }: ActionCompleteProps) => {
+const ActionComplete = ({
+  helpRequest,
+  setSessionOpen,
+}: ActionCompleteProps) => {
   const [updateHelpRequest, updateHelpRequestResponse] =
     useUpdateHRRequestMutation()
   const navigate = useNavigate()
 
   const submitCompleteHandler = () => {
+    setSessionOpen(false)
     updateHelpRequest({ id: helpRequest.id, status: 'closed-complete' })
-    console.log(helpRequest)
-    return navigate(`/student-feedback/${helpRequest.id}`)
+    setTimeout(() => {
+      return navigate(`/student-feedback/${helpRequest.id}`)
+    }, 500)
   }
 
   const submitIncompleteHandler = () => {
+    setSessionOpen(false)
     updateHelpRequest({ id: helpRequest.id, status: 'closed-incomplete' })
-    return navigate(`/student-feedback/${helpRequest.id}`)
+    setTimeout(() => {
+      return navigate(`/student-feedback/${helpRequest.id}`)
+    }, 500)
   }
 
   return (
