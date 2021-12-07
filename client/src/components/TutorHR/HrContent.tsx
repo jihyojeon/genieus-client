@@ -3,6 +3,7 @@ import Split from 'react-split'
 import ButtonBar from './ButtonBar'
 import Editor from '@monaco-editor/react'
 import '../../styles/example.css'
+import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
 import {
   Grid,
@@ -13,7 +14,7 @@ import {
   Text,
   // Select,
   HStack,
-  Button,
+  Image,
   useColorModeValue,
   Tag,
   TagLabel,
@@ -99,6 +100,14 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
 
                 <HStack spacing={5}>
                   <Tag variant="outline" size="lg" colorScheme="indigo">
+                    <Image
+                      mr={2}
+                      height="1rem"
+                      width="1rem"
+                      borderRadius="5"
+                      // @ts-ignore
+                      src={ProgrammingLanguages[hrData.language]}
+                    />
                     <TagLabel>{hrData.language}</TagLabel>
                   </Tag>
                 </HStack>

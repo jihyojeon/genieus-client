@@ -11,12 +11,14 @@ import {
   Text,
   Textarea,
   useColorModeValue,
+  Image,
 } from '@chakra-ui/react'
 import { useLocation } from 'react-router'
 import { FaStar } from 'react-icons/fa'
 import Split from 'react-split'
 import Editor from '@monaco-editor/react'
 import TopBar from '../components/TopBar/TopBar'
+import { ProgrammingLanguages } from '../assets/devicon/ProgrammingLanguages'
 
 const PreviousHelpRequest = () => {
   const location = useLocation()
@@ -148,6 +150,14 @@ const PreviousHelpRequest = () => {
                   </Heading>
                   <HStack spacing={5}>
                     <Tag variant="outline" size="lg" colorScheme="indigo">
+                      <Image
+                        mr={2}
+                        height="1rem"
+                        width="1rem"
+                        borderRadius="5"
+                        // @ts-ignore
+                        src={ProgrammingLanguages[hrData.language]}
+                      />
                       <TagLabel>{hrData.language}</TagLabel>
                     </Tag>
                   </HStack>

@@ -158,22 +158,20 @@ const HrContent = () => {
                   direction="row"
                 >
                   {selectValue && (
-                    <Image
-                      mr={5}
-                      height="30px"
-                      width="30px"
-                      borderRadius="5"
-                      // @ts-ignore
-                      src={ProgrammingLanguages[selectValue]}
-                    />
-                  )}
-                  {selectValue && (
                     <Tag
                       mr={5}
                       variant="outline"
                       size="lg"
                       colorScheme="indigo"
                     >
+                      <Image
+                        mr={2}
+                        height="1rem"
+                        width="1rem"
+                        borderRadius="5"
+                        // @ts-ignore
+                        src={ProgrammingLanguages[selectValue]}
+                      />
                       <TagLabel>{selectValue}</TagLabel>
                     </Tag>
                   )}
