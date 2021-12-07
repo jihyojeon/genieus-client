@@ -136,13 +136,15 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
               {!isLoading ? (
                 <Button
                   onClick={() => {
-                    console.log(hrById)
+
                     updateHr({
                       id: hrById.data.id,
                       status: 'assigned',
                       tutor_id: tutorId,
                     })
+
                     setisLoading(true)
+
                     setTimeout(() => {
                       setisLoading(false)
 

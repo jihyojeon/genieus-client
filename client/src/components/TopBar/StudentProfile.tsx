@@ -61,7 +61,12 @@ export default function StudentProfile() {
                   cursor={'pointer'}
                   minW={0}
                 >
-                  <Avatar size={'md'} shadow="md" src={student.photo_url}>
+                  <Avatar
+                    name={student.name}
+                    size={'md'}
+                    shadow="md"
+                    src={student.photo_url}
+                  >
                     <AvatarBadge boxSize="1em" bg="green.500" />
                   </Avatar>
                 </MenuButton>
