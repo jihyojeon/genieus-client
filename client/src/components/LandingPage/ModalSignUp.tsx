@@ -67,20 +67,21 @@ const ModalSignUp = ({
 
   const signup = async () => {
     try {
-      await createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       )
+      const userId = user.uid
 
-      const userId = auth.currentUser?.uid
+
       await addStudent({
         email: registerEmail,
         id: userId,
         name: username,
         subscription_type: radioValue,
       })
-      console.log(auth.currentUser)
+
       connectToSocket(auth)
       navigate('/student-dashboard')
     } catch (error) {
@@ -224,14 +225,14 @@ const ModalSignUp = ({
                     {basicClicked ? (
                       <Radio
                         size="md"
-                        name="basic"
+                        value="basic"
                         colorScheme="indigo"
                         defaultChecked
                       >
                         Basic
                       </Radio>
                     ) : (
-                      <Radio size="md" name="basic" colorScheme="indigo">
+                      <Radio size="md" value="basic" colorScheme="indigo">
                         Basic
                       </Radio>
                     )}
@@ -239,14 +240,14 @@ const ModalSignUp = ({
                     {proClicked ? (
                       <Radio
                         size="md"
-                        name="pro"
+                        value="pro"
                         colorScheme="indigo"
                         defaultChecked
                       >
                         Pro
                       </Radio>
                     ) : (
-                      <Radio size="md" name="pro" colorScheme="indigo">
+                      <Radio size="md" value="pro" colorScheme="indigo">
                         Pro
                       </Radio>
                     )}
@@ -254,14 +255,14 @@ const ModalSignUp = ({
                     {maxClicked ? (
                       <Radio
                         size="md"
-                        name="max"
+                        value="max"
                         colorScheme="indigo"
                         defaultChecked
                       >
                         Max
                       </Radio>
                     ) : (
-                      <Radio size="md" name="max" colorScheme="indigo">
+                      <Radio size="md" value="max" colorScheme="indigo">
                         Max
                       </Radio>
                     )}
