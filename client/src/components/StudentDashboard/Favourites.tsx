@@ -64,7 +64,7 @@ const Favourites = () => {
         fontWeight="300"
         pb={'1rem'}
         ml={10}
-        mt={10}
+        mt={2}
         mb={5}
         pt={5}
       >
@@ -90,7 +90,7 @@ const Favourites = () => {
               />
             ))
         ) : (
-          <Text textAlign="center" mt={10} fontSize={'20px'} opacity="0.6">
+          <Text textAlign="center" mt={5} fontSize={'20px'} opacity="0.6">
             Your favourite tutors will be displayed here!{' '}
           </Text>
         )}
