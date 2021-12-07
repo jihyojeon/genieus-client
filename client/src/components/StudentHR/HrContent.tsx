@@ -134,6 +134,7 @@ const HrContent = ({ settutorComplete }: any) => {
                   border="1px solid"
                   borderColor="indigo.300"
                   onChange={handleInputChange}
+                  fontSize={'1.5rem'}
                   isRequired
                   value={value}
                   height={'50vh'}
@@ -157,6 +158,7 @@ const HrContent = ({ settutorComplete }: any) => {
                   fontFamily="montserrat"
                   fontWeight={300}
                   as="h5"
+                  paddingRight={'1rem'}
                 >
                   Code Sample
                 </Heading>
