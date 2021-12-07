@@ -29,6 +29,7 @@ import {
   TagLabel,
   Button,
   Textarea,
+  useDisclosure,
 } from '@chakra-ui/react'
 
 const HrContent = () => {
@@ -40,6 +41,7 @@ const HrContent = () => {
   const [searchValue, setSearchValue] = useState('')
   const [filteredLanguages, setFilteredLanguages] = useState(languageKeys)
   const [userId, setUserId] = useState()
+  const { onOpen, onClose, isOpen } = useDisclosure()
   let tags = value.match(/#[a-z]+/gi)
 
   const filterLanguages = (e: any) => {
@@ -175,7 +177,7 @@ const HrContent = () => {
                       <TagLabel>{selectValue}</TagLabel>
                     </Tag>
                   )}
-                  <Popover>
+                  <Popover isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
                     <PopoverTrigger>
                       <Button
                         opacity="0.6"
@@ -205,6 +207,8 @@ const HrContent = () => {
                               <ListItem
                                 onClick={() => {
                                   setSelectValue(lang)
+                                  onClose()
+                                  setSearchValue('')
                                 }}
                                 listStyleType={'none'}
                               >

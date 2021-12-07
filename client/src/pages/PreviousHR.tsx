@@ -106,18 +106,21 @@ const PreviousHelpRequest = () => {
                   >
                     <Text color={textColor}>Description</Text>
                   </Heading>
-                  {hrData && hrData == null ? (
-                    hrData.tags.map((tag: string[]) => {
-                      return (
-                        <HStack spacing={5}>
-                          <Tag variant="outline" size="lg" colorScheme="indigo">
+                  {hrData && (
+                    <Flex spacing={2} justify="flex-end" flexWrap={'wrap'}>
+                      {hrData.tags.map((tag: string[]) => {
+                        return (
+                          <Tag
+                            ml="0.25rem"
+                            variant="outline"
+                            size="lg"
+                            colorScheme="indigo"
+                          >
                             <TagLabel>{tag}</TagLabel>
                           </Tag>
-                        </HStack>
-                      )
-                    })
-                  ) : (
-                    <Text color={textColor}>Tags Here</Text>
+                        )
+                      })}
+                    </Flex>
                   )}
                 </Flex>
                 <Box pt={5}>
