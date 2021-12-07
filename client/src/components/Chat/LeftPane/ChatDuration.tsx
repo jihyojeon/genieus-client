@@ -77,7 +77,7 @@ const ChatDuration = ({
             ['#F7B801', 0.33],
             ['#A30000', 0.33],
           ]}
-          duration={initialTimer}
+          duration={initialTimer || 0}
           isPlaying={clockRunning}
           key={key}
           rotation={'clockwise'}
