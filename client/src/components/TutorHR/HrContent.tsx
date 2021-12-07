@@ -52,7 +52,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                   <Text color={textColor}>Description</Text>
                 </Heading>
 
-                {hrData && (
+                {hrData && hrData.tags && (
                   <Flex spacing={2} justify="flex-end" flexWrap={'wrap'}>
                     {hrData.tags.map((tag: string[]) => {
                       return (
