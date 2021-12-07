@@ -35,14 +35,18 @@ export const studentApi = createApi({
       providesTags: ['Student'],
     }),
 
-    addStudent: builder.mutation({
-      query: (student) => ({
-        url: '/student',
-        method: 'POST',
-        body: student,
-      }),
-      invalidatesTags: ['Student'],
-    }),
+    addStudent: builder.mutation(
+      {
+        query: (student) => ({
+          url: '/student',
+          method: 'POST',
+          body: student,
+        }),
+
+        invalidatesTags: ['Student'],
+      }
+      
+    ),
 
     updateStudentById: builder.mutation<
       StudentType,

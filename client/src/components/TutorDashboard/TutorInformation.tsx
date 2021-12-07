@@ -7,11 +7,8 @@ import {
   HStack,
   Tag,
   TagLabel,
-  VStack,
-  useDisclosure,
   Wrap,
   WrapItem,
-  CloseButton,
   TagCloseButton,
   Popover,
   PopoverTrigger,
@@ -21,11 +18,12 @@ import {
   PopoverHeader,
   Input,
   FormControl,
-  FormLabel,
   PopoverBody,
   PopoverFooter,
   ListItem,
-  Image
+  Image,
+  Button,
+  useDisclosure,
 } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import  FocusLock from "react-focus-lock"
@@ -34,6 +32,8 @@ import { auth } from '../../firebase'
 import { useGetTutorByIdQuery, useUpdateTutorMutation} from '../../redux/services/tutorService'
 
 import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
+
+import ModalEditTutorProfile from './ModalEditTutorProfile'
 
 export const TutorInformation = () => {
   const languageKeys = Object.keys(ProgrammingLanguages)
@@ -49,6 +49,12 @@ export const TutorInformation = () => {
 
   //@ts-ignore
   const tutor = useGetTutorByIdQuery(userId, {skip: !userId})
+
+  const {
+    isOpen: OpenModal,
+    onOpen: onOpenModal,
+    onClose: onModalClose,
+  } = useDisclosure()
 
   const filterLanguages = (e: any) => {
     setSearchValue(e.target.value)
@@ -127,6 +133,8 @@ export const TutorInformation = () => {
           </Heading>
         </Flex>
 
+        {
+        tutor.data && tutor.data.location ? (
         <Flex direction="column">
           <Text>Location:</Text>
           <HStack spacing={5}>
@@ -142,6 +150,16 @@ export const TutorInformation = () => {
             </Tag>
           </HStack>
         </Flex>
+        ) : 
+        <Flex direction="column">
+          <Text>Location:</Text>
+          <HStack spacing={5}>
+            <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
+              <AddIcon onClick={onOpenModal}/>
+            </Tag>
+          </HStack>
+        </Flex>
+        }
 
         <Flex mt={4} direction="column">
           <Text>Spoken languages:</Text>
@@ -187,6 +205,8 @@ export const TutorInformation = () => {
           </Wrap>
         </Flex>
 
+        {
+        tutor.data && tutor.data.bio ? (
         <Flex mt={4} direction="column" maxW="15rem">
           <Text>Bio:</Text>
           <Text fontSize={"sm"} color="#ca84dbc7">{tutor.error
@@ -198,6 +218,16 @@ export const TutorInformation = () => {
                         : undefined}
           </Text>
         </Flex>
+        ) :
+        <Flex mt={4} direction="column" maxW="15rem">
+          <Text>Bio:</Text>
+          <HStack spacing={5}>
+            <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
+              <AddIcon onClick={onOpenModal}/>
+            </Tag>
+          </HStack>
+        </Flex>
+        }
 
         <Flex
           alignItems="flex-start"
@@ -246,7 +276,20 @@ export const TutorInformation = () => {
                           value={searchValue}
                           type="text"
                           onChange={(e) => filterLanguages(e)}
-                          onKeyDown={(e) => e.key === 'Enter' && addProgrammingLanguage(searchValue)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              let addedLanguage = languageKeys.find(language => language.toLowerCase() === searchValue.toLowerCase())
+                              if (addedLanguage) {
+                                addProgrammingLanguage(addedLanguage)
+                                setSearchValue('')
+                                setFilteredLanguages(languageKeys)
+                              } else {
+                                addProgrammingLanguage(searchValue)
+                                setSearchValue('')
+                                setFilteredLanguages(languageKeys)
+                              }
+                            } 
+                          }}
                           placeholder='Add a Technology'
                           _placeholder={{ color: 'gray.500' }}
                         />
@@ -260,6 +303,8 @@ export const TutorInformation = () => {
                                 onClick={() => {
                                   setSearchValue(lang)
                                   addProgrammingLanguage(lang)
+                                  setSearchValue('')
+                                  setFilteredLanguages(languageKeys)
                                 }}
                                 listStyleType={'none'}
                               >
@@ -293,6 +338,11 @@ export const TutorInformation = () => {
           </Wrap>
         </Flex>
       </Box>
+      <ModalEditTutorProfile
+            tutor={tutor.data}
+            isOpen={OpenModal}
+            onClose={onModalClose}
+          />
     </Flex>
   )
 }

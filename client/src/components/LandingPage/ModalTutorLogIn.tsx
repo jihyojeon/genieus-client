@@ -36,7 +36,8 @@ const ModalTutorLogIn = ({ isOpen, onClose }) => {
   const [loginpassword, setLoginPassword] = useState('')
   const [errormsg, seterrormsg] = useState('')
 
-  const login = async () => {
+  const login = async (e: any) => {
+    e.preventDefault()
     try {
       await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
       connectToSocket(auth)
@@ -72,64 +73,72 @@ const ModalTutorLogIn = ({ isOpen, onClose }) => {
         </ModalHeader>
 
         <ModalBody>
-          <Flex justifyContent="center" alignItems="center" direction="column">
-            <FormControl mb="8.5" id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
-              <Input
-                onChange={(e) => setLoginEmail(e.target.value)}
-                type="email"
-              />
-              <FormHelperText ml={1}>
-                We'll never share your email.
-              </FormHelperText>
-            </FormControl>
-            <FormControl my={4} id="password" isRequired>
-              <FormLabel>Password</FormLabel>
-              <InputGroup size="md">
-                <Input
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                  type={show ? 'text' : 'password'}
-                  placeholder="Enter password"
-                />
-                <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {show ? 'Hide' : 'Show'}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
-            <Button
-              onClick={signInWithGoogle}
-              w={'25rem'}
-              variant={'outline'}
-              leftIcon={<FcGoogle />}
+          <form onSubmit={login}>
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              direction="column"
             >
-              <Center>
-                <Text>Sign in with Google</Text>
-              </Center>
-            </Button>
-          </Flex>
+              <FormControl mb="8.5" id="email" isRequired>
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                  type="email"
+                />
+                <FormHelperText ml={1}>
+                  We'll never share your email.
+                </FormHelperText>
+              </FormControl>
+              <FormControl my={4} id="password" isRequired>
+                <FormLabel>Password</FormLabel>
+                <InputGroup size="md">
+                  <Input
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    type={show ? 'text' : 'password'}
+                    placeholder="Enter password"
+                  />
+                  <InputRightElement width="4.5rem">
+                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                      {show ? 'Hide' : 'Show'}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+            </Flex>
+
+            <Flex w="100%" direction="column">
+              <Text
+                color="#cc0000"
+                opacity="0.7"
+                fontFamily="montserrat"
+                mb={2}
+                textAlign="center"
+              >
+                {' '}
+                {errormsg}
+              </Text>
+              <Button type="submit" w="100%" onClick={login}>
+                Submit
+              </Button>
+            </Flex>
+          </form>
         </ModalBody>
 
         <ModalCloseButton />
 
         <ModalFooter>
+          <Button
+            onClick={signInWithGoogle}
+            w={'25rem'}
+            variant={'outline'}
+            leftIcon={<FcGoogle />}
+          >
+            <Center>
+              <Text>Sign in with Google</Text>
+            </Center>
+          </Button>
+
           {/* LINK */}
-          <Flex w="100%" direction="column">
-            <Text
-              color="#cc0000"
-              opacity="0.7"
-              fontFamily="montserrat"
-              mb={2}
-              textAlign="center"
-            >
-              {' '}
-              {errormsg}
-            </Text>
-            <Button w="100%" onClick={login}>
-              Submit
-            </Button>
-          </Flex>
         </ModalFooter>
       </ModalContent>
     </Modal>

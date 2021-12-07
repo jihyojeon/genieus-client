@@ -4,6 +4,7 @@ import Logo from './Logo'
 import StudentProfile from './StudentProfile'
 import ColorModeSwitcher from './ColorModeSwitcher'
 import TutorProfile from './TutorProfile'
+// import { useNavigate } from 'react-router-dom'
 
 type TopBarProps = {
   heading?: string
@@ -11,6 +12,13 @@ type TopBarProps = {
 }
 
 const TopBar = ({ heading, tutor = false }: TopBarProps) => {
+
+// const navigate = useNavigate()
+// const backToHome = () => {
+//   return navigate('/')
+// }
+  
+  
   return (
     <Flex
       justifyContent="space-between"
@@ -18,9 +26,14 @@ const TopBar = ({ heading, tutor = false }: TopBarProps) => {
       alignItems="center"
       m=".5rem 1rem"
     >
+
       <Logo />
       {heading && <Heading>{heading}</Heading>}
-      <Flex alignItems="center">
+
+      <Flex
+        alignItems="center"
+        // onClick={backToHome}
+      >
         {tutor ? <TutorProfile /> : <StudentProfile />}
         <ColorModeSwitcher />
       </Flex>

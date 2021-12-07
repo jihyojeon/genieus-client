@@ -24,9 +24,8 @@ import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 export default function TutorProfile() {
   const navigate = useNavigate()
   const [userId, setUserId] = useState('')
-  const queryResponse = useGetTutorByIdQuery(userId)
+  const queryResponse = useGetTutorByIdQuery(userId, {skip: !userId})
   const tutor = queryResponse.data
-  console.log(tutor)
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       if (item) {

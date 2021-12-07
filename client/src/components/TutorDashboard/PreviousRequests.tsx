@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {
   Flex,
   Box,
-  List
+  List,
+  Text
 } from '@chakra-ui/react'
 
 import PreviousRequestCard from './PreviousRequestCard'
@@ -35,6 +36,7 @@ const PreviousRequests = () => {
        >
         Previous Requests:
       </Box>
+      {helpRequests.data && helpRequests.data.length ?
       <List 
       display="flex" 
       overflow="scroll"
@@ -55,6 +57,8 @@ const PreviousRequests = () => {
         return <PreviousRequestCard key={index} hr={hr}/>
         }).reverse() : undefined}
       </List>
+      : <Text ml={5}>Previous help requests will appear here. Help someone out to see previous help requests!</Text>
+      }
 
     </Flex>
   )

@@ -1,16 +1,9 @@
-import React from 'react'
 import { Grid, GridItem } from '@chakra-ui/react'
-// import Achievements from '../components/StudentDashboard/Achievements'
-import CornerProfile from '../components/StudentDashboard/CornerProfile'
 import CreateRequestButton from '../components/StudentDashboard/CreateRequestButton'
 import Favourites from '../components/StudentDashboard/Favourites'
-// import Interactions from '../components/StudentDashboard/Interactions'
 import Previous from '../components/StudentDashboard/Previous'
 import Stats from '../components/StudentDashboard/StudentStats'
 import TopBar from '../components/TopBar/TopBar'
-// import { auth } from '../firebase'
-
-// const gridBackgroundColor: string = 'hsl(217, 22%, 19%)'
 
 const StudentDashboard = () => {
   return (
@@ -19,19 +12,17 @@ const StudentDashboard = () => {
       <Grid
         gap={5}
         h="100vh"
-        mh="100%"
-        overflowY={'hidden'}
+        mh="50%"
         padding="5"
         templateColumns="repeat(3, 1fr)"
-        templateRows="repeat(5, 1fr)"
-        // templateRows="auto 1fr auto"
+        templateRows="repeat(4, 1fr)"
       >
         {/* CREATE REQUEST BUTTON */}
-        <GridItem rowSpan={1} colSpan={3}>
+        <GridItem h="5rem" rowSpan={1} colSpan={3}>
           <CreateRequestButton />
         </GridItem>
 
-        <GridItem w="80vh" rowSpan={1} colSpan={2}>
+        <GridItem h="28rem" w="53rem" rowSpan={2} colSpan={2}>
           <Stats />
         </GridItem>
 
@@ -41,7 +32,7 @@ const StudentDashboard = () => {
         </GridItem>
 
         {/* PREVIOUS (BOTTOM) PANE */}
-        <GridItem rowSpan={1} colSpan={2} h="200px">
+        <GridItem rowSpan={1} colSpan={2}>
           <Previous />
         </GridItem>
       </Grid>

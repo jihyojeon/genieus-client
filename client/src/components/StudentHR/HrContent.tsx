@@ -70,7 +70,7 @@ const HrContent = () => {
 
   return (
     <Box>
-      <Grid p={10} templateColumns="repeat(2, 1fr)" gap={10}>
+      <Grid p={10} templateColumns="repeat(2, 1fr)" gap={5}>
         {/* Description Box */}
 
         <Split
@@ -83,7 +83,12 @@ const HrContent = () => {
         >
           <div className="split-one">
             <GridItem id="one">
-              <Flex direction="row" justify="space-between" alignItems="center">
+              <Flex
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+                height="5rem"
+              >
                 <Heading
                   fontSize={30}
                   fontFamily="montserrat"
@@ -92,7 +97,7 @@ const HrContent = () => {
                 >
                   Description
                 </Heading>
-                <Flex spacing={2} justify="flex-end">
+                <Flex spacing={2} justify="flex-end" flexWrap={'wrap'}>
                   {tags !== null ? (
                     tags.map((tag) => {
                       return (
@@ -101,6 +106,7 @@ const HrContent = () => {
                           size="lg"
                           colorScheme="indigo"
                           ml="0.25rem"
+                          mt="0.25rem"
                           flexWrap="wrap"
                         >
                           <TagLabel>{tag}</TagLabel>
@@ -118,6 +124,7 @@ const HrContent = () => {
                   border="1px solid"
                   borderColor="indigo.300"
                   onChange={handleInputChange}
+                  fontSize={'1.5rem'}
                   isRequired
                   value={value}
                   height={'50vh'}
@@ -134,12 +141,14 @@ const HrContent = () => {
                 alignItems="center"
                 direction="row"
                 justifyContent="space-between"
+                height="5rem"
               >
                 <Heading
                   fontSize={30}
                   fontFamily="montserrat"
                   fontWeight={300}
                   as="h5"
+                  paddingRight={'1rem'}
                 >
                   Code Sample
                 </Heading>
