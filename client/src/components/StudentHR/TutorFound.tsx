@@ -15,6 +15,8 @@ import {
   Stack,
   Badge,
   useColorModeValue,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react'
 import { useGetTutorByIdQuery } from '../../redux/services/tutorService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -88,10 +90,14 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
               color={useColorModeValue('gray.700', 'gray.400')}
               py={2}
             >
-              <Text>
-                <FontAwesomeIcon icon={faStar} />{' '}
-                {tutorValue.data?.avg_rating ? tutorValue.data?.avg_rating : 0}
-              </Text>
+              {tutorValue.data?.completed_help_requests !== 0 && (
+                <Text>
+                  <FontAwesomeIcon icon={faStar} />{' '}
+                  {tutorValue.data?.avg_rating
+                    ? tutorValue.data?.avg_rating
+                    : 0}
+                </Text>
+              )}
               <Text>
                 {' '}
                 Completed help requests:{' '}
@@ -103,23 +109,25 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
             <Grid templateColumns="1fr, 1fr">
               <GridItem>
                 <Text> Tech languages: </Text>
-                {tutorValue !== undefined &&
+                {tutorValue !== undefined && (
                   // @ts-ignore
-                  tutorValue.data?.programming_languages.map((lang) => {
-                    return (
-                      <Flex justifyContent="center" direction="row">
-                        <Badge
-                          borderRadius="10px"
-                          px={2}
-                          py={1}
-                          my={2}
-                          fontWeight={'400'}
-                        >
-                          {lang} - years of experience
-                        </Badge>
-                      </Flex>
-                    )
-                  })}
+                  <Wrap justify="center" mt={3}>
+                    {tutorValue.data?.programming_languages.map((lang) => {
+                      return (
+                        <WrapItem>
+                          <Badge
+                            borderRadius="10px"
+                            px={2}
+                            py={1}
+                            fontWeight={'400'}
+                          >
+                            {lang}
+                          </Badge>
+                        </WrapItem>
+                      )
+                    })}
+                  </Wrap>
+                )}
               </GridItem>
             </Grid>
 
