@@ -10,7 +10,6 @@ import {
   WrapItem,
   Stack,
   Button,
-  Link,
   Badge,
   useColorModeValue,
   UnorderedList,
@@ -20,7 +19,10 @@ import {
   ModalContent,
   Flex,
   ModalHeader,
+  Icon,
+  HStack,
 } from '@chakra-ui/react'
+import { BiUserMinus } from 'react-icons/bi'
 import { useRemoveFavouriteTutorMutation } from '../../redux/services/studentService'
 
 //@ts-ignore
@@ -36,6 +38,7 @@ const ModalFavourites = ({ isOpen, onClose, tutor, connected }) => {
   }, [])
 
   const [loading, setLoading] = useState(false)
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
@@ -124,9 +127,9 @@ const ModalFavourites = ({ isOpen, onClose, tutor, connected }) => {
                       return (
                         <WrapItem>
                           <Badge
-                            px={2}
+                            px={1}
                             py={1}
-                            fontSize={'18px'}
+                            fontSize={'15px'}
                             fontWeight={'400'}
                             borderRadius="10px"
                             mx={3}
@@ -156,7 +159,10 @@ const ModalFavourites = ({ isOpen, onClose, tutor, connected }) => {
                       opacity: 0.6,
                     }}
                   >
-                    Remove from favourites
+                    <HStack>
+                      <Icon as={BiUserMinus} w={5} h={5} />
+                      <Text>Remove</Text>
+                    </HStack>
                   </Button>
                 </Stack>
               </Box>
