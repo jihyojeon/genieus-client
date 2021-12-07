@@ -11,12 +11,14 @@ import {
   Text,
   Textarea,
   useColorModeValue,
+  Image,
 } from '@chakra-ui/react'
 import { useLocation } from 'react-router'
 import { FaStar } from 'react-icons/fa'
 import Split from 'react-split'
 import Editor from '@monaco-editor/react'
 import TopBar from '../components/TopBar/TopBar'
+import { ProgrammingLanguages } from '../assets/devicon/ProgrammingLanguages'
 
 const PreviousHelpRequest = () => {
   const location = useLocation()
@@ -33,6 +35,8 @@ const PreviousHelpRequest = () => {
     'linear(to-l, blue.300, teal.100)'
   )
   const feedbackBg = useColorModeValue('gray.100', 'gray.700')
+  const textColor = useColorModeValue('gray.900', 'gray.100')
+
   const iconsize = 10
 
   function displayRating(helprequest: any) {
@@ -74,8 +78,7 @@ const PreviousHelpRequest = () => {
   return (
     <Box>
       {/* @ts-ignore */}
-      {/* <TopBar hrData={location.state} /> */}
-      <TopBar />
+      <TopBar heading={`Help Request with ${hrData.tutor.name}`} />
       <Box>
         <Grid p={10} templateColumns="repeat(2, 1fr)" gap={10}>
           {/* Description Box */}
@@ -100,20 +103,23 @@ const PreviousHelpRequest = () => {
                     fontFamily="montserrat"
                     fontWeight={300}
                   >
-                    Description
+                    <Text color={textColor}>Description</Text>
                   </Heading>
-                  {hrData && hrData == null ? (
-                    hrData.tags.map((tag: string[]) => {
-                      return (
-                        <HStack spacing={5}>
-                          <Tag variant="outline" size="lg" colorScheme="indigo">
+                  {hrData && (
+                    <Flex spacing={2} justify="flex-end" flexWrap={'wrap'}>
+                      {hrData.tags.map((tag: string[]) => {
+                        return (
+                          <Tag
+                            ml="0.25rem"
+                            variant="outline"
+                            size="lg"
+                            colorScheme="indigo"
+                          >
                             <TagLabel>{tag}</TagLabel>
                           </Tag>
-                        </HStack>
-                      )
-                    })
-                  ) : (
-                    <Text>Tags Here</Text>
+                        )
+                      })}
+                    </Flex>
                   )}
                 </Flex>
                 <Box pt={5}>
@@ -123,7 +129,7 @@ const PreviousHelpRequest = () => {
                     isRequired
                     value={hrData.description}
                     height={'50vh'}
-                    placeholder="<!-- Please describe you issue in detail....  -->"
+                    placeholder="No description given..."
                   />
                 </Box>
               </GridItem>
@@ -142,10 +148,18 @@ const PreviousHelpRequest = () => {
                     fontWeight={300}
                     as="h5"
                   >
-                    Code Sample
+                    <Text color={textColor}>Code Sample</Text>
                   </Heading>
                   <HStack spacing={5}>
                     <Tag variant="outline" size="lg" colorScheme="indigo">
+                      <Image
+                        mr={2}
+                        height="1rem"
+                        width="1rem"
+                        borderRadius="5"
+                        // @ts-ignore
+                        src={ProgrammingLanguages[hrData.language]}
+                      />
                       <TagLabel>{hrData.language}</TagLabel>
                     </Tag>
                   </HStack>
@@ -161,7 +175,7 @@ const PreviousHelpRequest = () => {
                   <Editor
                     height="50vh"
                     defaultLanguage="javascript"
-                    defaultValue="// Please describe your problem..."
+                    defaultValue="// No code given..."
                     value={hrData.code}
                     theme={useColorModeValue('vs-light', 'vs-dark')}
                   />

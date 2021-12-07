@@ -29,17 +29,19 @@ import {
   TagLabel,
   Button,
   Textarea,
+  useDisclosure,
 } from '@chakra-ui/react'
 
 const HrContent = () => {
   const languageKeys = Object.keys(ProgrammingLanguages)
-
+  const textColor = useColorModeValue('gray.900', 'gray.100')
   const [value, setValue] = useState('')
   const [codeValue, setCodeValue] = useState('')
   const [selectValue, setSelectValue] = useState('')
   const [searchValue, setSearchValue] = useState('')
   const [filteredLanguages, setFilteredLanguages] = useState(languageKeys)
   const [userId, setUserId] = useState()
+  const { onOpen, onClose, isOpen } = useDisclosure()
   let tags = value.match(/#[a-z]+/gi)
 
   const filterLanguages = (e: any) => {
@@ -95,7 +97,7 @@ const HrContent = () => {
                   fontWeight={300}
                   as="h5"
                 >
-                  Description
+                  <Text color={textColor}>Description</Text>
                 </Heading>
                 <Flex spacing={2} justify="flex-end" flexWrap={'wrap'}>
                   {tags !== null ? (
@@ -114,7 +116,7 @@ const HrContent = () => {
                       )
                     })
                   ) : (
-                    <Text> Tags displayed here...</Text>
+                    <Text color={textColor}> Tags displayed here...</Text>
                   )}
                 </Flex>
               </Flex>
@@ -124,11 +126,11 @@ const HrContent = () => {
                   border="1px solid"
                   borderColor="indigo.300"
                   onChange={handleInputChange}
-                  fontSize={'1.5rem'}
+                  fontSize={'1rem'}
                   isRequired
                   value={value}
                   height={'50vh'}
-                  placeholder="<!-- Please describe you issue in detail, using #tags to populate the hashtag bar....  -->"
+                  placeholder="Describe your issue and use #tags to create tags."
                 />
               </Box>
             </GridItem>
@@ -150,7 +152,7 @@ const HrContent = () => {
                   as="h5"
                   paddingRight={'1rem'}
                 >
-                  Code Sample
+                  <Text color={textColor}>Code Sample</Text>
                 </Heading>
                 <Flex
                   justifyContent="space-between"
@@ -158,26 +160,24 @@ const HrContent = () => {
                   direction="row"
                 >
                   {selectValue && (
-                    <Image
-                      mr={5}
-                      height="30px"
-                      width="30px"
-                      borderRadius="5"
-                      // @ts-ignore
-                      src={ProgrammingLanguages[selectValue]}
-                    />
-                  )}
-                  {selectValue && (
                     <Tag
                       mr={5}
                       variant="outline"
                       size="lg"
                       colorScheme="indigo"
                     >
+                      <Image
+                        mr={2}
+                        height="1rem"
+                        width="1rem"
+                        borderRadius="5"
+                        // @ts-ignore
+                        src={ProgrammingLanguages[selectValue]}
+                      />
                       <TagLabel>{selectValue}</TagLabel>
                     </Tag>
                   )}
-                  <Popover>
+                  <Popover isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
                     <PopoverTrigger>
                       <Button
                         opacity="0.6"
@@ -207,6 +207,8 @@ const HrContent = () => {
                               <ListItem
                                 onClick={() => {
                                   setSelectValue(lang)
+                                  onClose()
+                                  setSearchValue('')
                                 }}
                                 listStyleType={'none'}
                               >
