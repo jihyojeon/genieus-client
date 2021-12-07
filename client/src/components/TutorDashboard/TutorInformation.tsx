@@ -7,11 +7,8 @@ import {
   HStack,
   Tag,
   TagLabel,
-  VStack,
-  useDisclosure,
   Wrap,
   WrapItem,
-  CloseButton,
   TagCloseButton,
   Popover,
   PopoverTrigger,
@@ -21,7 +18,6 @@ import {
   PopoverHeader,
   Input,
   FormControl,
-  FormLabel,
   PopoverBody,
   PopoverFooter,
   ListItem,
@@ -248,9 +244,16 @@ export const TutorInformation = () => {
                           onChange={(e) => filterLanguages(e)}
                           onKeyDown={(e) => {
                             if (e.key === 'Enter') {
-                              addProgrammingLanguage(searchValue)
-                              setSearchValue('')
-                              setFilteredLanguages(languageKeys)
+                              let addedLanguage = languageKeys.find(language => language.toLowerCase() === searchValue.toLowerCase())
+                              if (addedLanguage) {
+                                addProgrammingLanguage(addedLanguage)
+                                setSearchValue('')
+                                setFilteredLanguages(languageKeys)
+                              } else {
+                                addProgrammingLanguage(searchValue)
+                                setSearchValue('')
+                                setFilteredLanguages(languageKeys)
+                              }
                             } 
                           }}
                           placeholder='Add a Technology'
