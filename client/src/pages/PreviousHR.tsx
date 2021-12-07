@@ -33,6 +33,8 @@ const PreviousHelpRequest = () => {
     'linear(to-l, blue.300, teal.100)'
   )
   const feedbackBg = useColorModeValue('gray.100', 'gray.700')
+  const textColor = useColorModeValue('gray.900', 'gray.100')
+
   const iconsize = 10
 
   function displayRating(helprequest: any) {
@@ -100,7 +102,7 @@ const PreviousHelpRequest = () => {
                     fontFamily="montserrat"
                     fontWeight={300}
                   >
-                    Description
+                    <Text color={textColor}>Description</Text>
                   </Heading>
                   {hrData && hrData == null ? (
                     hrData.tags.map((tag: string[]) => {
@@ -113,7 +115,7 @@ const PreviousHelpRequest = () => {
                       )
                     })
                   ) : (
-                    <Text>Tags Here</Text>
+                    <Text color={textColor}>Tags Here</Text>
                   )}
                 </Flex>
                 <Box pt={5}>
@@ -142,7 +144,7 @@ const PreviousHelpRequest = () => {
                     fontWeight={300}
                     as="h5"
                   >
-                    Code Sample
+                    <Text color={textColor}>Code Sample</Text>
                   </Heading>
                   <HStack spacing={5}>
                     <Tag variant="outline" size="lg" colorScheme="indigo">

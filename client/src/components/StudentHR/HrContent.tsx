@@ -33,7 +33,7 @@ import {
 
 const HrContent = () => {
   const languageKeys = Object.keys(ProgrammingLanguages)
-
+  const textColor = useColorModeValue('gray.900', 'gray.100')
   const [value, setValue] = useState('')
   const [codeValue, setCodeValue] = useState('')
   const [selectValue, setSelectValue] = useState('')
@@ -95,7 +95,7 @@ const HrContent = () => {
                   fontWeight={300}
                   as="h5"
                 >
-                  Description
+                  <Text color={textColor}>Description</Text>
                 </Heading>
                 <Flex spacing={2} justify="flex-end" flexWrap={'wrap'}>
                   {tags !== null ? (
@@ -114,7 +114,7 @@ const HrContent = () => {
                       )
                     })
                   ) : (
-                    <Text> Tags displayed here...</Text>
+                    <Text color={textColor}> Tags displayed here...</Text>
                   )}
                 </Flex>
               </Flex>
@@ -150,7 +150,7 @@ const HrContent = () => {
                   as="h5"
                   paddingRight={'1rem'}
                 >
-                  Code Sample
+                  <Text color={textColor}>Code Sample</Text>
                 </Heading>
                 <Flex
                   justifyContent="space-between"
