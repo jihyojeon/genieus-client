@@ -1,18 +1,14 @@
 import React from 'react'
 import { Flex, Box, useColorModeValue, Heading } from '@chakra-ui/react'
+import '../../styles/Landing.css'
 
 const Logo = () => {
-
-
   return (
     <Flex
       alignItems="center"
       color={useColorModeValue('indigo.600', 'indigo.300')}
     >
-      <Box
-        w="1.8rem"
-
-      >
+      <Box w="1.8rem">
         <svg
           viewBox="0 0 102 198"
           fill="none"
@@ -28,7 +24,13 @@ const Logo = () => {
           />
         </svg>
       </Box>
-      <Heading ml={5} size="lg" fontFamily="montserrat" position="relative">
+      <Heading
+        id="logoText"
+        ml={5}
+        size="lg"
+        fontFamily="montserrat"
+        position="relative"
+      >
         GENIE
         <span
           style={{
