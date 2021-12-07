@@ -14,17 +14,22 @@ type ChatLeftPaneProps = {
   helpRequest: any
   userId: string
   isTutor: boolean
+  setSessionOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
+const ChatLeftPane = ({
+  helpRequest,
+  userId,
+  isTutor,
+  setSessionOpen,
+}: ChatLeftPaneProps) => {
   const [canDecline, setCanDecline] = useState(true)
 
   const studentQuery = useGetStudentByIdQuery(helpRequest.student_id)
-
-  const student = studentQuery.data
-
   const initialTime: number = 10
-  const subscriptionRemainingSecs: number = student?.time_remaining || 9999
+  const subscriptionRemainingSecs: number = studentQuery.isSuccess
+    ? studentQuery.data.time_remaining
+    : 999
   return (
     <Flex
       direction="column"
@@ -77,7 +82,10 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
       {!isTutor && (
         <ActionBox>
           <Text>End the call</Text>
-          <ActionComplete helpRequest={helpRequest} />
+          <ActionComplete
+            helpRequest={helpRequest}
+            setSessionOpen={setSessionOpen}
+          />
         </ActionBox>
       )}
     </Flex>

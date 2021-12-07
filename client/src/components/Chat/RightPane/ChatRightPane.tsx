@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Flex, useColorModeValue } from '@chakra-ui/react'
+import { useNavigate } from 'react-router'
 import ChatBubble from './ChatBubble'
 import socket, {
   checkAndReconnectToSocket,
@@ -14,11 +15,13 @@ type Message = {
 }
 type ChatRightPaneProps = {
   helpRequest: any
+  sessionOpen: boolean
 }
 
-const ChatRightPane = ({ helpRequest }: ChatRightPaneProps) => {
+const ChatRightPane = ({ helpRequest, sessionOpen }: ChatRightPaneProps) => {
   const [userID, setUserID] = useState<string | undefined>()
   const [msgs, setMsgs] = useState<Message[]>([])
+  const navigate = useNavigate()
 
   // get userID from firebase
   useEffect(() => {
@@ -45,11 +48,21 @@ const ChatRightPane = ({ helpRequest }: ChatRightPaneProps) => {
         console.log('adding message', message.content)
         setMsgs((priorMsgs) => [...priorMsgs, message])
       })
+      socket.on('chat closed', () => {
+        navigate('/tutor-dashboard')
+      })
     }
     return () => {
       socket.emit('leave help request', helpRequest.id)
     }
   }, [userID])
+
+  useEffect(() => {
+    if (!sessionOpen) {
+      console.log('ending session')
+      socket.emit('end session', helpRequest.id)
+    }
+  }, [sessionOpen])
 
   const sendHandler = (content: string) => {
     if (socket.connected) {
