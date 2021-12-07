@@ -116,7 +116,7 @@ export default function BasicStatistics() {
           <StatsCard
             title={'Subscription Type '}
             //@ts-ignore
-            stat={student.data?.subscription_type}
+            stat={student.data?.subscription_type.toUpperCase()}
             icon={<BsPerson size={'3em'} />}
           />
           <StatsCard

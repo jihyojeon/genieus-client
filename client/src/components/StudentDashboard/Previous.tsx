@@ -34,6 +34,7 @@ const Previous = () => {
       (a, b) =>
         new Date(b.time_opened).getTime() - new Date(a.time_opened).getTime()
     )
+    .slice(0, 9)
 
   function displayDate(date: Date) {
     const timeUnits = [
