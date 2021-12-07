@@ -94,7 +94,7 @@ export default function BasicStatistics() {
   return (
     <Flex
       alignItems="flex-start"
-      mt={10}
+      mt={5}
       direction="column"
       h="40vh"
       px={{ base: 2, sm: 12, md: 17 }}
