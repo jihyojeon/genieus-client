@@ -7,6 +7,7 @@ import socket, {
 } from '../../../redux/services/socket'
 import { auth } from '../../../firebase'
 import ChatInput from './ChatInput'
+import HRType from '../../../redux/services/helpRequestService'
 
 type Message = {
   authorID: string
@@ -14,7 +15,7 @@ type Message = {
   postedDate: Date
 }
 type ChatRightPaneProps = {
-  helpRequest: any
+  helpRequest: HRType
   sessionOpen: boolean
 }
 
@@ -27,7 +28,6 @@ const ChatRightPane = ({ helpRequest, sessionOpen }: ChatRightPaneProps) => {
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       setUserID(item?.uid)
-      console.log('setting userID', userID)
     })
   }, [])
   // setup socket

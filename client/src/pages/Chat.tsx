@@ -18,23 +18,22 @@ const Chat = () => {
   const [sessionOpen, setSessionOpen] = useState(true)
 
   const { id } = useParams()
-  const hrById = useGetHRRequestByIdQuery(id || 'notfound')
+  const hrById = useGetHRRequestByIdQuery(id || 'notfound', { skip: !id })
   const helpRequest = hrById.isSuccess ? hrById.data : null
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       if (item) {
-        console.log(userId)
         setUserId(item.uid)
       }
     })
   }, [])
   if (!userId) return <Heading>Loading ...</Heading>
   const isTutor = userId === helpRequest?.tutor_id
-  console.log(sessionOpen)
+  console.log(helpRequest)
   return (
     <>
-      <TopBar heading={'Chat'} tutor={isTutor} />
+      <TopBar heading={'Help Request Chat'} tutor={isTutor} />
       <Box p={'1rem'}>
         {helpRequest ? (
           <Flex w={'100%'}>
