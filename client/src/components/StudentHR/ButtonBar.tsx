@@ -81,81 +81,82 @@ const ButtonBar = ({
             </Text>
           </Flex>
 
-          {!loadingBtn === true ? (
-            <Button
-              onClick={() => {
-                setloadingBtn(true)
-                addHRRequest({
-                  student_id: userId,
-                  description: value,
-                  language: selectValue,
-                  code: codeValue,
-                  favourites_only: SelectFav,
-                  tags: tags,
-                })
-              }}
-              ml={105}
-              mr={105}
-              letterSpacing={2}
-              colorScheme="indigo"
-              variant="outline"
-              padding={8}
-              fontFamily="montserrat"
-            >
-              Submit
-            </Button>
-          ) : (
-            <Flex
-              justifyContent="center"
-              alignItems="center"
-              direction="column"
-            >
+          <Flex direction="column" align="center" justify={'center'}>
+            {!loadingBtn === true ? (
               <Button
-                isLoading
-                loadingText="Finding Tutor"
-                ml={105}
+                onClick={() => {
+                  setloadingBtn(true)
+                  addHRRequest({
+                    student_id: userId,
+                    description: value,
+                    language: selectValue,
+                    code: codeValue,
+                    favourites_only: SelectFav,
+                    tags: tags,
+                  })
+                }}
+                // ml={105}
+                // mr={105}
                 letterSpacing={2}
                 colorScheme="indigo"
                 variant="outline"
                 padding={8}
-              ></Button>
-              <Button
-                onClick={() => {
-                  setloadingBtn(false)
-                }}
-                letterSpacing={1}
-                mr={50}
-                _hover={{ bg: 'none', opacity: 0.6 }}
-                variant="ghost"
                 fontFamily="montserrat"
               >
-                Cancel
+                Submit
               </Button>
-            </Flex>
-          )}
+            ) : (
+              <Flex
+                justifyContent="center"
+                alignItems="center"
+                direction="column"
+              >
+                <Button
+                  isLoading
+                  loadingText="Finding Tutor"
+                  // ml={105}
+                  letterSpacing={2}
+                  colorScheme="indigo"
+                  variant="outline"
+                  padding={8}
+                ></Button>
+                <Button
+                  onClick={() => {
+                    setloadingBtn(false)
+                  }}
+                  letterSpacing={1}
+                  // mr={50}
+                  _hover={{ bg: 'none', opacity: 0.6 }}
+                  variant="ghost"
+                  fontFamily="montserrat"
+                >
+                  Cancel
+                </Button>
+              </Flex>
+            )}
 
-          <Box >
-            <Text fontFamily="montserrat" letterSpacing={0.5} >
+            <Flex justifyContent="center">
+              {hrById.data && hrById.data.interested_tutors.length !== 0 ? (
+                //@ts-ignore
+                <TutorFound
+                  hrById={hrById}
+                  tutors={hrById.data.interested_tutors}
+                />
+              ) : (
+                <Text mt={5} fontFamily="montserrat" fontSize="15px">
+                  Available tutors will be displayed below...
+                </Text>
+              )}
+            </Flex>
+          </Flex>
+          <Box>
+            <Text fontFamily="montserrat" letterSpacing={0.5}>
               You can continue to update your request after submitting
             </Text>
           </Box>
         </Flex>
       </GridItem>
-      <GridItem>
-        <Flex justifyContent="center">
-          {hrById.data && hrById.data.interested_tutors.length !== 0 ? (
-            //@ts-ignore
-            <TutorFound
-              hrById={hrById}
-              tutors={hrById.data.interested_tutors}
-            />
-          ) : (
-            <Text mt={5} fontFamily="montserrat" fontSize="15px">
-              Available tutors will be displayed below...
-            </Text>
-          )}
-        </Flex>
-      </GridItem>
+      <GridItem></GridItem>
     </Grid>
   )
 }
