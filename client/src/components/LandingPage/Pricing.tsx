@@ -126,7 +126,7 @@ export default function Pricing() {
                 bg={useColorModeValue('indigo.300', 'indigo.400')}
                 px={3}
                 py={1}
-                color={useColorModeValue('gray.300', 'gray.900')}
+                color={useColorModeValue('gray.600', 'gray.900')}
                 fontSize="sm"
                 fontWeight="600"
                 rounded="xl"

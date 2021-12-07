@@ -27,6 +27,7 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
   const [tutorId, setTutorId] = useState('')
   const tutorValue = useGetTutorByIdQuery(tutorId)
   const [updateHr, updateHrResult] = useUpdateHRRequestMutation()
+  const [isLoading, setisLoading] = useState(false)
   const declinedTutors: [] = []
   const tutor = tutorValue.data?.id
 
@@ -132,28 +133,51 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
             </Grid>
 
             <Stack mt={8} direction={'row'} spacing={4}>
-              <Button
-                onClick={() => {
-                  console.log(hrById)
-                  updateHr({
-                    id: hrById.data.id,
-                    status: 'assigned',
-                    tutor_id: tutorId,
-                  })
-                  navigate(`/chat/${hrById.data.id}`)
-                }}
-                flex={1}
-                fontSize={'sm'}
-                variant="outline"
-                boxShadow={
-                  '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
-                }
-                _focus={{
-                  bg: 'gray.200',
-                }}
-              >
-                Accept
-              </Button>
+              {!isLoading ? (
+                <Button
+                  onClick={() => {
+                    console.log(hrById)
+                    updateHr({
+                      id: hrById.data.id,
+                      status: 'assigned',
+                      tutor_id: tutorId,
+                    })
+                    setisLoading(true)
+                    setTimeout(() => {
+                      setisLoading(false)
+
+                      navigate(`/chat/${hrById.data.id}`)
+                    }, 3000)
+                  }}
+                  flex={1}
+                  fontSize={'sm'}
+                  variant="outline"
+                  boxShadow={
+                    '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                  }
+                  _focus={{
+                    bg: 'gray.200',
+                  }}
+                >
+                  Accept
+                </Button>
+              ) : (
+                <Button
+                  flex={1}
+                  isLoading
+                  loadingText="Connecting..."
+                  fontSize={'sm'}
+                  variant="outline"
+                  boxShadow={
+                    '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
+                  }
+                  _focus={{
+                    bg: 'gray.200',
+                  }}
+                >
+                  Accept
+                </Button>
+              )}
               <Button
                 onClick={() => {
                   //@ts-ignore
@@ -162,7 +186,6 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
                     id: hrById.data.id,
                     declined_tutors: declinedTutors,
                   })
-                  navigate('/student-dashboard')
                 }}
                 opacity="0.5"
                 flex={1}
