@@ -13,6 +13,7 @@ import TutorFound from '../StudentHR/TutorFound'
 import {
   useAddHRRequestMutation,
   useGetHRRequestByIdQuery,
+  useDeleteHRRequestMutation,
 } from '../../redux/services/helpRequestService'
 
 const ButtonBar = ({
@@ -24,12 +25,14 @@ const ButtonBar = ({
   tags,
 }: any) => {
   const [addHRRequest, addHRRequestResult] = useAddHRRequestMutation()
+  const [deleteRequest, deleteRequestResult] = useDeleteHRRequestMutation()
   const [loadingBtn, setloadingBtn] = useState(false)
   const [SelectFav, setSelectFav] = useState(false)
   //@ts-ignore
   const hrById = useGetHRRequestByIdQuery(addHRRequestResult?.data?.id, {
     pollingInterval: 3000,
   })
+  console.log(hrById)
 
   useEffect(() => {
     if (hrById.data?.interested_tutors.length !== 0) {
@@ -124,6 +127,8 @@ const ButtonBar = ({
                 ></Button>
                 <Button
                   onClick={() => {
+                    //@ts-ignore
+                    deleteRequest(hrById?.data?.id)
                     setloadingBtn(false)
                   }}
                   letterSpacing={1}
