@@ -15,18 +15,13 @@ import { useLocation } from 'react-router'
 import { FaStar } from 'react-icons/fa'
 import Split from 'react-split'
 import Editor from '@monaco-editor/react'
-import { useGetTutorByIdQuery } from '../redux/services/tutorService'
 import TopBar from '../components/TopBar/TopBar'
 
 const PreviousHelpRequest = () => {
   const location = useLocation()
   const hrData = location.state
-  const tutor = useGetTutorByIdQuery(hrData.tutor_id, {
-    skip: !hrData.tutor_id,
-  }).data
 
   function displayRating(helprequest: any) {
-    console.log(hrData)
     if (helprequest.status === 'pending' || helprequest.status === 'assigned') {
       return
     } else {
@@ -150,11 +145,13 @@ const PreviousHelpRequest = () => {
             </div>
           </Split>
         </Grid>
-        <Flex justify="center" align="center" flexDirection="column">
-          <Text fontSize="3xl">{hrData.tutor.name}</Text>
-          <Flex m={3}>{displayRating(hrData)}</Flex>
-          <Text fontSize="lg">{hrData.feedback_comments}</Text>
-        </Flex>
+        {hrData.tutor && (
+          <Flex justify="center" align="center" flexDirection="column">
+            <Text fontSize="3xl">{hrData.tutor.name}</Text>
+            <Flex m={3}>{displayRating(hrData)}</Flex>
+            <Text fontSize="lg">{hrData.feedback_comments}</Text>
+          </Flex>
+        )}
       </Box>
     </Box>
   )
