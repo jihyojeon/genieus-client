@@ -121,7 +121,7 @@ export default function WithSpeechBubbles() {
           <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>
-                Solved our temple backend in minutes
+                Solved our temple backend issues
               </TestimonialHeading>
               <TestimonialText>
                 Our temple's webpage was really suffering until Jess recommended

@@ -4,7 +4,7 @@ import {
   Grid,
   Heading,
   Flex,
-  useColorModeValue,
+  // useColorModeValue,
   GridItem,
   Text,
   UnorderedList,
