@@ -25,8 +25,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
   const [codeValue, setcodeValue] = useState('')
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
-
-  
+  const textColor = useColorModeValue('gray.900', 'gray.100')
 
   return (
     <Box>
@@ -50,7 +49,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                   fontFamily="montserrat"
                   fontWeight={300}
                 >
-                  Description
+                  <Text color={textColor}>Description</Text>
                 </Heading>
 
                 {hrData && hrData == null ? (
@@ -64,7 +63,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                     )
                   })
                 ) : (
-                  <Text>Tags Here</Text>
+                  <Text color={textColor}>Tags Here</Text>
                 )}
               </Flex>
 
@@ -95,7 +94,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                   fontWeight={300}
                   as="h5"
                 >
-                  Code Sample
+                  <Text color={textColor}>Code Sample</Text>
                 </Heading>
 
                 <HStack spacing={5}>
