@@ -78,8 +78,7 @@ const PreviousHelpRequest = () => {
   return (
     <Box>
       {/* @ts-ignore */}
-      {/* <TopBar hrData={location.state} /> */}
-      <TopBar />
+      <TopBar heading={`Help Request with ${hrData.tutor.name}`} />
       <Box>
         <Grid p={10} templateColumns="repeat(2, 1fr)" gap={10}>
           {/* Description Box */}
