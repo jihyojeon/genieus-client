@@ -21,11 +21,6 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
 
   const studentQuery = useGetStudentByIdQuery(helpRequest.student_id)
 
-  // TODO: replace this with better error handling
-  // if (!(tutorQuery.isSuccess && studentQuery.isSuccess)) {
-  //   return <Heading>Loading ...</Heading>
-  // }
-
   const student = studentQuery.data
 
   const initialTime: number = 10
@@ -52,7 +47,7 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
           width: '10px',
         },
         '&::-webkit-scrollbar-thumb': {
-          backgroundColor: useColorModeValue('indigo.50', 'gray.600'),
+          backgroundColor: useColorModeValue('indigo.200', 'gray.600'),
           borderRadius: '8px',
           width: '10px',
         },

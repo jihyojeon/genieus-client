@@ -90,7 +90,7 @@ const ChatRightPane = ({ helpRequest }: ChatRightPaneProps) => {
               width: '10px',
             },
             '&::-webkit-scrollbar-thumb': {
-              backgroundColor: useColorModeValue('indigo.50', 'gray.600'),
+              backgroundColor: useColorModeValue('indigo.200', 'gray.600'),
               borderRadius: '8px',
               width: '10px',
             },
