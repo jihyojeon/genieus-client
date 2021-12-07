@@ -10,6 +10,7 @@ import TutorClose from './pages/TutorClose'
 import TutorDashboard from './pages/TutorDashboard'
 import TutorHR from './pages/TutorHR'
 import PreviousHelpRequest from './pages/PreviousHR'
+import NotFound from './pages/NotFound'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/chat/:id" element={<Chat />} />
         <Route path="/student-feedback/:id" element={<Feedback />} />
         <Route path="/tutor-complete" element={<TutorClose />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   )
