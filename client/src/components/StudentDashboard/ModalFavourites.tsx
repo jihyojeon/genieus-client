@@ -19,7 +19,10 @@ import {
   ModalContent,
   Flex,
   ModalHeader,
+  Icon,
+  HStack,
 } from '@chakra-ui/react'
+import { BiUserMinus } from 'react-icons/bi'
 import { useRemoveFavouriteTutorMutation } from '../../redux/services/studentService'
 
 //@ts-ignore
@@ -156,7 +159,10 @@ const ModalFavourites = ({ isOpen, onClose, tutor, connected }) => {
                       opacity: 0.6,
                     }}
                   >
-                    Remove from favourites
+                    <HStack>
+                      <Icon as={BiUserMinus} w={5} h={5} />
+                      <Text>Remove</Text>
+                    </HStack>
                   </Button>
                 </Stack>
               </Box>
