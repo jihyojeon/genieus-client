@@ -179,12 +179,6 @@ const ModalSignUp = ({
                 </FormHelperText>
               </FormControl>
 
-              <FormControl>
-                <Button type="submit" my={3} w={'100%'} onClick={signup}>
-                  Submit
-                </Button>
-              </FormControl>
-
               <FormControl
                 display="flex"
                 justifyContent="center"
@@ -267,6 +261,11 @@ const ModalSignUp = ({
                   </RadioGroup>
                 </HStack>
               </FormControl>
+                <FormControl>
+                  <Button type="submit" my={3} w={'100%'} onClick={signup}>
+                    Submit
+                  </Button>
+                </FormControl>
             </Flex>
             <Flex
               justifyContent="center"
