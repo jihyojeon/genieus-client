@@ -39,18 +39,16 @@ function StatsCard(props: StatsCardProps) {
       px={{ base: 2, md: 4 }}
       py={'5'}
       m={5}
-      w={'30vh'}
+      w={'20rem'}
       shadow={'base'}
       bg={useColorModeValue('gray.100', 'gray.700')}
       rounded={'lg'}
     >
       <Flex justifyContent={'space-between'}>
         <Box pl={{ base: 2, md: 4 }}>
-          <StatLabel fontWeight={'medium'} isTruncated>
-            {title}
-          </StatLabel>
+          <StatLabel fontWeight={'medium'}>{title}</StatLabel>
           <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
-            <Text bgGradient={gradient} bgClip="text">
+            <Text bgGradient={gradient} bgClip="text" width="fit-content">
               {stat}
             </Text>
           </StatNumber>
