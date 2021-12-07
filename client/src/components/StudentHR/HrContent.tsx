@@ -80,7 +80,7 @@ const HrContent = ({ settutorComplete }: any) => {
 
   return (
     <Box>
-      <Grid p={10} templateColumns="repeat(2, 1fr)" gap={10}>
+      <Grid p={10} templateColumns="repeat(2, 1fr)" gap={5}>
         {/* Description Box */}
 
         <Split
@@ -93,7 +93,12 @@ const HrContent = ({ settutorComplete }: any) => {
         >
           <div className="split-one">
             <GridItem id="one">
-              <Flex direction="row" justify="space-between" alignItems="center">
+              <Flex
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+                height="5rem"
+              >
                 <Heading
                   fontSize={30}
                   fontFamily="montserrat"
@@ -102,7 +107,7 @@ const HrContent = ({ settutorComplete }: any) => {
                 >
                   Description
                 </Heading>
-                <Flex spacing={2} justify="flex-end" flexWrap={"wrap"}>
+                <Flex spacing={2} justify="flex-end" flexWrap={'wrap'}>
                   {tags !== null ? (
                     tags.map((tag) => {
                       return (
@@ -111,6 +116,7 @@ const HrContent = ({ settutorComplete }: any) => {
                           size="lg"
                           colorScheme="indigo"
                           ml="0.25rem"
+                          mt="0.25rem"
                           flexWrap="wrap"
                         >
                           <TagLabel>{tag}</TagLabel>
@@ -144,6 +150,7 @@ const HrContent = ({ settutorComplete }: any) => {
                 alignItems="center"
                 direction="row"
                 justifyContent="space-between"
+                height="5rem"
               >
                 <Heading
                   fontSize={30}
