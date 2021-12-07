@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import ModalStudentRequest from './ModalStudentRequest'
 import { useNavigate } from 'react-router-dom'
-import { BsPerson, BsTrash, BsCheckCircle } from 'react-icons/bs'
+import { BsPerson, BsTrash, BsCheck } from 'react-icons/bs'
 import StudentAccept from './StudentAccept'
 import {
   useDeleteHRRequestMutation,
@@ -112,12 +112,12 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
               // color={'black'}
               _hover={{
                 bgGradient: 'linear(to-r, blue.500, teal.300)',
-                color: 'gray.300',
+                color: 'white',
               }}
               fontFamily="montserrat"
             >
               Accept
-              {<BsCheckCircle size={'2em'} style={{ marginLeft: '10px' }} />}
+              {<BsCheck size={'2em'} style={{ marginLeft: '10px' }} />}
             </Button>
           ) : (
             <Flex
