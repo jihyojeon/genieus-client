@@ -9,6 +9,8 @@ import StudentHR from './pages/StudentHR'
 import TutorClose from './pages/TutorClose'
 import TutorDashboard from './pages/TutorDashboard'
 import TutorHR from './pages/TutorHR'
+import PreviousHelpRequest from './pages/PreviousHR'
+import NotFound from './pages/NotFound'
 
 const App = () => {
   return (
@@ -19,9 +21,11 @@ const App = () => {
         <Route path="/tutor-dashboard" element={<TutorDashboard />} />
         <Route path="/student-hr" element={<StudentHR />} />
         <Route path="/tutor-hr" element={<TutorHR />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/student-feedback" element={<Feedback />} />
+        <Route path="/previous-hr" element={<PreviousHelpRequest />} />
+        <Route path="/chat/:id" element={<Chat />} />
+        <Route path="/student-feedback/:id" element={<Feedback />} />
         <Route path="/tutor-complete" element={<TutorClose />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   )

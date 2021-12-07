@@ -1,51 +1,40 @@
-import { useState } from 'react'
-import {
-  Avatar,
-  Center,
-  Flex,
-  Heading,
-  Text,
-  VStack,
-} from '@chakra-ui/react'
-import StarRating from '../components/Feedback/StarRating'
-import StudentComments from '../components/Feedback/StudentComments'
-
-// TODO: REPLACE WITH DATABASE DATA FOR TUTOROBJSTATE
-const tutorObj = {
-  tutorName: 'Vic',
-  callDuration: 25,
-  photo: 'https://bit.ly/sage-adebayo',
-}
+import React from 'react'
+import FeedbackForm from '../components/Feedback/FeedbackForm'
+import TopBar from '../components/TopBar/TopBar'
+import { useParams } from 'react-router'
+import { Box, Text, Link } from '@chakra-ui/react'
+import { useGetHRRequestByIdQuery } from '../redux/services/helpRequestService'
+import { Link as RouterLink } from 'react-router-dom'
 
 const Feedback = () => {
-  const [tutorObjState, setTutorObjState] = useState(tutorObj)
+  const { id } = useParams()
+  const hrById = useGetHRRequestByIdQuery(id || 'notfound')
+  const helpRequest = hrById.isSuccess ? hrById.data : null
 
-  return (
-    <Center>
-      <Flex
-        direction="column"
-        align="center"
-        mt="2rem"
-        border="solid"
-        borderRadius="3rem"
-        padding="2rem"
-      >
-        <VStack spacing={4}>
-          <Text>You were online for {tutorObjState.callDuration} minutes</Text>
-          <Heading>How was your call with {tutorObjState.tutorName}?</Heading>
-          <Avatar size="2xl" src={tutorObjState.photo} />
-          <StarRating
-            size={32}
-            icon="StarIcon"
-            scale={5}
-            fillColor="gold"
-            strokeColor="grey"
-          />
-          <StudentComments name={tutorObjState.tutorName} />
-        </VStack>
-      </Flex>
-    </Center>
-  )
+  if (helpRequest) {
+    if (helpRequest.rating) {
+      return (
+        <Box>
+          <Text>This help request already has a rating</Text>
+          <Link as={RouterLink} to="/student-dashboard/">
+            Go back
+          </Link>
+        </Box>
+      )
+    }
+    return (
+      <>
+        <TopBar heading="Feedback" />
+        {helpRequest ? (
+          <FeedbackForm helpRequest={helpRequest} />
+        ) : (
+          <Text>Help Request ID Not Found</Text>
+        )}
+      </>
+    )
+  } else {
+    return <Text>Loading ...</Text>
+  }
 }
 
 export default Feedback

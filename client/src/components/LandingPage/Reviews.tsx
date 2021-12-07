@@ -90,9 +90,9 @@ const TestimonialAvatar = ({
 export default function WithSpeechBubbles() {
   return (
     <Box py={'10vh'}>
-      <Container maxW={'7xl'} py={16} as={Stack} spacing={12}>
+      <Container maxW={'7xl'} py={3} as={Stack} spacing={12}>
         <Stack spacing={0} align={'center'}>
-          <Heading color="gray.500">Our clients Speak</Heading>
+          <Heading>Our clients Speak</Heading>
           <Text color="gray.500">
             We work with coding students and professionals around the world
           </Text>
@@ -121,7 +121,7 @@ export default function WithSpeechBubbles() {
           <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>
-                Solved our temple backend in minutes
+                Solved our temple backend issues
               </TestimonialHeading>
               <TestimonialText>
                 Our temple's webpage was really suffering until Jess recommended
@@ -148,10 +148,10 @@ export default function WithSpeechBubbles() {
             </TestimonialContent>
             <TestimonialAvatar
               src={
-                'https://obamawhitehouse.archives.gov/sites/whitehouse.gov/files/images/twitter_cards_potus.jpg'
+                'https://upload.wikimedia.org/wikipedia/commons/4/4b/Michelle_Obama_2013_official_portrait.jpg'
               }
-              name={'Barak Obama'}
-              title={'Former US President'}
+              name={'Michelle Obama'}
+              title={'Former First Lady'}
             />
           </Testimonial>
         </Stack>

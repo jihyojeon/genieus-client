@@ -10,6 +10,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
+import '../../styles/Landing.css'
+import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
 // Modals
 import ModalSignUp from './ModalSignUp'
@@ -60,7 +62,7 @@ const Hero = () => {
                   onClick={() => {
                     window.scrollTo({
                       left: 0,
-                      top: 800,
+                      top: 700,
                       behavior: 'smooth',
                     })
                   }}
@@ -73,7 +75,7 @@ const Hero = () => {
           </Flex>
         </GridItem>
 
-        <GridItem >
+        <GridItem>
           <Box>
             <Flex
               h="80vh"
@@ -81,63 +83,84 @@ const Hero = () => {
               justifyContent="center"
               alignItems="flex-start"
             >
-
               <Lottie animationData={codingLottie} style={{ height: '80vh' }}>
-              <Box position="relative">
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1024px-Unofficial_JavaScript_logo_2.svg.png"
-                  boxSize="60px"
-                  position="absolute"
-                  top="40vh"
-                  right="90%"
-                  borderRadius="50px"
-                />
+                <Box position="relative">
+                  <Image
+                    src={ProgrammingLanguages.JavaScript}
+                    boxSize="50px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="40vh"
+                    right="90%"
+                    borderRadius="50px"
+                    id="lang"
+                  />
 
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png"
-                  boxSize="60px"
-                  position="absolute"
-                  top="10vh"
-                  right="75%"
-                  borderRadius="full"
-                />
+                  <Image
+                    src={ProgrammingLanguages.Python}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="10vh"
+                    right="75%"
+                    borderRadius="full"
+                    id="lang"
+                  />
 
-                <Image
-                  src="https://cdn.worldvectorlogo.com/logos/java.svg"
-                  boxSize="60px"
-                  position="absolute"
-                  top="70vh"
-                  right="70%"
-                  borderRadius="50px"
-                />
+                  <Image
+                    src={ProgrammingLanguages.Java}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="70vh"
+                    right="70%"
+                    borderRadius="50px"
+                    id="lang"
+                  />
 
-                <Image
-                  src="https://cdn.worldvectorlogo.com/logos/react-1.svg"
-                  boxSize="60px"
-                  position="absolute"
-                  top="5vh"
-                  right="55%"
-                  borderRadius="50px"
-                />
+                  <Image
+                    src={ProgrammingLanguages.React}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="5vh"
+                    right="55%"
+                    borderRadius="50px"
+                    id="lang"
+                  />
 
-                <Image
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png"
-                  boxSize="60px"
-                  position="absolute"
-                  top="10vh"
-                  right="20%"
-                  borderRadius="full"
-                />
+                  <Image
+                    src={ProgrammingLanguages.Firebase}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="10vh"
+                    right="20%"
+                    borderRadius="full"
+                    id="lang"
+                  />
 
-                <Image
-                  src="https://cdn.worldvectorlogo.com/logos/redux.svg"
-                  boxSize="60px"
-                  position="absolute"
-                  top="65vh"
-                  right="15%"
-                  borderRadius="20px"
-                />
-              </Box>
+                  <Image
+                    src={ProgrammingLanguages.Redux}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="65vh"
+                    right="15%"
+                    borderRadius="20px"
+                    id="lang"
+                  />
+                  <Image
+                    src={ProgrammingLanguages.C}
+                    boxSize="60px"
+                    position="absolute"
+                    opacity="0.6"
+                    top="35vh"
+                    right="5%"
+                    borderRadius="20px"
+                    id="lang"
+                  />
+                </Box>
               </Lottie>
             </Flex>
           </Box>
@@ -150,6 +173,7 @@ const Hero = () => {
         height="100px"
         width="100vw"
       ></Box>
+      {/* @ts-ignore */}
       <ModalSignUp isOpen={isOpen} onClose={onClose} />
     </Box>
   )

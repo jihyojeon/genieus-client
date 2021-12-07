@@ -17,13 +17,9 @@ import { SettingsIcon } from '@chakra-ui/icons'
 import ModalEditProfile from './ModalEditProfile'
 import { useNavigate } from 'react-router-dom'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
-
-// TODO: DUMMY OBJECT - PULL FROM DATABASE
-const userDetailsObj: any = {
-  name: 'David',
-  tier: 'Pro',
-  avatar: 'https://bit.ly/sage-adebayo',
-}
+import { disconnectFromSocket } from '../../redux/services/socket'
+import { ColorModeSwitcher } from '../../ColorModeSwitcher'
+import { error } from 'console'
 
 const CornerProfile = () => {
   const navigate = useNavigate()
@@ -40,14 +36,15 @@ const CornerProfile = () => {
     })
   }, [])
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => navigate('/'))
-      .catch((err) => console.log(err))
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut()
+      navigate('/')
+      disconnectFromSocket()
+    } catch (error) {
+      console.error(error)
+    }
   }
-
-  const [userDetails, setUserDetails] = useState(userDetailsObj)
 
   return (
     <Flex justifyContent="flex-end" mr={5} px={0} py={0} h="10vh">
@@ -55,7 +52,6 @@ const CornerProfile = () => {
         <Flex alignItems={'center'}>
           <Stack direction={'row'} spacing={7}>
             {/* User area  */}
-
             <Flex pt={4}>
               <Box>
                 <Text fontFamily="montserrat" fontSize={18} mr={5}>
@@ -72,10 +68,9 @@ const CornerProfile = () => {
                 <Flex alignItems="center" justifyContent="center">
                   <Flex alignItems="center" direction="row">
                     <IconButton
-                      // TODO: ICON IS TOO DARK IN DARK MODE
                       aria-label="Edit Profile"
                       color={useColorModeValue('#000', '#fff')}
-                      bg="gray.700"
+                      bg={useColorModeValue('gray.100', 'gray.700')}
                       height="20px"
                       icon={<SettingsIcon />}
                       size="small"
@@ -83,7 +78,11 @@ const CornerProfile = () => {
                       width="20px"
                     />
                   </Flex>
-                  <Button onClick={handleSignOut} opacity="0.6" variant="ghost">
+                  <Button
+                    onClick={handleSignOut}
+                    color={useColorModeValue('blue.500', 'blue.300')}
+                    variant="ghost"
+                  >
                     Log Out
                   </Button>
                 </Flex>
@@ -99,8 +98,14 @@ const CornerProfile = () => {
             </Flex>
           </Stack>
         </Flex>
+        <ColorModeSwitcher />
       </Flex>
-      <ModalEditProfile student={student.data} userId={userId} isOpen={isOpen} onClose={onClose} />
+      <ModalEditProfile
+        student={student.data}
+        userId={userId}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </Flex>
   )
 }

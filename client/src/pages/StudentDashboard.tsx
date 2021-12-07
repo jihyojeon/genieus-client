@@ -1,69 +1,42 @@
-import React from 'react'
 import { Grid, GridItem } from '@chakra-ui/react'
-import Achievements from '../components/StudentDashboard/Achievements'
-import CornerProfile from '../components/StudentDashboard/CornerProfile'
 import CreateRequestButton from '../components/StudentDashboard/CreateRequestButton'
 import Favourites from '../components/StudentDashboard/Favourites'
-import Interactions from '../components/StudentDashboard/Interactions'
 import Previous from '../components/StudentDashboard/Previous'
 import Stats from '../components/StudentDashboard/StudentStats'
-import { auth } from '../firebase'
-
-const gridBackgroundColor: string = 'hsl(217, 22%, 19%)'
+import TopBar from '../components/TopBar/TopBar'
 
 const StudentDashboard = () => {
   return (
-    <Grid
-      bg={gridBackgroundColor}
-      gap={5}
-      h="100vh"
-      mh="100%"
-      overflowY={'hidden'}
-      padding="5"
-      templateColumns="repeat(3, 1fr)"
-      templateRows="auto 1fr auto"
-    >
-      {/* CREATE REQUEST BUTTON */}
-      <GridItem rowSpan={1} colSpan={2}>
-        <CreateRequestButton />
-      </GridItem>
-
-      {/* PROFILE TOPRIGHT */}
-      <GridItem rowSpan={1} colSpan={1}>
-        <CornerProfile />
-      </GridItem>
-
-      {/* INTRACTIONS PANE */}
-      {/* <GridItem rowSpan={1} colSpan={1}>
-        <Interactions />
-      </GridItem> */}
-
-      <GridItem w="80vh" rowSpan={1} colSpan={2}>
-        <Stats />
-      </GridItem>
-
-      {/* ACHIEVEMENTS PANE */}
-      {/* <GridItem
-        justifyContent="flex-end"
-        alignItems="flex-end"
-        w="30vh"
-        rowSpan={1}
-        colSpan={1}
-        ml={20}
+    <>
+      <TopBar />
+      <Grid
+        gap={5}
+        h="100vh"
+        mh="50%"
+        padding="5"
+        templateColumns="repeat(3, 1fr)"
+        templateRows="repeat(4, 1fr)"
       >
-        <Achievements />
-      </GridItem> */}
+        {/* CREATE REQUEST BUTTON */}
+        <GridItem h="5rem" rowSpan={1} colSpan={3}>
+          <CreateRequestButton />
+        </GridItem>
 
-      {/* FAVOURITES (RIGHT) PANE */}
-      <GridItem rowSpan={2} colSpan={1}>
-        <Favourites />
-      </GridItem>
+        <GridItem h="28rem" w="53rem" rowSpan={2} colSpan={2}>
+          <Stats />
+        </GridItem>
 
-      {/* PREVIOUS (BOTTOM) PANE */}
-      <GridItem rowSpan={1} colSpan={2} h="200px">
-        <Previous />
-      </GridItem>
-    </Grid>
+        {/* FAVOURITES (RIGHT) PANE */}
+        <GridItem rowSpan={2} colSpan={1}>
+          <Favourites />
+        </GridItem>
+
+        {/* PREVIOUS (BOTTOM) PANE */}
+        <GridItem rowSpan={1} colSpan={2}>
+          <Previous />
+        </GridItem>
+      </Grid>
+    </>
   )
 }
 

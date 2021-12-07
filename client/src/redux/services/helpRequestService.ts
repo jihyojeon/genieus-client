@@ -1,12 +1,25 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export default interface HRType {
+  id: string
+  rating: number
   student_id: string
   description: string
   tags?: string[]
+  interested_tutors: string[]
+  declined_tutors: string[]
   language: string
   code: string
   favourites_only: boolean
+  status: any
+  tutor_id: string
+  time_opened: Date
+  time_accepted: Date
+  time_closed: Date
+  feedback_comments: string
+  zoom_url: string
+  student: { id: string; name: string; photo_url: string }
+  tutor: { id: string; name: string; photo_url: string }
 }
 
 export const helpRequestApi = createApi({
@@ -17,11 +30,12 @@ export const helpRequestApi = createApi({
     getHRRequests: builder.query<HRType, void>({
       query: () => `/helprequest`,
     }),
+
     getHrRequestByValue: builder.query<
       HRType[],
       {
-        student_id: string
-        tutor_id: string
+        student_id?: string
+        tutor_id?: string
         language?: string
         status?: string
       }

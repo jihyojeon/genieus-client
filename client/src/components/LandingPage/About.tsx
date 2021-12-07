@@ -4,6 +4,7 @@ import {
   Grid,
   Heading,
   Flex,
+  // useColorModeValue,
   GridItem,
   Text,
   UnorderedList,
@@ -23,7 +24,7 @@ const About = () => {
           onClick={() => {
             window.scrollTo({
               left: 0,
-              top: 800,
+              top: 700,
               behavior: 'smooth',
             })
           }}
@@ -36,8 +37,11 @@ const About = () => {
           _hover={{ opacity: 0.8, cursor: 'pointer' }}
           align="center"
         >
-          Find out more...
-          <FontAwesomeIcon icon={faArrowDown} />
+          Find out more
+          <FontAwesomeIcon
+            style={{ marginLeft: '0.7rem', opacity: 0.6 }}
+            icon={faArrowDown}
+          />
         </Text>
       </Box>
       <Heading

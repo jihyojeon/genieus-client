@@ -1,72 +1,63 @@
-import React from 'react'
-import { Grid, GridItem } from '@chakra-ui/react'
-import ChatInput from '../components/Chat/BottomPane/ChatInput'
+import React, { useState, useEffect } from 'react'
+import {
+  Box,
+  Flex,
+  Heading,
+  Text,
+  // useColorModeValue
+} from '@chakra-ui/react'
 import ChatLeftPane from '../components/Chat/LeftPane/ChatLeftPane'
 import ChatRightPane from '../components/Chat/RightPane/ChatRightPane'
-import ChatTopBar from '../components/Chat/TopPane/ChatTopBar'
-
-const minutes: number = 3
-const seconds: number = minutes * 60
-const zoomUrl =
-  'https://zoom.us/j/91414924610?pwd=RHk3ZGxVMDlPY2lvMlU4R3RnSk1ZUT09'
-const participantsArr: any = [
-  {
-    tutor: 'Vic',
-    image: 'https://bit.ly/dan-abramov',
-    exp1: 'JS',
-    dur1: 1,
-    exp2: 'Java',
-    dur2: 2,
-    online: 0,
-    key: 0,
-  },
-  {
-    tutor: 'Charley',
-    image: 'https://bit.ly/ryan-florence',
-    exp1: 'Ada',
-    dur1: 2,
-    exp2: 'Python',
-    dur2: 2,
-    online: 0,
-    key: 1,
-  },
-]
-
+import TopBar from '../components/TopBar/TopBar'
+import { useParams } from 'react-router-dom'
+import { auth } from '../firebase'
+import { useGetHRRequestByIdQuery } from '../redux/services/helpRequestService'
 
 const Chat = () => {
+  const [userId, setUserId] = useState<string | null>(null)
+  const [sessionOpen, setSessionOpen] = useState(true)
+
+  const { id } = useParams()
+  const hrById = useGetHRRequestByIdQuery(id || 'notfound')
+  const helpRequest = hrById.isSuccess ? hrById.data : null
+
+  useEffect(() => {
+    auth.onAuthStateChanged((item) => {
+      if (item) {
+        console.log(userId)
+        setUserId(item.uid)
+      }
+    })
+  }, [])
+  if (!userId) return <Heading>Loading ...</Heading>
+  const isTutor = userId === helpRequest?.tutor_id
+  console.log(sessionOpen)
   return (
-    <Grid
-      gap={3}
-      height="100%"
-      overflowY={'hidden'}
-      padding="3"
-      templateColumns="repeat(3, 1fr)"
-      templateRows="80px auto 100px"
-    >
-      <GridItem rowSpan={1} colSpan={3}>
-        <ChatTopBar/>
-      </GridItem>
-
-      <GridItem rowSpan={2} colSpan={1}>
-        <ChatLeftPane
-          seconds={seconds}
-          zoomUrl={zoomUrl}
-          name={participantsArr[0].tutor}
-          imageUrl={participantsArr[0].image}
-          participantsArr={participantsArr}
-          />
-      </GridItem>
-
-      <GridItem rowSpan={1} colSpan={2}>
-        <ChatRightPane
-          participantsArr={participantsArr}
-        />
-      </GridItem>
-
-      <GridItem rowSpan={1} colSpan={2}>
-        <ChatInput />
-      </GridItem>
-    </Grid>
+    <>
+      <TopBar heading={'Chat'} tutor={isTutor} />
+      <Box p={'1rem'}>
+        {helpRequest ? (
+          <Flex w={'100%'}>
+            <ChatLeftPane
+              setSessionOpen={setSessionOpen}
+              helpRequest={helpRequest}
+              userId={userId}
+              isTutor={isTutor}
+            />
+            <Box flexGrow={1} maxW="90ch" margin="auto">
+              <ChatRightPane
+                helpRequest={helpRequest}
+                sessionOpen={sessionOpen}
+              />
+            </Box>
+          </Flex>
+        ) : (
+          <Text size="xl">
+            No ongoing help request, please create/accept a new help request.
+          </Text>
+        )}
+      </Box>
+    </>
   )
 }
 

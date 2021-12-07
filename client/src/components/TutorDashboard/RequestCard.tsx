@@ -13,16 +13,13 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import HRType from '../../redux/services/helpRequestService'
-
-const imageObj = {
-  python:
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png',
-}
+import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
 //@ts-ignore
 export const RequestCard = ({ hr }: HRType) => {
+  const navigate = useNavigate()
   return (
     <Center
       border="1px solid"
@@ -32,8 +29,9 @@ export const RequestCard = ({ hr }: HRType) => {
       mx={6}
       my={2}
       bg={useColorModeValue('white', 'gray.800')}
-      // bg={'red'}
-      minW={'25%'}
+      minW={'26%'}
+      maxW={'26%'}
+      minH={'23rem'}
     >
       <Box
         overflow="hidden"
@@ -49,13 +47,15 @@ export const RequestCard = ({ hr }: HRType) => {
             height="25px"
             top={2}
             left={5}
-            src={imageObj.python}
+            //@ts-ignore
+            src={ProgrammingLanguages[hr.language]}
           />
         </Box>
         <Flex justify={'center'} mt={-10}>
           <Avatar
             size={'lg'}
             src={hr.student.photo_url}
+            name={hr.student.name}
             alt={'Author'}
             css={{
               border: '2px solid white',
@@ -63,51 +63,49 @@ export const RequestCard = ({ hr }: HRType) => {
           />
         </Flex>
 
-        <Box p={6}>
+        <Box
+          p={6}
+          display={'flex'}
+          flexDirection={'column'}
+          alignItems={'center'}
+        >
           <Stack spacing={0} align={'center'} mb={5}>
             <Heading fontSize={'lg'} fontWeight={500} fontFamily={'body'}>
               {hr.student.name}
             </Heading>
           </Stack>
-          <Flex
-            direction={'column'}
-            alignItems={'flex-start'}
-            justifyContent={'flex-start'}
-          >
-            <Text fontSize="13">
-              {hr.description}
-            </Text>
-          </Flex>
+          <Text fontSize="13">{hr.description.substring(0, 150)}</Text>
           <Divider mt={3} />
           <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
             {/*@ts-ignore*/}
-            {hr.tags?.map(tag => {
-            return (
-            <Badge
-              px={2}
-              py={1}
-              fontWeight={'400'}
-            >
-              #{tag}
-            </Badge>
-            )})}
+            {hr.tags?.map((tag, index) => {
+              return (
+                <Badge key={index} px={2} py={1} fontWeight={'400'}>
+                  {tag}
+                </Badge>
+              )
+            })}
           </Stack>
-          <Link to="/tutor-hr">
-            <Button
-              w={'full'}
-              mt={3}
-              bg={useColorModeValue('#151f21', 'gray.900')}
-              color={'white'}
-              rounded={'md'}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-            >
-              Expand
-            </Button>
-          </Link>
         </Box>
+        <Button
+          position={'absolute'}
+          bottom={'10px'}
+          left={'10%'}
+          w={'80%'}
+          mt={3}
+          onClick={() => {
+            navigate('/tutor-hr', { state: hr })
+          }}
+          bg={useColorModeValue('#151f21', 'gray.900')}
+          color={'white'}
+          rounded={'md'}
+          _hover={{
+            transform: 'translateY(-2px)',
+            boxShadow: 'lg',
+          }}
+        >
+          Expand
+        </Button>
       </Box>
     </Center>
   )

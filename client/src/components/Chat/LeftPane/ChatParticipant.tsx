@@ -1,44 +1,49 @@
-import { Avatar, Box, Flex, Heading, useDisclosure } from '@chakra-ui/react'
-import ModalChat from './ModalChat'
+import {
+  Avatar,
+  Box,
+  Heading,
+  useColorModeValue,
+  useDisclosure,
+} from '@chakra-ui/react'
 
-const ChatParticipant = (props: any) => {
+type ChatParticipantProps = {
+  hr: any
+  isTutor: boolean
+}
 
+const ChatParticipant = ({ hr, isTutor }: ChatParticipantProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const name: string = props.name
-  const imageUrl: string = props.imageUrl
+  const name: string = isTutor ? hr.student?.name : hr.tutor?.name
+  const photo_url: string = isTutor
+    ? hr.student?.photo_url
+    : hr.tutor?.photo_url
 
   return (
     <Box
-      bg="grey"
-      borderTopRightRadius="1rem"
-      borderBottomRightRadius="1rem"
-      marginTop={'1rem'}
+      alignItems="center"
+      bg={useColorModeValue('gray.100', 'gray.700')}
+      borderRadius="1rem"
+      direction="column"
+      onClick={onOpen}
       padding="1rem"
-      // position="absolute"
-      // right="0%"
-      // top="0%"
+      marginTop={'1rem'}
+      height="100%"
+      width="100%"
+      justifyContent="space-between"
     >
-      <Avatar
-        bg="grey"
-        onClick={onOpen}
-        padding="0.5rem"
-        size={'2xl'}
-        src={imageUrl}
-        zIndex="10"
-      >
-      </Avatar>
+      <Avatar bg="grey" size={'xl'} src={photo_url} zIndex="10"></Avatar>
       <Heading
         fontFamily="montserrat"
-        letterSpacing={1}
         fontSize={25}
         fontWeight={400}
+        height="100%"
+        letterSpacing={1}
+        mt="0.5rem"
       >
         {name}
       </Heading>
-      <ModalChat isOpen={isOpen} onClose={onClose} />
     </Box>
-
   )
 }
 

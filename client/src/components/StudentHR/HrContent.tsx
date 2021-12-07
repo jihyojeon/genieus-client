@@ -4,47 +4,61 @@ import ButtonBar from './ButtonBar'
 import Editor from '@monaco-editor/react'
 import '../../styles/example.css'
 import { auth } from '../../firebase'
+import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
 import {
   Grid,
   Box,
   Image,
   GridItem,
+  ListItem,
   Heading,
   Flex,
-  Select,
-  HStack,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  Portal,
+  Input,
+  Text,
+  FormControl,
   useColorModeValue,
   Tag,
   TagLabel,
+  Button,
   Textarea,
 } from '@chakra-ui/react'
 
-const HrContent = ({ settutorComplete }: any) => {
-  const imageObj = {
-    js: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png',
-    python: 'http://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png',
-    cplus:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/1822px-ISO_C%2B%2B_Logo.svg.png',
-  }
+const HrContent = () => {
+  const languageKeys = Object.keys(ProgrammingLanguages)
 
   const [value, setValue] = useState('')
-  const [codeValue, setcodeValue] = useState('')
-  const [loadingBtn, setloadingBtn] = useState(false)
+  const [codeValue, setCodeValue] = useState('')
   const [selectValue, setSelectValue] = useState('')
+  const [searchValue, setSearchValue] = useState('')
+  const [filteredLanguages, setFilteredLanguages] = useState(languageKeys)
   const [userId, setUserId] = useState()
+  let tags = value.match(/#[a-z]+/gi)
+
+  const filterLanguages = (e: any) => {
+    setSearchValue(e.target.value)
+    setFilteredLanguages(
+      languageKeys.filter((language: string) => {
+        return searchValue
+          ? language.toLowerCase().includes(searchValue.toLowerCase())
+          : languageKeys
+      })
+    )
+  }
 
   let handleInputChange = (e: any): void => {
     let inputValue = e.target.value
     setValue(inputValue)
   }
   function handleEditorChange(value: any, event: any): void {
-    setcodeValue(value)
-  }
-
-  // Form output
-  const getHRData = () => {
-    console.log(`${codeValue}, ${value}, ${selectValue}`)
+    setCodeValue(value)
   }
 
   useEffect(() => {
@@ -56,7 +70,7 @@ const HrContent = ({ settutorComplete }: any) => {
 
   return (
     <Box>
-      <Grid p={10} templateColumns="repeat(2, 1fr)" gap={10}>
+      <Grid p={10} templateColumns="repeat(2, 1fr)" gap={5}>
         {/* Description Box */}
 
         <Split
@@ -69,7 +83,12 @@ const HrContent = ({ settutorComplete }: any) => {
         >
           <div className="split-one">
             <GridItem id="one">
-              <Flex direction="row" justify="space-between" alignItems="center">
+              <Flex
+                direction="row"
+                justify="space-between"
+                alignItems="center"
+                height="5rem"
+              >
                 <Heading
                   fontSize={30}
                   fontFamily="montserrat"
@@ -78,17 +97,26 @@ const HrContent = ({ settutorComplete }: any) => {
                 >
                   Description
                 </Heading>
-                <HStack spacing={5}>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>#redux</TagLabel>
-                  </Tag>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>#react</TagLabel>
-                  </Tag>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>#javascript</TagLabel>
-                  </Tag>
-                </HStack>
+                <Flex spacing={2} justify="flex-end" flexWrap={'wrap'}>
+                  {tags !== null ? (
+                    tags.map((tag) => {
+                      return (
+                        <Tag
+                          variant="outline"
+                          size="lg"
+                          colorScheme="indigo"
+                          ml="0.25rem"
+                          mt="0.25rem"
+                          flexWrap="wrap"
+                        >
+                          <TagLabel>{tag}</TagLabel>
+                        </Tag>
+                      )
+                    })
+                  ) : (
+                    <Text> Tags displayed here...</Text>
+                  )}
+                </Flex>
               </Flex>
 
               <Box pt={5}>
@@ -96,10 +124,11 @@ const HrContent = ({ settutorComplete }: any) => {
                   border="1px solid"
                   borderColor="indigo.300"
                   onChange={handleInputChange}
+                  fontSize={'1.5rem'}
                   isRequired
                   value={value}
                   height={'50vh'}
-                  placeholder="<!-- Please describe you issue in detail....  -->"
+                  placeholder="<!-- Please describe you issue in detail, using #tags to populate the hashtag bar....  -->"
                 />
               </Box>
             </GridItem>
@@ -112,12 +141,14 @@ const HrContent = ({ settutorComplete }: any) => {
                 alignItems="center"
                 direction="row"
                 justifyContent="space-between"
+                height="5rem"
               >
                 <Heading
                   fontSize={30}
                   fontFamily="montserrat"
                   fontWeight={300}
                   as="h5"
+                  paddingRight={'1rem'}
                 >
                   Code Sample
                 </Heading>
@@ -133,31 +164,80 @@ const HrContent = ({ settutorComplete }: any) => {
                       width="30px"
                       borderRadius="5"
                       // @ts-ignore
-                      src={
-                        selectValue === 'javascript'
-                          ? imageObj.js
-                          : selectValue === 'python'
-                          ? imageObj.python
-                          : selectValue === 'cplus'
-                          ? imageObj.cplus
-                          : null
-                      }
+                      src={ProgrammingLanguages[selectValue]}
                     />
                   )}
-                  <Select
-                    onChange={(e) => setSelectValue(e.target.value)}
-                    value={selectValue}
-                    colorScheme="indigo"
-                    borderColor="indigo.300"
-                    maxW={'200px'}
-                    variant="outline"
-                    placeholder="Select language"
-                    isRequired
-                  >
-                    <option value="javascript">JavaScript</option>
-                    <option value="python">Python</option>
-                    <option value="cplus">C++</option>
-                  </Select>
+                  {selectValue && (
+                    <Tag
+                      mr={5}
+                      variant="outline"
+                      size="lg"
+                      colorScheme="indigo"
+                    >
+                      <TagLabel>{selectValue}</TagLabel>
+                    </Tag>
+                  )}
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button
+                        opacity="0.6"
+                        variant="outline"
+                        colorScheme="indigo"
+                      >
+                        Choose Language
+                      </Button>
+                    </PopoverTrigger>
+                    <Portal>
+                      <PopoverContent>
+                        <PopoverArrow />
+
+                        <PopoverBody>
+                          <FormControl>
+                            <Input
+                              value={searchValue}
+                              type="text"
+                              onChange={(e) => filterLanguages(e)}
+                              placeholder="Choose language..."
+                            ></Input>
+                          </FormControl>
+                        </PopoverBody>
+                        <PopoverFooter>
+                          {filteredLanguages.slice(0, 5).map((lang) => {
+                            return (
+                              <ListItem
+                                onClick={() => {
+                                  setSelectValue(lang)
+                                }}
+                                listStyleType={'none'}
+                              >
+                                <Flex alignItems="center" direction="row">
+                                  {/*@ts-ignore*/}
+                                  <Image
+                                    mr={5}
+                                    height="1rem"
+                                    width="1rem"
+                                    borderRadius="5"
+                                    // @ts-ignore
+                                    src={ProgrammingLanguages[lang]}
+                                  />
+                                  <Text
+                                    _hover={{
+                                      cursor: 'pointer',
+                                      opacity: '0.7',
+                                      color: 'indigo.300',
+                                    }}
+                                  >
+                                    {lang.charAt(0).toUpperCase() +
+                                      lang.substr(1).toLowerCase()}
+                                  </Text>
+                                </Flex>
+                              </ListItem>
+                            )
+                          })}
+                        </PopoverFooter>
+                      </PopoverContent>
+                    </Portal>
+                  </Popover>
                 </Flex>
               </Flex>
               <Box
@@ -170,7 +250,7 @@ const HrContent = ({ settutorComplete }: any) => {
               >
                 <Editor
                   height="50vh"
-                  defaultLanguage="javascript"
+                  language={selectValue.toLowerCase()}
                   defaultValue="// Provide sample code to help outline your problem..."
                   value={codeValue}
                   onChange={handleEditorChange}
@@ -184,14 +264,12 @@ const HrContent = ({ settutorComplete }: any) => {
 
       {/* Bottom Nar */}
       <ButtonBar
+        tags={tags}
         value={value}
         userId={userId}
         selectValue={selectValue}
-        settutorComplete={settutorComplete}
-        loadingBtn={loadingBtn}
-        setloadingBtn={setloadingBtn}
-        getHRData={getHRData}
         codeValue={codeValue}
+        setUserId={setUserId}
       />
     </Box>
   )

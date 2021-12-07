@@ -10,7 +10,6 @@ import {
   WrapItem,
   Stack,
   Button,
-  Link,
   Badge,
   useColorModeValue,
   UnorderedList,
@@ -20,11 +19,14 @@ import {
   ModalContent,
   Flex,
   ModalHeader,
+  Icon,
+  HStack,
 } from '@chakra-ui/react'
+import { BiUserMinus } from 'react-icons/bi'
 import { useRemoveFavouriteTutorMutation } from '../../redux/services/studentService'
 
 //@ts-ignore
-const ModalFavourites = ({ isOpen, onClose, tutor }) => {
+const ModalFavourites = ({ isOpen, onClose, tutor, connected }) => {
   const [removeTutor, removeTutorResult] = useRemoveFavouriteTutorMutation()
   const [userId, setUserId] = useState()
 
@@ -36,15 +38,20 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
   }, [])
 
   const [loading, setLoading] = useState(false)
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
-        <ModalContent fontFamily="sans-serif">
-          <ModalHeader m={0} fontWeight="400" align="center" fontSize="30px">
-            <Center py={6}>
+        <ModalContent
+          bg={useColorModeValue('white', 'gray.800')}
+          fontFamily="sans-serif"
+          round="full"
+        >
+          <ModalHeader fontWeight="400" align="center" fontSize="30px">
+            <Center>
               <Box
                 w={'full'}
-                bg={useColorModeValue('white', 'gray.900')}
+                bg={useColorModeValue('white', 'gray.800')}
                 boxShadow={'2xl'}
                 rounded={'lg'}
                 p={6}
@@ -61,7 +68,7 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                     content: '""',
                     w: 4,
                     h: 4,
-                    bg: 'green.300',
+                    bg: connected ? 'green.500' : 'gray.400',
                     border: '2px solid white',
                     rounded: 'full',
                     pos: 'absolute',
@@ -72,10 +79,9 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                 <Heading fontSize={'2xl'} fontFamily={'body'}>
                   {tutor.name}
                 </Heading>
-
                 <Flex mt={5} direction="column" alignItems="flex-start">
                   <Text fontWeight="bold" color="indigo.400" fontSize={'22px'}>
-                    Languages:
+                    Languages
                   </Text>
 
                   {!loading &&
@@ -91,21 +97,24 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                       )
                     })}
 
-                  <Flex mt={5} direction="column" alignItems="flex-start">
+                  <Flex mt={3} direction="column" alignItems="flex-start">
                     <Text
                       fontWeight="bold"
                       color="indigo.400"
                       fontSize={'22px'}
                     >
-                      Personal Info:{' '}
+                      Personal Info
                     </Text>
-                    <Text my={5} fontSize={'18px'}>
-                      Bio: {tutor.bio}
+                    <Text color="indigo.400" fontSize={'18px'} my={2}>
+                      Bio
                     </Text>
-                    <Text fontSize={'18px'}>Location: {tutor.location}</Text>
+                    <Text fontSize={'18px'}>{tutor.bio}</Text>
+                    <Text color="indigo.400" fontSize={'18px'} my={2}>
+                      Location
+                    </Text>
+                    <Text fontSize={'18px'}>{tutor.location}</Text>
                   </Flex>
                 </Flex>
-
                 <Wrap
                   align={'flex-start'}
                   justify={'flex-start'}
@@ -118,9 +127,9 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                       return (
                         <WrapItem>
                           <Badge
-                            px={2}
+                            px={1}
                             py={1}
-                            fontSize={'18px'}
+                            fontSize={'15px'}
                             fontWeight={'400'}
                             borderRadius="10px"
                             mx={3}
@@ -131,7 +140,6 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                       )
                     })}
                 </Wrap>
-
                 <Stack
                   d="flex"
                   alignItems="center"
@@ -145,17 +153,16 @@ const ModalFavourites = ({ isOpen, onClose, tutor }) => {
                       removeTutor({ studentId: userId, tutorId: tutor.id })
                     }
                     fontSize={'sm'}
-                    w={'10vh'}
                     rounded={'full'}
                     variant={'outline'}
-                    boxShadow={
-                      '0px 1px 1px 1px rgb(66 153 225 / 48%), 0 1px 1px -5px rgb(66 153 225 / 43%)'
-                    }
                     _hover={{
                       opacity: 0.6,
                     }}
                   >
-                    Remove
+                    <HStack>
+                      <Icon as={BiUserMinus} w={5} h={5} />
+                      <Text>Remove</Text>
+                    </HStack>
                   </Button>
                 </Stack>
               </Box>

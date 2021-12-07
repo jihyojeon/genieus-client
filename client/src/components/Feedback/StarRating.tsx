@@ -1,74 +1,73 @@
-import { useState } from 'react'
-import { Box, Icon, Image, VStack } from '@chakra-ui/react'
-import { SunIcon } from '@chakra-ui/icons'
-import StarIcon from '../../assets/icons/star.svg'
+import React, { useState } from 'react'
+import {
+  IconButton,
+  HStack,
+  Stat,
+  StatNumber,
+  StatLabel,
+  Flex,
+  useColorModeValue,
+} from '@chakra-ui/react'
+import { FaStar } from 'react-icons/fa'
 
-const StarRating = ({ size, icon, scale, fillColor, strokeColor }: any) => {
-  const [rating, setRating] = useState(0)
+type StarRatingProps = {
+  clickHandler: (idx: number) => void
+  rating: number
+}
+
+const StarRating = ({ clickHandler, rating }: StarRatingProps) => {
+  const [hoverRating, setHoverRating] = useState<number | null>(null)
+  const scale = 5
   const buttons = []
 
-  const onClick = (idx: any) => {
-    if (!isNaN(idx)) {
-      if (rating === 1 && idx === 1) {
-        setRating(0)
-      } else {
-        setRating(idx)
-      }
-    }
-    console.log('Click')
-    console.log(rating)
+  type RatingButtonProps = {
+    idx: number
+    hasFill: boolean
+    colorIdx: number
   }
 
-  // TODO: NEEDS FIXING
-  const RatingIcon = ({ fill }: any) => {
+  const iconcolor = [
+    useColorModeValue('gray.400', 'gray.300'),
+    useColorModeValue('red.400', 'red.300'),
+    useColorModeValue('orange.400', 'orange.300'),
+    useColorModeValue('yellow.400', 'yellow.300'),
+    useColorModeValue('cyan.400', 'cyan.300'),
+  ]
+
+  const RatingButton = ({ idx, hasFill, colorIdx }: RatingButtonProps) => {
     return (
-
-          // <SunIcon
-          //   // name={SunIcon}
-          //   size={`${size}px`}
-          //   color={fill ? "red" : "blue" }
-          //   stroke={strokeColor}
-          //   onClick={onClick}
-          //   fillOpacity={fill ? '100%' : '0'}
-          // />
-
-
-      <Image
-        src={StarIcon}
-        size={`${size}px`}
-        color={fill ? 'red' : 'blue'}
-        stroke={strokeColor}
-        onClick={onClick}
-        fillOpacity={fill ? '100%' : '0'}
+      <IconButton
+        icon={<FaStar size="1.6rem" />}
+        aria-label={`Rate ${idx}`}
+        borderRadius="50%"
+        variant="ghost"
+        size="md"
+        color={hasFill ? iconcolor[colorIdx - 1] : 'gray.300'}
+        onClick={() => clickHandler(idx)}
+        onMouseEnter={() => setHoverRating(idx)}
+        onMouseLeave={() => setHoverRating(null)}
+        opacity={hasFill ? 1 : 0.5}
       />
     )
   }
-
-  const RatingButton = ({ idx, fill }: any) => {
-    return (
-      <Box
-        // variant="unstyled"
-        as="button"
-        aria-label={`Rate ${idx}`}
-        height={`${size}px`}
-        width={`${size}px`}
-        mx={1}
-        onClick={() => onClick(idx)}
-        _focus={{ outline: 0 }}
-      >
-        <RatingIcon fill={fill} />
-      </Box>
+  for (let i = 1; i <= scale; i++) {
+    buttons.push(
+      <RatingButton
+        key={i}
+        idx={i}
+        colorIdx={hoverRating ? hoverRating : rating}
+        hasFill={i <= (hoverRating ? hoverRating : rating)}
+      />
     )
   }
-
-  for (let i = 1; i <= scale; i++) {
-    buttons.push(<RatingButton key={i} idx={i} fill={i <= rating} />)
-  }
-
   return (
-    <VStack isInline mt={8} justify="center">
-      {buttons}
-    </VStack>
+    <Flex justifyContent="space-between">
+      <HStack isInline>{buttons}</HStack>
+      <Stat textAlign="end">
+        <StatNumber sx={{ display: 'inline' }}>{rating}</StatNumber>
+        <StatLabel sx={{ display: 'inline' }}>/5</StatLabel>
+      </Stat>
+    </Flex>
   )
 }
 

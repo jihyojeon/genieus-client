@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+
 import { auth } from '../../firebase'
-import { signInWithGoogle } from '../../firebase'
+// import { signInWithGoogle } from '../../firebase'
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+
 import { FcGoogle } from 'react-icons/fc'
 
 import {
@@ -25,8 +28,8 @@ import {
   FormHelperText,
 } from '@chakra-ui/react'
 import Logo from '../../assets/icons/logo.svg'
-import { Link, useNavigate } from 'react-router-dom'
-import { useGetStudentByIdQuery } from '../../redux/services/studentService'
+import { useNavigate } from 'react-router-dom'
+import { connectToSocket } from '../../redux/services/socket'
 
 //@ts-ignore
 const ModalLogIn = ({ isOpen, onClose }) => {
@@ -34,48 +37,36 @@ const ModalLogIn = ({ isOpen, onClose }) => {
 
   const [loginEmail, setLoginEmail] = useState('')
   const [loginpassword, setLoginPassword] = useState('')
-  const [isLoggedIn, setisLoggedIn] = useState(false)
   const [errormsg, seterrormsg] = useState('')
+  const provider = new GoogleAuthProvider()
 
-
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       navigate('/student-dashboard')
-  //     }
-  //   })
-  //   return unsubscribe
-  // }, [])
-
-  // const student = useGetStudentByIdQuery(userId)
-
-  const login = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
-      
-      navigate('/student-dashboard')
-    } catch (error) {
-      console.log(error)
-    }
-
-    await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
-      .then((user) => {
+  const signInWithGoogle = async () => {
+    await signInWithPopup(auth, provider)
+      .then((result) => {
         navigate('/student-dashboard')
-        console.log(auth.currentUser?.email)
       })
       .catch((err) => {
         console.log(err)
-        seterrormsg('Please enter valid details...')
       })
   }
 
-  // const handleAccountStatus = () => {
-  //   auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       ;<Redirect to="/student-dashboard" />
-  //     }
-  //   })
-  // }
+  const login = async (e: any) => {
+    e.preventDefault()
+    try {
+      await signInWithEmailAndPassword(auth, loginEmail, loginpassword)
+      connectToSocket(auth)
+      navigate('/student-dashboard')
+    } catch (error) {
+      if (error instanceof Error) {
+        let errmsg = error.message.split(' ')
+        errmsg.includes('(auth/invalid-email).')
+          ? seterrormsg('Please enter a valid email...')
+          : errmsg.includes('(auth/wrong-password).')
+          ? seterrormsg('Incorrect password...')
+          : seterrormsg('Please enter valid details...')
+      }
+    }
+  }
 
   const [show, setShow] = React.useState(false)
   const handleClick = () => setShow(!show)
@@ -96,58 +87,73 @@ const ModalLogIn = ({ isOpen, onClose }) => {
         </ModalHeader>
 
         <ModalBody>
-          <Flex justifyContent="center" alignItems="center" direction="column">
-            <FormControl mb="8.5" id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
-              <Input
-                onChange={(e) => setLoginEmail(e.target.value)}
-                type="email"
-              />
-              <FormHelperText ml={1}>
-                We'll never share your email.
-              </FormHelperText>
-            </FormControl>
-            <FormControl my={4} id="email" isRequired>
-              <FormLabel>Password</FormLabel>
-              <InputGroup size="md">
-                <Input
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                  type={show ? 'text' : 'password'}
-                  placeholder="Enter password"
-                />
-                <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {show ? 'Hide' : 'Show'}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
-            <Button
-              onClick={signInWithGoogle}
-              w={'25rem'}
-              variant={'outline'}
-              leftIcon={<FcGoogle />}
+          <form onSubmit={login}>
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              direction="column"
             >
-              <Center>
-                <Text>Sign in with Google</Text>
-              </Center>
-            </Button>
-          </Flex>
+              <FormControl mb="8.5" id="email" isRequired>
+                <FormLabel>Email address</FormLabel>
+                <Input
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                  type="email"
+                />
+                <FormHelperText ml={1}>
+                  We'll never share your email.
+                </FormHelperText>
+              </FormControl>
+              <FormControl my={4} id="password" isRequired>
+                <FormLabel>Password</FormLabel>
+                <InputGroup size="md">
+                  <Input
+                    onChange={(e) => setLoginPassword(e.target.value)}
+                    type={show ? 'text' : 'password'}
+                    placeholder="Enter password"
+                  />
+                  <InputRightElement width="4.5rem">
+                    <Button h="1.75rem" size="sm" onClick={handleClick}>
+                      {show ? 'Hide' : 'Show'}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+            </Flex>
+
+            <Flex w="100%" direction="column">
+              <Text
+                color="#cc0000"
+                opacity="0.7"
+                fontFamily="montserrat"
+                mb={3}
+                textAlign="center"
+              >
+                {' '}
+                {errormsg}
+              </Text>
+              <Button type="submit" w="100%" onClick={login}>
+                Submit
+              </Button>
+            </Flex>
+          </form>
         </ModalBody>
 
         <ModalCloseButton />
 
         <ModalFooter>
+          <Button
+            onClick={() => {
+              signInWithGoogle()
+            }}
+            w={'25rem'}
+            variant={'outline'}
+            leftIcon={<FcGoogle />}
+          >
+            <Center>
+              <Text>Sign in with Google</Text>
+            </Center>
+          </Button>
           {/* LINK */}
-          <Flex w="100%" direction="column">
-            <Text mb={2} textAlign="center">
-              {' '}
-              {errormsg}
-            </Text>
-            <Button w="100%" onClick={login}>
-              Submit
-            </Button>
-          </Flex>
         </ModalFooter>
       </ModalContent>
     </Modal>
