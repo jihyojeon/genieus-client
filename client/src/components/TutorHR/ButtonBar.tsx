@@ -38,6 +38,8 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
 
   useEffect(() => {
     //@ts-ignore
+    console.log(getHrById.data)
+    //@ts-ignore
     if (getHrById.data) {
       setloadingButton(false)
       window.scrollTo({
@@ -46,13 +48,21 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
         behavior: 'smooth',
       })
     }
+    if (
+      //@ts-ignore
+      getHrById?.data &&
+      getHrById?.data.declined_tutors.length !== 0
+    ) {
+      console.log('declinedtutors')
+      setloadingButton(false)
+    }
 
     auth.onAuthStateChanged((item) => {
       //@ts-ignore
       setUserId(item.uid)
     })
     //@ts-ignore
-  }, [getHrById.data?.status])
+  }, [getHrById.data?.status, getHrById.data?.declined_tutors])
 
   const handleClick = () => {
     //@ts-ignore

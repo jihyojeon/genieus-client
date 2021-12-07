@@ -143,7 +143,9 @@ const ButtonBar = ({
             )}
 
             <Flex justifyContent="center">
-              {hrById.data && hrById.data.interested_tutors.length !== 0 ? (
+              {hrById.data &&
+              hrById.data.interested_tutors.length !== 0 &&
+              hrById.data.declined_tutors.length === 0 ? (
                 //@ts-ignore
                 <TutorFound
                   hrById={hrById}
