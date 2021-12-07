@@ -30,7 +30,6 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
 
   const initialTime: number = 10
   const subscriptionRemainingSecs: number = student?.time_remaining || 9999
-  console.log(isTutor)
   return (
     <Flex
       direction="column"
@@ -66,7 +65,7 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
           setCanDecline={setCanDecline}
         />
       )}
-      {canDecline && (
+      {!isTutor && canDecline && (
         <ActionBox>
           <Text>
             You have {initialTime} seconds before billing starts to decide

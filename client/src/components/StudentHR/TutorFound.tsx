@@ -132,7 +132,7 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
                     status: 'assigned',
                     tutor_id: tutorId,
                   })
-                  navigate('/chat', { state: hrById.data })
+                  navigate(`/chat/${hrById.data.id}`)
                 }}
                 flex={1}
                 fontSize={'sm'}
