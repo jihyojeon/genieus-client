@@ -179,20 +179,6 @@ const ModalSignUp = ({
                 </FormHelperText>
               </FormControl>
 
-              <HStack>
-                <Button
-                  mt={4}
-                  onClick={signInWithGoogle}
-                  w={'25rem'}
-                  variant={'outline'}
-                  leftIcon={<FcGoogle />}
-                >
-                  <Center>
-                    <Text>Sign in with Google</Text>
-                  </Center>
-                </Button>
-              </HStack>
-
               <FormControl
                 display="flex"
                 justifyContent="center"
@@ -299,24 +285,21 @@ const ModalSignUp = ({
 
         <ModalCloseButton />
 
-        {/* <ModalFooter>
-          <Flex
-            justifyContent="center"
-            fontFamily="montserrat"
-            mr={55}
-            align="center"
-            direction="column"
-            color="#cc0000"
-            opacity="0.7"
-          >
-            <Text mb={2} textAlign="center">
-              {errormsg}
-            </Text>
-          </Flex>
-          <FormControl>
-            <Button onClick={signup}>Next</Button>
-          </FormControl>
-        </ModalFooter> */}
+        <ModalFooter>
+          <HStack>
+            <Button
+              mt={4}
+              onClick={signInWithGoogle}
+              w={'25rem'}
+              variant={'outline'}
+              leftIcon={<FcGoogle />}
+            >
+              <Center>
+                <Text>Sign in with Google</Text>
+              </Center>
+            </Button>
+          </HStack>
+        </ModalFooter> 
       </ModalContent>
     </Modal>
   )
