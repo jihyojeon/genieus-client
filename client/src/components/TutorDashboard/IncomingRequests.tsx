@@ -1,4 +1,4 @@
-import { Box, Flex, List, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, List, Text, useColorModeValue } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import HRType, {
   useGetPendingHRByIdQuery,
@@ -12,7 +12,7 @@ export const IncomingRequests = () => {
   //@ts-ignore
   const helpRequests = useGetPendingHRByIdQuery(userId, {
     pollingInterval: 3000,
-    skip: !userId
+    skip: !userId,
   })
 
   useEffect(() => {
@@ -24,39 +24,51 @@ export const IncomingRequests = () => {
 
   return (
     <Flex flexDirection="column">
-      <Box
-        my={2}
-        ml={5}
-        fontSize="xl"
-        fontWeight="400"
-        color="indigo.400"
-        letterSpacing={0.5}
-      >
-        Open Requests:
-      </Box>
+      <Heading fontFamily="montserrat" fontWeight="400" ml={5} mb={5}>
+          <Text>Open Requests</Text>
+      </Heading>
       {/*@ts-ignore*/}
-      {helpRequests.data && helpRequests.data.length ? 
-      <List
-        display="flex"
-        overflow="scroll"
-        border="1px solid"
-        borderColor="rgba(127, 6, 219, .4)"
-        borderRadius="5px"
-        py={3}
-      >
-        {helpRequests.error
-          ? 'error'
-          : helpRequests.isLoading
-          ? 'loading'
-          : helpRequests.data
-          ? helpRequests.data.map((hr, index) => {
-              //@ts-ignore
-              return <RequestCard key={index} hr={hr} />
-            })
-          : undefined}
-      </List>
-      : <Text ml={5}>New help requests will appear here. Add to your tech stack to see incoming help requests!</Text>
-    }
+      {helpRequests.data && helpRequests.data.length ? (
+        <List
+          display="flex"
+          overflow="scroll"
+          border="1px solid"
+          borderColor="rgba(127, 6, 219, .4)"
+          borderRadius="5px"
+          py={3}
+          overflowY={'auto'}
+          sx={{
+            '&::-webkit-scrollbar': {
+              backgroundColor: 'gray.400',
+              borderRadius: '8px',
+              backgroundClip: 'padding-box',
+              width: '10px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: 'indigo.200',
+              borderRadius: '8px',
+              width: '10px',
+            },
+          }}
+
+        >
+          {helpRequests.error
+            ? 'error'
+            : helpRequests.isLoading
+            ? 'loading'
+            : helpRequests.data
+            ? helpRequests.data.map((hr, index) => {
+                //@ts-ignore
+                return <RequestCard key={index} hr={hr} />
+              })
+            : undefined}
+        </List>
+      ) : (
+        <Text ml={5}>
+          New help requests will appear here. Add to your tech stack to see
+          incoming help requests!
+        </Text>
+      )}
     </Flex>
   )
 }

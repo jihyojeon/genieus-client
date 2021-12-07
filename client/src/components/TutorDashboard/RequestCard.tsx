@@ -29,8 +29,8 @@ export const RequestCard = ({ hr }: HRType) => {
       mx={6}
       my={2}
       bg={useColorModeValue('white', 'gray.800')}
-      minW={'26%'}
-      maxW={'26%'}
+      minW={'20ch'}
+      maxW={'26ch'}
       minH={'23rem'}
     >
       <Box
@@ -93,15 +93,15 @@ export const RequestCard = ({ hr }: HRType) => {
           left={'10%'}
           w={'80%'}
           mt={3}
-          onClick={() => {
-            navigate('/tutor-hr', { state: hr })
-          }}
-          bg={useColorModeValue('#151f21', 'gray.900')}
-          color={'white'}
-          rounded={'md'}
+          rounded={'xl'}
           _hover={{
             transform: 'translateY(-2px)',
             boxShadow: 'lg',
+          }}
+          _focus={{}}
+
+          onClick={() => {
+            navigate('/tutor-hr', { state: hr })
           }}
         >
           Expand

@@ -26,10 +26,14 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
-import  FocusLock from "react-focus-lock"
+import FocusLock from 'react-focus-lock'
+import { RiUserLine } from 'react-icons/ri'
 
 import { auth } from '../../firebase'
-import { useGetTutorByIdQuery, useUpdateTutorMutation} from '../../redux/services/tutorService'
+import {
+  useGetTutorByIdQuery,
+  useUpdateTutorMutation,
+} from '../../redux/services/tutorService'
 
 import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 
@@ -48,7 +52,7 @@ export const TutorInformation = () => {
   const [updateTutor, updateTutorResult] = useUpdateTutorMutation()
 
   //@ts-ignore
-  const tutor = useGetTutorByIdQuery(userId, {skip: !userId})
+  const tutor = useGetTutorByIdQuery(userId, { skip: !userId })
 
   const {
     isOpen: OpenModal,
@@ -60,7 +64,6 @@ export const TutorInformation = () => {
     setSearchValue(e.target.value)
     setFilteredLanguages(
       languageKeys.filter((language: string) => {
-
         return searchValue
           ? language.toLowerCase().includes(searchValue.toLowerCase())
           : languageKeys
@@ -89,7 +92,7 @@ export const TutorInformation = () => {
     updateTutor({
       //@ts-ignore
       id: tutor.data.id,
-      spoken_language: spokenLanugages.filter(lang => lang !== language),
+      spoken_language: spokenLanugages.filter((lang) => lang !== language),
     })
   }
 
@@ -97,7 +100,7 @@ export const TutorInformation = () => {
     updateTutor({
       //@ts-ignore
       id: tutor.data.id,
-      spoken_language: [...spokenLanugages, addedSpokenLanguage]
+      spoken_language: [...spokenLanugages, addedSpokenLanguage],
     })
     setAddedSpokenLanguage('')
   }
@@ -106,7 +109,9 @@ export const TutorInformation = () => {
     updateTutor({
       //@ts-ignore
       id: tutor.data.id,
-      programming_languages: programmingLanguages.filter(lang => lang !== language)
+      programming_languages: programmingLanguages.filter(
+        (lang) => lang !== language
+      ),
     })
   }
 
@@ -114,7 +119,7 @@ export const TutorInformation = () => {
     updateTutor({
       //@ts-ignore
       id: tutor.data.id,
-      programming_languages: [...programmingLanguages, language]
+      programming_languages: [...programmingLanguages, language],
     })
   }
 
@@ -123,77 +128,94 @@ export const TutorInformation = () => {
       <Box mt={10} height="30vh" fontFamily="montserrat" h="30vh">
         <Flex alignItems="center" justifyContent="space-between">
           <Heading
-            my={2}
-            fontSize="xl"
-            fontWeight="340"
-            color="indigo.400"
-            letterSpacing={1}
+            as="h1"
+            size="lg"
+            fontFamily="montserrat"
+            fontWeight="300"
+            pb={'1rem'}
+            mt={2}
+            mb={5}
           >
-            Tutor Information:
+            <HStack>
+              <RiUserLine />
+              <Text>Tutor Information</Text>
+            </HStack>
           </Heading>
         </Flex>
 
-        {
-        tutor.data && tutor.data.location ? (
-        <Flex direction="column">
-          <Text>Location:</Text>
-          <HStack spacing={5}>
-            <Tag mt={3} variant="outline" size="lg" colorScheme="indigo">
-              <TagLabel>{tutor.error
-                      ? 'error'
-                      : tutor.isLoading
-                      ? 'loading'
-                      : tutor.data
-                      ? ' ' + tutor.data.location
-                      : undefined}
-              </TagLabel>
-            </Tag>
-          </HStack>
-        </Flex>
-        ) : 
-        <Flex direction="column">
-          <Text>Location:</Text>
-          <HStack spacing={5}>
-            <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
-              <AddIcon onClick={onOpenModal}/>
-            </Tag>
-          </HStack>
-        </Flex>
-        }
+        {tutor.data && tutor.data.location ? (
+          <Flex direction="column">
+            <Text>Location:</Text>
+            <HStack spacing={5}>
+              <Tag mt={3} variant="outline" size="lg" colorScheme="indigo">
+                <TagLabel>
+                  {tutor.error
+                    ? 'error'
+                    : tutor.isLoading
+                    ? 'loading'
+                    : tutor.data
+                    ? ' ' + tutor.data.location
+                    : undefined}
+                </TagLabel>
+              </Tag>
+            </HStack>
+          </Flex>
+        ) : (
+          <Flex direction="column">
+            <Text>Location:</Text>
+            <HStack spacing={5}>
+              <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
+                <AddIcon onClick={onOpenModal} />
+              </Tag>
+            </HStack>
+          </Flex>
+        )}
 
         <Flex mt={4} direction="column">
           <Text>Spoken languages:</Text>
           <Wrap mt={2} spacing={2}>
-            {spokenLanugages && spokenLanugages.map((language, index) => {
-              return (
-                <WrapItem key={index}>
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <TagLabel>{language}</TagLabel>
-                    <TagCloseButton onClick={() => removeSpokenLanguage(language)}/>
-                  </Tag>
-                </WrapItem>
-              )
-            })}
+            {spokenLanugages &&
+              spokenLanugages.map((language, index) => {
+                return (
+                  <WrapItem key={index}>
+                    <Tag variant="outline" size="lg" colorScheme="indigo">
+                      <TagLabel>{language}</TagLabel>
+                      <TagCloseButton
+                        onClick={() => removeSpokenLanguage(language)}
+                      />
+                    </Tag>
+                  </WrapItem>
+                )
+              })}
             <WrapItem>
               <Popover>
                 <PopoverTrigger>
-                  <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
-                    <AddIcon/>
+                  <Tag
+                    variant="outline"
+                    size="sm"
+                    colorScheme="indigo"
+                    mt={1.5}
+                  >
+                    <AddIcon />
                   </Tag>
                 </PopoverTrigger>
                 <PopoverContent>
-                    <PopoverArrow/>
-                    <PopoverCloseButton/>
-                    <PopoverHeader>Add a Language!</PopoverHeader>
+                  <PopoverArrow />
+                  <PopoverCloseButton />
+                  <PopoverHeader>Add a Language!</PopoverHeader>
                   <FocusLock returnFocus persistentFocus={false}>
                     <PopoverBody>
                       <FormControl id="language">
                         <Input
-                          placeholder='Add a Language'
+                          placeholder="Add a Language"
                           _placeholder={{ color: 'gray.500' }}
-                          onChange={(e) => setAddedSpokenLanguage(e.target.value)}
+                          onChange={(e) =>
+                            setAddedSpokenLanguage(e.target.value)
+                          }
                           value={addedSpokenLanguage}
-                          onKeyDown={(e) => e.key === 'Enter' && addSpokenLanguage()}
+                          onKeyDown={(e) =>
+                            e.key === 'Enter' && addSpokenLanguage()
+                          }
                           type="text"
                         />
                       </FormControl>
@@ -205,29 +227,29 @@ export const TutorInformation = () => {
           </Wrap>
         </Flex>
 
-        {
-        tutor.data && tutor.data.bio ? (
-        <Flex mt={4} direction="column" maxW="15rem">
-          <Text>Bio:</Text>
-          <Text fontSize={"sm"} color="#ca84dbc7">{tutor.error
-                        ? 'error'
-                        : tutor.isLoading
-                        ? 'loading'
-                        : tutor.data
-                        ? tutor.data.bio
-                        : undefined}
-          </Text>
-        </Flex>
-        ) :
-        <Flex mt={4} direction="column" maxW="15rem">
-          <Text>Bio:</Text>
-          <HStack spacing={5}>
-            <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
-              <AddIcon onClick={onOpenModal}/>
-            </Tag>
-          </HStack>
-        </Flex>
-        }
+        {tutor.data && tutor.data.bio ? (
+          <Flex mt={4} direction="column" maxW="15rem">
+            <Text>Bio:</Text>
+            <Text fontSize={'sm'} color="#ca84dbc7">
+              {tutor.error
+                ? 'error'
+                : tutor.isLoading
+                ? 'loading'
+                : tutor.data
+                ? tutor.data.bio
+                : undefined}
+            </Text>
+          </Flex>
+        ) : (
+          <Flex mt={4} direction="column" maxW="15rem">
+            <Text>Bio:</Text>
+            <HStack spacing={5}>
+              <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
+                <AddIcon onClick={onOpenModal} />
+              </Tag>
+            </HStack>
+          </Flex>
+        )}
 
         <Flex
           alignItems="flex-start"
@@ -240,35 +262,43 @@ export const TutorInformation = () => {
           <Text>Your Tech Expertise:</Text>
 
           <Wrap align="left" mt={2} spacing={2}>
-            {programmingLanguages && programmingLanguages.map((language, index) => {
-              return (
-                <WrapItem key={index}>
-                  {/*@ts-ignore*/}
-                  <Tag variant="outline" size="lg" colorScheme="indigo">
-                    <Image
-                      mr={2}
-                      height="1rem"
-                      width="1rem"
-                      borderRadius="5"
-                      src={ProgrammingLanguages[language]}
-                    />
-                    <TagLabel>{language}</TagLabel>
-                    <TagCloseButton onClick={() => removeProgrammingLanguage(language)}/>
-                  </Tag>
-                </WrapItem>
-              )
-            })}
+            {programmingLanguages &&
+              programmingLanguages.map((language, index) => {
+                return (
+                  <WrapItem key={index}>
+                    {/*@ts-ignore*/}
+                    <Tag variant="outline" size="lg" colorScheme="indigo">
+                      <Image
+                        mr={2}
+                        height="1rem"
+                        width="1rem"
+                        borderRadius="5"
+                        src={ProgrammingLanguages[language]}
+                      />
+                      <TagLabel>{language}</TagLabel>
+                      <TagCloseButton
+                        onClick={() => removeProgrammingLanguage(language)}
+                      />
+                    </Tag>
+                  </WrapItem>
+                )
+              })}
             <WrapItem>
               <Popover>
                 <PopoverTrigger>
-                  <Tag variant="outline" size="sm" colorScheme="indigo" mt={1.5}>
-                    <AddIcon/>
+                  <Tag
+                    variant="outline"
+                    size="sm"
+                    colorScheme="indigo"
+                    mt={1.5}
+                  >
+                    <AddIcon />
                   </Tag>
                 </PopoverTrigger>
                 <PopoverContent>
-                    <PopoverArrow/>
-                    <PopoverCloseButton/>
-                    <PopoverHeader>Add to your Tech Stack!</PopoverHeader>
+                  <PopoverArrow />
+                  <PopoverCloseButton />
+                  <PopoverHeader>Add to your Tech Stack!</PopoverHeader>
                   <FocusLock returnFocus persistentFocus={false}>
                     <PopoverBody>
                       <FormControl id="techStack">
@@ -278,7 +308,11 @@ export const TutorInformation = () => {
                           onChange={(e) => filterLanguages(e)}
                           onKeyDown={(e) => {
                             if (e.key === 'Enter') {
-                              let addedLanguage = languageKeys.find(language => language.toLowerCase() === searchValue.toLowerCase())
+                              let addedLanguage = languageKeys.find(
+                                (language) =>
+                                  language.toLowerCase() ===
+                                  searchValue.toLowerCase()
+                              )
                               if (addedLanguage) {
                                 addProgrammingLanguage(addedLanguage)
                                 setSearchValue('')
@@ -288,50 +322,51 @@ export const TutorInformation = () => {
                                 setSearchValue('')
                                 setFilteredLanguages(languageKeys)
                               }
-                            } 
+                            }
                           }}
-                          placeholder='Add a Technology'
+                          placeholder="Add a Technology"
                           _placeholder={{ color: 'gray.500' }}
                         />
                       </FormControl>
                     </PopoverBody>
                   </FocusLock>
                   <PopoverFooter>
-                          {filteredLanguages.slice(0, 5).map((lang, index) => {
-                            return (
-                              <ListItem key={index}
-                                onClick={() => {
-                                  setSearchValue(lang)
-                                  addProgrammingLanguage(lang)
-                                  setSearchValue('')
-                                  setFilteredLanguages(languageKeys)
-                                }}
-                                listStyleType={'none'}
-                              >
-                                <Flex alignItems="center" direction="row">
-                                  {/*@ts-ignore*/}
-                                  <Image
-                                    mr={5}
-                                    height="1rem"
-                                    width="1rem"
-                                    borderRadius="5"
-                                    // @ts-ignore
-                                    src={ProgrammingLanguages[lang]}
-                                  />
-                                  <Text
-                                    _hover={{
-                                      cursor: 'pointer',
-                                      opacity: '0.7',
-                                      color: 'indigo.300',
-                                    }}
-                                  >
-                                    {lang}
-                                  </Text>
-                                </Flex>
-                              </ListItem>
-                            )
-                          })}
-                        </PopoverFooter>
+                    {filteredLanguages.slice(0, 5).map((lang, index) => {
+                      return (
+                        <ListItem
+                          key={index}
+                          onClick={() => {
+                            setSearchValue(lang)
+                            addProgrammingLanguage(lang)
+                            setSearchValue('')
+                            setFilteredLanguages(languageKeys)
+                          }}
+                          listStyleType={'none'}
+                        >
+                          <Flex alignItems="center" direction="row">
+                            {/*@ts-ignore*/}
+                            <Image
+                              mr={5}
+                              height="1rem"
+                              width="1rem"
+                              borderRadius="5"
+                              // @ts-ignore
+                              src={ProgrammingLanguages[lang]}
+                            />
+                            <Text
+                              _hover={{
+                                cursor: 'pointer',
+                                opacity: '0.7',
+                                color: 'indigo.300',
+                              }}
+                            >
+                              {lang}
+                            </Text>
+                          </Flex>
+                        </ListItem>
+                      )
+                    })}
+                  </PopoverFooter>
                 </PopoverContent>
               </Popover>
             </WrapItem>
@@ -339,10 +374,10 @@ export const TutorInformation = () => {
         </Flex>
       </Box>
       <ModalEditTutorProfile
-            tutor={tutor.data}
-            isOpen={OpenModal}
-            onClose={onModalClose}
-          />
+        tutor={tutor.data}
+        isOpen={OpenModal}
+        onClose={onModalClose}
+      />
     </Flex>
   )
 }
