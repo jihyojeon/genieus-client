@@ -45,9 +45,9 @@ const CountdownTimer = ({
   return (
     <CountdownCircleTimer
       colors={[
-        ['#004777', 0.33],
-        ['#F7B801', 0.33],
-        ['#A30000', 0.33],
+        ['#3B82F6', 0.8],
+        ['#1D4ED8', 0.1],
+        ['#9B2C2C', 0.1],
       ]}
       duration={duration}
       isPlaying={true}
