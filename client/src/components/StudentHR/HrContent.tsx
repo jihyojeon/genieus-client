@@ -102,7 +102,7 @@ const HrContent = ({ settutorComplete }: any) => {
                 >
                   Description
                 </Heading>
-                <Flex spacing={2} justify="flex-end">
+                <Flex spacing={2} justify="flex-end" flexWrap={"wrap"}>
                   {tags !== null ? (
                     tags.map((tag) => {
                       return (
