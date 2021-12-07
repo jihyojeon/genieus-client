@@ -2,12 +2,17 @@ import React from 'react'
 import { Flex, Box, useColorModeValue, Heading } from '@chakra-ui/react'
 
 const Logo = () => {
+
+
   return (
     <Flex
       alignItems="center"
       color={useColorModeValue('indigo.600', 'indigo.300')}
     >
-      <Box w="1.8rem">
+      <Box
+        w="1.8rem"
+
+      >
         <svg
           viewBox="0 0 102 198"
           fill="none"
