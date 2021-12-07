@@ -95,6 +95,7 @@ const ButtonBar = ({
                 })
               }}
               ml={105}
+              mr={105}
               letterSpacing={2}
               colorScheme="indigo"
               variant="outline"
@@ -133,8 +134,8 @@ const ButtonBar = ({
             </Flex>
           )}
 
-          <Box>
-            <Text fontFamily="montserrat" letterSpacing={0.5}>
+          <Box >
+            <Text fontFamily="montserrat" letterSpacing={0.5} >
               You can continue to update your request after submitting
             </Text>
           </Box>
