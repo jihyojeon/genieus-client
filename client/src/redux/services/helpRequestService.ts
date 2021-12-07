@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export default interface HRType {
   id: string
-
+  rating: number
   student_id: string
   description: string
   tags?: string[]
