@@ -69,7 +69,7 @@ const PreviousRequests = () => {
             : undefined}
         </List>
       ) : (
-        <Text ml={5} mb={15}>
+        <Text ml={5} mb={15} mt={15}>
           Previous help requests will appear here. Help someone out to see
           previous help requests!
         </Text>
