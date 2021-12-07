@@ -17,6 +17,7 @@ import {
   useGetHRRequestByIdQuery,
   useDeleteHRRequestMutation,
 } from '../../redux/services/helpRequestService'
+import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 
 const ButtonBar = ({
   userId,
@@ -28,13 +29,14 @@ const ButtonBar = ({
 }: any) => {
   const [addHRRequest, addHRRequestResult] = useAddHRRequestMutation()
   const [deleteRequest, deleteRequestResult] = useDeleteHRRequestMutation()
+  const getStudent = useGetStudentByIdQuery(userId)
   const [loadingBtn, setloadingBtn] = useState(false)
   const [SelectFav, setSelectFav] = useState(false)
   //@ts-ignore
   const hrById = useGetHRRequestByIdQuery(addHRRequestResult?.data?.id, {
     pollingInterval: 3000,
   })
-  console.log(hrById)
+  // console.log(getStudent.data?.favourite_tutors)
 
   useEffect(() => {
     if (hrById.data?.interested_tutors.length !== 0) {
@@ -62,26 +64,40 @@ const ButtonBar = ({
           alignItems="flex-start"
           justifyContent="space-around"
         >
-          <Flex>
-            <Checkbox
-              onChange={() => setSelectFav(true)}
-              size="lg"
-              colorScheme="indigo"
-              pr={5}
-            ></Checkbox>
+          {getStudent.data?.favourite_tutors.length !== 0 ? (
+            <Flex>
+              <Checkbox
+                onChange={() => setSelectFav(true)}
+                size="lg"
+                colorScheme="indigo"
+                pr={5}
+              ></Checkbox>
 
-            <Text fontFamily="montserrat" letterSpacing={1} lineHeight={7}>
-              Click here to wait for your favourites <br />{' '}
+              <Text fontFamily="montserrat" letterSpacing={1} lineHeight={7}>
+                Click here to wait for your favourites <br />{' '}
+                <Text
+                  letterSpacing={1}
+                  fontFamily="montserrat"
+                  fontSize={15}
+                  opacity={0.5}
+                >
+                  Expect a longer wait time...{' '}
+                </Text>
+              </Text>
+            </Flex>
+          ) : (
+            <Text fontFamily="montserrat" lineHeight={7}>
+              You will have the option to only see favourite tutors
               <Text
                 letterSpacing={1}
                 fontFamily="montserrat"
                 fontSize={15}
                 opacity={0.5}
               >
-                Expect a longer wait time...{' '}
+                You can add favourites after call
               </Text>
             </Text>
-          </Flex>
+          )}
 
           <Flex
             direction="column"
