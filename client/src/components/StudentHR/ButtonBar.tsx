@@ -81,7 +81,12 @@ const ButtonBar = ({
             </Text>
           </Flex>
 
-          <Flex direction="column" align="center" justify={'center'}>
+          <Flex
+            direction="column"
+            align="center"
+            justify={'center'}
+            marginLeft="8rem"
+          >
             {!loadingBtn === true ? (
               <Button
                 onClick={() => {
