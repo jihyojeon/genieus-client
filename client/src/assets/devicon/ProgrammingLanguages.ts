@@ -8,7 +8,7 @@ export const ProgrammingLanguages = {
   "Apache" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg",
   "Apache Kafka" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg",
   "appcelerator" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/appcelerator/appcelerator-original.svg",
-  "Apple" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/appcelerator/appcelerator-original.svg",
+  "Apple" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg",
   "Appwrite" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/appwrite/appwrite-original.svg",
   "Arduino" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg",
   "Atom" : "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/atom/atom-original.svg",
