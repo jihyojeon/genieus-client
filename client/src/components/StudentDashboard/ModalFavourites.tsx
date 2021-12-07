@@ -10,7 +10,6 @@ import {
   WrapItem,
   Stack,
   Button,
-  Link,
   Badge,
   useColorModeValue,
   UnorderedList,
@@ -36,6 +35,7 @@ const ModalFavourites = ({ isOpen, onClose, tutor, connected }) => {
   }, [])
 
   const [loading, setLoading] = useState(false)
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay>
@@ -124,9 +124,9 @@ const ModalFavourites = ({ isOpen, onClose, tutor, connected }) => {
                       return (
                         <WrapItem>
                           <Badge
-                            px={2}
+                            px={1}
                             py={1}
-                            fontSize={'18px'}
+                            fontSize={'15px'}
                             fontWeight={'400'}
                             borderRadius="10px"
                             mx={3}

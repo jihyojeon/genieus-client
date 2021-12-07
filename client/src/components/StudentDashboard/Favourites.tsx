@@ -1,23 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { RiUserHeartLine } from 'react-icons/ri'
 import { auth } from '../../firebase'
-import {
-  Avatar,
-  Button,
-  Box,
-  Flex,
-  Heading,
-  // Image,
-  Text,
-  // AvatarBadge,
-  useDisclosure,
-} from '@chakra-ui/react'
-// import { MdCheckCircle, MdRemoveCircleOutline } from 'react-icons/md'
-import ModalFavourites from './ModalFavourites'
-import {
-  useGetFavouriteTutorsByIdQuery,
-  useRemoveFavouriteTutorMutation,
-} from '../../redux/services/studentService'
-import { useAddFavouriteTutorMutation } from '../../redux/services/studentService'
+import { Box, Flex, Heading, HStack, Text } from '@chakra-ui/react'
+import { useGetFavouriteTutorsByIdQuery } from '../../redux/services/studentService'
 import FavouriteTutor from './FavouriteTutor'
 import socket, { checkAndReconnectToSocket } from '../../redux/services/socket'
 
@@ -38,9 +23,6 @@ const Favourites = () => {
   const favouriteTutor = useGetFavouriteTutorsByIdQuery(userId, {
     skip: !userId,
   })
-
-  // const [addTutorToFav, addTutorToFavResult] = useAddFavouriteTutorMutation()
-  // const [RemTutorToFav, RemTutorToFavResult] = useRemoveFavouriteTutorMutation()
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
@@ -72,12 +54,8 @@ const Favourites = () => {
       })
     }
   }, [userId])
-  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    // TODO: USE FLATLIST/MP TO POPULATE FAVOURITES FROM SERVER/STATE
-    // TODO: USE https://chakra-ui.com/docs/overlay/drawer FOR REVIEW
-
     <Flex justifyContent="flex-start" flexDirection="column" h="100vh">
       <Heading
         as="h1"
@@ -90,7 +68,10 @@ const Favourites = () => {
         mb={5}
         pt={5}
       >
-        Favourite Tutors
+        <HStack>
+          <RiUserHeartLine />
+          <Text>Favourite Tutors</Text>
+        </HStack>
       </Heading>
       <Box>
         {favouriteTutor.isSuccess && favouriteTutor.data.length !== 0 ? (
