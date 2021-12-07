@@ -124,11 +124,11 @@ const HrContent = () => {
                   border="1px solid"
                   borderColor="indigo.300"
                   onChange={handleInputChange}
-                  fontSize={'1.5rem'}
+                  fontSize={'1rem'}
                   isRequired
                   value={value}
                   height={'50vh'}
-                  placeholder="<!-- Please describe you issue in detail, using #tags to populate the hashtag bar....  -->"
+                  placeholder="Describe your issue and use #tags to create tags."
                 />
               </Box>
             </GridItem>

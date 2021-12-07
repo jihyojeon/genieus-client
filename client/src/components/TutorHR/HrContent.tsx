@@ -75,7 +75,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                   isRequired
                   value={hrData.description}
                   height={'50vh'}
-                  placeholder="<!-- Please describe you issue in detail....  -->"
+                  placeholder="No description given...😢"
                 />
               </Box>
             </GridItem>
@@ -123,7 +123,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                 <Editor
                   height="50vh"
                   defaultLanguage="javascript"
-                  defaultValue="// Please describe your problem..."
+                  defaultValue="// No code given...😢"
                   value={hrData.code}
                   theme={useColorModeValue('vs-light', 'vs-dark')}
                 />
