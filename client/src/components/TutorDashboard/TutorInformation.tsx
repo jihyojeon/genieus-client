@@ -246,7 +246,13 @@ export const TutorInformation = () => {
                           value={searchValue}
                           type="text"
                           onChange={(e) => filterLanguages(e)}
-                          onKeyDown={(e) => e.key === 'Enter' && addProgrammingLanguage(searchValue)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              addProgrammingLanguage(searchValue)
+                              setSearchValue('')
+                              setFilteredLanguages(languageKeys)
+                            } 
+                          }}
                           placeholder='Add a Technology'
                           _placeholder={{ color: 'gray.500' }}
                         />
@@ -260,6 +266,8 @@ export const TutorInformation = () => {
                                 onClick={() => {
                                   setSearchValue(lang)
                                   addProgrammingLanguage(lang)
+                                  setSearchValue('')
+                                  setFilteredLanguages(languageKeys)
                                 }}
                                 listStyleType={'none'}
                               >
