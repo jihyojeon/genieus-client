@@ -24,16 +24,15 @@ const ChatRightPane = ({ helpRequest }: ChatRightPaneProps) => {
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
       setUserID(item?.uid)
+      console.log('setting userID', userID)
     })
   }, [])
   // setup socket
   useEffect(() => {
     if (userID) {
       checkAndReconnectToSocket(userID)
-      console.log(socket)
       socket.emit('join help request', helpRequest.id)
       socket.on('existing messages', (messages) => {
-        console.log(messages)
         messages && setMsgs(messages)
       })
       socket.on('user joined chat', (user) => {
@@ -43,6 +42,7 @@ const ChatRightPane = ({ helpRequest }: ChatRightPaneProps) => {
         console.log(user)
       })
       socket.on('get message', (message: Message) => {
+        console.log('adding message', message.content)
         setMsgs((priorMsgs) => [...priorMsgs, message])
       })
     }
