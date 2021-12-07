@@ -35,8 +35,8 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
       direction="column"
       alignItems="center"
       textAlign="center"
-      justify="stretch"
-      height="81vh"
+      justify={isTutor ? 'flex-start' : 'stretch'}
+      height={isTutor ? 'fit-content' : '81vh'}
       w="20rem"
       paddingTop="0.5rem"
       paddingLeft="1.5rem"
@@ -79,10 +79,12 @@ const ChatLeftPane = ({ helpRequest, userId, isTutor }: ChatLeftPaneProps) => {
         <Text>Launch video call</Text>
         <ActionZoom zoom_url={helpRequest.zoom_url} />
       </ActionBox>
-      <ActionBox>
-        <Text>End the call</Text>
-        <ActionComplete helpRequest={helpRequest} />
-      </ActionBox>
+      {!isTutor && (
+        <ActionBox>
+          <Text>End the call</Text>
+          <ActionComplete helpRequest={helpRequest} />
+        </ActionBox>
+      )}
     </Flex>
   )
 }
