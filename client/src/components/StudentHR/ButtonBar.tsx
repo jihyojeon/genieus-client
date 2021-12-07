@@ -10,11 +10,14 @@ import {
   GridItem,
 } from '@chakra-ui/react'
 import TutorFound from '../StudentHR/TutorFound'
+import { BsCheck } from 'react-icons/bs'
+
 import {
   useAddHRRequestMutation,
   useGetHRRequestByIdQuery,
   useDeleteHRRequestMutation,
 } from '../../redux/services/helpRequestService'
+import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 
 const ButtonBar = ({
   userId,
@@ -26,13 +29,14 @@ const ButtonBar = ({
 }: any) => {
   const [addHRRequest, addHRRequestResult] = useAddHRRequestMutation()
   const [deleteRequest, deleteRequestResult] = useDeleteHRRequestMutation()
+  const getStudent = useGetStudentByIdQuery(userId)
   const [loadingBtn, setloadingBtn] = useState(false)
   const [SelectFav, setSelectFav] = useState(false)
   //@ts-ignore
   const hrById = useGetHRRequestByIdQuery(addHRRequestResult?.data?.id, {
     pollingInterval: 3000,
   })
-  console.log(hrById)
+  // console.log(getStudent.data?.favourite_tutors)
 
   useEffect(() => {
     if (hrById.data?.interested_tutors.length !== 0) {
@@ -60,32 +64,46 @@ const ButtonBar = ({
           alignItems="flex-start"
           justifyContent="space-around"
         >
-          <Flex>
-            <Checkbox
-              onChange={() => setSelectFav(true)}
-              size="lg"
-              colorScheme="indigo"
-              pr={5}
-            ></Checkbox>
+          {getStudent.data?.favourite_tutors.length !== 0 ? (
+            <Flex>
+              <Checkbox
+                onChange={() => setSelectFav(true)}
+                size="lg"
+                colorScheme="indigo"
+                pr={5}
+              ></Checkbox>
 
-            <Text fontFamily="montserrat" letterSpacing={1} lineHeight={7}>
-              Click here to wait for your favourites <br />{' '}
+              <Text fontFamily="montserrat" letterSpacing={1} lineHeight={7}>
+                Click here to wait for your favourites <br />{' '}
+                <Text
+                  letterSpacing={1}
+                  fontFamily="montserrat"
+                  fontSize={15}
+                  opacity={0.5}
+                >
+                  Expect a longer wait time...{' '}
+                </Text>
+              </Text>
+            </Flex>
+          ) : (
+            <Text fontFamily="montserrat" lineHeight={7}>
+              You will have the option to only see favourite tutors
               <Text
                 letterSpacing={1}
                 fontFamily="montserrat"
                 fontSize={15}
                 opacity={0.5}
               >
-                Expect a longer wait time...{' '}
+                You can add favourites after call
               </Text>
             </Text>
-          </Flex>
+          )}
 
           <Flex
             direction="column"
             align="center"
             justify={'center'}
-            marginLeft="8rem"
+            // marginRight="1rem"
           >
             {!loadingBtn === true ? (
               <Button
@@ -101,14 +119,21 @@ const ButtonBar = ({
                   })
                 }}
                 // ml={105}
-                // mr={105}
-                letterSpacing={2}
-                colorScheme="indigo"
-                variant="outline"
+
+                letterSpacing={1}
+                bg="indigo.400"
+                color="white"
+                variant="solid"
+                // color={'black'}
+                _hover={{
+                  bgGradient: 'linear(to-r, blue.500, teal.300)',
+                  color: 'gray.300',
+                }}
                 padding={8}
                 fontFamily="montserrat"
               >
                 Submit
+                {<BsCheck size={'2em'} style={{ marginLeft: '5px' }} />}
               </Button>
             ) : (
               <Flex
@@ -120,7 +145,7 @@ const ButtonBar = ({
                   isLoading
                   loadingText="Finding Tutor"
                   // ml={105}
-                  letterSpacing={2}
+                  letterSpacing={1}
                   colorScheme="indigo"
                   variant="outline"
                   padding={8}
@@ -143,22 +168,25 @@ const ButtonBar = ({
             )}
 
             <Flex justifyContent="center">
-              {hrById.data && hrById.data.interested_tutors.length !== 0 ? (
-                //@ts-ignore
-                <TutorFound
-                  hrById={hrById}
-                  tutors={hrById.data.interested_tutors}
-                />
-              ) : (
-                <Text mt={5} fontFamily="montserrat" fontSize="15px">
-                  Available tutors will be displayed below...
-                </Text>
-              )}
+              {
+                hrById.data &&
+                hrById.data.interested_tutors.length !== 0 &&
+                hrById.data.declined_tutors.length === 0 ? (
+                  //@ts-ignore
+                  <TutorFound
+                    hrById={hrById}
+                    tutors={hrById.data.interested_tutors}
+                  />
+                ) : null
+                // <Text mt={5} fontFamily="montserrat" fontSize="15px">
+                //   Available tutors will be displayed below...
+                // </Text>
+              }
             </Flex>
           </Flex>
           <Box>
-            <Text fontFamily="montserrat" letterSpacing={0.5}>
-              You can continue to update your request after submitting
+            <Text fontFamily="montserrat" letterSpacing={1}>
+              Available tutors will be displayed below...
             </Text>
           </Box>
         </Flex>

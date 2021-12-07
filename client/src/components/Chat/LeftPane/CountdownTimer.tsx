@@ -1,6 +1,6 @@
 import React from 'react'
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import { Box, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 
 const countdownText = ({ remainingTime }: { remainingTime: number }) => {
   if (remainingTime <= 60) {
@@ -11,9 +11,6 @@ const countdownText = ({ remainingTime }: { remainingTime: number }) => {
         </Text>
         <Text fontFamily="montserrat" fontSize={20} fontWeight={400}>
           seconds
-        </Text>
-        <Text fontFamily="montserrat" fontSize={20} fontWeight={400}>
-          remaining
         </Text>
       </Box>
     )
@@ -26,9 +23,6 @@ const countdownText = ({ remainingTime }: { remainingTime: number }) => {
         <Text fontFamily="montserrat" fontSize={20} fontWeight={400}>
           mins
         </Text>
-        <Text fontFamily="montserrat" fontSize={20} fontWeight={400}>
-          remaining
-        </Text>
       </Box>
     )
   }
@@ -36,12 +30,11 @@ const countdownText = ({ remainingTime }: { remainingTime: number }) => {
 
 const CountdownTimer = ({
   duration,
-  key,
+  version,
 }: {
   duration: number
-  key: number
+  version: number
 }) => {
-  console.log(duration)
   return (
     <CountdownCircleTimer
       colors={[
@@ -52,9 +45,9 @@ const CountdownTimer = ({
       duration={duration}
       isPlaying={true}
       rotation={'clockwise'}
-      key={key}
-      size={170}
-      strokeWidth={10}
+      key={version}
+      size={120}
+      strokeWidth={6}
       onComplete={() => [false, 0]}
     >
       {countdownText}

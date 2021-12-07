@@ -4,6 +4,7 @@ import {
   Heading,
   useColorModeValue,
   useDisclosure,
+  Text,
 } from '@chakra-ui/react'
 
 type ChatParticipantProps = {
@@ -32,6 +33,9 @@ const ChatParticipant = ({ hr, isTutor }: ChatParticipantProps) => {
       width="100%"
       justifyContent="space-between"
     >
+      <Text color="gray.400" size="sm" mb={2}>
+        Chatting with
+      </Text>
       <Avatar bg="grey" size={'xl'} src={photo_url} zIndex="10"></Avatar>
       <Heading
         fontFamily="montserrat"

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Box } from '@chakra-ui/react'
 import TopBar from '../components/TopBar/TopBar'
 import HrContent from '../components/StudentHR/HrContent'
@@ -6,7 +5,7 @@ import HrContent from '../components/StudentHR/HrContent'
 const StudentHR = () => {
   return (
     <Box>
-      <TopBar />
+      <TopBar heading="New Help Reqeust" />
       <HrContent />
     </Box>
   )

@@ -179,6 +179,12 @@ const ModalSignUp = ({
                 </FormHelperText>
               </FormControl>
 
+              <FormControl>
+                <Button type="submit" my={3} w={'100%'} onClick={signup}>
+                  Submit
+                </Button>
+              </FormControl>
+
               <FormControl
                 display="flex"
                 justifyContent="center"
@@ -275,11 +281,6 @@ const ModalSignUp = ({
                 {errormsg}
               </Text>
             </Flex>
-            <FormControl>
-              <Button type="submit" my={3} w={'100%'} onClick={signup}>
-                Next
-              </Button>
-            </FormControl>
           </form>
         </ModalBody>
 
@@ -299,7 +300,7 @@ const ModalSignUp = ({
               </Center>
             </Button>
           </HStack>
-        </ModalFooter> 
+        </ModalFooter>
       </ModalContent>
     </Modal>
   )
