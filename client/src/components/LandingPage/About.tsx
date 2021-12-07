@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react'
 import Lottie from 'lottie-react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import '../../styles/Landing.css'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 const workingMan: any = require('../../assets/lottie/working-man/36707-working-man.json')
@@ -92,7 +93,7 @@ const About = () => {
                 <ListItem>Experienced advice</ListItem>
               </UnorderedList>
             </Flex>
-            <Flex ml={20} flexDirection="column">
+            <Flex id="secondList" ml={20} flexDirection="column">
               <Heading
                 as="h3"
                 size="lg"

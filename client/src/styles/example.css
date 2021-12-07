@@ -15,7 +15,8 @@
 
 .gutter.gutter-horizontal {
   background-color: grey;
-  opacity: 0.3;
+  opacity: 0.1;
+
   height: 100%;
   border-radius: 10px;
   cursor: col-resize;
