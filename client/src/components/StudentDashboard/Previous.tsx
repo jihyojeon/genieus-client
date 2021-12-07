@@ -128,7 +128,7 @@ const Previous = () => {
                     Tutor : {el.tutor_id ? el.tutor.name : 'not assigned yet'}
                   </Text>
                   <Flex m={2} mb={0}>
-                    {displayRating(el)}
+                    {el.rating && displayRating(el)}
                   </Flex>
                 </Box>
               </Flex>
