@@ -31,6 +31,7 @@ import {
   Textarea,
   useDisclosure,
 } from '@chakra-ui/react'
+import { BsFillCaretDownFill } from 'react-icons/bs'
 
 const HrContent = () => {
   const languageKeys = Object.keys(ProgrammingLanguages)
@@ -186,6 +187,12 @@ const HrContent = () => {
                         colorScheme="indigo"
                       >
                         Choose Language
+                        {
+                          <BsFillCaretDownFill
+                            size={'1em'}
+                            style={{ marginLeft: '5px' }}
+                          />
+                        }
                       </Button>
                     </PopoverTrigger>
                     <Portal>
