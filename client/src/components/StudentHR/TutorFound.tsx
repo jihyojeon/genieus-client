@@ -95,7 +95,7 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
                 <Text>
                   <FontAwesomeIcon icon={faStar} />{' '}
                   {tutorValue.data?.avg_rating
-                    ? tutorValue.data?.avg_rating
+                    ? tutorValue.data?.avg_rating.toFixed(2)
                     : 0}
                 </Text>
               )}
