@@ -80,7 +80,10 @@ const ChatLeftPane = ({
             You have {initialTime} seconds before billing starts to decide
             whether you want to stay on the call or look for another tutor.
           </Text>
-          <ActionDecline helpRequestId={helpRequest.id} />
+          <ActionDecline
+            helpRequestId={helpRequest.id}
+            setSessionOpen={setSessionOpen}
+          />
         </ActionBox>
       )}
       <ActionBox>
