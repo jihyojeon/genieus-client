@@ -124,7 +124,7 @@ export const TutorStats = () => {
               ? 'loading'
               : tutor.data
               ? tutor.data.avg_rating
-                ? tutor.data.avg_rating.toFixed(1).toString()
+                ? tutor.data.avg_rating.toFixed(2).toString()
                 : 'N/A'
               : 'N/A'
           }
