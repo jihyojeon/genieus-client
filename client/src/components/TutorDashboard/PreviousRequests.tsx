@@ -33,7 +33,7 @@ const PreviousRequests = () => {
       {helpRequests.data && helpRequests.data.length ? (
         <List
           display="flex"
-          overflow="scroll"
+          // overflow="scroll"
           border="1px solid"
           borderColor="gray"
           borderRadius="5px"
@@ -41,6 +41,7 @@ const PreviousRequests = () => {
           mx={4}
           my={3}
           overflowY={'auto'}
+          overflowX={'auto'}
           sx={{
             '&::-webkit-scrollbar': {
               backgroundColor: 'gray.400',

@@ -31,11 +31,12 @@ export const IncomingRequests = () => {
       {helpRequests.data && helpRequests.data.length ? (
         <List
           display="flex"
-          overflow="scroll"
+          // overflow="scroll"
           border="1px solid"
           borderColor="gray"
           borderRadius="5px"
           py={3}
+          overflowX={'auto'}
           overflowY={'auto'}
           sx={{
             '&::-webkit-scrollbar': {
