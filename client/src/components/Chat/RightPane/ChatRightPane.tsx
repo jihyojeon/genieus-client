@@ -18,7 +18,7 @@ import socket, {
 import { auth } from '../../../firebase'
 import ChatInput from './ChatInput'
 import HRType from '../../../redux/services/helpRequestService'
-import { FaComment, FaCode, FaFileAlt } from 'react-icons/fa'
+import { FaComment, FaCode, FaFileAlt, FaVideo } from 'react-icons/fa'
 import Editor from '@monaco-editor/react'
 
 type Message = {
@@ -103,72 +103,80 @@ const ChatRightPane = ({
   const codeTheme = useColorModeValue('vs-light', 'vs-dark')
 
   return (
-    <Box height="70vh">
-      <Tabs height="100%" colorScheme="indigo">
-        <TabList>
-          <Tab>
-            <FaComment />
-            &nbsp;&nbsp;Chat
-          </Tab>
-          <Tab>
-            <FaFileAlt />
-            &nbsp;&nbsp; Description
-          </Tab>
-          <Tab>
-            <FaCode />
-            &nbsp;&nbsp; Code
-          </Tab>
-        </TabList>
+    <Tabs height="70vh" colorScheme="indigo">
+      <TabList>
+        <Tab>
+          <FaComment />
+          &nbsp;&nbsp;Chat
+        </Tab>
+        <Tab>
+          <FaFileAlt />
+          &nbsp;&nbsp; Description
+        </Tab>
+        <Tab>
+          <FaCode />
+          &nbsp;&nbsp; Code
+        </Tab>
+        <Tab>
+          <FaVideo />
+          &nbsp;&nbsp; Video
+        </Tab>
+      </TabList>
 
-        <TabPanels height="100%">
-          <TabPanel height="100%">
-            <Flex direction="column" height="100%">
-              <Flex
-                direction={'column-reverse'}
-                paddingRight={'0.5rem'}
-                height="100%"
-                pl="1rem"
-                overflowY={'auto'}
-                sx={{
-                  '&::-webkit-scrollbar': {
-                    backgroundColor: useColorModeValue('indigo.50', 'gray.700'),
-                    borderRadius: '8px',
-                    backgroundClip: 'padding-box',
-                    width: '10px',
-                  },
-                  '&::-webkit-scrollbar-thumb': {
-                    backgroundColor: useColorModeValue(
-                      'indigo.200',
-                      'gray.600'
-                    ),
-                    borderRadius: '8px',
-                    width: '10px',
-                  },
-                }}
-              >
-                <Flex direction="column">{messages}</Flex>
-              </Flex>
+      <TabPanels height="100%">
+        <TabPanel height="100%">
+          <Flex direction="column" height="100%">
+            <Flex
+              direction={'column-reverse'}
+              paddingRight={'0.5rem'}
+              height="100%"
+              pl="1rem"
+              overflowY={'auto'}
+              sx={{
+                '&::-webkit-scrollbar': {
+                  backgroundColor: useColorModeValue('indigo.50', 'gray.700'),
+                  borderRadius: '8px',
+                  backgroundClip: 'padding-box',
+                  width: '10px',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  backgroundColor: useColorModeValue('indigo.200', 'gray.600'),
+                  borderRadius: '8px',
+                  width: '10px',
+                },
+              }}
+            >
+              <Flex direction="column">{messages}</Flex>
             </Flex>
-            <ChatInput sendHandler={sendHandler} />
-          </TabPanel>
-          <TabPanel>
-            <Text>{helpRequest.description && helpRequest.description}</Text>
-          </TabPanel>
-          <TabPanel>
-            {helpRequest.code && (
-              <Editor
-                height="65vh"
-                language={helpRequest.language.toLowerCase() || 'javascript'}
-                defaultValue="// No code sample was provided"
-                value={helpRequest.code}
-                theme={codeTheme}
-                options={{ readOnly: true, contextmenu: false }}
-              />
-            )}
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </Box>
+          </Flex>
+          <ChatInput sendHandler={sendHandler} />
+        </TabPanel>
+        <TabPanel>
+          <Text>{helpRequest.description && helpRequest.description}</Text>
+        </TabPanel>
+        <TabPanel>
+          {helpRequest.code && (
+            <Editor
+              height="65vh"
+              language={helpRequest.language.toLowerCase() || 'javascript'}
+              defaultValue="// No code sample was provided"
+              value={helpRequest.code}
+              theme={codeTheme}
+              options={{ readOnly: true, contextmenu: false }}
+            />
+          )}
+        </TabPanel>
+        <TabPanel height="100%">
+          {helpRequest.zoom_url && (
+            <iframe
+              height="100%"
+              width="100%"
+              src={helpRequest.zoom_url}
+            ></iframe>
+          )}
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
   )
 }
 

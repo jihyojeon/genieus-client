@@ -45,7 +45,7 @@ const Chat = () => {
               userId={userId}
               isTutor={isTutor}
             />
-            <Box flexGrow={1} maxW="90ch" margin="auto">
+            <Box flexGrow={1} maxW="90ch" marginLeft="auto" marginRight="auto">
               <ChatRightPane
                 helpRequest={helpRequest}
                 sessionOpen={sessionOpen}
