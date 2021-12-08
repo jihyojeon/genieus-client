@@ -29,9 +29,9 @@ export const RequestCard = ({ hr }: HRType) => {
       mx={6}
       my={2}
       bg={useColorModeValue('white', 'gray.800')}
-      minW={'20ch'}
-      maxW={'26ch'}
-      minH={'23rem'}
+      minW={'24ch'}
+      maxW={'24ch'}
+      // minH={'27rem'}
     >
       <Box
         overflow="hidden"
@@ -81,7 +81,7 @@ export const RequestCard = ({ hr }: HRType) => {
             justify={'center'}
             direction={'row'}
             mt={6}
-            mb={2}
+            mb={8}
             flexWrap={'wrap'}
           >
             {/*@ts-ignore*/}
