@@ -107,6 +107,7 @@ const HrContent = () => {
                           variant="outline"
                           size="lg"
                           colorScheme="indigo"
+                          p="0.5rem"
                           ml="0.25rem"
                           mt="0.25rem"
                           flexWrap="wrap"
