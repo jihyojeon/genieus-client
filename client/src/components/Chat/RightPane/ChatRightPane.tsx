@@ -28,7 +28,7 @@ const ChatRightPane = ({
   const [userID, setUserID] = useState<string | undefined>()
   const [msgs, setMsgs] = useState<Message[]>([])
   const navigate = useNavigate()
-
+  console.log(participantName)
   // get userID from firebase
   useEffect(() => {
     auth.onAuthStateChanged((item) => {

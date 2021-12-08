@@ -17,12 +17,6 @@ const Chat = () => {
   const [helpRequest, setHelpRequest] = useState<HRType | undefined>(
     helpRequestRes.data
   )
-  console.log(helpRequest)
-  // useEffect(() => {
-  //   if (helpRequestRes.isSuccess) {
-  //     setHelpRequest(helpRequestRes.data)
-  //   }
-  // }, [helpRequestRes])
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
@@ -38,6 +32,7 @@ const Chat = () => {
     ? helpRequest?.student.name
     : helpRequest?.tutor.name
 
+  console.log(isTutor, participantName)
   if (helpRequest) {
     if (!helpRequest.tutor) return <Text>Loading ...</Text>
     return (
@@ -56,7 +51,7 @@ const Chat = () => {
                 helpRequest={helpRequest}
                 sessionOpen={sessionOpen}
                 participantName={
-                  participantName || isTutor ? 'Student' : 'Tutor'
+                  participantName || (isTutor ? 'Student' : 'Tutor')
                 }
               />
             </Box>
