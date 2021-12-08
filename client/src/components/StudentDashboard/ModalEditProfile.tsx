@@ -19,6 +19,7 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
+  Textarea,
 } from '@chakra-ui/react'
 import { SmallCloseIcon } from '@chakra-ui/icons'
 import { useUpdateStudentByIdMutation } from '../../redux/services/studentService'
@@ -145,7 +146,7 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
 
                 <FormControl id="bio">
                   <FormLabel>Bio</FormLabel>
-                  <Input
+                  <Textarea
                     // placeholder={student?.bio}
                     _placeholder={{ color: 'gray.500' }}
                     onChange={(e) => setupdateBio(e.target.value)}
