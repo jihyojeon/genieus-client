@@ -38,12 +38,13 @@ const ChatLeftPane = ({
       textAlign="center"
       justify={isTutor ? 'flex-start' : 'stretch'}
       height={isTutor ? 'fit-content' : '81vh'}
-      w="18rem"
+      w="16rem"
       mr="0.5rem"
       paddingTop="0.5rem"
       paddingLeft="1rem"
       paddingRight="1rem"
       paddingBottom="1rem"
+      flexShrink={0}
       overflowY={'auto'}
       sx={{
         '&::-webkit-scrollbar': {
