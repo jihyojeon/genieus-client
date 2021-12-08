@@ -49,9 +49,12 @@ const ChatRightPane = ({
       setUserID(item?.uid)
     })
   }, [])
-  // setup socket
   useEffect(() => {
     if (selectedTab === 0) setUnreadMessages(false)
+  }, [msgs])
+
+  // setup socket
+  useEffect(() => {
     if (userID) {
       checkAndReconnectToSocket(userID)
       socket.emit('join help request', helpRequest.id)
@@ -68,7 +71,7 @@ const ChatRightPane = ({
         setUnreadMessages(true)
         setMsgs((priorMsgs) => {
           if (
-            priorMsgs &&
+            priorMsgs.length &&
             priorMsgs.slice(-1)[0].postedDate === message.postedDate
           )
             return priorMsgs
