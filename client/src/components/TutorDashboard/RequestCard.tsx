@@ -76,11 +76,18 @@ export const RequestCard = ({ hr }: HRType) => {
           </Stack>
           <Text fontSize="13">{hr.description.substring(0, 150)}</Text>
           <Divider mt={3} />
-          <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
+          <Stack
+            align={'center'}
+            justify={'center'}
+            direction={'row'}
+            mt={6}
+            mb={2}
+            flexWrap={'wrap'}
+          >
             {/*@ts-ignore*/}
             {hr.tags?.map((tag, index) => {
               return (
-                <Badge key={index} px={2} py={1} fontWeight={'400'}>
+                <Badge key={index} mt={1} px={2} py={1} fontWeight={'400'}>
                   {tag}
                 </Badge>
               )
