@@ -15,7 +15,7 @@ const TutorDashboard = () => {
         // h="90vh"
         py={2}
         px={4}
-        templateRows="auto 1fr auto"
+        templateRows="auto auto auto"
         templateColumns="auto 1fr"
         gap={4}
       >
@@ -31,7 +31,7 @@ const TutorDashboard = () => {
           <TutorStats />
         </GridItem>
 
-        <GridItem rowSpan={1} colSpan={1}>
+        <GridItem rowSpan={1} colSpan={2}>
           <PreviousRequests />
         </GridItem>
       </Grid>

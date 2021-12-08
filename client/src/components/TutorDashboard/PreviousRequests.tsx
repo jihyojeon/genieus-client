@@ -21,7 +21,7 @@ const PreviousRequests = () => {
   }, [])
 
   return (
-    <Flex flexDirection="column" width="70vw">
+    <Flex flexDirection="column" width="100%">
       <Box>
         <Heading as="h1" size="lg" fontWeight="300" pb="0.5rem" ml={5}>
           <HStack>
