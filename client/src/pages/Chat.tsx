@@ -17,12 +17,6 @@ const Chat = () => {
   const [helpRequest, setHelpRequest] = useState<HRType | undefined>(
     helpRequestRes.data
   )
-  console.log(helpRequest)
-  // useEffect(() => {
-  //   if (helpRequestRes.isSuccess) {
-  //     setHelpRequest(helpRequestRes.data)
-  //   }
-  // }, [helpRequestRes])
 
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
@@ -31,7 +25,14 @@ const Chat = () => {
       }
     })
   }, [])
-  if (!userId) return <Heading>Loading ...</Heading>
+
+  useEffect(() => {
+    setHelpRequest(helpRequestRes.data)
+  }, [helpRequestRes.fulfilledTimeStamp])
+
+  if (!userId) return <Text>Loading ...</Text>
+  if (helpRequest?.status !== 'assigned')
+    return <Text>This help request is not open & assigned to a tutor</Text>
 
   const isTutor = userId === helpRequest?.tutor_id
   const participantName = isTutor
@@ -51,12 +52,12 @@ const Chat = () => {
               userId={userId}
               isTutor={isTutor}
             />
-            <Box flexGrow={1} maxW="90ch" margin="auto">
+            <Box flexGrow={1} maxW="90ch" marginLeft="auto" marginRight="auto">
               <ChatRightPane
                 helpRequest={helpRequest}
                 sessionOpen={sessionOpen}
                 participantName={
-                  participantName || isTutor ? 'Student' : 'Tutor'
+                  participantName || (isTutor ? 'Student' : 'Tutor')
                 }
               />
             </Box>

@@ -7,9 +7,6 @@ type ChatBubbleProps = {
 }
 
 const ChatBubble = ({ message, fromSelf, from }: ChatBubbleProps) => {
-  // TODO: REPLACE WITH PROPS?
-  // const timeStamp = '14:32 [20s ago]'
-
   const justify = fromSelf ? 'right' : 'left'
   const borders = fromSelf ? '2rem .5rem 2rem 2rem' : '.5rem 2rem 2rem 2rem'
   const bgLight = fromSelf ? 'blue.100' : 'gray.100'
