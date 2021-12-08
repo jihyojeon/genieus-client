@@ -172,6 +172,7 @@ const HrContent = () => {
                         height="1rem"
                         width="1rem"
                         borderRadius="5"
+                        alt="selected programming language"
                         // @ts-ignore
                         src={ProgrammingLanguages[selectValue]}
                       />
@@ -226,6 +227,7 @@ const HrContent = () => {
                                     height="1rem"
                                     width="1rem"
                                     borderRadius="5"
+                                    alt="programming language icon"
                                     // @ts-ignore
                                     src={ProgrammingLanguages[lang]}
                                   />
