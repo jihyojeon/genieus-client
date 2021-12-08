@@ -98,7 +98,7 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                           icon={<SmallCloseIcon />}
                           onClick={() => {
                             setAvatarBadge('')
-                            setUrl('')
+
                             updateStudent({
                               id: userId,
                               //@ts-ignore
