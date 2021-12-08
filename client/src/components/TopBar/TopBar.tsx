@@ -12,13 +12,11 @@ type TopBarProps = {
 }
 
 const TopBar = ({ heading, tutor = false }: TopBarProps) => {
+  // const navigate = useNavigate()
+  // const backToHome = () => {
+  //   return navigate('/')
+  // }
 
-// const navigate = useNavigate()
-// const backToHome = () => {
-//   return navigate('/')
-// }
-  
-  
   return (
     <Flex
       justifyContent="space-between"
@@ -26,9 +24,8 @@ const TopBar = ({ heading, tutor = false }: TopBarProps) => {
       alignItems="center"
       m=".5rem 1rem"
     >
-
       <Logo />
-      {heading && <Heading>{heading}</Heading>}
+      {heading && <Heading fontFamily="montserrat">{heading}</Heading>}
 
       <Flex
         alignItems="center"
