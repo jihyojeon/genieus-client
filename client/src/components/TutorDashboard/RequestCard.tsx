@@ -38,7 +38,7 @@ export const RequestCard = ({ hr }: HRType) => {
         position="relative"
         minH={'100%'}
         minW={'100%'}
-        boxShadow={'2xl'}
+        boxShadow={'xl'}
         rounded={'md'}
       >
         <Box position="relative" h={'50px'} w={'full'}>
@@ -99,7 +99,6 @@ export const RequestCard = ({ hr }: HRType) => {
             boxShadow: 'lg',
           }}
           _focus={{}}
-
           onClick={() => {
             navigate('/tutor-hr', { state: hr })
           }}

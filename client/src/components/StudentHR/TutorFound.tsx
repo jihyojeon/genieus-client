@@ -64,7 +64,7 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
           >
             <Avatar
               size={'xl'}
-              src={'...'}
+              src={tutorValue?.data?.photo_url}
               alt={'Avatar Alt'}
               mb={4}
               // @ts-ignore
