@@ -43,6 +43,8 @@ export const TutorStats = () => {
     return (
       <Stat
         px={{ base: 2, md: 4 }}
+        
+        // px={"10rem"}
         py={'5'}
         m={5}
         w={'13rem'}
@@ -56,8 +58,9 @@ export const TutorStats = () => {
         // border={'1px solid'}
         // borderColor={useColorModeValue('gray.800', 'gray.500')}
       >
-        <Flex justifyContent={'space-between'}>
-          <Box pl={{ base: 2, md: 4 }}>
+        <Flex justifyContent={'center'}>
+          <Box pl={{ base: 2, md: 4 }}
+          >
             <StatLabel fontWeight={'medium'} isTruncated>
               {title}
             </StatLabel>
@@ -67,6 +70,7 @@ export const TutorStats = () => {
               bgGradient={gradient}
               bgClip="text"
               width="fit-content"
+              
             >
               {stat}
             </StatNumber>
@@ -85,17 +89,20 @@ export const TutorStats = () => {
 
   return (
     <Box
-      minW="3xl"
-      maxW="7xl"
-      mx={'auto'}
+      // w="3xl"
+      // minW="3xl"
+      // maxW="3xl"
+      // mx={'auto'}
+      
       pt={5}
-      px={{ base: 2, sm: 12, md: 17 }}
+      px={{ base: 2, sm: 1, md: 17 }}
     >
-      <SimpleGrid
+      {/* <SimpleGrid
         columns={{ base: 1, md: 4 }}
         spacing={{ base: 5, lg: 8 }}
         justifyItems={'center'}
-      >
+      > */}
+      <Flex flexWrap="wrap" justifyContent={'center'}>
         <StatsCard
           title={'Requests Completed'}
           stat={
@@ -156,7 +163,8 @@ export const TutorStats = () => {
           }
           icon={<AiOutlineDollarCircle size={'3em'} />}
         />
-      </SimpleGrid>
+        {/* </SimpleGrid> */}
+      </Flex>
     </Box>
   )
 }

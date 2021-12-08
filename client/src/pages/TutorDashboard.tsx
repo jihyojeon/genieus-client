@@ -10,12 +10,12 @@ import PreviousRequests from '../components/TutorDashboard/PreviousRequests'
 const TutorDashboard = () => {
   return (
     <Box>
-      <TopBar tutor={true}/>
+      <TopBar tutor={true} />
       <Grid
-        h="90vh"
+        // h="90vh"
         py={2}
         px={4}
-        templateRows="1fr auto auto"
+        templateRows="auto auto auto"
         templateColumns="auto 1fr"
         gap={4}
       >
@@ -32,7 +32,7 @@ const TutorDashboard = () => {
         </GridItem>
 
         <GridItem rowSpan={1} colSpan={2}>
-          <PreviousRequests/>
+          <PreviousRequests />
         </GridItem>
       </Grid>
     </Box>

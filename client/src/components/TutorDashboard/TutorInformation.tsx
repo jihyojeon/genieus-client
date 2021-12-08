@@ -125,7 +125,7 @@ export const TutorInformation = () => {
 
   return (
     <Flex flexDirection="column">
-      <Box mt={10} height="30vh" fontFamily="montserrat" w="30ch">
+      <Box mt={10} height="100%" fontFamily="montserrat" w="30ch" minW={"30ch"}>
         <Flex alignItems="center" justifyContent="space-between">
           <Heading
             as="h1"
