@@ -30,7 +30,9 @@ const Chat = () => {
     setHelpRequest(helpRequestRes.data)
   }, [helpRequestRes.fulfilledTimeStamp])
 
-  if (!userId) return <Heading>Loading ...</Heading>
+  if (!userId) return <Text>Loading ...</Text>
+  if (helpRequest?.status !== 'assigned')
+    return <Text>This help request is not open & assigned to a tutor</Text>
 
   const isTutor = userId === helpRequest?.tutor_id
   const participantName = isTutor
