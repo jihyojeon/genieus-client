@@ -13,6 +13,7 @@ import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 
 const StudentAccept = ({ hrData }: { hrData: any }) => {
   const studentById = useGetStudentByIdQuery(hrData.student_id)
+  console.log(studentById)
 
   console.log(studentById.data)
   const navigate = useNavigate()
@@ -36,7 +37,7 @@ const StudentAccept = ({ hrData }: { hrData: any }) => {
           {hrData.student.name} is ready{' '}
         </Heading>
         <Text opacity="0.5" mb={2}>
-          {studentById.data && studentById.data.email}{' '}
+          {studentById.data && studentById.data.bio.substr(0, 20)}
         </Text>
         <Avatar
           position="absolute"
