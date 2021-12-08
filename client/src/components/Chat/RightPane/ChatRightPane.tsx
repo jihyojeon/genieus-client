@@ -117,10 +117,6 @@ const ChatRightPane = ({
           <FaCode />
           &nbsp;&nbsp; Code
         </Tab>
-        <Tab>
-          <FaVideo />
-          &nbsp;&nbsp; Video
-        </Tab>
       </TabList>
 
       <TabPanels height="100%">
@@ -157,22 +153,13 @@ const ChatRightPane = ({
         <TabPanel>
           {helpRequest.code && (
             <Editor
-              height="65vh"
+              height="70vh"
               language={helpRequest.language.toLowerCase() || 'javascript'}
               defaultValue="// No code sample was provided"
               value={helpRequest.code}
               theme={codeTheme}
               options={{ readOnly: true, contextmenu: false }}
             />
-          )}
-        </TabPanel>
-        <TabPanel height="100%">
-          {helpRequest.zoom_url && (
-            <iframe
-              height="100%"
-              width="100%"
-              src={helpRequest.zoom_url}
-            ></iframe>
           )}
         </TabPanel>
       </TabPanels>

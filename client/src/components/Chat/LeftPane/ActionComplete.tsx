@@ -25,7 +25,7 @@ const ActionComplete = ({
     updateHelpRequest({ id: helpRequest.id, status: 'closed-complete' })
     setTimeout(() => {
       return navigate(`/student-feedback/${helpRequest.id}`)
-    }, 1500)
+    }, 1000)
   }
 
   const submitIncompleteHandler = () => {
@@ -34,7 +34,7 @@ const ActionComplete = ({
     updateHelpRequest({ id: helpRequest.id, status: 'closed-incomplete' })
     setTimeout(() => {
       return navigate(`/student-feedback/${helpRequest.id}`)
-    }, 1500)
+    }, 1000)
   }
 
   return (

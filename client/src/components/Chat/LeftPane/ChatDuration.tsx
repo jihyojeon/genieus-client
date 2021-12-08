@@ -40,7 +40,7 @@ const ChatDuration = ({
         ) : (
           <>
             <Text color="gray.400" size="sm" mb={2}>
-              Remaining time this month
+              Subscription remaining
             </Text>
             <CountdownTimer duration={subscriptionRemainingSecs} version={2} />
           </>

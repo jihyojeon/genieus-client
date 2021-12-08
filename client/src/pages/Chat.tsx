@@ -25,6 +25,11 @@ const Chat = () => {
       }
     })
   }, [])
+
+  useEffect(() => {
+    setHelpRequest(helpRequestRes.data)
+  }, [helpRequestRes.fulfilledTimeStamp])
+
   if (!userId) return <Heading>Loading ...</Heading>
 
   const isTutor = userId === helpRequest?.tutor_id
