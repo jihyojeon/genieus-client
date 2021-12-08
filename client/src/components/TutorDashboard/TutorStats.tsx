@@ -43,7 +43,6 @@ export const TutorStats = () => {
     return (
       <Stat
         px={{ base: 2, md: 4 }}
-        
         // px={"10rem"}
         py={'5'}
         m={5}
@@ -59,8 +58,7 @@ export const TutorStats = () => {
         // borderColor={useColorModeValue('gray.800', 'gray.500')}
       >
         <Flex justifyContent={'center'}>
-          <Box pl={{ base: 2, md: 4 }}
-          >
+          <Box pl={{ base: 2, md: 4 }}>
             <StatLabel fontWeight={'medium'} isTruncated>
               {title}
             </StatLabel>
@@ -70,7 +68,6 @@ export const TutorStats = () => {
               bgGradient={gradient}
               bgClip="text"
               width="fit-content"
-              
             >
               {stat}
             </StatNumber>
@@ -93,7 +90,7 @@ export const TutorStats = () => {
       // minW="3xl"
       // maxW="3xl"
       // mx={'auto'}
-      
+
       pt={5}
       px={{ base: 2, sm: 1, md: 17 }}
     >
@@ -127,7 +124,7 @@ export const TutorStats = () => {
               ? 'loading'
               : tutor.data
               ? tutor.data.avg_rating
-                ? tutor.data.avg_rating.toString()
+                ? tutor.data.avg_rating.toFixed(1).toString()
                 : 'N/A'
               : 'N/A'
           }
