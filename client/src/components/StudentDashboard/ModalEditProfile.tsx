@@ -96,13 +96,15 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                           colorScheme="red"
                           aria-label="remove Image"
                           icon={<SmallCloseIcon />}
-                          onClick={() =>
+                          onClick={() => {
+                            setAvatarBadge('')
+                            setUrl('')
                             updateStudent({
                               id: userId,
                               //@ts-ignore
-                              // photo_url: null,
+                              photo_url: null,
                             })
-                          }
+                          }}
                         />
                       </Avatar>
                     </Center>
