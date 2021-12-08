@@ -11,8 +11,6 @@ const Feedback = () => {
   const hrById = useGetHRRequestByIdQuery(id || 'notfound', { skip: !id })
   const helpRequest = hrById.isSuccess ? hrById.data : null
 
-  console.log(helpRequest)
-
   if (helpRequest) {
     if (helpRequest.rating) {
       return (

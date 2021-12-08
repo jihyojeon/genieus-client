@@ -25,6 +25,7 @@ import {
   useRemoveFavouriteTutorMutation,
 } from '../../redux/services/studentService'
 import { useUpdateHRRequestMutation } from '../../redux/services/helpRequestService'
+import { displayTimeinMMSS } from '../TutorDashboard/utils'
 
 const FeedbackForm = ({ helpRequest }: { helpRequest: any }) => {
   // HELP REQUEST & STUDENT INFO
@@ -112,6 +113,7 @@ const FeedbackForm = ({ helpRequest }: { helpRequest: any }) => {
     }
     navigate('/student-dashboard')
   }
+
   return (
     <Flex
       // border={'1px solid'}
@@ -142,14 +144,15 @@ const FeedbackForm = ({ helpRequest }: { helpRequest: any }) => {
                 </Text>
                 ?
               </Heading>
-              <Text
-                color="gray.500"
-                textAlign={tutor.photo_url ? 'start' : 'center'}
-              >
-                You were on a call for{' '}
-                {Math.floor(helpRequest.call_length / 60)} minutes,{' '}
-                {helpRequest.call_length % 60} seconds
-              </Text>
+              {helpRequest.call_length && (
+                <Text
+                  color="gray.500"
+                  textAlign={tutor.photo_url ? 'start' : 'center'}
+                >
+                  You were on a call for{' '}
+                  {displayTimeinMMSS(helpRequest.call_length)}
+                </Text>
+              )}
             </Box>
           </Flex>
           <FormControl isRequired>
