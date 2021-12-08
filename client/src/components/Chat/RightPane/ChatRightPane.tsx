@@ -68,7 +68,7 @@ const ChatRightPane = ({
         setUnreadMessages(true)
         setMsgs((priorMsgs) => {
           if (
-            priorMsgs.slice(-1) &&
+            priorMsgs &&
             priorMsgs.slice(-1)[0].postedDate === message.postedDate
           )
             return priorMsgs
@@ -119,7 +119,6 @@ const ChatRightPane = ({
       height="70vh"
       colorScheme="indigo"
       onChange={(index) => {
-        console.log(index)
         setSelectedTab(index)
         if (index === 0) setUnreadMessages(false)
       }}
@@ -184,7 +183,9 @@ const ChatRightPane = ({
           <ChatInput sendHandler={sendHandler} />
         </TabPanel>
         <TabPanel>
-          <Text>{helpRequest.description && helpRequest.description}</Text>
+          <Text whiteSpace="pre-wrap">
+            {helpRequest.description && helpRequest.description}
+          </Text>
         </TabPanel>
         <TabPanel>
           {helpRequest.code && (
