@@ -83,6 +83,7 @@ const ModalLogIn = ({ isOpen, onClose }) => {
             top={1}
             boxSize="4.5rem"
             borderRadius="50px"
+            alt="genieus logo"
           />
         </ModalHeader>
 

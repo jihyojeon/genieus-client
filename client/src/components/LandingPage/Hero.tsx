@@ -94,6 +94,7 @@ const Hero = () => {
                     right="90%"
                     borderRadius="50px"
                     id="lang"
+                    alt="javascript logo"
                   />
 
                   <Image
@@ -105,6 +106,8 @@ const Hero = () => {
                     right="75%"
                     borderRadius="full"
                     id="lang"
+                    alt="javascript logo"
+
                   />
 
                   <Image
@@ -116,6 +119,8 @@ const Hero = () => {
                     right="70%"
                     borderRadius="50px"
                     id="lang"
+                    alt="java logo"
+
                   />
 
                   <Image
@@ -127,6 +132,8 @@ const Hero = () => {
                     right="55%"
                     borderRadius="50px"
                     id="lang"
+                    alt="react logo"
+
                   />
 
                   <Image
@@ -138,6 +145,8 @@ const Hero = () => {
                     right="20%"
                     borderRadius="full"
                     id="lang"
+                    alt="firebase logo"
+
                   />
 
                   <Image
@@ -149,6 +158,8 @@ const Hero = () => {
                     right="15%"
                     borderRadius="20px"
                     id="lang"
+                    alt="redux logo"
+
                   />
                   <Image
                     src={ProgrammingLanguages.C}
@@ -159,6 +170,8 @@ const Hero = () => {
                     right="5%"
                     borderRadius="20px"
                     id="lang"
+                    alt="C logo"
+
                   />
                 </Box>
               </Lottie>

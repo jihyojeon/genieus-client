@@ -20,7 +20,14 @@ export default function Navbar() {
     <>
       <Box px={6} py={2} h="10vh">
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Image src={Logo} boxSize="9rem" pt={5} pl={7} borderRadius="50px" />
+          <Image
+            src={Logo}
+            boxSize="9rem"
+            pt={5}
+            pl={7}
+            borderRadius="50px"
+            alt="genieus logo"
+          />
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
               <TutorLoginButton />
