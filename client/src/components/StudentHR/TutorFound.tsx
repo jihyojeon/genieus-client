@@ -48,7 +48,7 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
       h="50vh"
     >
       <GridItem>
-        <Heading fontSize={'20px'} fontFamily="montserrat">
+        <Heading textAlign="center" fontSize={'20px'} fontFamily="montserrat">
           Tutor is available to help!
         </Heading>
       </GridItem>
@@ -109,7 +109,7 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
             </Text>
             <Grid templateColumns="1fr, 1fr">
               <GridItem>
-                <Text> Tech languages: </Text>
+                <Text> Tech Stack: </Text>
                 {tutorValue !== undefined && (
                   // @ts-ignore
                   <Wrap justify="center" mt={3}>
@@ -136,7 +136,6 @@ const TutorFound = ({ tutors, hrById }: { tutors: any[]; hrById: any }) => {
               {!isLoading ? (
                 <Button
                   onClick={() => {
-
                     updateHr({
                       id: hrById.data.id,
                       status: 'assigned',
