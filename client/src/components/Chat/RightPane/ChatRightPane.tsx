@@ -7,8 +7,8 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  Box,
   Text,
+  Icon,
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router'
 import ChatBubble from './ChatBubble'
@@ -18,7 +18,7 @@ import socket, {
 import { auth } from '../../../firebase'
 import ChatInput from './ChatInput'
 import HRType from '../../../redux/services/helpRequestService'
-import { FaComment, FaCode, FaFileAlt, FaVideo } from 'react-icons/fa'
+import { FaComment, FaCode, FaFileAlt, FaEnvelope } from 'react-icons/fa'
 import Editor from '@monaco-editor/react'
 
 type Message = {
@@ -39,6 +39,9 @@ const ChatRightPane = ({
 }: ChatRightPaneProps) => {
   const [userID, setUserID] = useState<string | undefined>()
   const [msgs, setMsgs] = useState<Message[]>([])
+  const [selectedTab, setSelectedTab] = useState(0)
+  const [unreadMessages, setUnreadMessages] = useState(false)
+
   const navigate = useNavigate()
   // get userID from firebase
   useEffect(() => {
@@ -48,6 +51,7 @@ const ChatRightPane = ({
   }, [])
   // setup socket
   useEffect(() => {
+    if (selectedTab === 0) setUnreadMessages(false)
     if (userID) {
       checkAndReconnectToSocket(userID)
       socket.emit('join help request', helpRequest.id)
@@ -61,7 +65,15 @@ const ChatRightPane = ({
         // console.log(user)
       })
       socket.on('get message', (message: Message) => {
-        setMsgs((priorMsgs) => [...priorMsgs, message])
+        setUnreadMessages(true)
+        setMsgs((priorMsgs) => {
+          if (
+            priorMsgs.slice(-1) &&
+            priorMsgs.slice(-1)[0].postedDate === message.postedDate
+          )
+            return priorMsgs
+          return [...priorMsgs, message]
+        })
       })
       socket.on('chat closed', () => {
         navigate('/tutor-dashboard')
@@ -103,11 +115,35 @@ const ChatRightPane = ({
   const codeTheme = useColorModeValue('vs-light', 'vs-dark')
 
   return (
-    <Tabs height="70vh" colorScheme="indigo">
+    <Tabs
+      height="70vh"
+      colorScheme="indigo"
+      onChange={(index) => {
+        console.log(index)
+        setSelectedTab(index)
+        if (index === 0) setUnreadMessages(false)
+      }}
+    >
       <TabList>
-        <Tab>
+        <Tab position="relative">
           <FaComment />
           &nbsp;&nbsp;Chat
+          {unreadMessages && (
+            <Flex
+              top={-3}
+              left={0}
+              position="absolute"
+              w={5}
+              h={5}
+              backgroundColor="red.500"
+              borderRadius="50%"
+              alignItems="center"
+              justifyContent="center"
+              color="white"
+            >
+              <Icon as={FaEnvelope} fontSize="xs" />
+            </Flex>
+          )}
         </Tab>
         <Tab>
           <FaFileAlt />
