@@ -33,7 +33,7 @@ export const IncomingRequests = () => {
           display="flex"
           overflow="scroll"
           border="1px solid"
-          borderColor="rgba(127, 6, 219, .4)"
+          borderColor="gray"
           borderRadius="5px"
           py={3}
           overflowY={'auto'}

@@ -46,7 +46,6 @@ export default function PreviousRequestCard({ hr }: any) {
         border="1px solid"
         borderColor="rgba(0, 66, 156, .4)"
         borderRadius="10px"
-        
       >
         <Stack
           textAlign={'center'}
@@ -64,7 +63,7 @@ export default function PreviousRequestCard({ hr }: any) {
               alignContent={'center'}
             >
               <Avatar
-                size={'xs'}
+                size={'lg'}
                 src={hr.student.photo_url}
                 name={hr.student.name}
                 alt={'Author'}
@@ -90,7 +89,7 @@ export default function PreviousRequestCard({ hr }: any) {
           </WrapItem>
         </Stack>
 
-        <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={10} >
+        <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={10}>
           <List spacing={3}>
             <ListItem>
               <ListIcon as={AiOutlineStar} />

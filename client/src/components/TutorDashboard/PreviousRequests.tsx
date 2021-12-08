@@ -35,7 +35,7 @@ const PreviousRequests = () => {
           display="flex"
           overflow="scroll"
           border="1px solid"
-          borderColor="rgba(127, 6, 219, .4)"
+          borderColor="gray"
           borderRadius="5px"
           px={4}
           mx={4}

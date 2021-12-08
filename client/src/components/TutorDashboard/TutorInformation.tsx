@@ -125,7 +125,7 @@ export const TutorInformation = () => {
 
   return (
     <Flex flexDirection="column">
-      <Box mt={10} height="100%" fontFamily="montserrat" w="30ch" minW={"30ch"}>
+      <Box mt={10} height="100%" fontFamily="montserrat" w="30ch" minW={'30ch'}>
         <Flex alignItems="center" justifyContent="space-between">
           <Heading
             as="h1"
@@ -230,7 +230,7 @@ export const TutorInformation = () => {
         {tutor.data && tutor.data.bio ? (
           <Flex mt={4} direction="column" maxW="15rem">
             <Text>Bio:</Text>
-            <Text fontSize={'sm'} color="#ca84dbc7">
+            <Text fontSize={'md'} color="gray" fontWeight={'500'}>
               {tutor.error
                 ? 'error'
                 : tutor.isLoading
