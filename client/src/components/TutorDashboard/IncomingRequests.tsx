@@ -1,4 +1,11 @@
-import { Box, Flex, Heading, List, Text, useColorModeValue } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Heading,
+  List,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import HRType, {
   useGetPendingHRByIdQuery,
@@ -23,14 +30,15 @@ export const IncomingRequests = () => {
   }, [])
 
   return (
-    <Flex flexDirection="column">
+    <Flex flexDirection="column" maxWidth={'70vw'}>
       <Heading fontFamily="montserrat" fontWeight="400" ml={5} mb={5}>
-          <Text>Open Requests</Text>
+        <Text>Open Requests</Text>
       </Heading>
       {/*@ts-ignore*/}
       {helpRequests.data && helpRequests.data.length ? (
         <List
           display="flex"
+          minWidth={'10rem'}
           // overflow="scroll"
           border="1px solid"
           borderColor="gray"
@@ -51,7 +59,6 @@ export const IncomingRequests = () => {
               width: '10px',
             },
           }}
-
         >
           {helpRequests.error
             ? 'error'
