@@ -32,7 +32,6 @@ const Chat = () => {
     ? helpRequest?.student.name
     : helpRequest?.tutor.name
 
-  console.log(isTutor, participantName)
   if (helpRequest) {
     if (!helpRequest.tutor) return <Text>Loading ...</Text>
     return (

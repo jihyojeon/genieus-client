@@ -28,7 +28,6 @@ const ChatRightPane = ({
   const [userID, setUserID] = useState<string | undefined>()
   const [msgs, setMsgs] = useState<Message[]>([])
   const navigate = useNavigate()
-  console.log(participantName)
   // get userID from firebase
   useEffect(() => {
     auth.onAuthStateChanged((item) => {
@@ -44,10 +43,10 @@ const ChatRightPane = ({
         messages && setMsgs(messages)
       })
       socket.on('user joined chat', (user) => {
-        console.log(user)
+        // console.log(user)
       })
       socket.on('user left chat', (user) => {
-        console.log(user)
+        // console.log(user)
       })
       socket.on('get message', (message: Message) => {
         setMsgs((priorMsgs) => [...priorMsgs, message])
