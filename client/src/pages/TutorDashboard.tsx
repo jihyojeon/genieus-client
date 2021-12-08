@@ -12,7 +12,7 @@ const TutorDashboard = () => {
     <Box>
       <TopBar tutor={true} />
       <Grid
-        h="90vh"
+        // h="90vh"
         py={2}
         px={4}
         templateRows="auto 1fr auto"
