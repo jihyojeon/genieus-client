@@ -86,7 +86,7 @@ const ModalEditProfile = ({ isOpen, onClose, userId, student }) => {
                         size="xl"
                         name={student?.name}
                         //@ts-ignore
-                        src={avatarBadge}
+                        src={Url}
                       >
                         <AvatarBadge
                           as={IconButton}
