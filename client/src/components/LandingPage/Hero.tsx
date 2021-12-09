@@ -107,7 +107,6 @@ const Hero = () => {
                     borderRadius="full"
                     id="lang"
                     alt="javascript logo"
-
                   />
 
                   <Image
@@ -120,7 +119,6 @@ const Hero = () => {
                     borderRadius="50px"
                     id="lang"
                     alt="java logo"
-
                   />
 
                   <Image
@@ -133,7 +131,6 @@ const Hero = () => {
                     borderRadius="50px"
                     id="lang"
                     alt="react logo"
-
                   />
 
                   <Image
@@ -146,7 +143,6 @@ const Hero = () => {
                     borderRadius="full"
                     id="lang"
                     alt="firebase logo"
-
                   />
 
                   <Image
@@ -159,7 +155,6 @@ const Hero = () => {
                     borderRadius="20px"
                     id="lang"
                     alt="redux logo"
-
                   />
                   <Image
                     src={ProgrammingLanguages.C}
@@ -171,7 +166,6 @@ const Hero = () => {
                     borderRadius="20px"
                     id="lang"
                     alt="C logo"
-
                   />
                 </Box>
               </Lottie>
@@ -184,7 +178,7 @@ const Hero = () => {
         justifyContent="center"
         alignItems="flex-start"
         height="100px"
-        width="100vw"
+        width="90vw"
       ></Box>
       {/* @ts-ignore */}
       <ModalSignUp isOpen={isOpen} onClose={onClose} />
