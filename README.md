@@ -1,24 +1,17 @@
-# genieus-client
-Codeworks seniors London - thesis project Nov 2021 test test
+# GenieUs
 
-# GENIUS CLIENT
+GenieUs is a help-request ticketing tool aimed at software developers using a subscription-based model.  
+It connects developers seeking one-to-one, face-to-face, advice and support with tutors and mentors.
+
+Created by the Codeworks London September cohort as their two-week final thesis project in Nov/Dec 2021.
+
+## Produced by:
+- Alistair Garioch <https://github.com/agarioch>
+- Jihyo Jeon <https://github.com/JIHYO-JEON>
+- Alex Green <https://github.com/apgreene>
+- Louis Cappell <https://github.com/LCappell>
+- David Martin <https://github.com/tookayNET>
+
 ## Homepage
-http://localhost:3000/
+<https://www.genieus.help>
 
-## Student View
-### Student Dashboard
-http://localhost:3000/student-dashboard
-
-### Student Help Request
-http://localhost:3000/student-hr
-
-### Student Feedback
-http://localhost:3000/student-feedback
-
-## Tutor View
-
-### Tutor Dashboard
-http://localhost:3000/tutor-dashboard
-
-### Tutor Help Request
-http://localhost:3000/student-hr
