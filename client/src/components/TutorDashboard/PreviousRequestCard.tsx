@@ -36,6 +36,11 @@ export default function PreviousRequestCard({ hr }: any) {
       bg={useColorModeValue('white', 'gray.800')}
       minW={'20ch'}
       maxW={'20ch'}
+      _hover={{
+        transform: 'translateY(-3px)',
+        transition: '200ms',
+        boxShadow: 'lg',
+      }}
     >
       <Box
         w={'full'}
@@ -89,7 +94,7 @@ export default function PreviousRequestCard({ hr }: any) {
           </WrapItem>
         </Stack>
 
-        <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={10}>
+        <Box bg={useColorModeValue('gray.50', 'gray.900')} px={8} py={10}>
           <List spacing={3}>
             <ListItem>
               <ListIcon as={AiOutlineStar} />

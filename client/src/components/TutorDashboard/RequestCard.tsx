@@ -34,6 +34,11 @@ export const RequestCard = ({ hr }: HRType) => {
       bg={useColorModeValue('white', 'gray.800')}
       minW={'24ch'}
       maxW={'24ch'}
+      _hover={{
+        transform: 'translateY(-3px)',
+        transition: '200ms',
+        boxShadow: 'lg',
+      }}
     >
       <Flex direction="column" justify="flex-start" align="center">
         <Box position="relative">
@@ -68,7 +73,12 @@ export const RequestCard = ({ hr }: HRType) => {
         </Text>
         <Divider />
       </Flex>
-      <Flex m={'1rem'} direction="column" justify="flex-end">
+      <Flex
+        m={'1rem'}
+        direction="column"
+        justify="flex-end"
+
+      >
         <Box
           align={'center'}
           justify={'flex-end'}
@@ -104,7 +114,5 @@ export const RequestCard = ({ hr }: HRType) => {
         </Button>
       </Flex>
     </Flex>
-
-
   )
 }
