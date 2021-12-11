@@ -3,7 +3,7 @@
 GenieUs is a help-request ticketing tool aimed at software developers using a subscription-based model.  
 It connects developers seeking one-to-one, face-to-face, advice and support with tutors and mentors.
 
-Created by the Codeworks London September cohort as their two-week final thesis project in Nov/Dec 2021.
+Created by the Codeworks London September cohort in Nov/Dec 2021.
 
 ## Produced by:
 - Alistair Garioch <https://github.com/agarioch>
