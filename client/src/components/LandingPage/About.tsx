@@ -33,6 +33,7 @@ const About = () => {
           fontFamily="sans-serif"
           bottom={10}
           left={'45%'}
+          id="findOut"
           opacity="0.5"
           letterSpacing={1.5}
           _hover={{ opacity: 0.8, cursor: 'pointer' }}
@@ -57,12 +58,17 @@ const About = () => {
       <Grid templateColumns="2.3fr 3fr">
         <GridItem>
           <Flex h="90vh" justifyContent="center" alignItems="flex-start">
-            <Lottie animationData={workingMan} style={{ height: '70vh' }} />
+            <Lottie
+              id="lottiegif"
+              animationData={workingMan}
+              style={{ height: '70vh' }}
+            />
           </Flex>
         </GridItem>
 
-        <GridItem>
+        <GridItem id="aboutInfo">
           <Flex
+            id="about-text"
             h="90vh"
             justifyContent="flex-start"
             alignItems="flex-start"
@@ -74,13 +80,14 @@ const About = () => {
               <Heading
                 as="h3"
                 size="lg"
+                id="about-header"
                 mb={7}
                 color="indigo.300"
                 mt={1}
                 fontWeight={200}
                 fontFamily="sans-serif"
               >
-                Recieve instant tutoring from one of our experts!
+                Receive instant tutoring from one of our experts!
               </Heading>
 
               <UnorderedList

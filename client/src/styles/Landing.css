@@ -9,8 +9,33 @@
     display: none;
   }
 
-  #secondList {
+  #lottiegif {
+    height: 0;
+    width: 0;
     display: none;
+  }
+
+  #link-header {
+    font-size: 1.5rem;
+  }
+
+  #findOut {
+    display: none;
+  }
+
+  #aboutInfo {
+    width: 100vw;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #logo {
+    margin-right: 2rem;
+  }
+
+  #about-header {
+    width: 15rem;
   }
 }
 

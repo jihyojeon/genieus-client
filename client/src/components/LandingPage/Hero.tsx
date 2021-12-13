@@ -12,6 +12,7 @@ import {
 import Lottie from 'lottie-react'
 import '../../styles/Landing.css'
 import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
+import '../../styles/Landing.css'
 
 // Modals
 import ModalSignUp from './ModalSignUp'
@@ -83,7 +84,11 @@ const Hero = () => {
               justifyContent="center"
               alignItems="flex-start"
             >
-              <Lottie animationData={codingLottie} style={{ height: '80vh' }}>
+              <Lottie
+                id="lottiegif"
+                animationData={codingLottie}
+                style={{ height: '80vh' }}
+              >
                 <Box position="relative">
                   <Image
                     src={ProgrammingLanguages.JavaScript}
