@@ -12,6 +12,7 @@ import {
 import Lottie from 'lottie-react'
 import '../../styles/Landing.css'
 import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
+import '../../styles/Landing.css'
 
 // Modals
 import ModalSignUp from './ModalSignUp'
@@ -83,7 +84,11 @@ const Hero = () => {
               justifyContent="center"
               alignItems="flex-start"
             >
-              <Lottie animationData={codingLottie} style={{ height: '80vh' }}>
+              <Lottie
+                id="lottiegif"
+                animationData={codingLottie}
+                style={{ height: '80vh' }}
+              >
                 <Box position="relative">
                   <Image
                     src={ProgrammingLanguages.JavaScript}
@@ -107,7 +112,6 @@ const Hero = () => {
                     borderRadius="full"
                     id="lang"
                     alt="javascript logo"
-
                   />
 
                   <Image
@@ -120,7 +124,6 @@ const Hero = () => {
                     borderRadius="50px"
                     id="lang"
                     alt="java logo"
-
                   />
 
                   <Image
@@ -133,7 +136,6 @@ const Hero = () => {
                     borderRadius="50px"
                     id="lang"
                     alt="react logo"
-
                   />
 
                   <Image
@@ -146,7 +148,6 @@ const Hero = () => {
                     borderRadius="full"
                     id="lang"
                     alt="firebase logo"
-
                   />
 
                   <Image
@@ -159,7 +160,6 @@ const Hero = () => {
                     borderRadius="20px"
                     id="lang"
                     alt="redux logo"
-
                   />
                   <Image
                     src={ProgrammingLanguages.C}
@@ -171,7 +171,6 @@ const Hero = () => {
                     borderRadius="20px"
                     id="lang"
                     alt="C logo"
-
                   />
                 </Box>
               </Lottie>
