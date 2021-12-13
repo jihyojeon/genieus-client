@@ -26,10 +26,11 @@ const ChatLeftPane = ({
   const [canDecline, setCanDecline] = useState(true)
 
   const studentQuery = useGetStudentByIdQuery(helpRequest.student_id)
-  const initialTime: number = 10
-  const subscriptionRemainingSecs: number = studentQuery.isSuccess
+  const initialTime: number = 30
+  const subscriptionRemainingSecs = studentQuery.isSuccess
     ? studentQuery.data.time_remaining
-    : 999
+    : 0
+  const isValidTimeRemaining = subscriptionRemainingSecs > 0
   return (
     <Flex
       direction="column"
@@ -37,12 +38,13 @@ const ChatLeftPane = ({
       textAlign="center"
       justify={isTutor ? 'flex-start' : 'stretch'}
       height={isTutor ? 'fit-content' : '81vh'}
-      w="18rem"
+      w="16rem"
       mr="0.5rem"
       paddingTop="0.5rem"
       paddingLeft="1rem"
       paddingRight="1rem"
       paddingBottom="1rem"
+      flexShrink={0}
       overflowY={'auto'}
       sx={{
         '&::-webkit-scrollbar': {
@@ -59,12 +61,18 @@ const ChatLeftPane = ({
       }}
     >
       <ChatParticipant hr={helpRequest} isTutor={isTutor} />
-      {!isTutor && (
+      {!isTutor && isValidTimeRemaining ? (
         <ChatDuration
           seconds={initialTime}
           subscriptionRemainingSecs={subscriptionRemainingSecs}
           setCanDecline={setCanDecline}
         />
+      ) : (
+        !isTutor && (
+          <ActionBox>
+            <Text>Error, subscription expired</Text>
+          </ActionBox>
+        )
       )}
       {!isTutor && canDecline && (
         <ActionBox>
@@ -72,7 +80,10 @@ const ChatLeftPane = ({
             You have {initialTime} seconds before billing starts to decide
             whether you want to stay on the call or look for another tutor.
           </Text>
-          <ActionDecline helpRequestId={helpRequest.id} />
+          <ActionDecline
+            helpRequestId={helpRequest.id}
+            setSessionOpen={setSessionOpen}
+          />
         </ActionBox>
       )}
       <ActionBox>

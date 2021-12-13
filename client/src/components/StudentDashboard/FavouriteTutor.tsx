@@ -38,7 +38,7 @@ const FavouriteTutor = ({
           <Avatar
             name={tutor.name}
             size={'lg'}
-            src={tutor.image}
+            src={tutor.photo_url}
             _after={{
               content: '""',
               w: 4,
@@ -61,7 +61,7 @@ const FavouriteTutor = ({
           <Heading fontSize={25} fontWeight={300}>
             {tutor.name}
           </Heading>
-          <Flex flexDirection="row">
+          <Flex flexDirection="row" flexWrap={'wrap'}>
             {tutor.programming_languages.map((lang: any) => {
               return (
                 <Text fontSize={15} fontWeight={200} mr={3}>

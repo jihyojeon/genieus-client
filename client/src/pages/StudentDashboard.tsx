@@ -10,7 +10,7 @@ const StudentDashboard = () => {
     <>
       <TopBar />
       <Grid
-        gap={5}
+        gap={2}
         h="100vh"
         mh="50%"
         padding="5"

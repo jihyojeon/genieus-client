@@ -8,7 +8,7 @@ import { Link as RouterLink } from 'react-router-dom'
 
 const Feedback = () => {
   const { id } = useParams()
-  const hrById = useGetHRRequestByIdQuery(id || 'notfound')
+  const hrById = useGetHRRequestByIdQuery(id || 'notfound', { skip: !id })
   const helpRequest = hrById.isSuccess ? hrById.data : null
 
   if (helpRequest) {

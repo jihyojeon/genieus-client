@@ -18,6 +18,7 @@ import { auth } from '../../firebase'
 import { useEffect, useState } from 'react'
 import { useGetStudentByIdQuery } from '../../redux/services/studentService'
 import { useGetHrRequestByValueQuery } from '../../redux/services/helpRequestService'
+import { displayTimeinHHMM } from '../TutorDashboard/utils'
 
 interface StatsCardProps {
   title: string
@@ -32,9 +33,7 @@ function StatsCard(props: StatsCardProps) {
   )
 
   if (typeof stat === 'number') {
-    const mins = String(stat % 60).padStart(2, '0')
-    const hrs = String(Math.floor(stat / 60 / 60)).padStart(2, '0')
-    stat = `${hrs}:${mins}`
+    stat = displayTimeinHHMM(stat)
   }
   return (
     <Stat
@@ -94,7 +93,7 @@ export default function BasicStatistics() {
   return (
     <Flex
       alignItems="flex-start"
-      mt={10}
+      mt={5}
       direction="column"
       h="40vh"
       px={{ base: 2, sm: 12, md: 17 }}

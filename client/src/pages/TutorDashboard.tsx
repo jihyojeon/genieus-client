@@ -10,28 +10,31 @@ import PreviousRequests from '../components/TutorDashboard/PreviousRequests'
 const TutorDashboard = () => {
   return (
     <Box>
-      <TopBar tutor={true}/>
+      <TopBar tutor={true} />
       <Grid
-        h="90vh"
+        // h="90vh"
         py={2}
         px={4}
-        templateRows="repeat(11, 1fr)"
-        templateColumns="repeat(4, 1fr)"
+        templateRows="auto auto auto"
+        templateColumns="auto 1fr"
         gap={4}
       >
-        <GridItem rowSpan={8} colSpan={3}>
+        <GridItem rowSpan={1} colSpan={1}>
           <IncomingRequests />
         </GridItem>
 
-        <GridItem rowSpan={9} colSpan={1}>
+        <GridItem rowSpan={2} colSpan={1}>
           <TutorInformation />
         </GridItem>
 
-        <GridItem rowSpan={3} colSpan={3}>
+        <GridItem rowSpan={1} colSpan={1}>
           <TutorStats />
         </GridItem>
+
+        <GridItem rowSpan={1} colSpan={2}>
+          <PreviousRequests />
+        </GridItem>
       </Grid>
-      <PreviousRequests/>
     </Box>
   )
 }

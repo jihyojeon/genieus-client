@@ -97,10 +97,17 @@ const ModalEditTutorProfile = ({ isOpen, onClose, tutor }) => {
                   <FormLabel>Photo</FormLabel>
                   <Stack direction={['column', 'row']} spacing={6}>
                     <Center>
-                      <Avatar size="xl" src={tutor?.photo_url}>
+                      <Avatar size="xl" name={tutor?.name} src={Url}>
                         <AvatarBadge
                           as={IconButton}
                           size="sm"
+                          onClick={() => {
+                            updateTutor({
+                              id: tutor.id,
+                              //@ts-ignore
+                              photo_url: null,
+                            })
+                          }}
                           rounded="full"
                           top="-10px"
                           colorScheme="red"

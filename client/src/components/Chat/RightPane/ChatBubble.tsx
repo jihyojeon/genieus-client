@@ -3,12 +3,10 @@ import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 type ChatBubbleProps = {
   message: string
   fromSelf: boolean
+  from: string
 }
 
-const ChatBubble = ({ message, fromSelf }: ChatBubbleProps) => {
-  // TODO: REPLACE WITH PROPS?
-  // const timeStamp = '14:32 [20s ago]'
-
+const ChatBubble = ({ message, fromSelf, from }: ChatBubbleProps) => {
   const justify = fromSelf ? 'right' : 'left'
   const borders = fromSelf ? '2rem .5rem 2rem 2rem' : '.5rem 2rem 2rem 2rem'
   const bgLight = fromSelf ? 'blue.100' : 'gray.100'
@@ -28,7 +26,7 @@ const ChatBubble = ({ message, fromSelf }: ChatBubbleProps) => {
               zIndex="2"
             >
               <Text align={justify} fontSize="xs">
-                {fromSelf ? 'You' : 'Them'}
+                {from}
               </Text>
             </Box>
             <Box

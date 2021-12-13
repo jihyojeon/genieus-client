@@ -4,6 +4,16 @@
   }
 }
 
+@media screen and (max-width: 700px) {
+  #logoText {
+    display: none;
+  }
+
+  #secondList {
+    display: none;
+  }
+}
+
 #lang:hover {
   background-color: red;
 }

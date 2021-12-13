@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Box, Button } from '@chakra-ui/react'
-import TopBar from '../components/TutorHR/TopBar'
+import { useState } from 'react'
+import { Box } from '@chakra-ui/react'
+import TopBar from '../components/TopBar/TopBar'
 import HrContent from '../components/TutorHR/HrContent'
 import StudentReady from '../components/TutorHR/StudentReady'
 import { useLocation } from 'react-router'
@@ -12,7 +12,10 @@ const TutorHelpRequest = () => {
   return (
     <Box>
       {/* @ts-ignore */}
-      <TopBar hrData={location.state} />
+      <TopBar
+        heading={`${location.state.student.name}'s Help Request`}
+        tutor={true}
+      />
       <HrContent hrData={location.state} setStudentReady={setStudentReady} />
       {studentReady && (
         <Box mt={10} p={0}>

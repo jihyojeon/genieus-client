@@ -5,11 +5,13 @@ import {
   Button,
   useDisclosure,
   Text,
+  useColorModeValue,
   Grid,
   GridItem,
 } from '@chakra-ui/react'
 import ModalStudentRequest from './ModalStudentRequest'
 import { useNavigate } from 'react-router-dom'
+import { BsPerson, BsTrash, BsCheck } from 'react-icons/bs'
 import StudentAccept from './StudentAccept'
 import {
   useDeleteHRRequestMutation,
@@ -46,13 +48,21 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
         behavior: 'smooth',
       })
     }
+    if (
+      //@ts-ignore
+      getHrById?.data &&
+      getHrById?.data.declined_tutors.length !== 0
+    ) {
+      console.log('declinedtutors')
+      setloadingButton(false)
+    }
 
     auth.onAuthStateChanged((item) => {
       //@ts-ignore
       setUserId(item.uid)
     })
     //@ts-ignore
-  }, [getHrById.data?.status])
+  }, [getHrById.data?.status, getHrById.data?.declined_tutors])
 
   const handleClick = () => {
     //@ts-ignore
@@ -69,7 +79,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
         <Flex
           alignItems="flex-start"
           flexDirection="row"
-          justifyContent="center"
+          justifyContent="space-around"
           px="10"
           ml={3}
         >
@@ -77,12 +87,13 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
             colorScheme="indigo"
             fontFamily="montserrat"
             left={0}
-            letterSpacing={2}
+            letterSpacing={1}
             onClick={onOpen}
             padding={8}
-            variant="outline"
+            variant="ghost"
           >
             Student
+            {<BsPerson size={'2em'} />}
           </Button>
 
           {!loadingButton === true ? (
@@ -91,14 +102,22 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
                 handleClick()
                 setloadingButton(true)
               }}
-              ml={105}
-              letterSpacing={2}
-              colorScheme="indigo"
+              ml={99}
+              letterSpacing={1}
+              // colorScheme="indigo"
               variant="solid"
               padding={8}
+              color="white"
+              bg="indigo.400"
+              // color={'black'}
+              _hover={{
+                bgGradient: 'linear(to-r, blue.500, teal.300)',
+                color: 'white',
+              }}
               fontFamily="montserrat"
             >
               Accept
+              {<BsCheck size={'2em'} style={{ marginLeft: '10px' }} />}
             </Button>
           ) : (
             <Flex
@@ -110,7 +129,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
                 isLoading
                 loadingText="Waiting for Student response"
                 ml={105}
-                letterSpacing={2}
+                letterSpacing={1}
                 colorScheme="indigo"
                 variant="ghost"
                 padding={8}
@@ -126,6 +145,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
                 fontFamily="montserrat"
               >
                 Cancel
+                {<BsTrash size={'1em'} />}
               </Button>
             </Flex>
           )}
@@ -133,7 +153,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
           <Button
             colorScheme="indigo"
             fontFamily="montserrat"
-            letterSpacing={2}
+            letterSpacing={1}
             ml={105}
             padding={8}
             variant="outline"
@@ -143,6 +163,7 @@ const ButtonBar = ({ setloadingBtn, setStudentReady, hrData }: any) => {
             }}
           >
             Decline
+            {<BsTrash style={{ marginLeft: '10px' }} size={'2em'} />}
           </Button>
           <ModalStudentRequest
             hrData={hrData}

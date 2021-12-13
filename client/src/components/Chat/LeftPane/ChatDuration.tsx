@@ -18,7 +18,6 @@ const ChatDuration = ({
     setIsInitialPeriod(false)
     setCanDecline(false)
   }, (seconds + 1) * 1000)
-  console.log(subscriptionRemainingSecs)
   return (
     <Box
       alignItems="center"
@@ -33,17 +32,17 @@ const ChatDuration = ({
       <Flex direction="column" justify="center" align="center">
         {isInitialPeriod ? (
           <>
-            <CountdownTimer duration={seconds} key={1} />
-            <Text color="gray.400" size="sm">
+            <Text color="gray.400" size="sm" mb={2}>
               Evaluation time
             </Text>
+            <CountdownTimer duration={seconds} version={1} />
           </>
         ) : (
           <>
-            <CountdownTimer duration={subscriptionRemainingSecs} key={2} />
-            <Text color="gray.400" size="sm">
-              Remaining time this month
+            <Text color="gray.400" size="sm" mb={2}>
+              Subscription remaining
             </Text>
+            <CountdownTimer duration={subscriptionRemainingSecs} version={2} />
           </>
         )}
       </Flex>

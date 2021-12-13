@@ -3,7 +3,7 @@ import Split from 'react-split'
 import ButtonBar from './ButtonBar'
 import Editor from '@monaco-editor/react'
 import '../../styles/example.css'
-
+import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
 import {
   Grid,
   Box,
@@ -13,7 +13,7 @@ import {
   Text,
   // Select,
   HStack,
-  Button,
+  Image,
   useColorModeValue,
   Tag,
   TagLabel,
@@ -25,8 +25,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
   const [codeValue, setcodeValue] = useState('')
   const [loadingBtn, setloadingBtn] = useState(false)
   const [selectValue, setSelectValue] = useState('')
-
-  
+  const textColor = useColorModeValue('gray.900', 'gray.100')
 
   return (
     <Box>
@@ -50,21 +49,24 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                   fontFamily="montserrat"
                   fontWeight={300}
                 >
-                  Description
+                  <Text color={textColor}>Description</Text>
                 </Heading>
 
-                {hrData && hrData == null ? (
-                  hrData.tags.map((tag: string[]) => {
-                    return (
-                      <HStack spacing={5}>
-                        <Tag variant="outline" size="lg" colorScheme="indigo">
+                {hrData && hrData.tags && (
+                  <Flex spacing={2} justify="flex-end" flexWrap={'wrap'}>
+                    {hrData.tags.map((tag: string[]) => {
+                      return (
+                        <Tag
+                          ml="0.25rem"
+                          variant="outline"
+                          size="lg"
+                          colorScheme="indigo"
+                        >
                           <TagLabel>{tag}</TagLabel>
                         </Tag>
-                      </HStack>
-                    )
-                  })
-                ) : (
-                  <Text>Tags Here</Text>
+                      )
+                    })}
+                  </Flex>
                 )}
               </Flex>
 
@@ -75,7 +77,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                   isRequired
                   value={hrData.description}
                   height={'50vh'}
-                  placeholder="<!-- Please describe you issue in detail....  -->"
+                  placeholder="No description given...😢"
                 />
               </Box>
             </GridItem>
@@ -95,11 +97,19 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                   fontWeight={300}
                   as="h5"
                 >
-                  Code Sample
+                  <Text color={textColor}>Code Sample</Text>
                 </Heading>
 
                 <HStack spacing={5}>
                   <Tag variant="outline" size="lg" colorScheme="indigo">
+                    <Image
+                      mr={2}
+                      height="1rem"
+                      width="1rem"
+                      borderRadius="5"
+                      // @ts-ignore
+                      src={ProgrammingLanguages[hrData.language]}
+                    />
                     <TagLabel>{hrData.language}</TagLabel>
                   </Tag>
                 </HStack>
@@ -115,7 +125,7 @@ const HrContent = ({ setStudentReady, hrData }: any) => {
                 <Editor
                   height="50vh"
                   defaultLanguage="javascript"
-                  defaultValue="// Please describe your problem..."
+                  defaultValue="// No code given...😢"
                   value={hrData.code}
                   theme={useColorModeValue('vs-light', 'vs-dark')}
                 />

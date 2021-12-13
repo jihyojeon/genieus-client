@@ -13,31 +13,34 @@ import {
   WrapItem,
   TagLabel,
   Tag,
-  Avatar
-} from '@chakra-ui/react';
-import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages';
-import { displayTimeinHHMMSS, displayDate } from './utils';
-import { BiTimeFive } from "react-icons/bi";
-import { AiOutlineDollarCircle, AiOutlineCalendar, AiOutlineStar } from 'react-icons/ai'
+  Avatar,
+} from '@chakra-ui/react'
+import { ProgrammingLanguages } from '../../assets/devicon/ProgrammingLanguages'
+import { displayTimeinHHMMSS, displayDate } from './utils'
+import { BiTimeFive } from 'react-icons/bi'
+import {
+  AiOutlineDollarCircle,
+  AiOutlineCalendar,
+  AiOutlineStar,
+} from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
-
 
 export default function PreviousRequestCard({ hr }: any) {
   const navigate = useNavigate()
   return (
-    <Center 
+    <Center
       py={2}
       fontFamily="montserrat"
       mx={6}
       my={2}
       bg={useColorModeValue('white', 'gray.800')}
-      minW={'17%'}
-      maxW={'17%'}
+      minW={'20ch'}
+      maxW={'20ch'}
     >
       <Box
         w={'full'}
         bg={useColorModeValue('white', 'gray.800')}
-        boxShadow={'2xl'}
+        boxShadow={'xl'}
         rounded={'md'}
         overflow={'hidden'}
         border="1px solid"
@@ -49,24 +52,24 @@ export default function PreviousRequestCard({ hr }: any) {
           p={6}
           color={useColorModeValue('gray.800', 'white')}
           align={'center'}
-          >
+        >
           <Stack direction={'row'} align={'center'} justify={'center'}>
             <Text fontSize={'lg'} fontWeight={800}>
               {hr.student.name}
             </Text>
             <Box
-            my={'auto'}
-            color={useColorModeValue('gray.800', 'gray.200')}
-            alignContent={'center'}
+              my={'auto'}
+              color={useColorModeValue('gray.800', 'gray.200')}
+              alignContent={'center'}
             >
               <Avatar
-              size={'xs'}
-              src={hr.student.photo_url}
-              name={hr.student.name}
-              alt={'Author'}
-              css={{
-                border: '2px solid white',
-              }}
+                size={'lg'}
+                src={hr.student.photo_url}
+                name={hr.student.name}
+                alt={'Author'}
+                css={{
+                  border: '2px solid white',
+                }}
               />
             </Box>
           </Stack>
@@ -93,8 +96,8 @@ export default function PreviousRequestCard({ hr }: any) {
               {hr.rating}
             </ListItem>
             <ListItem>
-              <ListIcon as={AiOutlineDollarCircle} />
-              ${(hr.call_length*40/60/60).toFixed(2)}
+              <ListIcon as={AiOutlineDollarCircle} />$
+              {((hr.call_length * 40) / 60 / 60).toFixed(2)}
             </ListItem>
             <ListItem>
               <ListIcon as={BiTimeFive} />
@@ -111,17 +114,18 @@ export default function PreviousRequestCard({ hr }: any) {
             w={'full'}
             rounded={'xl'}
             _hover={{
+              transform: 'translateY(-2px)',
+              boxShadow: 'lg',
             }}
-            _focus={{
-            }}
+            _focus={{}}
             onClick={() => {
               navigate('/previous-hr', { state: hr })
-            }}>
+            }}
+          >
             See Feedback
           </Button>
         </Box>
       </Box>
     </Center>
-  );
+  )
 }
-
