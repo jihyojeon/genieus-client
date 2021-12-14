@@ -105,53 +105,44 @@ export default function WithSpeechBubbles() {
             <TestimonialContent>
               <TestimonialHeading>Brilliant!</TestimonialHeading>
               <TestimonialText>
-                Vic's advice to "Switch it off and back on again" really helped
-                with my Windows problems.
+                I was having some issues with a difficult bug whilst using
+                Redux. My problem was solved in a quick call. Great Service!
               </TestimonialText>
             </TestimonialContent>
 
             <TestimonialAvatar
-              src={
-                'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT12cP23udqvCqHW_2oAvK257g3oVQkv23tOumxtpfFOhHi8a5B'
-              }
-              name={'Bill Gates'}
-              title={'Former CEO'}
+              src={'https://randomuser.me/api/portraits/men/36.jpg'}
+              name={'James Dean'}
+              title={'Full-Stack Engineer'}
             />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
-              <TestimonialHeading>
-                Solved our temple backend issues
-              </TestimonialHeading>
+              <TestimonialHeading>Fantastic!</TestimonialHeading>
               <TestimonialText>
-                Our temple's webpage was really suffering until Jess recommended
-                we adopt Next.js. It solved everything and even sped up
-                chanting.
+                Fantastic one on one chat. Was struggling to understand GraphQl
+                but after a chat with my tutor, it was much easier to
+                comprehend!
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Dalai_Lama_in_2012_02.jpg/1280px-Dalai_Lama_in_2012_02.jpg'
-              }
-              name={'Tenzin Gyatso'}
-              title={'Dalai Lama'}
+              src={'https://randomuser.me/api/portraits/men/46.jpg'}
+              name={'Aaron Mathews'}
+              title={'Front-End Developer'}
             />
           </Testimonial>
           <Testimonial>
             <TestimonialContent>
               <TestimonialHeading>Tobias fixed it!</TestimonialHeading>
               <TestimonialText>
-                My country was on the verge of collapse - then I turned to
-                GenieUs and their expert tutors helped us solve all our tech
-                issues.
+                Needed some help for a client project that I am working on.
+                Tobias was able to fix a difficult bug in no time! Thank you!
               </TestimonialText>
             </TestimonialContent>
             <TestimonialAvatar
-              src={
-                'https://upload.wikimedia.org/wikipedia/commons/4/4b/Michelle_Obama_2013_official_portrait.jpg'
-              }
-              name={'Michelle Obama'}
-              title={'Former First Lady'}
+              src={'https://randomuser.me/api/portraits/women/2.jpg'}
+              name={'Elizabeth'}
+              title={'DevOps Engineer'}
             />
           </Testimonial>
         </Stack>
